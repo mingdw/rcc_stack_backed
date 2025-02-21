@@ -197,147 +197,372 @@ CREATE TABLE `rcc_product_sku_attr` (
     KEY `idx_attr_id` (`attr_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- 插入一级分类
-INSERT INTO `rcc_category` (`id`, `name`, `parent_id`, `level`, `sort`, `icon`, `creator`, `updator`) VALUES
-(1, 'NFT专区', NULL, 1, 1, 'CrownOutlined', 'admin', 'admin'),
-(2, '数字素材类', NULL, 1, 2, 'FileOutlined', 'admin', 'admin'),
-(3, '学习资源类', NULL, 1, 3, 'ReadOutlined', 'admin', 'admin'),
-(4, '生活娱乐类', NULL, 1, 4, 'PlayCircleOutlined', 'admin', 'admin'),
-(5, '会员权益类', NULL, 1, 5, 'CrownOutlined', 'admin', 'admin'),
-(6, '软件服务类', NULL, 1, 6, 'AppstoreOutlined', 'admin', 'admin');
 
--- 插入二级分类
-INSERT INTO `rcc_category` (`id`, `name`, `parent_id`, `level`, `sort`, `icon`, `creator`, `updator`) VALUES
--- NFT专区的二级分类
-(101, '数字艺术品NFT', 1, 2, 1, 'PictureOutlined', 'admin', 'admin'),
-(102, '虚拟身份NFT', 1, 2, 2, 'UserOutlined', 'admin', 'admin'),
-(103, '游戏资产NFT', 1, 2, 3, 'TrophyOutlined', 'admin', 'admin'),
+--插入目录相关示例数据
+--插入一级目录数据
+INSERT INTO `rcc_category` (`code`, `name`, `parent_id`, `parent_code`, `level`, `sort`, `icon`, `created_at`, `updated_at`, `is_deleted`, `creator`, `updator`) 
+VALUES 
+('100000', 'NFT专区', 0, '', 1, 1, '', NOW(), NOW(), 0, 'admin', 'admin'),
+('200000', '数字素材类', 0, '', 1, 2, '', NOW(), NOW(), 0, 'admin', 'admin'),
+('300000', '学习资源类', 0, '', 1, 3, '', NOW(), NOW(), 0, 'admin', 'admin'),
+('400000', '生活娱乐类', 0, '', 1, 4, '', NOW(), NOW(), 0, 'admin', 'admin'),
+('500000', '会员权益类', 0, '', 1, 5, '', NOW(), NOW(), 0, 'admin', 'admin'),
+('600000', '软件服务类', 0, '', 1, 6, '', NOW(), NOW(), 0, 'admin', 'admin');
 
--- 数字素材类的二级分类
-(201, '文档模板', 2, 2, 1, 'FileTextOutlined', 'admin', 'admin'),
-(202, '图片素材', 2, 2, 2, 'PictureOutlined', 'admin', 'admin'),
-(203, '音效素材', 2, 2, 3, 'CustomerServiceOutlined', 'admin', 'admin'),
 
--- 学习资源类的二级分类
-(301, '学术资料', 3, 2, 1, 'BookOutlined', 'admin', 'admin'),
-(302, '职业考证', 3, 2, 2, 'SafetyCertificateOutlined', 'admin', 'admin'),
-(303, '语言学习', 3, 2, 3, 'TranslationOutlined', 'admin', 'admin'),
+--插入NFT专区的二级目录
+INSERT INTO `rcc_category` (`code`, `name`, `parent_id`, `parent_code`, `level`, `sort`, `icon`, `created_at`, `updated_at`, `is_deleted`, `creator`, `updator`) 
+SELECT 
+    '101000' as code,
+    '数字艺术品' as name,
+    id as parent_id,
+    '100000' as parent_code,
+    2 as level,
+    1 as sort,
+    '' as icon,
+    NOW() as created_at,
+    NOW() as updated_at,
+    0 as is_deleted,
+    'admin' as creator,
+    'admin' as updator
+FROM rcc_category WHERE code = '100000'
+UNION ALL
+SELECT '102000', '虚拟身份', id, '100000', 2, 2, '', NOW(), NOW(), 0, 'admin', 'admin'
+FROM rcc_category WHERE code = '100000'
+UNION ALL
+SELECT '103000', '游戏资产', id, '100000', 2, 3, '', NOW(), NOW(), 0, 'admin', 'admin'
+FROM rcc_category WHERE code = '100000'
+UNION ALL
+SELECT '104000', '收藏品', id, '100000', 2, 4, '', NOW(), NOW(), 0, 'admin', 'admin'
+FROM rcc_category WHERE code = '100000'
+UNION ALL
+SELECT '105000', '虚拟房地产', id, '100000', 2, 5, '', NOW(), NOW(), 0, 'admin', 'admin'
+FROM rcc_category WHERE code = '100000'
+UNION ALL
+SELECT '106000', '数字证书', id, '100000', 2, 6, '', NOW(), NOW(), 0, 'admin', 'admin'
+FROM rcc_category WHERE code = '100000'
+UNION ALL
+SELECT '107000', '金融资产', id, '100000', 2, 7, '', NOW(), NOW(), 0, 'admin', 'admin'
+FROM rcc_category WHERE code = '100000';
 
--- 生活娱乐类的二级分类
-(401, '影视音乐', 4, 2, 1, 'VideoCameraOutlined', 'admin', 'admin'),
-(402, '游戏周边', 4, 2, 2, 'GiftOutlined', 'admin', 'admin'),
-(403, '兴趣爱好', 4, 2, 3, 'CameraOutlined', 'admin', 'admin'),
+-- 插入数字艺术品(101000)下的三级分类
+INSERT INTO `rcc_category` (`code`, `name`, `parent_id`, `parent_code`, `level`, `sort`, `icon`, `created_at`, `updated_at`, `is_deleted`, `creator`, `updator`) 
+SELECT 
+    '101001' as code,
+    '潮流艺术画作NFT' as name,
+    id as parent_id,
+    '101000' as parent_code,
+    3 as level,
+    1 as sort,
+    '' as icon,
+    NOW() as created_at,
+    NOW() as updated_at,
+    0 as is_deleted,
+    'admin' as creator,
+    'admin' as updator
+FROM rcc_category WHERE code = '101000'
+UNION ALL
+SELECT '101002', '先锋音乐作品NFT', id, '101000', 3, 2, '', NOW(), NOW(), 0, 'admin', 'admin'
+FROM rcc_category WHERE code = '101000'
+UNION ALL
+SELECT '101003', '视频艺术NFT', id, '101000', 3, 3, '', NOW(), NOW(), 0, 'admin', 'admin'
+FROM rcc_category WHERE code = '101000'
+UNION ALL
+SELECT '101004', '文本类型NFT', id, '101000', 3, 4, '', NOW(), NOW(), 0, 'admin', 'admin'
+FROM rcc_category WHERE code = '101000'
+UNION ALL
+SELECT '101005', '其它类型NFT', id, '101000', 3, 5, '', NOW(), NOW(), 0, 'admin', 'admin'
+FROM rcc_category WHERE code = '101000';
 
--- 会员权益类的二级分类
-(501, '视频平台会员', 5, 2, 1, 'PlayCircleOutlined', 'admin', 'admin'),
-(502, '音乐平台会员', 5, 2, 2, 'CustomerServiceOutlined', 'admin', 'admin'),
-(503, '阅读平台会员', 5, 2, 3, 'ReadOutlined', 'admin', 'admin'),
+-- 插入虚拟身份(102000)下的三级分类
+INSERT INTO `rcc_category` (`code`, `name`, `parent_id`, `parent_code`, `level`, `sort`, `icon`, `created_at`, `updated_at`, `is_deleted`, `creator`, `updator`) 
+SELECT 
+    '102001' as code,
+    '独特头像NFT' as name,
+    id as parent_id,
+    '102000' as parent_code,
+    3 as level,
+    1 as sort,
+    '' as icon,
+    NOW() as created_at,
+    NOW() as updated_at,
+    0 as is_deleted,
+    'admin' as creator,
+    'admin' as updator
+FROM rcc_category WHERE code = '102000'
+UNION ALL
+SELECT '102002', '定制虚拟形象NFT', id, '102000', 3, 2, '', NOW(), NOW(), 0, 'admin', 'admin'
+FROM rcc_category WHERE code = '102000'
+UNION ALL
+SELECT '102003', '专属社交身份NFT', id, '102000', 3, 3, '', NOW(), NOW(), 0, 'admin', 'admin'
+FROM rcc_category WHERE code = '102000';
 
--- 软件服务类的二级分类
-(601, '办公软件', 6, 2, 1, 'FileWordOutlined', 'admin', 'admin'),
-(602, '设计软件', 6, 2, 2, 'SketchOutlined', 'admin', 'admin'),
-(603, '系统工具', 6, 2, 3, 'WindowsOutlined', 'admin', 'admin');
+-- 插入游戏资产(103000)下的三级分类
+INSERT INTO `rcc_category` (`code`, `name`, `parent_id`, `parent_code`, `level`, `sort`, `icon`, `created_at`, `updated_at`, `is_deleted`, `creator`, `updator`) 
+SELECT 
+    '103001' as code,
+    '游戏道具NFT' as name,
+    id as parent_id,
+    '103000' as parent_code,
+    3 as level,
+    1 as sort,
+    '' as icon,
+    NOW() as created_at,
+    NOW() as updated_at,
+    0 as is_deleted,
+    'admin' as creator,
+    'admin' as updator
+FROM rcc_category WHERE code = '103000'
+UNION ALL
+SELECT '103002', '游戏装备NFT', id, '103000', 3, 2, '', NOW(), NOW(), 0, 'admin', 'admin'
+FROM rcc_category WHERE code = '103000'
+UNION ALL
+SELECT '103003', '游戏角色NFT', id, '103000', 3, 3, '', NOW(), NOW(), 0, 'admin', 'admin'
+FROM rcc_category WHERE code = '103000';
 
--- 插入三级分类
-INSERT INTO `rcc_category` (`id`, `name`, `parent_id`, `level`, `sort`, `icon`, `creator`, `updator`) VALUES
--- NFT专区-数字艺术品NFT的三级分类
-(1011, '潮流艺术画作NFT', 101, 3, 1, 'HighlightOutlined', 'admin', 'admin'),
-(1012, '先锋音乐作品NFT', 101, 3, 2, 'CustomerServiceOutlined', 'admin', 'admin'),
-(1013, '3D创意雕塑NFT', 101, 3, 3, 'GiftOutlined', 'admin', 'admin'),
+-- 插入收藏品(104000)下的三级分类
+INSERT INTO `rcc_category` (`code`, `name`, `parent_id`, `parent_code`, `level`, `sort`, `icon`, `created_at`, `updated_at`, `is_deleted`, `creator`, `updator`) 
+SELECT 
+    '104001' as code,
+    '体育赛事纪念NFT' as name,
+    id as parent_id,
+    '104000' as parent_code,
+    3 as level,
+    1 as sort,
+    '' as icon,
+    NOW() as created_at,
+    NOW() as updated_at,
+    0 as is_deleted,
+    'admin' as creator,
+    'admin' as updator
+FROM rcc_category WHERE code = '104000'
+UNION ALL
+SELECT '104002', '历史文化收藏NFT', id, '104000', 3, 2, '', NOW(), NOW(), 0, 'admin', 'admin'
+FROM rcc_category WHERE code = '104000'
+UNION ALL
+SELECT '104003', '名人周边NFT', id, '104000', 3, 3, '', NOW(), NOW(), 0, 'admin', 'admin'
+FROM rcc_category WHERE code = '104000'
+UNION ALL
+SELECT '104004', '限量版徽章NFT', id, '104000', 3, 4, '', NOW(), NOW(), 0, 'admin', 'admin'
+FROM rcc_category WHERE code = '104000';
 
--- NFT专区-虚拟身份NFT的三级分类
-(1021, '独特头像NFT', 102, 3, 1, 'UserOutlined', 'admin', 'admin'),
-(1022, '定制虚拟形象NFT', 102, 3, 2, 'SkinOutlined', 'admin', 'admin'),
-(1023, '专属社交身份NFT', 102, 3, 3, 'TeamOutlined', 'admin', 'admin'),
+-- 插入虚拟房地产(105000)下的三级分类
+INSERT INTO `rcc_category` (`code`, `name`, `parent_id`, `parent_code`, `level`, `sort`, `icon`, `created_at`, `updated_at`, `is_deleted`, `creator`, `updator`) 
+SELECT 
+    '105001' as code,
+    '元宇宙地块NFT' as name,
+    id as parent_id,
+    '105000' as parent_code,
+    3 as level,
+    1 as sort,
+    '' as icon,
+    NOW() as created_at,
+    NOW() as updated_at,
+    0 as is_deleted,
+    'admin' as creator,
+    'admin' as updator
+FROM rcc_category WHERE code = '105000'
+UNION ALL
+SELECT '105002', '虚拟建筑NFT', id, '105000', 3, 2, '', NOW(), NOW(), 0, 'admin', 'admin'
+FROM rcc_category WHERE code = '105000'
+UNION ALL
+SELECT '105003', '数字空间NFT', id, '105000', 3, 3, '', NOW(), NOW(), 0, 'admin', 'admin'
+FROM rcc_category WHERE code = '105000';
 
--- 以此类推，继续插入其他三级分类...
--- 数字素材类-文档模板的三级分类
-(2011, 'Word商务报告模板', 201, 3, 1, 'FileWordOutlined', 'admin', 'admin'),
-(2012, 'Excel财务报表模板', 201, 3, 2, 'FileExcelOutlined', 'admin', 'admin'),
-(2013, 'PPT项目展示模板', 201, 3, 3, 'FilePptOutlined', 'admin', 'admin');
+-- 插入数字证书(106000)下的三级分类
+INSERT INTO `rcc_category` (`code`, `name`, `parent_id`, `parent_code`, `level`, `sort`, `icon`, `created_at`, `updated_at`, `is_deleted`, `creator`, `updator`) 
+SELECT 
+    '106001' as code,
+    '教育认证NFT' as name,
+    id as parent_id,
+    '106000' as parent_code,
+    3 as level,
+    1 as sort,
+    '' as icon,
+    NOW() as created_at,
+    NOW() as updated_at,
+    0 as is_deleted,
+    'admin' as creator,
+    'admin' as updator
+FROM rcc_category WHERE code = '106000'
+UNION ALL
+SELECT '106002', '会员资格NFT', id, '106000', 3, 2, '', NOW(), NOW(), 0, 'admin', 'admin'
+FROM rcc_category WHERE code = '106000'
+UNION ALL
+SELECT '106003', '活动门票NFT', id, '106000', 3, 3, '', NOW(), NOW(), 0, 'admin', 'admin'
+FROM rcc_category WHERE code = '106000'
+UNION ALL
+SELECT '106004', '数字版权NFT', id, '106000', 3, 4, '', NOW(), NOW(), 0, 'admin', 'admin'
+FROM rcc_category WHERE code = '106000';
 
--- 为了避免SQL文件过长，其他三级分类可以按需添加
+-- 插入金融资产(107000)下的三级分类
+INSERT INTO `rcc_category` (`code`, `name`, `parent_id`, `parent_code`, `level`, `sort`, `icon`, `created_at`, `updated_at`, `is_deleted`, `creator`, `updator`) 
+SELECT 
+    '107001' as code,
+    '数字债券NFT' as name,
+    id as parent_id,
+    '107000' as parent_code,
+    3 as level,
+    1 as sort,
+    '' as icon,
+    NOW() as created_at,
+    NOW() as updated_at,
+    0 as is_deleted,
+    'admin' as creator,
+    'admin' as updator
+FROM rcc_category WHERE code = '107000'
+UNION ALL
+SELECT '107002', '资产凭证NFT', id, '107000', 3, 2, '', NOW(), NOW(), 0, 'admin', 'admin'
+FROM rcc_category WHERE code = '107000'
+UNION ALL
+SELECT '107003', '股权通证NFT', id, '107000', 3, 3, '', NOW(), NOW(), 0, 'admin', 'admin'
+FROM rcc_category WHERE code = '107000';
 
--- 插入属性组数据
-INSERT INTO `rcc_attr_group` (`id`, `attr_group_name`, `attr_group_code`, `sort`, `creator`, `updator`) VALUES
-(1, '场景', 'scene', 1, 'admin', 'admin'),
-(2, '风格', 'style', 2, 'admin', 'admin');
 
--- 插入属性数据
-INSERT INTO `rcc_attr` (`id`, `attr_name`, `attr_code`, `attr_group_id`, `icon`, `sort`, `creator`, `updator`) VALUES
--- 场景属性
-(101, '收藏展示', 'collect', 1, 'CrownOutlined', 1, 'admin', 'admin'),
-(102, '社交分享', 'share', 1, 'UserOutlined', 2, 'admin', 'admin'),
-(103, '游戏体验', 'game', 1, 'TrophyOutlined', 3, 'admin', 'admin'),
-(104, '投资理财', 'invest', 1, 'TrophyOutlined', 4, 'admin', 'admin'),
-(105, '艺术收藏', 'art', 1, 'TrophyOutlined', 5, 'admin', 'admin'),
-(106, '工作总结', 'work-summary', 1, 'FileTextOutlined', 6, 'admin', 'admin'),
-(107, '培训课件', 'training', 1, 'FileWordOutlined', 7, 'admin', 'admin'),
-(108, '商业提案', 'business-proposal', 1, 'FilePptOutlined', 8, 'admin', 'admin'),
-(109, '数据分析', 'data-analysis', 1, 'FileExcelOutlined', 9, 'admin', 'admin'),
-(110, '项目汇报', 'project-report', 1, 'ProfileOutlined', 10, 'admin', 'admin'),
-(111, '考试备考', 'exam', 1, 'BookOutlined', 11, 'admin', 'admin'),
-(112, '技能提升', 'skill', 1, 'ToolOutlined', 12, 'admin', 'admin'),
-(113, '职业发展', 'career', 1, 'ProfileOutlined', 13, 'admin', 'admin'),
-(114, '学术研究', 'research', 1, 'ReadOutlined', 14, 'admin', 'admin'),
-(115, '自我提升', 'self-improvement', 1, 'UserOutlined', 15, 'admin', 'admin'),
-(116, '休闲娱乐', 'leisure', 1, 'PlayCircleOutlined', 16, 'admin', 'admin'),
-(117, '兴趣培养', 'hobby', 1, 'CameraOutlined', 17, 'admin', 'admin'),
-(118, '个人收藏', 'collection', 1, 'CrownOutlined', 18, 'admin', 'admin'),
-(119, '日常娱乐', 'daily', 1, 'PlayCircleOutlined', 19, 'admin', 'admin'),
-(120, '学习充电', 'study', 1, 'ReadOutlined', 20, 'admin', 'admin'),
-(121, '工作效率', 'work', 1, 'ToolOutlined', 21, 'admin', 'admin'),
-(122, '创作创造', 'create', 1, 'HighlightOutlined', 22, 'admin', 'admin'),
-(123, '办公应用', 'office', 1, 'FileWordOutlined', 23, 'admin', 'admin'),
-(124, '设计创作', 'design', 1, 'SketchOutlined', 24, 'admin', 'admin'),
-(125, '开发编程', 'development', 1, 'CodeOutlined', 25, 'admin', 'admin'),
-(126, '系统工具', 'system', 1, 'WindowsOutlined', 26, 'admin', 'admin'),
+---------------------------------------------------------
+--插入数字素材类二级目录数据
+INSERT INTO `rcc_category` (`code`, `name`, `parent_id`, `parent_code`, `level`, `sort`, `icon`, `created_at`, `updated_at`, `is_deleted`, `creator`, `updator`) 
+SELECT 
+    '201000' as code,
+    '文档模板' as name,
+    id as parent_id,
+    '200000' as parent_code,
+    2 as level,
+    1 as sort,
+    '' as icon,
+    NOW() as created_at,
+    NOW() as updated_at,
+    0 as is_deleted,
+    'admin' as creator,
+    'admin' as updator
+FROM rcc_category WHERE code = '200000'
+UNION ALL
+SELECT '202000', '图片素材', id, '200000', 2, 2, '', NOW(), NOW(), 0, 'admin', 'admin'
+FROM rcc_category WHERE code = '200000'
+UNION ALL
+SELECT '203000', '音频素材', id, '200000', 2, 3, '', NOW(), NOW(), 0, 'admin', 'admin'
+FROM rcc_category WHERE code = '200000'
+UNION ALL
+SELECT '204000', '视频素材', id, '200000', 2, 4, '', NOW(), NOW(), 0, 'admin', 'admin'
+FROM rcc_category WHERE code = '200000';
 
--- 风格属性
-(201, '赛博朋克', 'cyberpunk', 2, 'CrownOutlined', 1, 'admin', 'admin'),
-(202, '未来科技', 'future', 2, 'CrownOutlined', 2, 'admin', 'admin'),
-(203, '像素复古', 'pixel', 2, 'CrownOutlined', 3, 'admin', 'admin'),
-(204, '艺术写实', 'art', 2, 'CrownOutlined', 4, 'admin', 'admin'),
-(205, '抽象创意', 'abstract', 2, 'CrownOutlined', 5, 'admin', 'admin'),
-(206, '简约商务', 'business', 2, 'FileOutlined', 6, 'admin', 'admin'),
-(207, '清新文艺', 'fresh', 2, 'FileTextOutlined', 7, 'admin', 'admin'),
-(208, '科技感强', 'tech', 2, 'LayoutOutlined', 8, 'admin', 'admin'),
-(209, '创意设计', 'creative', 2, 'PictureOutlined', 9, 'admin', 'admin'),
-(210, '传统严谨', 'traditional', 2, 'ProfileOutlined', 10, 'admin', 'admin'),
-(211, '系统全面', 'systematic', 2, 'AppstoreOutlined', 11, 'admin', 'admin'),
-(212, '重点突出', 'focused', 2, 'HighlightOutlined', 12, 'admin', 'admin'),
-(213, '实用性强', 'practical', 2, 'ToolOutlined', 13, 'admin', 'admin'),
-(214, '深入浅出', 'easy', 2, 'ReadOutlined', 14, 'admin', 'admin'),
-(215, '轻松欢快', 'happy', 2, 'PlayCircleOutlined', 15, 'admin', 'admin'),
-(216, '文艺小众', 'artistic', 2, 'CustomerServiceOutlined', 16, 'admin', 'admin'),
-(217, '热血动感', 'energetic', 2, 'TrophyOutlined', 17, 'admin', 'admin'),
-(218, '温馨治愈', 'healing', 2, 'HeartOutlined', 18, 'admin', 'admin'),
-(219, '基础服务', 'basic', 2, 'AppstoreOutlined', 19, 'admin', 'admin'),
-(220, '进阶特权', 'advanced', 2, 'CrownOutlined', 20, 'admin', 'admin'),
-(221, '尊享专属', 'premium', 2, 'SafetyCertificateOutlined', 21, 'admin', 'admin'),
-(222, '定制服务', 'custom', 2, 'ToolOutlined', 22, 'admin', 'admin'),
-(223, '专业版本', 'professional', 2, 'SafetyCertificateOutlined', 23, 'admin', 'admin'),
-(224, '企业定制', 'enterprise', 2, 'AppstoreOutlined', 24, 'admin', 'admin'),
-(225, '个人使用', 'personal', 2, 'UserOutlined', 25, 'admin', 'admin'),
-(226, '教育版本', 'education', 2, 'ReadOutlined', 26, 'admin', 'admin');
 
--- 插入目录属性组关联数据
-INSERT INTO `rcc_category_attr_group` (`id`, `category_id`, `attr_group_id`, `creator`, `updator`) VALUES
--- NFT专区
-(1, 1, 1, 'admin', 'admin'),
-(2, 1, 2, 'admin', 'admin'),
--- 数字素材类
-(3, 2, 1, 'admin', 'admin'),
-(4, 2, 2, 'admin', 'admin'),
--- 学习资源类
-(5, 3, 1, 'admin', 'admin'),
-(6, 3, 2, 'admin', 'admin'),
--- 生活娱乐类
-(7, 4, 1, 'admin', 'admin'),
-(8, 4, 2, 'admin', 'admin'),
--- 会员权益类
-(9, 5, 1, 'admin', 'admin'),
-(10, 5, 2, 'admin', 'admin'),
--- 软件服务类
-(11, 6, 1, 'admin', 'admin'),
-(12, 6, 2, 'admin', 'admin');
+--插入文档模板的三级目录数据
+INSERT INTO `rcc_category` (`code`, `name`, `parent_id`, `parent_code`, `level`, `sort`, `icon`, `created_at`, `updated_at`, `is_deleted`, `creator`, `updator`) 
+SELECT 
+    '201001' as code,
+    'world' as name,
+    id as parent_id,
+    '201000' as parent_code,
+    3 as level,
+    1 as sort,
+    '' as icon,
+    NOW() as created_at,
+    NOW() as updated_at,
+    0 as is_deleted,
+    'admin' as creator,
+    'admin' as updator
+FROM rcc_category WHERE code = '201000'
+UNION ALL
+SELECT '201002', 'excel', id, '201000', 3, 2, '', NOW(), NOW(), 0, 'admin', 'admin'
+FROM rcc_category WHERE code = '201000'
+UNION ALL
+SELECT '201003', 'ppt', id, '201000', 3, 3, '', NOW(), NOW(), 0, 'admin', 'admin'
+FROM rcc_category WHERE code = '201000'
+UNION ALL
+SELECT '201004', 'pdf', id, '201000', 3, 4, '', NOW(), NOW(), 0, 'admin', 'admin'
+FROM rcc_category WHERE code = '201000'
+UNION ALL
+SELECT '201005', '其它', id, '201000', 3, 5, '', NOW(), NOW(), 0, 'admin', 'admin'
+FROM rcc_category WHERE code = '201000';
+
+
+--插入图片素材的三级目录数据
+INSERT INTO `rcc_category` (`code`, `name`, `parent_id`, `parent_code`, `level`, `sort`, `icon`, `created_at`, `updated_at`, `is_deleted`, `creator`, `updator`) 
+SELECT 
+    '202001' as code,
+    '壁纸' as name,
+    id as parent_id,
+    '202000' as parent_code,
+    3 as level,
+    1 as sort,
+    '' as icon,
+    NOW() as created_at,
+    NOW() as updated_at,
+    0 as is_deleted,
+    'admin' as creator,
+    'admin' as updator
+FROM rcc_category WHERE code = '202000'
+UNION ALL
+SELECT '202002', '头像', id, '202000', 3, 2, '', NOW(), NOW(), 0, 'admin', 'admin'
+FROM rcc_category WHERE code = '202000'
+UNION ALL
+SELECT '202003', '海报', id, '202000', 3, 3, '', NOW(), NOW(), 0, 'admin', 'admin'
+FROM rcc_category WHERE code = '202000'
+UNION ALL
+SELECT '202004', '插画', id, '202000', 3, 4, '', NOW(), NOW(), 0, 'admin', 'admin'
+FROM rcc_category WHERE code = '202000';
+
+
+--插入音乐素材的三级目录数据
+INSERT INTO `rcc_category` (`code`, `name`, `parent_id`, `parent_code`, `level`, `sort`, `icon`, `created_at`, `updated_at`, `is_deleted`, `creator`, `updator`) 
+SELECT 
+    '203001' as code,
+    '背景音乐' as name,
+    id as parent_id,
+    '203000' as parent_code,
+    3 as level,
+    1 as sort,
+    '' as icon,
+    NOW() as created_at,
+    NOW() as updated_at,
+    0 as is_deleted,
+    'admin' as creator,
+    'admin' as updator
+FROM rcc_category WHERE code = '203000'
+UNION ALL
+SELECT '203002', '配乐相关', id, '203000', 3, 2, '', NOW(), NOW(), 0, 'admin', 'admin'
+FROM rcc_category WHERE code = '203000'
+UNION ALL
+SELECT '203003', '音乐节拍', id, '203000', 3, 3, '', NOW(), NOW(), 0, 'admin', 'admin'
+FROM rcc_category WHERE code = '203000'
+UNION ALL
+SELECT '203004', '自然声音', id, '203000', 3, 4, '', NOW(), NOW(), 0, 'admin', 'admin'
+FROM rcc_category WHERE code = '203000'
+UNION ALL
+SELECT '203005', '其它', id, '203000', 3, 5, '', NOW(), NOW(), 0, 'admin', 'admin'
+FROM rcc_category WHERE code = '203000';
+
+
+--插入视频素材的三级目录数据
+INSERT INTO `rcc_category` (`code`, `name`, `parent_id`, `parent_code`, `level`, `sort`, `icon`, `created_at`, `updated_at`, `is_deleted`, `creator`, `updator`) 
+SELECT 
+    '204001' as code,
+    '广告视频' as name,
+    id as parent_id,
+    '204000' as parent_code,
+    3 as level,
+    1 as sort,
+    '' as icon,
+    NOW() as created_at,
+    NOW() as updated_at,
+    0 as is_deleted,
+    'admin' as creator,
+    'admin' as updator
+FROM rcc_category WHERE code = '204000'
+UNION ALL
+SELECT '204002', '宣传片', id, '204000', 3, 2, '', NOW(), NOW(), 0, 'admin', 'admin'
+FROM rcc_category WHERE code = '204000'
+UNION ALL
+SELECT '204003', '教学视频', id, '204000', 3, 3, '', NOW(), NOW(), 0, 'admin', 'admin'
+FROM rcc_category WHERE code = '204000'
+UNION ALL
+SELECT '204004', '动画视频', id, '204000', 3, 4, '', NOW(), NOW(), 0, 'admin', 'admin'
+FROM rcc_category WHERE code = '204000'
+UNION ALL
+SELECT '204005', '其它', id, '204000', 3, 5, '', NOW(), NOW(), 0, 'admin', 'admin'
+FROM rcc_category WHERE code = '204000';
+
+
+------------------------------------------------------------
+--插入学习资源类的二级目录
