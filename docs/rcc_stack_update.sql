@@ -1,11 +1,13 @@
 ---1.商品目录分类表-----
 CREATE TABLE `rcc_category` (
     `id` BIGINT NOT NULL AUTO_INCREMENT,
+    `code` VARCHAR(255) NOT NULL default '' COMMENT '编码',
     `name` VARCHAR(255) NOT NULL default '' COMMENT '名称',
-    `parent_id` BIGINT COMMENT '父级id',
-    `level` INT COMMENT '级别',
-    `sort` INT COMMENT '排序',
-    `icon` VARCHAR(255) COMMENT '图标',
+    `parent_id` BIGINT NOT NULL default 0 COMMENT '父级id',
+    `parent_code` VARCHAR(255) NOT NULL default '' COMMENT '父级编码',
+    `level` INT NOT NULL default 0 COMMENT '级别',
+    `sort` INT NOT NULL default 0 COMMENT '排序',
+    `icon` VARCHAR(255) NOT NULL default '' COMMENT '图标',
     `created_at` DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `updated_at` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
     `is_deleted` INT DEFAULT 0 COMMENT '是否删除',
@@ -17,9 +19,11 @@ CREATE TABLE `rcc_category` (
 ---2.属性组-----
 CREATE TABLE `rcc_attr_group` (
     `id` BIGINT NOT NULL AUTO_INCREMENT,
-    `attr_group_name` VARCHAR(255) NOT NULL COMMENT '名称',
-    `attr_group_code` VARCHAR(255) NOT NULL COMMENT '编码',
-    `sort` INT COMMENT '排序',
+    `attr_group_name` VARCHAR(255) NOT NULL default '' COMMENT '名称',
+    `attr_group_code` VARCHAR(255) NOT NULL default '' COMMENT '编码',
+    `type` INT NOT NULL default 0 COMMENT '类型',
+    `status` INT NOT NULL default 0 COMMENT '状态',
+    `sort` INT NOT NULL default 0 COMMENT '排序',
     `created_at` DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `updated_at` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
     `is_deleted` INT DEFAULT 0 COMMENT '是否删除',
@@ -31,12 +35,13 @@ CREATE TABLE `rcc_attr_group` (
 ---3.属性----
 CREATE TABLE `rcc_attr` (
     `id` BIGINT NOT NULL AUTO_INCREMENT,
-    `attr_name` VARCHAR(255) NOT NULL COMMENT '名称',
-    `attr_code` VARCHAR(255) NOT NULL COMMENT '编码',
+    `attr_name` VARCHAR(255) NOT NULL default '' COMMENT '名称',
+    `attr_code` VARCHAR(255) NOT NULL default '' COMMENT '编码',
     `attr_group_id` BIGINT NOT NULL default 0 COMMENT '属性组id',
-    `icon` VARCHAR(255) COMMENT '图标',
-    `attr_type` INT COMMENT '属性类型',
-    `sort` INT COMMENT '排序',
+    `icon` VARCHAR(255) NOT NULL default '' COMMENT '图标',
+    `attr_type` INT NOT NULL default 0 COMMENT '属性类型',
+    `status` INT NOT NULL default 0 COMMENT '状态',
+    `sort` INT NOT NULL default 0 COMMENT '排序',
     `created_at` DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `updated_at` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
     `is_deleted` INT DEFAULT 0 COMMENT '是否删除',
@@ -49,8 +54,10 @@ CREATE TABLE `rcc_attr` (
 ---4.目录属性组关联表---
 CREATE TABLE `rcc_category_attr_group` (
     `id` BIGINT NOT NULL AUTO_INCREMENT,
-    `category_id` BIGINT NOT NULL COMMENT '商品目录分类id',
-    `attr_group_id` BIGINT NOT NULL COMMENT '属性组id',
+    `category_id` BIGINT NOT NULL default 0 COMMENT '商品目录分类id',
+    `category_code` VARCHAR(255) NOT NULL default '' COMMENT '商品目录分类编码',
+    `attr_group_id` BIGINT NOT NULL default 0 COMMENT '属性组id',
+    `attr_group_code` VARCHAR(255) NOT NULL default '' COMMENT '属性组编码',
     `created_at` DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `updated_at` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
     `is_deleted` INT DEFAULT 0 COMMENT '是否删除',
@@ -64,13 +71,14 @@ CREATE TABLE `rcc_category_attr_group` (
 ---5.商品spu----
 CREATE TABLE `rcc_product_spu` (
     `id` BIGINT NOT NULL AUTO_INCREMENT,
-    `code` VARCHAR(255) NOT NULL COMMENT '编码',
-    `name` VARCHAR(255) NOT NULL COMMENT '名称',
-    `category_id` INT NOT NULL COMMENT '商品目录分类id',
-    `brand` VARCHAR(255) NOT NULL COMMENT '品牌',
-    `description` VARCHAR(255) COMMENT '描述',
-    `status` INT NOT NULL COMMENT '状态',
-    `images` VARCHAR(1000) COMMENT '图片',
+    `code` VARCHAR(255) NOT NULL default '' COMMENT '编码',
+    `name` VARCHAR(255) NOT NULL default '' COMMENT '名称',
+    `category_id` BIGINT NOT NULL default 0 COMMENT '商品目录分类id',
+    `category_code` VARCHAR(255) NOT NULL default '' COMMENT '商品目录分类编码',
+    `brand` VARCHAR(255) NOT NULL default '' COMMENT '品牌',
+    `description` VARCHAR(255) NOT NULL default '' COMMENT '描述',
+    `status` INT NOT NULL default 0 COMMENT '状态',
+    `images` VARCHAR(1000) NOT NULL default '' COMMENT '图片',
     `created_at` DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `updated_at` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
     `is_deleted` INT DEFAULT 0 COMMENT '是否删除',
@@ -84,7 +92,8 @@ CREATE TABLE `rcc_product_spu` (
 ---6.商品spu详情----
 CREATE TABLE `rcc_product_spu_detail` (
     `id` BIGINT NOT NULL AUTO_INCREMENT,
-    `product_spu_id` BIGINT NOT NULL COMMENT '商品spu id',
+    `product_spu_id` BIGINT NOT NULL default 0 COMMENT '商品spu id',
+    `product_spu_code` VARCHAR(255) NOT NULL default '' COMMENT '商品spu编码',
     `detail` LONGBLOB COMMENT '详情',
     `created_at` DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `updated_at` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
@@ -98,8 +107,10 @@ CREATE TABLE `rcc_product_spu_detail` (
 ---7.商品spu属性组关联表----
 CREATE TABLE `rcc_product_spu_attr_group` (
     `id` BIGINT NOT NULL AUTO_INCREMENT,
-    `product_spu_id` BIGINT NOT NULL COMMENT '商品spu id',
-    `attr_group_id` BIGINT NOT NULL COMMENT '属性组id',
+    `product_spu_id` BIGINT NOT NULL default 0 COMMENT '商品spu id',
+    `product_spu_code` VARCHAR(255) NOT NULL default '' COMMENT '商品spu编码',
+    `attr_group_id` BIGINT NOT NULL default 0 COMMENT '属性组id',
+    `attr_group_code` VARCHAR(255) NOT NULL default '' COMMENT '属性组编码',
     `created_at` DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `updated_at` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
     `is_deleted` INT DEFAULT 0 COMMENT '是否删除',
@@ -113,8 +124,9 @@ CREATE TABLE `rcc_product_spu_attr_group` (
 ---8.商品spu属性关联表----
 CREATE TABLE `rcc_product_spu_attr` (
     `id` BIGINT NOT NULL AUTO_INCREMENT,
-    `product_spu_id` BIGINT NOT NULL COMMENT '商品spu id',
-    `attr_id` BIGINT NOT NULL COMMENT '属性id',
+    `product_spu_id` BIGINT NOT NULL default 0 COMMENT '商品spu id',
+    `product_spu_code` VARCHAR(255) NOT NULL default '' COMMENT '商品spu编码',
+    `attr_id` BIGINT NOT NULL default 0 COMMENT '属性id',
     `created_at` DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `updated_at` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
     `is_deleted` INT DEFAULT 0 COMMENT '是否删除',
@@ -128,11 +140,13 @@ CREATE TABLE `rcc_product_spu_attr` (
 ---9.商品sku----
 CREATE TABLE `rcc_product_sku` (
     `id` BIGINT NOT NULL AUTO_INCREMENT,
-    `product_spu_id` BIGINT NOT NULL COMMENT '商品spu id',
-    `sku_code` VARCHAR(255) NOT NULL COMMENT 'sku编码',
-    `category_id` BIGINT NOT NULL COMMENT '商品目录分类id',
-    `price` DECIMAL(10,2) NOT NULL COMMENT '价格',
-    `stock` INT NOT NULL COMMENT '库存',
+    `product_spu_id` BIGINT NOT NULL default 0 COMMENT '商品spu id',
+    `product_spu_code` VARCHAR(255) NOT NULL default '' COMMENT '商品spu编码',
+    `sku_code` VARCHAR(255) NOT NULL default '' COMMENT 'sku编码',
+    `category_id` BIGINT NOT NULL default 0 COMMENT '商品目录分类id',
+    `category_code` VARCHAR(255) NOT NULL default '' COMMENT '商品目录分类编码',
+    `price` DECIMAL(10,2) NOT NULL default 0 COMMENT '价格',
+    `stock` INT NOT NULL default 0 COMMENT '库存',
     `sale_count` INT NOT NULL COMMENT '销量',
     `status` INT NOT NULL COMMENT '状态',
     `images` VARCHAR(1000) COMMENT '图片',
@@ -153,8 +167,10 @@ CREATE TABLE `rcc_product_sku` (
 ---10.商品sku属性组关联表----
 CREATE TABLE `rcc_product_sku_attr_group` (
     `id` BIGINT NOT NULL AUTO_INCREMENT,
-    `product_sku_id` BIGINT NOT NULL COMMENT '商品sku id',
-    `attr_group_id` BIGINT NOT NULL COMMENT '属性组id',
+    `product_sku_id` BIGINT NOT NULL default 0 COMMENT '商品sku id',
+    `product_sku_code` VARCHAR(255) NOT NULL default '' COMMENT '商品sku编码',
+    `attr_group_id` BIGINT NOT NULL default 0 COMMENT '属性组id',
+    `attr_group_code` VARCHAR(255) NOT NULL default '' COMMENT '属性组编码',
     `created_at` DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `updated_at` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
     `is_deleted` INT DEFAULT 0 COMMENT '是否删除',
@@ -168,9 +184,10 @@ CREATE TABLE `rcc_product_sku_attr_group` (
 ---11.商品sku属性关联表----
 CREATE TABLE `rcc_product_sku_attr` (
     `id` BIGINT NOT NULL AUTO_INCREMENT,
-    `product_sku_id` BIGINT NOT NULL COMMENT '商品sku id',
-    `attr_id` BIGINT NOT NULL COMMENT '属性id',
-    `created_at` DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `product_sku_id` BIGINT NOT NULL default 0 COMMENT '商品sku id',
+    `product_sku_code` VARCHAR(255) NOT NULL default '' COMMENT '商品sku编码',
+    `attr_id` BIGINT NOT NULL default 0 COMMENT '属性id',
+    `created_at` DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间', 
     `updated_at` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
     `is_deleted` INT DEFAULT 0 COMMENT '是否删除',
     `creator` VARCHAR(64) NOT NULL default '' COMMENT '创建人',
