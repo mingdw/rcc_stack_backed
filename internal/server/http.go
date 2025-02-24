@@ -20,6 +20,7 @@ func NewHTTPServer(
 	conf *viper.Viper,
 	jwt *jwt.JWT,
 	userHandler *handler.UserHandler,
+	categoryHandler *handler.CategoryHandler,
 ) *http.Server {
 	gin.SetMode(gin.DebugMode)
 	s := http.NewServer(
@@ -59,6 +60,7 @@ func NewHTTPServer(
 			noAuthRouter.POST("/register", userHandler.Register)
 			noAuthRouter.POST("/login", userHandler.Login)
 			commonApi(noAuthRouter)
+			mallApi(noAuthRouter, categoryHandler)
 		}
 		// Non-strict permission routing group
 		noStrictAuthRouter := v1.Group("/").Use(middleware.NoStrictAuth(jwt, logger))
@@ -70,6 +72,7 @@ func NewHTTPServer(
 		strictAuthRouter := v1.Group("/").Use(middleware.StrictAuth(jwt, logger))
 		{
 			strictAuthRouter.PUT("/user", userHandler.UpdateProfile)
+
 		}
 
 	}
@@ -87,4 +90,8 @@ func poolApi(router *gin.RouterGroup) {
 	router.GET("/pool", func(ctx *gin.Context) {
 		v1.HandleSuccess(ctx, nil)
 	})
+}
+
+func mallApi(router *gin.RouterGroup, categoryHandler *handler.CategoryHandler) {
+	router.GET("/categories", categoryHandler.GetCategoryTree)
 }

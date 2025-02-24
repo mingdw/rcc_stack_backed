@@ -1,8 +1,9 @@
 package handler
 
 import (
-	"github.com/gin-gonic/gin"
 	"rcc-stake-backed/internal/service"
+
+	"github.com/gin-gonic/gin"
 )
 
 type PoolHandler struct {
@@ -11,11 +12,11 @@ type PoolHandler struct {
 }
 
 func NewPoolHandler(
-    handler *Handler,
-    poolService service.PoolService,
+	handler *Handler,
+	poolService service.PoolService,
 ) *PoolHandler {
 	return &PoolHandler{
-		Handler:      handler,
+		Handler:     handler,
 		poolService: poolService,
 	}
 }

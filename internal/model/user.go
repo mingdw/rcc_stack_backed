@@ -1,11 +1,13 @@
 package model
 
 import (
-	"gorm.io/gorm"
 	"time"
+
+	"gorm.io/gorm"
 )
 
 type User struct {
+	gorm.Model
 	Id        uint   `gorm:"primarykey"`
 	UserId    string `gorm:"unique;not null"`
 	Nickname  string `gorm:"not null"`

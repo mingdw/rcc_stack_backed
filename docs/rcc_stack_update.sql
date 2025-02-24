@@ -1012,3 +1012,90 @@ UNION ALL
 SELECT '603005', '其它', id, '603000', 3, 5, '', NOW(), NOW(), 0, 'admin', 'admin'
 FROM rcc_category WHERE code = '603000';
 
+-- 插入属性和属性组
+-- 插入NFT专区相关属性组
+INSERT INTO `rcc_attr_group` (`attr_group_name`, `attr_group_code`, `type`, `status`, `sort`, `created_at`, `updated_at`, `is_deleted`, `creator`, `updator`)
+VALUES 
+('应用领域', 'nft_application_field', 1, 1, 1, NOW(), NOW(), 0, 'admin', 'admin'),
+('内容形式', 'nft_content_form', 1, 1, 2, NOW(), NOW(), 0, 'admin', 'admin');
+
+-- 插入应用领域属性组下的属性
+INSERT INTO `rcc_attr` (`attr_name`, `attr_code`, `attr_group_id`, `icon`, `attr_type`, `status`, `sort`, `created_at`, `updated_at`, `is_deleted`, `creator`, `updator`)
+SELECT 
+    '艺术创作' as attr_name,
+    'art_creation' as attr_code,
+    id as attr_group_id,
+    '' as icon,
+    1 as attr_type,
+    1 as status,
+    1 as sort,
+    NOW() as created_at,
+    NOW() as updated_at,
+    0 as is_deleted,
+    'admin' as creator,
+    'admin' as updator
+FROM rcc_attr_group WHERE attr_group_code = 'nft_application_field'
+UNION ALL
+SELECT '音乐作品', 'music_works', id, '', 1, 1, 2, NOW(), NOW(), 0, 'admin', 'admin'
+FROM rcc_attr_group WHERE attr_group_code = 'nft_application_field'
+UNION ALL
+SELECT '游戏道具', 'game_props', id, '', 1, 1, 3, NOW(), NOW(), 0, 'admin', 'admin'
+FROM rcc_attr_group WHERE attr_group_code = 'nft_application_field'
+UNION ALL
+SELECT '虚拟资产', 'virtual_assets', id, '', 1, 1, 4, NOW(), NOW(), 0, 'admin', 'admin'
+FROM rcc_attr_group WHERE attr_group_code = 'nft_application_field'
+UNION ALL
+SELECT '体育收藏', 'sports_collection', id, '', 1, 1, 5, NOW(), NOW(), 0, 'admin', 'admin'
+FROM rcc_attr_group WHERE attr_group_code = 'nft_application_field'
+UNION ALL
+SELECT '域名', 'domain_name', id, '', 1, 1, 6, NOW(), NOW(), 0, 'admin', 'admin'
+FROM rcc_attr_group WHERE attr_group_code = 'nft_application_field';
+
+-- 插入内容形式属性组下的属性
+INSERT INTO `rcc_attr` (`attr_name`, `attr_code`, `attr_group_id`, `icon`, `attr_type`, `status`, `sort`, `created_at`, `updated_at`, `is_deleted`, `creator`, `updator`)
+SELECT 
+    '图片' as attr_name,
+    'image' as attr_code,
+    id as attr_group_id,
+    '' as icon,
+    1 as attr_type,
+    1 as status,
+    1 as sort,
+    NOW() as created_at,
+    NOW() as updated_at,
+    0 as is_deleted,
+    'admin' as creator,
+    'admin' as updator
+FROM rcc_attr_group WHERE attr_group_code = 'nft_content_form'
+UNION ALL
+SELECT '视频', 'video', id, '', 1, 1, 2, NOW(), NOW(), 0, 'admin', 'admin'
+FROM rcc_attr_group WHERE attr_group_code = 'nft_content_form'
+UNION ALL
+SELECT '音频', 'audio', id, '', 1, 1, 3, NOW(), NOW(), 0, 'admin', 'admin'
+FROM rcc_attr_group WHERE attr_group_code = 'nft_content_form'
+UNION ALL
+SELECT '3D模型', '3d_model', id, '', 1, 1, 4, NOW(), NOW(), 0, 'admin', 'admin'
+FROM rcc_attr_group WHERE attr_group_code = 'nft_content_form'
+UNION ALL
+SELECT '文本类型', 'text', id, '', 1, 1, 5, NOW(), NOW(), 0, 'admin', 'admin'
+FROM rcc_attr_group WHERE attr_group_code = 'nft_content_form'
+UNION ALL
+SELECT '其它', 'other', id, '', 1, 1, 6, NOW(), NOW(), 0, 'admin', 'admin'
+FROM rcc_attr_group WHERE attr_group_code = 'nft_content_form';
+
+-- 建立NFT专区与属性组的关联
+INSERT INTO `rcc_category_attr_group` (`category_id`, `category_code`, `attr_group_id`, `attr_group_code`, `created_at`, `updated_at`, `is_deleted`, `creator`, `updator`)
+SELECT 
+    c.id as category_id,
+    c.code as category_code,
+    ag.id as attr_group_id,
+    ag.attr_group_code as attr_group_code,
+    NOW() as created_at,
+    NOW() as updated_at,
+    0 as is_deleted,
+    'admin' as creator,
+    'admin' as updator
+FROM rcc_category c
+CROSS JOIN rcc_attr_group ag
+WHERE c.code = (select code from rcc_category where name = 'NFT专区') 
+AND ag.attr_group_code IN ('nft_application_field', 'nft_content_form');

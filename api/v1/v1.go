@@ -2,8 +2,9 @@ package v1
 
 import (
 	"errors"
-	"github.com/gin-gonic/gin"
 	"net/http"
+
+	"github.com/gin-gonic/gin"
 )
 
 type Response struct {
@@ -32,6 +33,11 @@ func HandleError(ctx *gin.Context, httpCode int, err error, data interface{}) {
 		resp = Response{Code: 500, Message: "unknown error", Data: data}
 	}
 	ctx.JSON(httpCode, resp)
+}
+
+// 实现返回默认的错误码
+func HandleDefaultError(ctx *gin.Context, err error) {
+	HandleError(ctx, http.StatusInternalServerError, err, nil)
 }
 
 type Error struct {
