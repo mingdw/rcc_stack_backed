@@ -41,6 +41,7 @@ CREATE TABLE `rcc_attr` (
     `icon` VARCHAR(255) NOT NULL default '' COMMENT '图标',
     `attr_type` INT NOT NULL default 0 COMMENT '属性类型',
     `status` INT NOT NULL default 0 COMMENT '状态',
+    `description` VARCHAR(255) NOT NULL default '' COMMENT '描述',
     `sort` INT NOT NULL default 0 COMMENT '排序',
     `created_at` DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `updated_at` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',

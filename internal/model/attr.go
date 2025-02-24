@@ -10,6 +10,7 @@ type Attr struct {
 	Icon        string    `json:"icon" gorm:"column:icon;not null;default:'';comment:图标"`
 	AttrType    int       `json:"attrType" gorm:"column:attr_type;not null;default:0;comment:属性类型"`
 	Status      int       `json:"status" gorm:"column:status;not null;default:0;comment:状态"`
+	Description string    `json:"description" gorm:"column:description;not null;default:'';comment:描述"`
 	Sort        int       `json:"sort" gorm:"column:sort;not null;default:0;comment:排序"`
 	CreatedAt   time.Time `json:"createdAt" gorm:"column:created_at;default:CURRENT_TIMESTAMP;comment:创建时间"`
 	UpdatedAt   time.Time `json:"updatedAt" gorm:"column:updated_at;default:CURRENT_TIMESTAMP;comment:更新时间"`
