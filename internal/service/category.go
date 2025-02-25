@@ -112,25 +112,27 @@ func buildCategoryTree(categories []model.Category, categoryAttrGroupMap map[uin
 			if attrGroups, exists := categoryAttrGroupMap[uint(category.ID)]; exists {
 				for _, ag := range attrGroups {
 					attrGroupResp := v1.AttrGroupResponse{
-						ID:     uint(ag.ID),
-						Name:   ag.AttrGroupName,
-						Code:   ag.AttrGroupCode,
-						Sort:   ag.Sort,
-						Type:   ag.Type,
-						Status: ag.Status,
+						ID:          uint(ag.ID),
+						Name:        ag.AttrGroupName,
+						Code:        ag.AttrGroupCode,
+						Sort:        ag.Sort,
+						Type:        ag.Type,
+						Status:      ag.Status,
+						Description: ag.Description,
 					}
 
 					// 添加属性信息
 					if attrs, exists := attrGroupMap[uint(ag.ID)]; exists {
 						for _, attr := range attrs {
 							attrResp := v1.AttrResponse{
-								ID:      attr.ID,
-								Name:    attr.AttrName,
-								Code:    attr.AttrCode,
-								Sort:    attr.Sort,
-								Status:  attr.Status,
-								Type:    attr.AttrType,
-								GroupID: uint(ag.ID),
+								ID:          attr.ID,
+								Name:        attr.AttrName,
+								Code:        attr.AttrCode,
+								Sort:        attr.Sort,
+								Status:      attr.Status,
+								Type:        attr.AttrType,
+								GroupID:     uint(ag.ID),
+								Description: attr.Description,
 							}
 							attrGroupResp.Attrs = append(attrGroupResp.Attrs, attrResp)
 						}

@@ -10,6 +10,7 @@ type AttrGroup struct {
 	Type          int       `json:"type" gorm:"column:type;not null;default:0;comment:类型"`
 	Status        int       `json:"status" gorm:"column:status;not null;default:0;comment:状态"`
 	Sort          int       `json:"sort" gorm:"column:sort;not null;default:0;comment:排序"`
+	Description   string    `json:"description" gorm:"column:description;not null;default:'';comment:描述"`
 	CreatedAt     time.Time `json:"createdAt" gorm:"column:created_at;default:CURRENT_TIMESTAMP;comment:创建时间"`
 	UpdatedAt     time.Time `json:"updatedAt" gorm:"column:updated_at;default:CURRENT_TIMESTAMP;comment:更新时间"`
 	IsDeleted     int       `json:"isDeleted" gorm:"column:is_deleted;default:0;comment:是否删除"`

@@ -15,22 +15,24 @@ type CategoryTreeResponse struct {
 
 // AttrGroupResponse 属性组响应结构
 type AttrGroupResponse struct {
-	ID     uint           `json:"id"`
-	Name   string         `json:"name"`
-	Code   string         `json:"code"`
-	Sort   int            `json:"sort"`
-	Type   int            `json:"type"`
-	Status int            `json:"status"`
-	Attrs  []AttrResponse `json:"attrs"`
+	ID          uint           `json:"id"`
+	Name        string         `json:"name"`
+	Code        string         `json:"code"`
+	Sort        int            `json:"sort"`
+	Type        int            `json:"type"`
+	Description string         `json:"description"`
+	Status      int            `json:"status"`
+	Attrs       []AttrResponse `json:"attrs"`
 }
 
 // AttrResponse 属性响应结构
 type AttrResponse struct {
-	ID      uint   `json:"id"`
-	Name    string `json:"name"`
-	Code    string `json:"code"`
-	Type    int    `json:"type"`
-	Status  int    `json:"status"`
-	GroupID uint   `json:"groupId"`
-	Sort    int    `json:"sort"`
+	ID          uint   `json:"id"`
+	Name        string `json:"name"`
+	Code        string `json:"code"`
+	Type        int    `json:"type"`
+	Status      int    `json:"status"`
+	GroupID     uint   `json:"groupId"`
+	Description string `json:"description"`
+	Sort        int    `json:"sort"`
 }
