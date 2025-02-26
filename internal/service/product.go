@@ -103,8 +103,6 @@ func (s *productService) ListProducts(ctx context.Context, request *v1.ProductLi
 	// 目录--> 商品集合的映射关系
 	// 构建响应
 	var response v1.ProductListResponse
-	var resTotal int64 = 0
-	var categories []*v1.CategoryProducts
 	for _, categoryCode := range categoryCodes {
 		var categoryProducts v1.CategoryProducts
 		categoryProducts.CategoryCode = categoryCode
@@ -153,12 +151,12 @@ func (s *productService) ListProducts(ctx context.Context, request *v1.ProductLi
 				count++
 			}
 		}
+
 		categoryProducts.ProductCount = count
 		categoryProducts.Products = ps
 		response.Categories = append(response.Categories, &categoryProducts)
-		resTotal += count
-	}
 
+	}
 	response.Total = total
 	response.Categories = make([]*v1.CategoryProducts, 0)
 
