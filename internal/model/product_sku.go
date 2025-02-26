@@ -10,12 +10,12 @@ type ProductSku struct {
 	ProductSpuID   int64     `gorm:"column:product_spu_id;not null" json:"productSpuId"`     // 商品spu id
 	ProductSpuCode string    `gorm:"column:product_spu_code;not null" json:"productSpuCode"` // 商品spu编码
 	SkuCode        string    `gorm:"column:sku_code;not null" json:"skuCode"`                // sku编码
-	CategoryID     int64     `gorm:"column:category_id;not null" json:"categoryId"`          // 商品目录分类id
-	CategoryCode   string    `gorm:"column:category_code;not null" json:"categoryCode"`      // 商品目录分类编码
 	Price          float64   `gorm:"column:price;not null" json:"price"`                     // 价格
 	Stock          int       `gorm:"column:stock;not null" json:"stock"`                     // 库存
 	SaleCount      int       `gorm:"column:sale_count;not null" json:"saleCount"`            // 销量
 	Status         int       `gorm:"column:status;not null" json:"status"`                   // 状态
+	Indexs         int       `gorm:"column:indexs;not null" json:"indexs"`                   // 规格索引
+	AttrParams     string    `gorm:"column:attr_params" json:"attrParams"`                   // 属性参数
 	Images         string    `gorm:"column:images" json:"images"`                            // 图片
 	Title          string    `gorm:"column:title" json:"title"`                              // 标题
 	SubTitle       string    `gorm:"column:sub_title" json:"subTitle"`                       // 副标题

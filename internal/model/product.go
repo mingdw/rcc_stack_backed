@@ -1,11 +1,8 @@
 package model
 
-import "gorm.io/gorm"
-
 type Product struct {
-	gorm.Model
-}
-
-func (m *Product) TableName() string {
-    return "product"
+	SPU           *ProductSpu             `json:"spu"`
+	SPUDetail     *ProductSpuDetail       `json:"spuDetail"`
+	SPUAttrParams []*ProductSpuAttrParams `json:"spuAttrParams"`
+	SKU           []*ProductSku           `json:"sku"`
 }

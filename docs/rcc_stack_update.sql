@@ -76,12 +76,18 @@ CREATE TABLE `rcc_product_spu` (
     `id` BIGINT NOT NULL AUTO_INCREMENT,
     `code` VARCHAR(255) NOT NULL default '' COMMENT '编码',
     `name` VARCHAR(255) NOT NULL default '' COMMENT '名称',
-    `category_id` BIGINT NOT NULL default 0 COMMENT '商品目录分类id',
-    `category_code` VARCHAR(255) NOT NULL default '' COMMENT '商品目录分类编码',
+    `category1_id` BIGINT NOT NULL default 0 COMMENT '商品目录1分类id',
+    `category1_code` VARCHAR(255) NOT NULL default '' COMMENT '商品目录分类编码',
+    `category2_id` BIGINT NOT NULL default 0 COMMENT '商品目录2分类id',
+    `category2_code` VARCHAR(255) NOT NULL default '' COMMENT '商品目录2分类编码',
+    `category3_id` BIGINT NOT NULL default 0 COMMENT '商品目录3分类id',
+    `category3_code` VARCHAR(255) NOT NULL default '' COMMENT '商品目录3分类编码',
     `total_sales` INT NOT NULL default 0 COMMENT '总销量',
     `total_stock` INT NOT NULL default 0 COMMENT '总库存',
     `brand` VARCHAR(255) NOT NULL default '' COMMENT '品牌',
     `description` VARCHAR(255) NOT NULL default '' COMMENT '描述',
+    `price` DECIMAL(10,2) NOT NULL default 0 COMMENT '价格',
+    `real_price` DECIMAL(10,2) NOT NULL default 0 COMMENT '原价',
     `status` INT NOT NULL default 0 COMMENT '状态',
     `images` VARCHAR(1000) NOT NULL default '' COMMENT '图片',
     `created_at` DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
@@ -90,7 +96,6 @@ CREATE TABLE `rcc_product_spu` (
     `creator` VARCHAR(64) NOT NULL default '' COMMENT '创建人',
     `updator` VARCHAR(64) NOT NULL default '' COMMENT '更新人',
     PRIMARY KEY (`id`),
-    KEY `idx_category_id` (`category_id`),
     UNIQUE KEY `uk_code` (`code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -100,6 +105,8 @@ CREATE TABLE `rcc_product_spu_detail` (
     `product_spu_id` BIGINT NOT NULL default 0 COMMENT '商品spu id',
     `product_spu_code` VARCHAR(255) NOT NULL default '' COMMENT '商品spu编码',
     `detail` LONGBLOB COMMENT '详情',
+    `packing_list` LONGBLOB COMMENT '包装清单',
+    `after_sale` LONGBLOB COMMENT '售后服务',
     `created_at` DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `updated_at` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
     `is_deleted` INT DEFAULT 0 COMMENT '是否删除',
@@ -109,53 +116,42 @@ CREATE TABLE `rcc_product_spu_detail` (
     KEY `idx_product_spu_id` (`product_spu_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- 7.商品spu属性组关联表
-CREATE TABLE `rcc_product_spu_attr_group` (
+-- 7.商品spu属性详情表
+CREATE TABLE `rcc_product_spu_attr_params` (
     `id` BIGINT NOT NULL AUTO_INCREMENT,
     `product_spu_id` BIGINT NOT NULL default 0 COMMENT '商品spu id',
     `product_spu_code` VARCHAR(255) NOT NULL default '' COMMENT '商品spu编码',
-    `attr_group_id` BIGINT NOT NULL default 0 COMMENT '属性组id',
-    `attr_group_code` VARCHAR(255) NOT NULL default '' COMMENT '属性组编码',
+    `code` VARCHAR(255) NOT NULL default '' COMMENT '编码',
+    `name` VARCHAR(255) NOT NULL default '' COMMENT '名称',
+    `attr_type` INT NOT NULL default 0 COMMENT '类型：1-基本属性，2-销售属性，3-规格属性',
+    `value_type` INT NOT NULL default 0 COMMENT '值类型：1-文本，2-图片，3-视频，4-音频，5-链接，6-其它',
+    `value` TEXT NOT NULL  COMMENT '值',
+    `sort` INT NOT NULL default 0 COMMENT '排序',
+    `status` INT NOT NULL default 0 COMMENT '状态',
+    `is_required` INT NOT NULL default 0 COMMENT '是否必填',
+    `is_generic` INT NOT NULL default 0 COMMENT '是否通用',
     `created_at` DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `updated_at` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
     `is_deleted` INT DEFAULT 0 COMMENT '是否删除',
     `creator` VARCHAR(64) NOT NULL default '' COMMENT '创建人',
     `updator` VARCHAR(64) NOT NULL default '' COMMENT '更新人',
     PRIMARY KEY (`id`),
-    KEY `idx_product_spu_id` (`product_spu_id`),
-    KEY `idx_attr_group_id` (`attr_group_id`)
+    KEY `idx_product_spu_id` (`product_spu_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- 8.商品spu属性关联表
-CREATE TABLE `rcc_product_spu_attr` (
-    `id` BIGINT NOT NULL AUTO_INCREMENT,
-    `product_spu_id` BIGINT NOT NULL default 0 COMMENT '商品spu id',
-    `product_spu_code` VARCHAR(255) NOT NULL default '' COMMENT '商品spu编码',
-    `attr_id` BIGINT NOT NULL default 0 COMMENT '属性id',
-    `attr_code` VARCHAR(255) NOT NULL default '' COMMENT '属性编码',
-    `description` VARCHAR(255) NOT NULL default '' COMMENT '描述',
-    `created_at` DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-    `updated_at` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
-    `is_deleted` INT DEFAULT 0 COMMENT '是否删除',
-    `creator` VARCHAR(64) NOT NULL default '' COMMENT '创建人',
-    `updator` VARCHAR(64) NOT NULL default '' COMMENT '更新人',
-    PRIMARY KEY (`id`),
-    KEY `idx_product_spu_id` (`product_spu_id`),
-    KEY `idx_attr_id` (`attr_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- 9.商品sku
+-- 8.商品sku
 CREATE TABLE `rcc_product_sku` (
     `id` BIGINT NOT NULL AUTO_INCREMENT,
     `product_spu_id` BIGINT NOT NULL default 0 COMMENT '商品spu id',
     `product_spu_code` VARCHAR(255) NOT NULL default '' COMMENT '商品spu编码',
     `sku_code` VARCHAR(255) NOT NULL default '' COMMENT 'sku编码',
-    `category_id` BIGINT NOT NULL default 0 COMMENT '商品目录分类id',
-    `category_code` VARCHAR(255) NOT NULL default '' COMMENT '商品目录分类编码',
     `price` DECIMAL(10,2) NOT NULL default 0 COMMENT '价格',
     `stock` INT NOT NULL default 0 COMMENT '库存',
     `sale_count` INT NOT NULL COMMENT '销量',
     `status` INT NOT NULL COMMENT '状态',
+    `indexs` INT NOT NULL default 0 COMMENT '规格索引',
+    `attr_params` TEXT  COMMENT '属性参数',
     `images` VARCHAR(1000) COMMENT '图片',
     `title` VARCHAR(255) COMMENT '标题',
     `sub_title` VARCHAR(255) COMMENT '副标题',
@@ -167,42 +163,11 @@ CREATE TABLE `rcc_product_sku` (
     `updator` VARCHAR(64) NOT NULL default '' COMMENT '更新人',
     PRIMARY KEY (`id`),
     KEY `idx_product_spu_id` (`product_spu_id`),
-    KEY `idx_category_id` (`category_id`),
     UNIQUE KEY `uk_sku_code` (`sku_code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- 10.商品sku属性组关联表
-CREATE TABLE `rcc_product_sku_attr_group` (
-    `id` BIGINT NOT NULL AUTO_INCREMENT,
-    `product_sku_id` BIGINT NOT NULL default 0 COMMENT '商品sku id',
-    `product_sku_code` VARCHAR(255) NOT NULL default '' COMMENT '商品sku编码',
-    `attr_group_id` BIGINT NOT NULL default 0 COMMENT '属性组id',
-    `attr_group_code` VARCHAR(255) NOT NULL default '' COMMENT '属性组编码',
-    `created_at` DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-    `updated_at` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
-    `is_deleted` INT DEFAULT 0 COMMENT '是否删除',
-    `creator` VARCHAR(64) NOT NULL default '' COMMENT '创建人',
-    `updator` VARCHAR(64) NOT NULL default '' COMMENT '更新人',
-    PRIMARY KEY (`id`),
-    KEY `idx_product_sku_id` (`product_sku_id`),
-    KEY `idx_attr_group_id` (`attr_group_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- 11.商品sku属性关联表
-CREATE TABLE `rcc_product_sku_attr` (
-    `id` BIGINT NOT NULL AUTO_INCREMENT,
-    `product_sku_id` BIGINT NOT NULL default 0 COMMENT '商品sku id',
-    `product_sku_code` VARCHAR(255) NOT NULL default '' COMMENT '商品sku编码',
-    `attr_id` BIGINT NOT NULL default 0 COMMENT '属性id',
-    `created_at` DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间', 
-    `updated_at` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
-    `is_deleted` INT DEFAULT 0 COMMENT '是否删除',
-    `creator` VARCHAR(64) NOT NULL default '' COMMENT '创建人',
-    `updator` VARCHAR(64) NOT NULL default ''  COMMENT '更新人',
-    PRIMARY KEY (`id`),
-    KEY `idx_product_sku_id` (`product_sku_id`),
-    KEY `idx_attr_id` (`attr_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 
 
 -- 插入目录相关示例数据
@@ -1784,6 +1749,7 @@ SELECT '304000', '其它', id, '300000', 2, 4, '', NOW(), NOW(), 0, 'admin', 'ad
 FROM rcc_category WHERE code = '300000';
 
 
+
 -- 插入学术资料的三级目录数据
 INSERT INTO `rcc_category` (`code`, `name`, `parent_id`, `parent_code`, `level`, `sort`, `icon`, `created_at`, `updated_at`, `is_deleted`, `creator`, `updator`) 
 SELECT 
@@ -1835,601 +1801,7 @@ SELECT
 FROM rcc_category WHERE code = '302000'
 UNION ALL
 SELECT '302002', '设计', id, '302000', 3, 2, '', NOW(), NOW(), 0, 'admin', 'admin'
-FROM rcc_category WHERE code = '302000'
-UNION ALL
-SELECT '302003', '营销', id, '302000', 3, 3, '', NOW(), NOW(), 0, 'admin', 'admin'
-FROM rcc_category WHERE code = '302000'
-UNION ALL
-SELECT '302004', '其它', id, '302000', 3, 4, '', NOW(), NOW(), 0, 'admin', 'admin'
 FROM rcc_category WHERE code = '302000';
-
--- 插入语言学习的三级目录数据
-INSERT INTO `rcc_category` (`code`, `name`, `parent_id`, `parent_code`, `level`, `sort`, `icon`, `created_at`, `updated_at`, `is_deleted`, `creator`, `updator`) 
-SELECT 
-    '303001' as code,
-    '英语' as name,
-    id as parent_id,
-    '303000' as parent_code,
-    3 as level,
-    1 as sort,
-    '' as icon,
-    NOW() as created_at,
-    NOW() as updated_at,
-    0 as is_deleted,
-    'admin' as creator,
-    'admin' as updator
-FROM rcc_category WHERE code = '303000'
-UNION ALL
-SELECT '303002', '日语', id, '303000', 3, 2, '', NOW(), NOW(), 0, 'admin', 'admin'
-FROM rcc_category WHERE code = '303000'
-UNION ALL
-SELECT '303003', '韩语', id, '303000', 3, 3, '', NOW(), NOW(), 0, 'admin', 'admin'
-FROM rcc_category WHERE code = '303000'
-UNION ALL
-SELECT '303004', '其它', id, '303000', 3, 4, '', NOW(), NOW(), 0, 'admin', 'admin'
-FROM rcc_category WHERE code = '303000';
-
--- 插入生活娱乐类的二级目录数据
-INSERT INTO `rcc_category` (`code`, `name`, `parent_id`, `parent_code`, `level`, `sort`, `icon`, `created_at`, `updated_at`, `is_deleted`, `creator`, `updator`) 
-SELECT 
-    '401000' as code,
-    '影音娱乐' as name,
-    id as parent_id,
-    '400000' as parent_code,
-    2 as level,
-    1 as sort,
-    '' as icon,
-    NOW() as created_at,
-    NOW() as updated_at,
-    0 as is_deleted,
-    'admin' as creator,
-    'admin' as updator
-FROM rcc_category WHERE code = '400000'
-UNION ALL
-SELECT '402000', '游戏周边', id, '400000', 2, 2, '', NOW(), NOW(), 0, 'admin', 'admin'
-FROM rcc_category WHERE code = '400000'
-UNION ALL
-SELECT '403000', '兴趣爱好', id, '400000', 2, 3, '', NOW(), NOW(), 0, 'admin', 'admin'
-FROM rcc_category WHERE code = '400000';
-
--- 插入影音娱乐的三级目录数据
-INSERT INTO `rcc_category` (`code`, `name`, `parent_id`, `parent_code`, `level`, `sort`, `icon`, `created_at`, `updated_at`, `is_deleted`, `creator`, `updator`) 
-SELECT 
-    '401001' as code,
-    '电影' as name,
-    id as parent_id,
-    '401000' as parent_code,
-    3 as level,
-    1 as sort,
-    '' as icon,
-    NOW() as created_at,
-    NOW() as updated_at,
-    0 as is_deleted,
-    'admin' as creator,
-    'admin' as updator
-FROM rcc_category WHERE code = '401000'
-UNION ALL
-SELECT '401002', '电视剧', id, '401000', 3, 2, '', NOW(), NOW(), 0, 'admin', 'admin'
-FROM rcc_category WHERE code = '401000'
-UNION ALL
-SELECT '401003', '综艺', id, '401000', 3, 3, '', NOW(), NOW(), 0, 'admin', 'admin'
-FROM rcc_category WHERE code = '401000'
-UNION ALL
-SELECT '401004', '动漫', id, '401000', 3, 4, '', NOW(), NOW(), 0, 'admin', 'admin'
-FROM rcc_category WHERE code = '401000'
-UNION ALL
-SELECT '401005', '游戏', id, '401000', 3, 5, '', NOW(), NOW(), 0, 'admin', 'admin'
-FROM rcc_category WHERE code = '401000'
-UNION ALL
-SELECT '401006', '其它', id, '401000', 3, 6, '', NOW(), NOW(), 0, 'admin', 'admin'
-FROM rcc_category WHERE code = '401000';
-
--- 插入游戏周边的三级目录数据
-INSERT INTO `rcc_category` (`code`, `name`, `parent_id`, `parent_code`, `level`, `sort`, `icon`, `created_at`, `updated_at`, `is_deleted`, `creator`, `updator`) 
-SELECT 
-    '402001' as code,
-    '虚拟物品' as name,
-    id as parent_id,
-    '402000' as parent_code,
-    3 as level,
-    1 as sort,
-    '' as icon,
-    NOW() as created_at,
-    NOW() as updated_at,
-    0 as is_deleted,
-    'admin' as creator,
-    'admin' as updator
-FROM rcc_category WHERE code = '402000'
-UNION ALL
-SELECT '402002', '账号服务', id, '402000', 3, 2, '', NOW(), NOW(), 0, 'admin', 'admin'
-FROM rcc_category WHERE code = '402000'
-UNION ALL
-SELECT '402003', '辅助工具', id, '402000', 3, 3, '', NOW(), NOW(), 0, 'admin', 'admin'
-FROM rcc_category WHERE code = '402000'
-UNION ALL
-SELECT '402004', '游戏服务', id, '402000', 3, 4, '', NOW(), NOW(), 0, 'admin', 'admin'
-FROM rcc_category WHERE code = '402000';
-
--- 插入兴趣爱好的三级目录数据
-INSERT INTO `rcc_category` (`code`, `name`, `parent_id`, `parent_code`, `level`, `sort`, `icon`, `created_at`, `updated_at`, `is_deleted`, `creator`, `updator`) 
-SELECT 
-    '403001' as code,
-    '运动健身' as name,
-    id as parent_id,
-    '403000' as parent_code,
-    3 as level,
-    1 as sort,
-    '' as icon,
-    NOW() as created_at,
-    NOW() as updated_at,
-    0 as is_deleted,
-    'admin' as creator,
-    'admin' as updator
-FROM rcc_category WHERE code = '403000'
-UNION ALL
-SELECT '403002', '摄影摄像', id, '403000', 3, 2, '', NOW(), NOW(), 0, 'admin', 'admin'
-FROM rcc_category WHERE code = '403000'
-UNION ALL
-SELECT '403003', '绘画设计', id, '403000', 3, 3, '', NOW(), NOW(), 0, 'admin', 'admin'
-FROM rcc_category WHERE code = '403000'
-UNION ALL
-SELECT '403004', '音乐舞蹈', id, '403000', 3, 4, '', NOW(), NOW(), 0, 'admin', 'admin'
-FROM rcc_category WHERE code = '403000'
-UNION ALL
-SELECT '403005', '阅读写作', id, '403000', 3, 5, '', NOW(), NOW(), 0, 'admin', 'admin'
-FROM rcc_category WHERE code = '403000'
-UNION ALL
-SELECT '403006', '其它', id, '403000', 3, 6, '', NOW(), NOW(), 0, 'admin', 'admin'
-FROM rcc_category WHERE code = '403000';
-
-
--- 插入会员权益类的二级目录数据
-INSERT INTO `rcc_category` (`code`, `name`, `parent_id`, `parent_code`, `level`, `sort`, `icon`, `created_at`, `updated_at`, `is_deleted`, `creator`, `updator`) 
-SELECT 
-    '501000' as code,
-    '视频会员' as name,
-    id as parent_id,
-    '500000' as parent_code,
-    2 as level,
-    1 as sort,
-    '' as icon,
-    NOW() as created_at,
-    NOW() as updated_at,
-    0 as is_deleted,
-    'admin' as creator,
-    'admin' as updator
-FROM rcc_category WHERE code = '500000'
-UNION ALL
-SELECT '502000', '音乐会员', id, '500000', 2, 2, '', NOW(), NOW(), 0, 'admin', 'admin'
-FROM rcc_category WHERE code = '500000'
-UNION ALL
-SELECT '503000', '阅读会员', id, '500000', 2, 3, '', NOW(), NOW(), 0, 'admin', 'admin'
-FROM rcc_category WHERE code = '500000'
-UNION ALL
-SELECT '504000', '其它', id, '500000', 2, 4, '', NOW(), NOW(), 0, 'admin', 'admin'
-FROM rcc_category WHERE code = '500000';
-
--- 插入视频会员的三级目录数据
-INSERT INTO `rcc_category` (`code`, `name`, `parent_id`, `parent_code`, `level`, `sort`, `icon`, `created_at`, `updated_at`, `is_deleted`, `creator`, `updator`) 
-SELECT 
-    '501001' as code,
-    '爱奇艺' as name,
-    id as parent_id,
-    '501000' as parent_code,
-    3 as level,
-    1 as sort,
-    '' as icon,
-    NOW() as created_at,
-    NOW() as updated_at,
-    0 as is_deleted,
-    'admin' as creator,
-    'admin' as updator
-FROM rcc_category WHERE code = '501000'
-UNION ALL
-SELECT '501002', '腾讯视频', id, '501000', 3, 2, '', NOW(), NOW(), 0, 'admin', 'admin'
-FROM rcc_category WHERE code = '501000'
-UNION ALL
-SELECT '501003', '优酷', id, '501000', 3, 3, '', NOW(), NOW(), 0, 'admin', 'admin'
-FROM rcc_category WHERE code = '501000'
-UNION ALL
-SELECT '501004', '哔哩哔哩', id, '501000', 3, 4, '', NOW(), NOW(), 0, 'admin', 'admin'
-FROM rcc_category WHERE code = '501000'
-UNION ALL
-SELECT '501005', '其它', id, '501000', 3, 5, '', NOW(), NOW(), 0, 'admin', 'admin'
-FROM rcc_category WHERE code = '501000';
-
--- 插入音乐会员的三级目录数据
-INSERT INTO `rcc_category` (`code`, `name`, `parent_id`, `parent_code`, `level`, `sort`, `icon`, `created_at`, `updated_at`, `is_deleted`, `creator`, `updator`) 
-SELECT 
-    '502001' as code,
-    '网易云音乐' as name,
-    id as parent_id,
-    '502000' as parent_code,
-    3 as level,
-    1 as sort,
-    '' as icon,
-    NOW() as created_at,
-    NOW() as updated_at,
-    0 as is_deleted,
-    'admin' as creator,
-    'admin' as updator
-FROM rcc_category WHERE code = '502000'
-UNION ALL
-SELECT '502002', 'QQ音乐', id, '502000', 3, 2, '', NOW(), NOW(), 0, 'admin', 'admin'
-FROM rcc_category WHERE code = '502000'
-UNION ALL
-SELECT '502003', '酷狗音乐', id, '502000', 3, 3, '', NOW(), NOW(), 0, 'admin', 'admin'
-FROM rcc_category WHERE code = '502000'
-UNION ALL
-SELECT '502004', '酷我音乐', id, '502000', 3, 4, '', NOW(), NOW(), 0, 'admin', 'admin'
-FROM rcc_category WHERE code = '502000'
-UNION ALL
-SELECT '502005', '其它', id, '502000', 3, 5, '', NOW(), NOW(), 0, 'admin', 'admin'
-FROM rcc_category WHERE code = '502000';
-
--- 插入阅读会员的三级目录数据
-INSERT INTO `rcc_category` (`code`, `name`, `parent_id`, `parent_code`, `level`, `sort`, `icon`, `created_at`, `updated_at`, `is_deleted`, `creator`, `updator`) 
-SELECT 
-    '503001' as code,
-    '得到' as name,
-    id as parent_id,
-    '503000' as parent_code,
-    3 as level,
-    1 as sort,
-    '' as icon,
-    NOW() as created_at,
-    NOW() as updated_at,
-    0 as is_deleted,
-    'admin' as creator,
-    'admin' as updator
-FROM rcc_category WHERE code = '503000'
-UNION ALL
-SELECT '503002', '喜马拉雅', id, '503000', 3, 2, '', NOW(), NOW(), 0, 'admin', 'admin'
-FROM rcc_category WHERE code = '503000'
-UNION ALL
-SELECT '503003', '其它', id, '503000', 3, 3, '', NOW(), NOW(), 0, 'admin', 'admin'
-FROM rcc_category WHERE code = '503000';
-
--- 插入软件服务类的二级目录数据
-INSERT INTO `rcc_category` (`code`, `name`, `parent_id`, `parent_code`, `level`, `sort`, `icon`, `created_at`, `updated_at`, `is_deleted`, `creator`, `updator`) 
-SELECT 
-    '601000' as code,
-    '安装程序' as name,
-    id as parent_id,
-    '600000' as parent_code,
-    2 as level,
-    1 as sort,
-    '' as icon,
-    NOW() as created_at,
-    NOW() as updated_at,
-    0 as is_deleted,
-    'admin' as creator,
-    'admin' as updator
-FROM rcc_category WHERE code = '600000'
-UNION ALL
-SELECT '602000', '激活码', id, '600000', 2, 2, '', NOW(), NOW(), 0, 'admin', 'admin'
-FROM rcc_category WHERE code = '600000'
-UNION ALL
-SELECT '603000', '破解工具', id, '600000', 2, 3, '', NOW(), NOW(), 0, 'admin', 'admin'
-FROM rcc_category WHERE code = '600000'
-UNION ALL
-SELECT '604000', '其它服务', id, '600000', 2, 4, '', NOW(), NOW(), 0, 'admin', 'admin'
-FROM rcc_category WHERE code = '600000';
-
--- 插入安装程序的三级目录数据
-INSERT INTO `rcc_category` (`code`, `name`, `parent_id`, `parent_code`, `level`, `sort`, `icon`, `created_at`, `updated_at`, `is_deleted`, `creator`, `updator`) 
-SELECT 
-    '601001' as code,
-    '办公软件' as name,
-    id as parent_id,
-    '601000' as parent_code,
-    3 as level,
-    1 as sort,
-    '' as icon,
-    NOW() as created_at,
-    NOW() as updated_at,
-    0 as is_deleted,
-    'admin' as creator,
-    'admin' as updator
-FROM rcc_category WHERE code = '601000'
-UNION ALL
-SELECT '601002', '设计软件', id, '601000', 3, 2, '', NOW(), NOW(), 0, 'admin', 'admin'
-FROM rcc_category WHERE code = '601000'
-UNION ALL
-SELECT '601003', '编程软件', id, '601000', 3, 3, '', NOW(), NOW(), 0, 'admin', 'admin'
-FROM rcc_category WHERE code = '601000'
-UNION ALL
-SELECT '601004', '影音软件', id, '601000', 3, 4, '', NOW(), NOW(), 0, 'admin', 'admin'
-FROM rcc_category WHERE code = '601000'
-UNION ALL
-SELECT '601005', '其它', id, '601000', 3, 5, '', NOW(), NOW(), 0, 'admin', 'admin'
-FROM rcc_category WHERE code = '601000';
-
--- 插入激活码的三级目录数据
-INSERT INTO `rcc_category` (`code`, `name`, `parent_id`, `parent_code`, `level`, `sort`, `icon`, `created_at`, `updated_at`, `is_deleted`, `creator`, `updator`) 
-SELECT 
-    '602001' as code,
-    'office 365全家桶' as name,
-    id as parent_id,
-    '602000' as parent_code,
-    3 as level,
-    1 as sort,
-    '' as icon,
-    NOW() as created_at,
-    NOW() as updated_at,
-    0 as is_deleted,
-    'admin' as creator,
-    'admin' as updator
-FROM rcc_category WHERE code = '602000'
-UNION ALL
-SELECT '602002', '金山办公', id, '602000', 3, 2, '', NOW(), NOW(), 0, 'admin', 'admin'
-FROM rcc_category WHERE code = '602000'
-UNION ALL
-SELECT '602003', '腾讯文档', id, '602000', 3, 3, '', NOW(), NOW(), 0, 'admin', 'admin'
-FROM rcc_category WHERE code = '602000'
-UNION ALL
-SELECT '602004', 'wps', id, '602000', 3, 4, '', NOW(), NOW(), 0, 'admin', 'admin'
-FROM rcc_category WHERE code = '602000'
-UNION ALL
-SELECT '602005', '其它', id, '602000', 3, 5, '', NOW(), NOW(), 0, 'admin', 'admin'
-FROM rcc_category WHERE code = '602000';
-
--- 插入破解工具的三级目录数据
-INSERT INTO `rcc_category` (`code`, `name`, `parent_id`, `parent_code`, `level`, `sort`, `icon`, `created_at`, `updated_at`, `is_deleted`, `creator`, `updator`) 
-SELECT 
-    '603001' as code,
-    'office 365全家桶' as name,
-    id as parent_id,
-    '603000' as parent_code,
-    3 as level,
-    1 as sort,
-    '' as icon,
-    NOW() as created_at,
-    NOW() as updated_at,
-    0 as is_deleted,
-    'admin' as creator,
-    'admin' as updator
-FROM rcc_category WHERE code = '603000'
-UNION ALL
-SELECT '603002', '金山办公', id, '603000', 3, 2, '', NOW(), NOW(), 0, 'admin', 'admin'
-FROM rcc_category WHERE code = '603000'
-UNION ALL
-SELECT '603003', '腾讯文档', id, '603000', 3, 3, '', NOW(), NOW(), 0, 'admin', 'admin'
-FROM rcc_category WHERE code = '603000'
-UNION ALL
-SELECT '603004', 'wps', id, '603000', 3, 4, '', NOW(), NOW(), 0, 'admin', 'admin'
-FROM rcc_category WHERE code = '603000'
-UNION ALL
-SELECT '603005', '其它', id, '603000', 3, 5, '', NOW(), NOW(), 0, 'admin', 'admin'
-FROM rcc_category WHERE code = '603000';
-
-
--- 插入数字素材类二级目录数据
-INSERT INTO `rcc_category` (`code`, `name`, `parent_id`, `parent_code`, `level`, `sort`, `icon`, `created_at`, `updated_at`, `is_deleted`, `creator`, `updator`) 
-SELECT 
-    '201000' as code,
-    '文档模板' as name,
-    id as parent_id,
-    '200000' as parent_code,
-    2 as level,
-    1 as sort,
-    '' as icon,
-    NOW() as created_at,
-    NOW() as updated_at,
-    0 as is_deleted,
-    'admin' as creator,
-    'admin' as updator
-FROM rcc_category WHERE code = '200000'
-UNION ALL
-SELECT '202000', '图片素材', id, '200000', 2, 2, '', NOW(), NOW(), 0, 'admin', 'admin'
-FROM rcc_category WHERE code = '200000'
-UNION ALL
-SELECT '203000', '音频素材', id, '200000', 2, 3, '', NOW(), NOW(), 0, 'admin', 'admin'
-FROM rcc_category WHERE code = '200000'
-UNION ALL
-SELECT '204000', '视频素材', id, '200000', 2, 4, '', NOW(), NOW(), 0, 'admin', 'admin'
-FROM rcc_category WHERE code = '200000';
-
-
--- 插入文档模板的三级目录数据
-INSERT INTO `rcc_category` (`code`, `name`, `parent_id`, `parent_code`, `level`, `sort`, `icon`, `created_at`, `updated_at`, `is_deleted`, `creator`, `updator`) 
-SELECT 
-    '201001' as code,
-    'world' as name,
-    id as parent_id,
-    '201000' as parent_code,
-    3 as level,
-    1 as sort,
-    '' as icon,
-    NOW() as created_at,
-    NOW() as updated_at,
-    0 as is_deleted,
-    'admin' as creator,
-    'admin' as updator
-FROM rcc_category WHERE code = '201000'
-UNION ALL
-SELECT '201002', 'excel', id, '201000', 3, 2, '', NOW(), NOW(), 0, 'admin', 'admin'
-FROM rcc_category WHERE code = '201000'
-UNION ALL
-SELECT '201003', 'ppt', id, '201000', 3, 3, '', NOW(), NOW(), 0, 'admin', 'admin'
-FROM rcc_category WHERE code = '201000'
-UNION ALL
-SELECT '201004', 'pdf', id, '201000', 3, 4, '', NOW(), NOW(), 0, 'admin', 'admin'
-FROM rcc_category WHERE code = '201000'
-UNION ALL
-SELECT '201005', '其它', id, '201000', 3, 5, '', NOW(), NOW(), 0, 'admin', 'admin'
-FROM rcc_category WHERE code = '201000';
-
-
--- 插入图片素材的三级目录数据
-INSERT INTO `rcc_category` (`code`, `name`, `parent_id`, `parent_code`, `level`, `sort`, `icon`, `created_at`, `updated_at`, `is_deleted`, `creator`, `updator`) 
-SELECT 
-    '202001' as code,
-    '壁纸' as name,
-    id as parent_id,
-    '202000' as parent_code,
-    3 as level,
-    1 as sort,
-    '' as icon,
-    NOW() as created_at,
-    NOW() as updated_at,
-    0 as is_deleted,
-    'admin' as creator,
-    'admin' as updator
-FROM rcc_category WHERE code = '202000'
-UNION ALL
-SELECT '202002', '头像', id, '202000', 3, 2, '', NOW(), NOW(), 0, 'admin', 'admin'
-FROM rcc_category WHERE code = '202000'
-UNION ALL
-SELECT '202003', '海报', id, '202000', 3, 3, '', NOW(), NOW(), 0, 'admin', 'admin'
-FROM rcc_category WHERE code = '202000'
-UNION ALL
-SELECT '202004', '插画', id, '202000', 3, 4, '', NOW(), NOW(), 0, 'admin', 'admin'
-FROM rcc_category WHERE code = '202000';
-
-
--- 插入音乐素材的三级目录数据
-INSERT INTO `rcc_category` (`code`, `name`, `parent_id`, `parent_code`, `level`, `sort`, `icon`, `created_at`, `updated_at`, `is_deleted`, `creator`, `updator`) 
-SELECT 
-    '203001' as code,
-    '背景音乐' as name,
-    id as parent_id,
-    '203000' as parent_code,
-    3 as level,
-    1 as sort,
-    '' as icon,
-    NOW() as created_at,
-    NOW() as updated_at,
-    0 as is_deleted,
-    'admin' as creator,
-    'admin' as updator
-FROM rcc_category WHERE code = '203000'
-UNION ALL
-SELECT '203002', '配乐相关', id, '203000', 3, 2, '', NOW(), NOW(), 0, 'admin', 'admin'
-FROM rcc_category WHERE code = '203000'
-UNION ALL
-SELECT '203003', '音乐节拍', id, '203000', 3, 3, '', NOW(), NOW(), 0, 'admin', 'admin'
-FROM rcc_category WHERE code = '203000'
-UNION ALL
-SELECT '203004', '自然声音', id, '203000', 3, 4, '', NOW(), NOW(), 0, 'admin', 'admin'
-FROM rcc_category WHERE code = '203000'
-UNION ALL
-SELECT '203005', '其它', id, '203000', 3, 5, '', NOW(), NOW(), 0, 'admin', 'admin'
-FROM rcc_category WHERE code = '203000';
-
-
--- 插入视频素材的三级目录数据
-INSERT INTO `rcc_category` (`code`, `name`, `parent_id`, `parent_code`, `level`, `sort`, `icon`, `created_at`, `updated_at`, `is_deleted`, `creator`, `updator`) 
-SELECT 
-    '204001' as code,
-    '广告视频' as name,
-    id as parent_id,
-    '204000' as parent_code,
-    3 as level,
-    1 as sort,
-    '' as icon,
-    NOW() as created_at,
-    NOW() as updated_at,
-    0 as is_deleted,
-    'admin' as creator,
-    'admin' as updator
-FROM rcc_category WHERE code = '204000'
-UNION ALL
-SELECT '204002', '宣传片', id, '204000', 3, 2, '', NOW(), NOW(), 0, 'admin', 'admin'
-FROM rcc_category WHERE code = '204000'
-UNION ALL
-SELECT '204003', '教学视频', id, '204000', 3, 3, '', NOW(), NOW(), 0, 'admin', 'admin'
-FROM rcc_category WHERE code = '204000'
-UNION ALL
-SELECT '204004', '动画视频', id, '204000', 3, 4, '', NOW(), NOW(), 0, 'admin', 'admin'
-FROM rcc_category WHERE code = '204000'
-UNION ALL
-SELECT '204005', '其它', id, '204000', 3, 5, '', NOW(), NOW(), 0, 'admin', 'admin'
-FROM rcc_category WHERE code = '204000';
-
-
-
--- 插入学习资源类的二级目录
--- 插入学习资源类二级目录数据
-INSERT INTO `rcc_category` (`code`, `name`, `parent_id`, `parent_code`, `level`, `sort`, `icon`, `created_at`, `updated_at`, `is_deleted`, `creator`, `updator`) 
-SELECT 
-    '301000' as code,
-    '学术资料' as name,
-    id as parent_id,
-    '300000' as parent_code,
-    2 as level,
-    1 as sort,
-    '' as icon,
-    NOW() as created_at,
-    NOW() as updated_at,
-    0 as is_deleted,
-    'admin' as creator,
-    'admin' as updator
-FROM rcc_category WHERE code = '300000'
-UNION ALL
-SELECT '302000', '职业技能', id, '300000', 2, 2, '', NOW(), NOW(), 0, 'admin', 'admin'
-FROM rcc_category WHERE code = '300000'
-UNION ALL
-SELECT '303000', '语言学习', id, '300000', 2, 3, '', NOW(), NOW(), 0, 'admin', 'admin'
-FROM rcc_category WHERE code = '300000'
-UNION ALL
-SELECT '304000', '其它', id, '300000', 2, 4, '', NOW(), NOW(), 0, 'admin', 'admin'
-FROM rcc_category WHERE code = '300000';
-
-
-
--- 插入学术资料的三级目录数据
-INSERT INTO `rcc_category` (`code`, `name`, `parent_id`, `parent_code`, `level`, `sort`, `icon`, `created_at`, `updated_at`, `is_deleted`, `creator`, `updator`) 
-SELECT 
-    '301001' as code,
-    '论文' as name,
-    id as parent_id,
-    '301000' as parent_code,
-    3 as level,
-    1 as sort,
-    '' as icon,
-    NOW() as created_at,
-    NOW() as updated_at,
-    0 as is_deleted,
-    'admin' as creator,
-    'admin' as updator
-FROM rcc_category WHERE code = '301000'
-UNION ALL
-SELECT '301002', '书籍', id, '301000', 3, 2, '', NOW(), NOW(), 0, 'admin', 'admin'
-FROM rcc_category WHERE code = '301000'
-UNION ALL
-SELECT '301003', '报告', id, '301000', 3, 3, '', NOW(), NOW(), 0, 'admin', 'admin'
-FROM rcc_category WHERE code = '301000'
-UNION ALL
-SELECT '301004', '真题', id, '301000', 3, 4, '', NOW(), NOW(), 0, 'admin', 'admin'
-FROM rcc_category WHERE code = '301000'
-UNION ALL
-SELECT '301005', '课件', id, '301000', 3, 5, '', NOW(), NOW(), 0, 'admin', 'admin'
-FROM rcc_category WHERE code = '301000'
-UNION ALL
-SELECT '301006', '其它', id, '301000', 3, 6, '', NOW(), NOW(), 0, 'admin', 'admin'
-FROM rcc_category WHERE code = '301000';
-
-
--- 插入职业技能的三级目录数据
-INSERT INTO `rcc_category` (`code`, `name`, `parent_id`, `parent_code`, `level`, `sort`, `icon`, `created_at`, `updated_at`, `is_deleted`, `creator`, `updator`) 
-SELECT 
-    '302001' as code,
-    '编程' as name,
-    id as parent_id,
-    '302000' as parent_code,
-    3 as level,
-    1 as sort,
-    '' as icon,
-    NOW() as created_at,
-    NOW() as updated_at,
-    0 as is_deleted,
-    'admin' as creator,
-    'admin' as updator
-FROM rcc_category WHERE code = '302000'
-UNION ALL
-SELECT '302002', '设计', id, '302000', 3, 2, '', NOW(), NOW(), 0, 'admin', 'admin'
-FROM rcc_category WHERE code = '302000'
 
 
 -- 插入NFT属性组数据
@@ -3755,3 +3127,85 @@ AND ag.attr_group_code IN ('NFT_ENTERPRISE_FIELD', 'NFT_EQUITY_RATIO');
 
 
 
+-- 插入商品SPU示例数据
+-- 插入商品SPU示例数据
+INSERT INTO `rcc_product_spu` 
+(`code`, `name`, `category1_id`, `category1_code`, `category2_id`, `category2_code`, 
+`category3_id`, `category3_code`, `total_sales`, `total_stock`, `brand`, `description`, 
+`price`, `real_price`, `status`, `images`, `creator`, `updator`) 
+SELECT 
+    'SPU20240101001', '潮流数字艺术画作-星空系列', c1.id, c1.code, c2.id, c2.code, c3.id, c3.code,
+    100, 1000, 'ArtBlock', '独特的数字艺术画作，以星空为主题的NFT艺术品系列',
+    999.99, 1999.99, 1, 
+    'https://example.com/images/1.jpg,https://example.com/images/2.jpg', 
+    'admin', 'admin'
+FROM rcc_category c1 
+JOIN rcc_category c2 ON c2.parent_id = c1.id
+JOIN rcc_category c3 ON c3.parent_id = c2.id
+WHERE c1.code = '100000' AND c2.code = '101000' AND c3.code = '101001';
+
+-- 插入商品SPU属性参数示例数据
+INSERT INTO `rcc_product_spu_attr_params` 
+(`product_spu_id`, `product_spu_code`, `code`, `name`, `attr_type`, `value_type`, 
+`value`, `sort`, `status`, `is_required`, `is_generic`, `creator`, `updator`)
+SELECT 
+    id, code,
+    'BASIC_ATTRS', '基本属性', 1, 1,
+    '{"艺术风格":"现代抽象","创作主题":"星空宇宙","创作者":"John Doe","创作时间":"2024-01","作品编号":"ART2024001"}',
+    1, 1, 1, 1, 'admin', 'admin'
+FROM rcc_product_spu
+WHERE code = 'SPU20240101001'
+UNION ALL
+SELECT 
+    id, code,
+    'SALE_ATTRS', '销售属性', 2, 1,
+    '{"版本":["普通版","珍藏版","限定版"],"尺寸":["1000x1000px","2000x2000px","4000x4000px"],"质地":["普通纸张","珍珠纸","艺术纸"]}',
+    2, 1, 1, 1, 'admin', 'admin'
+FROM rcc_product_spu
+WHERE code = 'SPU20240101001'
+UNION ALL
+SELECT 
+    id, code,
+    'SPEC_ATTRS', '规格属性', 3, 1,
+    '{"文件格式":"JPG/PNG","分辨率":"300DPI","色彩模式":"RGB","文件大小":"100MB","打印尺寸":"50x50cm"}',
+    3, 1, 1, 1, 'admin', 'admin'
+FROM rcc_product_spu
+WHERE code = 'SPU20240101001';
+
+-- 插入商品SKU示例数据 (根据规格属性组合生成SKU)
+INSERT INTO `rcc_product_sku` 
+(`product_spu_id`, `product_spu_code`, `sku_code`, `price`, `stock`, `sale_count`, 
+`status`, `indexs`, `attr_params`, `images`, `title`, `sub_title`, `description`, 
+`creator`, `updator`)
+SELECT 
+    id, code,
+    CONCAT(code, '-SKU001'), 999.99, 100, 10,
+    1, 1, 
+    '{"版本":"普通版","尺寸":"1000x1000px","质地":"普通纸张"}',
+    'https://example.com/images/sku1.jpg',
+    '星空系列 普通版 1000x1000px', '限量发行100份', '普通版数字艺术收藏品',
+    'admin', 'admin'
+FROM rcc_product_spu
+WHERE code = 'SPU20240101001'
+UNION ALL
+SELECT 
+    id, code,
+    CONCAT(code, '-SKU002'), 1999.99, 50, 5,
+    1, 2,
+    '{"版本":"珍藏版","尺寸":"2000x2000px","质地":"珍珠纸"}',
+    'https://example.com/images/sku2.jpg',
+    '星空系列 珍藏版 2000x2000px', '限量发行50份', '珍藏版数字艺术收藏品',
+    'admin', 'admin'
+FROM rcc_product_spu
+WHERE code = 'SPU20240101001'
+UNION ALL
+SELECT 
+    id, code,
+    CONCAT(code, '-SKU003'), 4999.99, 10, 2,
+    1, 3,
+    '{"版本":"限定版","尺寸":"4000x4000px","质地":"艺术纸"}',
+    'https://example.com/images/sku3.jpg',
+    '星空系列 限定版 4000x4000px', '限量发行10份', '限定版数字艺术收藏品',
+    'admin', 'admin'
+FROM rcc_product_spu
+WHERE code = 'SPU20240101001';

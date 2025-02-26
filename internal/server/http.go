@@ -21,6 +21,7 @@ func NewHTTPServer(
 	jwt *jwt.JWT,
 	userHandler *handler.UserHandler,
 	categoryHandler *handler.CategoryHandler,
+	productHandler *handler.ProductHandler,
 ) *http.Server {
 	gin.SetMode(gin.DebugMode)
 	s := http.NewServer(
@@ -60,7 +61,7 @@ func NewHTTPServer(
 			noAuthRouter.POST("/register", userHandler.Register)
 			noAuthRouter.POST("/login", userHandler.Login)
 			commonApi(noAuthRouter)
-			mallApi(noAuthRouter, categoryHandler)
+			mallApi(noAuthRouter, categoryHandler, productHandler)
 		}
 		// Non-strict permission routing group
 		noStrictAuthRouter := v1.Group("/").Use(middleware.NoStrictAuth(jwt, logger))
@@ -92,6 +93,7 @@ func poolApi(router *gin.RouterGroup) {
 	})
 }
 
-func mallApi(router *gin.RouterGroup, categoryHandler *handler.CategoryHandler) {
+func mallApi(router *gin.RouterGroup, categoryHandler *handler.CategoryHandler, productHandler *handler.ProductHandler) {
 	router.GET("/categories", categoryHandler.GetCategoryTree)
+	router.POST("/products", productHandler.GetProduct)
 }
