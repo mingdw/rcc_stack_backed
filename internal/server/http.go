@@ -96,5 +96,5 @@ func poolApi(router *gin.RouterGroup) {
 func mallApi(router *gin.RouterGroup, categoryHandler *handler.CategoryHandler, productHandler *handler.ProductHandler) {
 	router.GET("/categories", categoryHandler.GetCategoryTree)
 	router.POST("/products", productHandler.ListProducts)
-	router.POST("/products/getProductDetails", productHandler.GetProduct)
+	router.POST("/products/getProductDetails", productHandler.GetProductDetail)
 }

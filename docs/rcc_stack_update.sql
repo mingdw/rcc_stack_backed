@@ -3209,3 +3209,103 @@ SELECT
     'admin', 'admin'
 FROM rcc_product_spu
 WHERE code = 'SPU20240101001';
+
+-- 插入数字艺术品商品数据 (目录code: 101001 潮流艺术画作NFT)
+INSERT INTO `rcc_product_spu` 
+(`code`, `name`, `category1_id`, `category1_code`, `category2_id`, `category2_code`, 
+`category3_id`, `category3_code`, `total_sales`, `total_stock`, `brand`, `description`, 
+`price`, `real_price`, `status`, `images`, `creator`, `updator`) 
+SELECT 
+    'SPU20240102001', '元宇宙艺术画作-未来城市', c1.id, c1.code, c2.id, c2.code, c3.id, c3.code,
+    200, 500, 'MetaArt', '以未来城市为主题的数字艺术作品，展现科技与艺术的完美融合',
+    1999.99, 1799.99, 1, 
+    'https://example.com/images/future_city.jpg', 
+    'admin', 'admin'
+FROM rcc_category c1 
+JOIN rcc_category c2 ON c2.parent_id = c1.id
+JOIN rcc_category c3 ON c3.parent_id = c2.id
+WHERE c1.code = '100000' AND c2.code = '101000' AND c3.code = '101001';
+
+-- 插入音乐作品数据 (目录code: 101002 先锋音乐作品NFT)
+INSERT INTO `rcc_product_spu` 
+(`code`, `name`, `category1_id`, `category1_code`, `category2_id`, `category2_code`, 
+`category3_id`, `category3_code`, `total_sales`, `total_stock`, `brand`, `description`, 
+`price`, `real_price`, `status`, `images`, `creator`, `updator`) 
+SELECT 
+    'SPU20240102002', '电子音乐专辑-赛博朋克', c1.id, c1.code, c2.id, c2.code, c3.id, c3.code,
+    150, 300, 'CyberMusic', '融合未来科技元素的电子音乐专辑，带来沉浸式听觉体验',
+    899.99, 799.99, 1, 
+    'https://example.com/images/cyberpunk_music.jpg', 
+    'admin', 'admin'
+FROM rcc_category c1 
+JOIN rcc_category c2 ON c2.parent_id = c1.id
+JOIN rcc_category c3 ON c3.parent_id = c2.id
+WHERE c1.code = '100000' AND c2.code = '101000' AND c3.code = '101002';
+
+-- 插入视频艺术数据 (目录code: 101003 视频艺术NFT)
+INSERT INTO `rcc_product_spu` 
+(`code`, `name`, `category1_id`, `category1_code`, `category2_id`, `category2_code`, 
+`category3_id`, `category3_code`, `total_sales`, `total_stock`, `brand`, `description`, 
+`price`, `real_price`, `status`, `images`, `creator`, `updator`) 
+SELECT 
+    'SPU20240102003', '数字视觉艺术-时空之旅', c1.id, c1.code, c2.id, c2.code, c3.id, c3.code,
+    100, 200, 'TimeArt', '探索时间与空间概念的视觉艺术作品，呈现独特的艺术视角',
+    2999.99, 2799.99, 1, 
+    'https://example.com/images/time_space.jpg', 
+    'admin', 'admin'
+FROM rcc_category c1 
+JOIN rcc_category c2 ON c2.parent_id = c1.id
+JOIN rcc_category c3 ON c3.parent_id = c2.id
+WHERE c1.code = '100000' AND c2.code = '101000' AND c3.code = '101003';
+
+-- 插入游戏道具数据 (目录code: 103001 游戏道具NFT)
+INSERT INTO `rcc_product_spu` 
+(`code`, `name`, `category1_id`, `category1_code`, `category2_id`, `category2_code`, 
+`category3_id`, `category3_code`, `total_sales`, `total_stock`, `brand`, `description`, 
+`price`, `real_price`, `status`, `images`, `creator`, `updator`) 
+SELECT 
+    'SPU20240102004', '限定皮肤-星际战士', c1.id, c1.code, c2.id, c2.code, c3.id, c3.code,
+    500, 1000, 'GameSkin', '独特的限定版游戏角色皮肤，展现未来战士的酷炫外观',
+    299.99, 259.99, 1, 
+    'https://example.com/images/star_warrior.jpg', 
+    'admin', 'admin'
+FROM rcc_category c1 
+JOIN rcc_category c2 ON c2.parent_id = c1.id
+JOIN rcc_category c3 ON c3.parent_id = c2.id
+WHERE c1.code = '100000' AND c2.code = '103000' AND c3.code = '103001';
+
+-- 为每个商品添加SPU属性参数
+INSERT INTO `rcc_product_spu_attr_params` 
+(`product_spu_id`, `product_spu_code`, `code`, `name`, `attr_type`, `value_type`, 
+`value`, `sort`, `status`, `is_required`, `is_generic`, `creator`, `updator`)
+SELECT 
+    id, code,
+    'BASIC_ATTRS', '基本属性', 1, 1,
+    '{"创作者":"Digital Artist","创作时间":"2024-01","作品编号":"ART2024002"}',
+    1, 1, 1, 1, 'admin', 'admin'
+FROM rcc_product_spu
+WHERE code = 'SPU20240102001'
+UNION ALL
+SELECT 
+    id, code,
+    'BASIC_ATTRS', '基本属性', 1, 1,
+    '{"音乐人":"Cyber Artist","发行时间":"2024-01","专辑编号":"MUSIC2024001"}',
+    1, 1, 1, 1, 'admin', 'admin'
+FROM rcc_product_spu
+WHERE code = 'SPU20240102002'
+UNION ALL
+SELECT 
+    id, code,
+    'BASIC_ATTRS', '基本属性', 1, 1,
+    '{"导演":"Visual Artist","制作时间":"2024-01","作品编号":"VIDEO2024001"}',
+    1, 1, 1, 1, 'admin', 'admin'
+FROM rcc_product_spu
+WHERE code = 'SPU20240102003'
+UNION ALL
+SELECT 
+    id, code,
+    'BASIC_ATTRS', '基本属性', 1, 1,
+    '{"游戏":"Star Wars","发行时间":"2024-01","道具编号":"GAME2024001"}',
+    1, 1, 1, 1, 'admin', 'admin'
+FROM rcc_product_spu
+WHERE code = 'SPU20240102004';
