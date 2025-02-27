@@ -42,7 +42,7 @@ type Product struct {
 	TotalSales    int           `json:"totalSales"`    // 总销量
 	TotalStock    int           `json:"totalStock"`    // 总库存
 	Status        int           `json:"status"`        // 状态
-	Images        string        `json:"images"`        // 图片
+	Images        []string      `json:"images"`        // 图片
 	Description   string        `json:"description"`   // 描述
 	Attributes    *ProductAttrs `json:"attributes"`    // 商品属性
 }
@@ -56,8 +56,8 @@ type ProductAttrs struct {
 
 // 请求参数
 type ProductDetailRequest struct {
-	ProductId int64 `json:"productId"` // 商品ID
-	SpuId     int64 `json:"spuId"`     // spuID
+	ProductId   int64  `json:"productId"`   // 修改这里，确保 json tag 与请求字段名匹配
+	ProductCode string `json:"productCode"` // 商品code
 }
 
 // 响应结果

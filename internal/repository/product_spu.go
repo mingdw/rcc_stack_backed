@@ -3,6 +3,8 @@ package repository
 import (
 	"context"
 	"rcc-stake-backed/internal/model"
+
+	"gorm.io/gorm"
 )
 
 type ProductSpuRepository interface {
@@ -11,10 +13,16 @@ type ProductSpuRepository interface {
 	CreateProductSpu(ctx context.Context, spu *model.ProductSpu) error
 	UpdateProductSpu(ctx context.Context, spu *model.ProductSpu) error
 	DeleteProductSpu(ctx context.Context, id int64) error
+	DB(ctx context.Context) *gorm.DB
+	ListProductsByCategoryCodes(ctx context.Context, categoryCodes []string, productName string, page, pageSize int) ([]*model.ProductSpu, int64, error)
 }
 
-func NewProductSpuRepository(repository *Repository) ProductSpuRepository {
-	return &productSpuRepository{Repository: repository}
+func NewProductSpuRepository(
+	r *Repository,
+) ProductSpuRepository {
+	return &productSpuRepository{
+		Repository: r,
+	}
 }
 
 type productSpuRepository struct {
@@ -60,4 +68,40 @@ func (r *productSpuRepository) DeleteProductSpu(ctx context.Context, id int64) e
 		Model(&model.ProductSpu{}).
 		Where("id = ?", id).
 		Update("is_deleted", 1).Error
+}
+
+func (r *productSpuRepository) ListProductsByCategoryCodes(
+	ctx context.Context,
+	categoryCodes []string,
+	productName string,
+	page,
+	pageSize int,
+) ([]*model.ProductSpu, int64, error) {
+	var products []*model.ProductSpu
+	var total int64
+
+	query := r.DB(ctx).Model(&model.ProductSpu{})
+
+	if len(categoryCodes) > 0 {
+		query = query.Where("category3_code IN ?", categoryCodes)
+	}
+
+	if productName != "" {
+		query = query.Where("name LIKE ?", "%"+productName+"%")
+	}
+
+	// Count total before pagination
+	err := query.Count(&total).Error
+	if err != nil {
+		return nil, 0, err
+	}
+
+	// Apply pagination
+	offset := (page - 1) * pageSize
+	err = query.Offset(offset).Limit(pageSize).Find(&products).Error
+	if err != nil {
+		return nil, 0, err
+	}
+
+	return products, total, nil
 }

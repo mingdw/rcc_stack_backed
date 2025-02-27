@@ -14,10 +14,10 @@ type ProductSkuRepository interface {
 }
 
 func NewProductSkuRepository(
-	repository *Repository,
+	r *Repository,
 ) ProductSkuRepository {
 	return &productSkuRepository{
-		Repository: repository,
+		Repository: r,
 	}
 }
 

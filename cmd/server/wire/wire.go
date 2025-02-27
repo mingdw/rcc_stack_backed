@@ -14,6 +14,7 @@ import (
 	"rcc-stake-backed/pkg/log"
 	"rcc-stake-backed/pkg/server/http"
 	"rcc-stake-backed/pkg/sid"
+
 	"github.com/google/wire"
 	"github.com/spf13/viper"
 )
@@ -24,6 +25,11 @@ var repositorySet = wire.NewSet(
 	repository.NewRepository,
 	repository.NewTransaction,
 	repository.NewUserRepository,
+	repository.NewProductRepository,
+	repository.NewProductSpuRepository,
+	repository.NewProductSpuDetailRepository,
+	repository.NewProductSpuAttrParamsRepository,
+	repository.NewProductSkuRepository,
 )
 
 var serviceSet = wire.NewSet(

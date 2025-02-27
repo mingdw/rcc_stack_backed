@@ -13,8 +13,8 @@ type ProductSpuAttrParamsRepository interface {
 	DeleteProductSpuAttrParams(ctx context.Context, spuId int64) error
 }
 
-func NewProductSpuAttrParamsRepository(repository *Repository) ProductSpuAttrParamsRepository {
-	return &productSpuAttrParamsRepository{Repository: repository}
+func NewProductSpuAttrParamsRepository(r *Repository) ProductSpuAttrParamsRepository {
+	return &productSpuAttrParamsRepository{Repository: r}
 }
 
 type productSpuAttrParamsRepository struct {

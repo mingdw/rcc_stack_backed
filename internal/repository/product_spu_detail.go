@@ -12,8 +12,8 @@ type ProductSpuDetailRepository interface {
 	DeleteProductSpuDetail(ctx context.Context, spuId int64) error
 }
 
-func NewProductSpuDetailRepository(repository *Repository) ProductSpuDetailRepository {
-	return &productSpuDetailRepository{Repository: repository}
+func NewProductSpuDetailRepository(r *Repository) ProductSpuDetailRepository {
+	return &productSpuDetailRepository{Repository: r}
 }
 
 type productSpuDetailRepository struct {

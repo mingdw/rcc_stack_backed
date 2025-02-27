@@ -9,8 +9,8 @@ import (
 )
 
 type ProductService interface {
-	GetProduct(ctx context.Context, request *v1.ProductListRequest) (response *v1.ProductListResponse, err error)
-	ListProducts(ctx context.Context, request *v1.ProductListRequest) (*v1.ProductListResponse, error)
+	GetProduct(ctx context.Context, request *v1.ProductDetailRequest) (response *v1.ProductDetailResponse, err error)
+	ListProducts(ctx context.Context, request *v1.ProductListRequest) (response *v1.ProductListResponse, err error)
 }
 
 func NewProductService(
@@ -45,7 +45,7 @@ func (s *productService) GetProduct(ctx context.Context, request *v1.ProductDeta
 		})
 	}
 	var productSkus []*v1.ProductSku
-	for _, sku := range product.SKU {
+	for _, sku := range product.SKUs {
 		productSkus = append(productSkus, &v1.ProductSku{
 			Id:           sku.ID,
 			ProductSpuID: sku.ProductSpuID,
@@ -140,7 +140,7 @@ func (s *productService) ListProducts(ctx context.Context, request *v1.ProductLi
 					TotalSales:    product.SPU.TotalSales,
 					TotalStock:    product.SPU.TotalStock,
 					Status:        product.SPU.Status,
-					Images:        product.SPU.Images,
+					Images:        strings.Split(product.SPU.Images, ","),
 					Description:   product.SPU.Description,
 					Attributes: &v1.ProductAttrs{
 						BasicAttrs: basicAttrs,
@@ -158,7 +158,6 @@ func (s *productService) ListProducts(ctx context.Context, request *v1.ProductLi
 
 	}
 	response.Total = total
-	response.Categories = make([]*v1.CategoryProducts, 0)
 
 	return &response, nil
 }

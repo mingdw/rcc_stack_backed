@@ -40,8 +40,18 @@ func NewWire(viperViper *viper.Viper, logger *log.Logger) (*app.App, func(), err
 	attrGroupRepository := repository.NewAttrGroupRepository(repositoryRepository)
 	categoryService := service.NewCategoryService(serviceService, categoryRepository, categoryAttrGroupRepository, attrRepository, attrGroupRepository)
 	categoryHandler := handler.NewCategoryHandler(handlerHandler, categoryService)
-	productRepository := repository.NewProductRepository(repositoryRepository)
-	productService := service.NewProductService(serviceService, productRepository)
+	productSpuRepository := repository.NewProductSpuRepository(repositoryRepository)	
+	productSpuDetailRepository := repository.NewProductSpuDetailRepository(repositoryRepository)
+	productSkuRepository := repository.NewProductSkuRepository(repositoryRepository)
+	productSpuAttrParamsRepository := repository.NewProductSpuAttrParamsRepository(repositoryRepository)
+	productRepository := repository.NewProductRepository(
+		repositoryRepository,
+		productSpuRepository,
+		productSpuDetailRepository,
+		productSpuAttrParamsRepository,
+		productSkuRepository,
+	)
+	productService := service.NewProductService(serviceService, productRepository, categoryRepository)
 	productHandler := handler.NewProductHandler(handlerHandler, productService)
 	httpServer := server.NewHTTPServer(logger, viperViper, jwtJWT, userHandler, categoryHandler, productHandler)
 	jobJob := job.NewJob(transaction, logger, sidSid)
