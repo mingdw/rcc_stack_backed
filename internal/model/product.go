@@ -1,7 +1,8 @@
 package model
 
 type Product struct {
-	SPU           *ProductSpu             `gorm:"embedded"` // 使用 embedded 标签嵌入 SPU
+	ID            int64                   `gorm:"primaryKey;column:id"`
+	SPU           *ProductSpu             `gorm:"foreignKey:ID;references:ID"`
 	SPUDetail     *ProductSpuDetail       `gorm:"foreignKey:ProductSpuID;references:ID"`
 	SPUAttrParams []*ProductSpuAttrParams `gorm:"foreignKey:ProductSpuID;references:ID"`
 	SKUs          []*ProductSku           `gorm:"foreignKey:ProductSpuID;references:ID"`

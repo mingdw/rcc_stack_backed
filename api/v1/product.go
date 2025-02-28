@@ -56,16 +56,16 @@ type ProductAttrs struct {
 
 // 请求参数
 type ProductDetailRequest struct {
-	ProductId   int64  `json:"productId"`   // 修改这里，确保 json tag 与请求字段名匹配
+	ProductID   int64  `json:"productId"`   // 添加 json tag，使其匹配请求体中的字段名
 	ProductCode string `json:"productCode"` // 商品code
 }
 
 // 响应结果
 type ProductDetailResponse struct {
-	ProductSpu           *ProductSpu             `json:"productSpu"`           // 商品SPU信息
-	ProductSkus          []*ProductSku           `json:"productSku"`           // 商品SKU信息
-	ProductSpuDetail     *ProductSpuDetail       `json:"productSpuDetail"`     // 商品SPU详情
-	ProductSpuAttrParams []*ProductSpuAttrParams `json:"productSpuAttrParams"` // 商品SPU属性参数
+	ProductSpu           *ProductSpu           `json:"productSpu"`           // 商品SPU信息
+	ProductSkus          []*ProductSku         `json:"productSku"`           // 商品SKU信息
+	ProductSpuDetail     *ProductSpuDetail     `json:"productSpuDetail"`     // 商品SPU详情
+	ProductSpuAttrParams *ProductSpuAttrParams `json:"productSpuAttrParams"` // 商品SPU属性参数
 }
 
 type ProductSpu struct {
@@ -79,9 +79,11 @@ type ProductSpu struct {
 	Category3ID   int64     `json:"category3Id"`   // 商品目录3分类ID
 	Category3Code string    `json:"category3Code"` // 商品目录3分类编码
 	Brand         string    `json:"brand"`         // 品牌
+	Price         float64   `json:"price"`         // 价格
+	RealPrice     float64   `json:"realPrice"`     // 原价
 	Description   string    `json:"description"`   // 描述
 	Status        int       `json:"status"`        // 状态
-	Images        string    `json:"images"`        // 图片
+	Images        []string  `json:"images"`        // 图片
 	TotalSales    int       `json:"totalSales"`    // 总销量
 	TotalStock    int       `json:"totalStock"`    // 总库存
 	CreatedAt     time.Time `json:"createdAt"`     // 创建时间
@@ -89,27 +91,34 @@ type ProductSpu struct {
 }
 
 type ProductSku struct {
-	Id           int64     `json:"id"`           // 商品SKU ID
-	Code         string    `json:"code"`         // 商品SKU 编码
-	Name         string    `json:"name"`         // 商品SKU 名称
-	ProductSpuID int64     `json:"productSpuId"` // 商品SPU ID
-	Price        float64   `json:"price"`        // 价格
-	RealPrice    float64   `json:"realPrice"`    // 原价
-	TotalSales   int       `json:"totalSales"`   // 总销量
-	TotalStock   int       `json:"totalStock"`   // 总库存
-	Status       int       `json:"status"`       // 状态
-	Images       string    `json:"images"`       // 图片
-	CreatedAt    time.Time `json:"createdAt"`    // 创建时间
-	UpdatedAt    time.Time `json:"updatedAt"`    // 更新时间
-	IsDeleted    int       `json:"isDeleted"`    // 是否删除
-	Creator      string    `json:"creator"`      // 创建者
-	Updator      string    `json:"updator"`      // 更新者
+	Id             int64     `json:"id"`
+	ProductSpuID   int64     `json:"productSpuId"`   // 商品spu id
+	ProductSpuCode string    `json:"productSpuCode"` // 商品spu编码
+	SkuCode        string    `json:"skuCode"`        // sku编码
+	Price          float64   `json:"price"`          // 价格
+	Stock          int       `json:"stock"`          // 库存
+	SaleCount      int       `json:"saleCount"`      // 销量
+	Status         int       `json:"status"`         // 状态
+	Indexs         int       `json:"indexs"`         // 规格索引
+	AttrParams     string    `json:"attrParams"`     // 属性参数
+	OwnerParams    string    `json:"ownerParams"`    // 属性参数
+	Images         string    `json:"images"`         // 图片
+	Title          string    `json:"title"`          // 标题
+	SubTitle       string    `json:"subTitle"`       // 副标题
+	Description    string    `json:"description"`    // 描述
+	CreatedAt      time.Time `json:"createdAt"`      // 创建时间
+	UpdatedAt      time.Time `json:"updatedAt"`      // 更新时间
+	IsDeleted      int       `json:"isDeleted"`      // 是否删除
+	Creator        string    `json:"creator"`        // 创建人
+	Updator        string    `json:"updator"`
 }
 
 type ProductSpuDetail struct {
 	Id           int64     `json:"id"`           // 商品SPU详情ID
 	ProductSpuID int64     `json:"productSpuId"` // 商品SPU ID
-	Content      string    `json:"content"`      // 内容
+	Detail       string    `json:"detail"`       // 详情
+	PackingList  string    `json:"packingList"`  // 装箱单
+	AfterSale    string    `json:"afterSale"`    // 售后
 	CreatedAt    time.Time `json:"createdAt"`    // 创建时间
 	UpdatedAt    time.Time `json:"updatedAt"`    // 更新时间
 	IsDeleted    int       `json:"isDeleted"`    // 是否删除
@@ -118,14 +127,14 @@ type ProductSpuDetail struct {
 }
 
 type ProductSpuAttrParams struct {
-	Id           int64               `json:"id"`           // 商品SPU属性参数ID
-	ProductSpuID int64               `json:"productSpuId"` // 商品SPU ID
-	BasicAttrs   map[string]string   `json:"basicAttrs"`   // 基础属性
-	SaleAttrs    map[string]string   `json:"saleAttrs"`    // 销售属性
-	SpecAttrs    map[string][]string `json:"specAttrs"`    // 规格属性
-	CreatedAt    time.Time           `json:"createdAt"`    // 创建时间
-	UpdatedAt    time.Time           `json:"updatedAt"`    // 更新时间
-	IsDeleted    int                 `json:"isDeleted"`    // 是否删除
-	Creator      string              `json:"creator"`      // 创建者
-	Updator      string              `json:"updator"`      // 更新者
+	Id           int64     `json:"id"`           // 商品SPU属性参数ID
+	ProductSpuID int64     `json:"productSpuId"` // 商品SPU ID
+	BasicAttrs   string    `json:"basicAttrs"`   // 基础属性
+	SaleAttrs    string    `json:"saleAttrs"`    // 销售属性
+	SpecAttrs    string    `json:"specAttrs"`    // 规格属性
+	CreatedAt    time.Time `json:"createdAt"`    // 创建时间
+	UpdatedAt    time.Time `json:"updatedAt"`    // 更新时间
+	IsDeleted    int       `json:"isDeleted"`    // 是否删除
+	Creator      string    `json:"creator"`      // 创建者
+	Updator      string    `json:"updator"`      // 更新者
 }

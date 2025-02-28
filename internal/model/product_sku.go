@@ -16,6 +16,7 @@ type ProductSku struct {
 	Status         int       `gorm:"column:status;not null" json:"status"`                   // 状态
 	Indexs         int       `gorm:"column:indexs;not null" json:"indexs"`                   // 规格索引
 	AttrParams     string    `gorm:"column:attr_params" json:"attrParams"`                   // 属性参数
+	OwnerParams    string    `gorm:"column:owner_params" json:"ownerParams"`                 // 属性参数
 	Images         string    `gorm:"column:images" json:"images"`                            // 图片
 	Title          string    `gorm:"column:title" json:"title"`                              // 标题
 	SubTitle       string    `gorm:"column:sub_title" json:"subTitle"`                       // 副标题

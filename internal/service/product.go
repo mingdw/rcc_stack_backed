@@ -33,22 +33,42 @@ type productService struct {
 
 func (s *productService) GetProduct(ctx context.Context, request *v1.ProductDetailRequest) (response *v1.ProductDetailResponse, err error) {
 	// 获取单个商品信息
-	product, err := s.productRepository.GetProduct(ctx, request.ProductId)
+	product, err := s.productRepository.GetProduct(ctx, request.ProductID)
 	if err != nil {
 		return nil, err
 	}
-	var productSpuAttrParams []*v1.ProductSpuAttrParams
-	for _, attr := range product.SPUAttrParams {
-		productSpuAttrParams = append(productSpuAttrParams, &v1.ProductSpuAttrParams{
-			Id:           attr.ID,
-			ProductSpuID: attr.ProductSpuID,
-		})
+
+	// 构造商品属性参数
+	productSpuAttrParams := &v1.ProductSpuAttrParams{}
+	for _, param := range product.SPUAttrParams {
+		if param.Code == "BASIC_ATTRS" {
+			productSpuAttrParams.BasicAttrs = param.Value
+		}
+		if param.Code == "SALE_ATTRS" {
+			productSpuAttrParams.SaleAttrs = param.Value
+		}
+		if param.Code == "SPEC_ATTRS" {
+			productSpuAttrParams.SpecAttrs = param.Value
+		}
 	}
+
+	// 构造商品SKU列表
 	var productSkus []*v1.ProductSku
 	for _, sku := range product.SKUs {
 		productSkus = append(productSkus, &v1.ProductSku{
 			Id:           sku.ID,
 			ProductSpuID: sku.ProductSpuID,
+			SkuCode:      sku.SkuCode,
+			Price:        sku.Price,
+			Stock:        sku.Stock,
+			SaleCount:    sku.SaleCount,
+			Status:       sku.Status,
+			Indexs:       sku.Indexs,
+			AttrParams:   sku.AttrParams,
+			Images:       sku.Images,
+			Title:        sku.Title,
+			SubTitle:     sku.SubTitle,
+			Description:  sku.Description,
 		})
 	}
 
@@ -59,15 +79,50 @@ func (s *productService) GetProduct(ctx context.Context, request *v1.ProductDeta
 			Name:          product.SPU.Name,
 			Category1ID:   product.SPU.Category1ID,
 			Category1Code: product.SPU.Category1Code,
+			Category2ID:   product.SPU.Category2ID,
+			Category2Code: product.SPU.Category2Code,
+			Category3ID:   product.SPU.Category3ID,
+			Category3Code: product.SPU.Category3Code,
+			Brand:         product.SPU.Brand,
+			Price:         product.SPU.Price,
+			RealPrice:     product.SPU.RealPrice,
+			TotalSales:    product.SPU.TotalSales,
+			TotalStock:    product.SPU.TotalStock,
+			Status:        product.SPU.Status,
+			// ... existing code ...
+			Images: func() []string {
+				if product.SPU.Images == "" {
+					return []string{}
+				}
+				images := strings.Split(product.SPU.Images, ",")
+				var result []string
+				for _, img := range images {
+					// 清理 URL 两端的空格
+					img = strings.TrimSpace(img)
+					// 跳过空字符串
+					if img == "" {
+						continue
+					}
+					// 检查 URL 是否合法（至少包含基本的 URL 结构）
+					if strings.HasPrefix(img, "http://") || strings.HasPrefix(img, "https://") || strings.HasPrefix(img, "/") {
+						result = append(result, img)
+					}
+				}
+				return result
+			}(),
+			Description: product.SPU.Description,
 		},
 		ProductSpuDetail: &v1.ProductSpuDetail{
 			Id:           product.SPUDetail.ID,
 			ProductSpuID: product.SPUDetail.ProductSpuID,
-			Content:      string(product.SPUDetail.Detail),
+			Detail:       string(product.SPUDetail.Detail),
+			PackingList:  string(product.SPUDetail.PackingList),
+			AfterSale:    string(product.SPUDetail.AfterSale),
 		},
 		ProductSpuAttrParams: productSpuAttrParams,
 		ProductSkus:          productSkus,
 	}
+
 	return response, nil
 }
 
@@ -109,6 +164,9 @@ func (s *productService) ListProducts(ctx context.Context, request *v1.ProductLi
 		var count int64 = 0
 		var ps []*v1.Product
 		for _, product := range products {
+			if product.SPU == nil {
+				continue
+			}
 			if product.SPU.Category1Code == categoryCode || product.SPU.Category2Code == categoryCode || product.SPU.Category3Code == categoryCode {
 				var basicAttrs string // 基础属性
 				var saleAttrs string  // 销售属性

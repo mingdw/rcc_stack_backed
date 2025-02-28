@@ -38,12 +38,36 @@ type productRepository struct {
 
 func (r *productRepository) GetProduct(ctx context.Context, id int64) (*model.Product, error) {
 	var product model.Product
-	err := r.DB(ctx).
+
+	// 打印 SQL 语句以便调试
+	db := r.DB(ctx).Debug()
+
+	err := db.Model(&product.SPU).
 		Where("id = ? AND is_deleted = ?", id, 0).
-		First(&product).Error
+		First(&product.SPU).Error
 	if err != nil {
 		return nil, err
 	}
+
+	// 分别查询关联数据
+	if err := db.Model(&product.SKUs).
+		Where("product_spu_id = ?", id).
+		Find(&product.SKUs).Error; err != nil {
+		return nil, err
+	}
+
+	if err := db.Model(&product.SPUDetail).
+		Where("product_spu_id = ?", id).
+		First(&product.SPUDetail).Error; err != nil {
+		return nil, err
+	}
+
+	if err := db.Model(&product.SPUAttrParams).
+		Where("product_spu_id = ?", id).
+		Find(&product.SPUAttrParams).Error; err != nil {
+		return nil, err
+	}
+
 	return &product, nil
 }
 
@@ -57,10 +81,9 @@ func (r *productRepository) ListProductsByCategoryCodes(
 	var products []*model.Product
 	var total int64
 
-	query := r.DB(ctx).Model(&model.Product{}).
-		Preload("SPUDetail").
-		Preload("SPUAttrParams").
-		Preload("SKUs")
+	// 使用 Debug 模式来查看具体的 SQL 查询
+	query := r.DB(ctx).Debug().Model(&model.ProductSpu{}).
+		Where("is_deleted = ?", 0)
 
 	if len(categoryCodes) > 0 {
 		query = query.Where("category1_code IN ? OR category2_code IN ? OR category3_code IN ?", categoryCodes, categoryCodes, categoryCodes)
@@ -76,12 +99,52 @@ func (r *productRepository) ListProductsByCategoryCodes(
 		return nil, 0, err
 	}
 
-	// 执行分页查询
+	// 先查询 SPU 基础数据
+	var spus []*model.ProductSpu
 	err = query.Offset((page - 1) * pageSize).
 		Limit(pageSize).
-		Find(&products).Error
+		Find(&spus).Error
 	if err != nil {
 		return nil, 0, err
+	}
+
+	// 如果有 SPU 数据，再查询关联数据
+	if len(spus) > 0 {
+		// 获取所有 SPU ID
+		var spuIDs []int64
+		for _, spu := range spus {
+			spuIDs = append(spuIDs, spu.ID)
+		}
+
+		// 分别查询关联数据
+		for _, spu := range spus {
+			// 查询 SKUs
+			var skus []*model.ProductSku
+			if err := r.DB(ctx).Where("product_spu_id = ?", spu.ID).Find(&skus).Error; err != nil {
+				return nil, 0, err
+			}
+
+			// 查询 SPU 详情
+			var spuDetail model.ProductSpuDetail
+			if err := r.DB(ctx).Where("product_spu_id = ?", spu.ID).First(&spuDetail).Error; err != nil {
+				return nil, 0, err
+			}
+
+			// 查询属性参数
+			var attrParams []*model.ProductSpuAttrParams
+			if err := r.DB(ctx).Where("product_spu_id = ?", spu.ID).Find(&attrParams).Error; err != nil {
+				return nil, 0, err
+			}
+
+			// 构建完整的 Product 对象
+			product := &model.Product{
+				SPU:           spu,
+				SKUs:          skus,
+				SPUDetail:     &spuDetail,
+				SPUAttrParams: attrParams,
+			}
+			products = append(products, product)
+		}
 	}
 
 	return products, total, nil
