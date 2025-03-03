@@ -155,12 +155,26 @@ func (s *productService) ListProducts(ctx context.Context, request *v1.ProductLi
 		return nil, err
 	}
 
-	// 目录--> 商品集合的映射关系
 	// 构建响应
 	var response v1.ProductListResponse
 	for _, categoryCode := range categoryCodes {
+		// 获取分类信息
+		categories, err := s.categoryRepository.GetCategoriesByParams(ctx, &model.Category{Code: categoryCode})
+		if err != nil {
+			return nil, err
+		}
+
+		// 确保找到了分类
+		if len(categories) == 0 {
+			continue
+		}
+		category := categories[0] // 获取匹配的分类
+
 		var categoryProducts v1.CategoryProducts
-		categoryProducts.CategoryCode = categoryCode
+		categoryProducts.CategoryId = int64(category.ID) // 使用实际的分类ID
+		categoryProducts.CategoryCode = category.Code    // 分类编码
+		categoryProducts.CategoryName = category.Name    // 分类名称
+
 		var count int64 = 0
 		var ps []*v1.Product
 		for _, product := range products {
@@ -255,8 +269,8 @@ func (s *productService) ListProducts(ctx context.Context, request *v1.ProductLi
 		categoryProducts.ProductCount = count
 		categoryProducts.Products = ps
 		response.Categories = append(response.Categories, &categoryProducts)
-
 	}
+
 	response.Total = total
 
 	return &response, nil
