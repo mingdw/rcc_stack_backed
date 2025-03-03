@@ -150,7 +150,7 @@ CREATE TABLE `rcc_product_sku` (
     `stock` INT NOT NULL default 0 COMMENT '库存',
     `sale_count` INT NOT NULL COMMENT '销量',
     `status` INT NOT NULL COMMENT '状态',
-    `indexs` INT NOT NULL default 0 COMMENT '规格索引',
+    `indexs` VARCHAR(64) NOT NULL default '' COMMENT '规格索引',
     `attr_params` TEXT  COMMENT '属性参数json',
     `owner_params` TEXT  COMMENT '属性参数json',
     `images` VARCHAR(1000) COMMENT '图片',

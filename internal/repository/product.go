@@ -81,7 +81,7 @@ func (r *productRepository) ListProductsByCategoryCodes(
 	var products []*model.Product
 	var total int64
 
-	// 使用 Debug 模式来查看具体的 SQL 查询
+	// 基础查询
 	query := r.DB(ctx).Debug().Model(&model.ProductSpu{}).
 		Where("is_deleted = ?", 0)
 
@@ -99,7 +99,7 @@ func (r *productRepository) ListProductsByCategoryCodes(
 		return nil, 0, err
 	}
 
-	// 先查询 SPU 基础数据
+	// 查询 SPU 基础数据
 	var spus []*model.ProductSpu
 	err = query.Offset((page - 1) * pageSize).
 		Limit(pageSize).
@@ -108,31 +108,18 @@ func (r *productRepository) ListProductsByCategoryCodes(
 		return nil, 0, err
 	}
 
-	// 如果有 SPU 数据，再查询关联数据
+	// 如果有 SPU 数据，查询关联数据
 	if len(spus) > 0 {
-		// 获取所有 SPU ID
-		var spuIDs []int64
-		for _, spu := range spus {
-			spuIDs = append(spuIDs, spu.ID)
-		}
-
-		// 分别查询关联数据
 		for _, spu := range spus {
 			// 查询 SKUs
 			var skus []*model.ProductSku
-			if err := r.DB(ctx).Where("product_spu_id = ?", spu.ID).Find(&skus).Error; err != nil {
-				return nil, 0, err
-			}
-
-			// 查询 SPU 详情
-			var spuDetail model.ProductSpuDetail
-			if err := r.DB(ctx).Where("product_spu_id = ?", spu.ID).First(&spuDetail).Error; err != nil {
+			if err := r.DB(ctx).Where("product_spu_id = ? AND is_deleted = ?", spu.ID, 0).Find(&skus).Error; err != nil {
 				return nil, 0, err
 			}
 
 			// 查询属性参数
 			var attrParams []*model.ProductSpuAttrParams
-			if err := r.DB(ctx).Where("product_spu_id = ?", spu.ID).Find(&attrParams).Error; err != nil {
+			if err := r.DB(ctx).Where("product_spu_id = ? AND is_deleted = ?", spu.ID, 0).Find(&attrParams).Error; err != nil {
 				return nil, 0, err
 			}
 
@@ -140,7 +127,6 @@ func (r *productRepository) ListProductsByCategoryCodes(
 			product := &model.Product{
 				SPU:           spu,
 				SKUs:          skus,
-				SPUDetail:     &spuDetail,
 				SPUAttrParams: attrParams,
 			}
 			products = append(products, product)

@@ -14,7 +14,7 @@ type ProductSku struct {
 	Stock          int       `gorm:"column:stock;not null" json:"stock"`                     // 库存
 	SaleCount      int       `gorm:"column:sale_count;not null" json:"saleCount"`            // 销量
 	Status         int       `gorm:"column:status;not null" json:"status"`                   // 状态
-	Indexs         int       `gorm:"column:indexs;not null" json:"indexs"`                   // 规格索引
+	Indexs         string    `gorm:"column:indexs;not null" json:"indexs"`                   // 规格索引
 	AttrParams     string    `gorm:"column:attr_params" json:"attrParams"`                   // 属性参数
 	OwnerParams    string    `gorm:"column:owner_params" json:"ownerParams"`                 // 属性参数
 	Images         string    `gorm:"column:images" json:"images"`                            // 图片

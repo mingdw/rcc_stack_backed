@@ -182,6 +182,29 @@ func (s *productService) ListProducts(ctx context.Context, request *v1.ProductLi
 						specAttrs = attr.Value
 					}
 				}
+
+				// 构造 SKU 列表
+				var skuList []*v1.ProductSku
+				for _, sku := range product.SKUs {
+					skuList = append(skuList, &v1.ProductSku{
+						Id:             sku.ID,
+						ProductSpuID:   sku.ProductSpuID,
+						ProductSpuCode: sku.ProductSpuCode,
+						SkuCode:        sku.SkuCode,
+						Price:          sku.Price,
+						Stock:          sku.Stock,
+						SaleCount:      sku.SaleCount,
+						Status:         sku.Status,
+						Indexs:         sku.Indexs,
+						AttrParams:     sku.AttrParams,
+						OwnerParams:    sku.OwnerParams,
+						Images:         sku.Images,
+						Title:          sku.Title,
+						SubTitle:       sku.SubTitle,
+						Description:    sku.Description,
+					})
+				}
+
 				ps = append(ps, &v1.Product{
 					Id:            product.SPU.ID,
 					Code:          product.SPU.Code,
@@ -198,13 +221,32 @@ func (s *productService) ListProducts(ctx context.Context, request *v1.ProductLi
 					TotalSales:    product.SPU.TotalSales,
 					TotalStock:    product.SPU.TotalStock,
 					Status:        product.SPU.Status,
-					Images:        strings.Split(product.SPU.Images, ","),
-					Description:   product.SPU.Description,
+					Images: func() []string {
+						if product.SPU.Images == "" {
+							return []string{}
+						}
+						images := strings.Split(product.SPU.Images, ",")
+						var result []string
+						for _, img := range images {
+							img = strings.TrimSpace(img)
+							if img == "" {
+								continue
+							}
+							if strings.HasPrefix(img, "http://") ||
+								strings.HasPrefix(img, "https://") ||
+								strings.HasPrefix(img, "/") {
+								result = append(result, img)
+							}
+						}
+						return result
+					}(),
+					Description: product.SPU.Description,
 					Attributes: &v1.ProductAttrs{
 						BasicAttrs: basicAttrs,
 						SaleAttrs:  saleAttrs,
 						SpecAttrs:  specAttrs,
 					},
+					SkuList: skuList, // 添加 SKU 列表到返回结构
 				})
 				count++
 			}

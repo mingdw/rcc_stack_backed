@@ -45,6 +45,7 @@ type Product struct {
 	Images        []string      `json:"images"`        // 图片
 	Description   string        `json:"description"`   // 描述
 	Attributes    *ProductAttrs `json:"attributes"`    // 商品属性
+	SkuList       []*ProductSku `json:"skuList"`       // 商品SKU列表
 }
 
 // 商品属性
@@ -99,7 +100,7 @@ type ProductSku struct {
 	Stock          int       `json:"stock"`          // 库存
 	SaleCount      int       `json:"saleCount"`      // 销量
 	Status         int       `json:"status"`         // 状态
-	Indexs         int       `json:"indexs"`         // 规格索引
+	Indexs         string    `json:"indexs"`         // 规格索引
 	AttrParams     string    `json:"attrParams"`     // 属性参数
 	OwnerParams    string    `json:"ownerParams"`    // 属性参数
 	Images         string    `json:"images"`         // 图片
