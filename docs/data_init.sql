@@ -3390,7 +3390,7 @@ SELECT
     'SPU20240102001', '元宇宙艺术画作-未来城市', c1.id, c1.code, c2.id, c2.code, c3.id, c3.code,
     200, 500, 'MetaArt', '以未来城市为主题的数字艺术作品，展现科技与艺术的完美融合',
     1999.99, 1799.99, 1, 
-    'https://example.com/images/future_city.jpg', 
+    'https://example.com/images/future_city_1.jpg,https://example.com/images/future_city_2.jpg', 
     'admin', 'admin'
 FROM sys_category c1 
 JOIN sys_category c2 ON c2.parent_id = c1.id
@@ -3406,7 +3406,7 @@ SELECT
     'SPU20240102002', '电子音乐专辑-赛博朋克', c1.id, c1.code, c2.id, c2.code, c3.id, c3.code,
     150, 300, 'CyberMusic', '融合未来科技元素的电子音乐专辑，带来沉浸式听觉体验',
     899.99, 799.99, 1, 
-    'https://example.com/images/cyberpunk_music.jpg', 
+    'https://example.com/images/cyber_music_1.jpg,https://example.com/images/cyber_music_2.jpg', 
     'admin', 'admin'
 FROM sys_category c1 
 JOIN sys_category c2 ON c2.parent_id = c1.id
@@ -3422,7 +3422,7 @@ SELECT
     'SPU20240102003', '数字视觉艺术-时空之旅', c1.id, c1.code, c2.id, c2.code, c3.id, c3.code,
     100, 200, 'TimeArt', '探索时间与空间概念的视觉艺术作品，呈现独特的艺术视角',
     2999.99, 2799.99, 1, 
-    'https://example.com/images/time_space.jpg', 
+    'https://example.com/images/time_space_1.jpg,https://example.com/images/time_space_2.jpg', 
     'admin', 'admin'
 FROM sys_category c1 
 JOIN sys_category c2 ON c2.parent_id = c1.id
@@ -3438,7 +3438,7 @@ SELECT
     'SPU20240102004', '限定皮肤-星际战士', c1.id, c1.code, c2.id, c2.code, c3.id, c3.code,
     500, 1000, 'GameSkin', '独特的限定版游戏角色皮肤，展现未来战士的酷炫外观',
     299.99, 259.99, 1, 
-    'https://example.com/images/star_warrior.jpg', 
+    'https://example.com/images/star_warrior_1.jpg,https://example.com/images/star_warrior_2.jpg', 
     'admin', 'admin'
 FROM sys_category c1 
 JOIN sys_category c2 ON c2.parent_id = c1.id
