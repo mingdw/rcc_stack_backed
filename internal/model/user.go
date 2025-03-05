@@ -6,18 +6,31 @@ import (
 	"gorm.io/gorm"
 )
 
+// User 用户表结构
 type User struct {
 	gorm.Model
-	Id        uint   `gorm:"primarykey"`
-	UserId    string `gorm:"unique;not null"`
-	Nickname  string `gorm:"not null"`
-	Password  string `gorm:"not null"`
-	Email     string `gorm:"not null"`
-	CreatedAt time.Time
-	UpdatedAt time.Time
-	DeletedAt gorm.DeletedAt `gorm:"index"`
+	ID         int64     `gorm:"column:id;primaryKey;autoIncrement" json:"id"`
+	UserId     string    `gorm:"column:user_id;not null;default:0;comment:用户id"`
+	UserCode   string    `gorm:"column:user_code;not null;default:'';comment:用户编码"`
+	Nickname   string    `gorm:"column:nickname;not null;default:'';comment:昵称"`
+	Avatar     string    `gorm:"column:avatar;not null;default:'';comment:头像"`
+	Gender     int       `gorm:"column:gender;not null;default:0;comment:性别"`
+	Birthday   time.Time `gorm:"column:birthday;comment:生日"`
+	Email      string    `gorm:"column:email;not null;default:'';comment:邮箱"`
+	Phone      string    `gorm:"column:phone;not null;default:'';comment:手机号"`
+	Password   string    `gorm:"column:password;not null;default:'';comment:密码"`
+	Status     int       `gorm:"column:status;not null;default:0;comment:状态"`
+	StatusDesc string    `gorm:"column:status_desc;not null;default:'';comment:状态描述"`
+	Type       int       `gorm:"column:type;not null;default:0;comment:类型"`
+	TypeDesc   string    `gorm:"column:type_desc;not null;default:'';comment:类型描述"`
+	IsDeleted  int       `gorm:"column:is_deleted;default:0;comment:是否删除"`
+	CreatedAt  time.Time `gorm:"column:created_at;default:CURRENT_TIMESTAMP;comment:创建时间"`
+	UpdatedAt  time.Time `gorm:"column:updated_at;default:CURRENT_TIMESTAMP;comment:更新时间"`
+	Creator    string    `gorm:"column:creator;not null;default:'';comment:创建人"`
+	Updator    string    `gorm:"column:updator;not null;default:'';comment:更新人"`
 }
 
+// TableName 指定表名
 func (u *User) TableName() string {
-	return "users"
+	return "sys_user"
 }

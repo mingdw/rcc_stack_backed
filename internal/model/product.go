@@ -9,5 +9,5 @@ type Product struct {
 }
 
 func (Product) TableName() string {
-	return "rcc_product_spu" // 使用主表名称
+	return "sys_product" // 使用主表名称
 }

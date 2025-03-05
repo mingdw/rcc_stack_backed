@@ -25,5 +25,5 @@ type ProductSpuAttrParams struct {
 
 // TableName 表名
 func (p *ProductSpuAttrParams) TableName() string {
-	return "rcc_product_spu_attr_params"
+	return "sys_product_spu_attr_params"
 }

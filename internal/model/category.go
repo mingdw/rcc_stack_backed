@@ -21,5 +21,5 @@ type Category struct {
 
 // TableName 表名
 func (m *Category) TableName() string {
-	return "rcc_category"
+	return "sys_category"
 }

@@ -20,7 +20,7 @@ type CategoryAttrGroup struct {
 
 // TableName 表名
 func (m *CategoryAttrGroup) TableName() string {
-	return "rcc_category_attr_group"
+	return "sys_category_attr_group"
 }
 
 // Attr 属性

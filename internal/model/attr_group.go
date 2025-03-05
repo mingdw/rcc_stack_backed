@@ -20,5 +20,5 @@ type AttrGroup struct {
 
 // TableName 表名
 func (m *AttrGroup) TableName() string {
-	return "rcc_attr_group"
+	return "sys_attr_group"
 }

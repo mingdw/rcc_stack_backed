@@ -19,5 +19,5 @@ type ProductSpuDetail struct {
 
 // TableName 表名
 func (p *ProductSpuDetail) TableName() string {
-	return "rcc_product_spu_detail"
+	return "sys_product_spu_detail"
 }

@@ -30,5 +30,5 @@ type ProductSku struct {
 
 // TableName 表名
 func (p *ProductSku) TableName() string {
-	return "rcc_product_sku"
+	return "sys_product_sku"
 }

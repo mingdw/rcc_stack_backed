@@ -21,5 +21,5 @@ type Attr struct {
 
 // TableName 表名
 func (m *Attr) TableName() string {
-	return "rcc_attr"
+	return "sys_attr"
 }
