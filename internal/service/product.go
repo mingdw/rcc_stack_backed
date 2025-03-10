@@ -126,152 +126,100 @@ func (s *productService) GetProduct(ctx context.Context, request *v1.ProductDeta
 	return response, nil
 }
 
-func (s *productService) ListProducts(ctx context.Context, request *v1.ProductListRequest) (*v1.ProductListResponse, error) {
+func (s *productService) ListProducts(ctx context.Context, request *v1.ProductListRequest) (response *v1.ProductListResponse, err error) {
 	// 解析请求中的分类编码
 	var categoryCodes []string
 	if request.CategoryCodes != "" {
 		categoryCodes = strings.Split(request.CategoryCodes, ",")
 	}
 
-	// 如果没有指定分类编码，获取所有一级分类
-	if len(categoryCodes) == 0 {
+	categoryMap := make(map[string]*model.Category)
+
+	// 获取分类信息
+	if len(categoryCodes) > 0 {
+		categories, err := s.categoryRepository.GetCategories(ctx, categoryCodes)
+		if err != nil {
+			return nil, err
+		}
+		for _, category := range categories {
+			categoryMap[category.Code] = category
+		}
+	} else {
+		// 如果没有指定分类，默认获取一级分类
 		categories, err := s.categoryRepository.GetCategoriesByParams(ctx, &model.Category{Level: 1})
 		if err != nil {
 			return nil, err
 		}
 		for _, category := range categories {
 			categoryCodes = append(categoryCodes, category.Code)
+			categoryMap[category.Code] = category
 		}
 	}
-	// 查询商品列表
-	products, total, err := s.productRepository.ListProductsByCategoryCodes(
-		ctx,
-		categoryCodes,
-		request.ProductName,
-		request.Page,
-		request.PageSize,
-	)
-	if err != nil {
-		return nil, err
-	}
 
-	// 构建响应
-	var response v1.ProductListResponse
+	// 构造返回结果
+	var productCategories []*v1.CategoryProducts
 	for _, categoryCode := range categoryCodes {
-		// 获取分类信息
-		categories, err := s.categoryRepository.GetCategoriesByParams(ctx, &model.Category{Code: categoryCode})
+		category := categoryMap[categoryCode]
+		if category == nil {
+			continue
+		}
+
+		// 获取该分类下的商品
+		products, total, err := s.productRepository.GetProductsBycategoryCode(ctx, categoryCode, request.ProductName, request.Page, request.PageSize)
 		if err != nil {
 			return nil, err
 		}
 
-		// 确保找到了分类
-		if len(categories) == 0 {
-			continue
-		}
-		category := categories[0] // 获取匹配的分类
-
-		var categoryProducts v1.CategoryProducts
-		categoryProducts.CategoryId = int64(category.ID) // 使用实际的分类ID
-		categoryProducts.CategoryCode = category.Code    // 分类编码
-		categoryProducts.CategoryName = category.Name    // 分类名称
-
-		var count int64 = 0
-		var ps []*v1.Product
+		// 构造商品列表
+		var productSpus []*v1.Product
 		for _, product := range products {
-			if product.SPU == nil {
-				continue
-			}
-			if product.SPU.Category1Code == categoryCode || product.SPU.Category2Code == categoryCode || product.SPU.Category3Code == categoryCode {
-				var basicAttrs string // 基础属性
-				var saleAttrs string  // 销售属性
-				var specAttrs string  // 规格属性
-				for _, attr := range product.SPUAttrParams {
-					if attr.Code == "BASIC_ATTRS" {
-						basicAttrs = attr.Value
+			productSpus = append(productSpus, &v1.Product{
+				Id:            product.SPU.ID,
+				Code:          product.SPU.Code,
+				Name:          product.SPU.Name,
+				Category1Id:   product.SPU.Category1ID,
+				Category1Code: product.SPU.Category1Code,
+				Category2Id:   product.SPU.Category2ID,
+				Category2Code: product.SPU.Category2Code,
+				Category3Id:   product.SPU.Category3ID,
+				Category3Code: product.SPU.Category3Code,
+				Brand:         product.SPU.Brand,
+				Price:         product.SPU.Price,
+				RealPrice:     product.SPU.RealPrice,
+				TotalSales:    product.SPU.TotalSales,
+				TotalStock:    product.SPU.TotalStock,
+				Status:        product.SPU.Status,
+				Images: func() []string {
+					if product.SPU.Images == "" {
+						return []string{}
 					}
-					if attr.Code == "SALE_ATTRS" {
-						saleAttrs = attr.Value
-					}
-					if attr.Code == "SPEC_ATTRS" {
-						specAttrs = attr.Value
-					}
-				}
-
-				// 构造 SKU 列表
-				var skuList []*v1.ProductSku
-				for _, sku := range product.SKUs {
-					skuList = append(skuList, &v1.ProductSku{
-						Id:             sku.ID,
-						ProductSpuID:   sku.ProductSpuID,
-						ProductSpuCode: sku.ProductSpuCode,
-						SkuCode:        sku.SkuCode,
-						Price:          sku.Price,
-						Stock:          sku.Stock,
-						SaleCount:      sku.SaleCount,
-						Status:         sku.Status,
-						Indexs:         sku.Indexs,
-						AttrParams:     sku.AttrParams,
-						OwnerParams:    sku.OwnerParams,
-						Images:         sku.Images,
-						Title:          sku.Title,
-						SubTitle:       sku.SubTitle,
-						Description:    sku.Description,
-					})
-				}
-
-				ps = append(ps, &v1.Product{
-					Id:            product.SPU.ID,
-					Code:          product.SPU.Code,
-					Name:          product.SPU.Name,
-					Category1Id:   product.SPU.Category1ID,
-					Category1Code: product.SPU.Category1Code,
-					Category2Id:   product.SPU.Category2ID,
-					Category2Code: product.SPU.Category2Code,
-					Category3Id:   product.SPU.Category3ID,
-					Category3Code: product.SPU.Category3Code,
-					Brand:         product.SPU.Brand,
-					Price:         product.SPU.Price,
-					RealPrice:     product.SPU.RealPrice,
-					TotalSales:    product.SPU.TotalSales,
-					TotalStock:    product.SPU.TotalStock,
-					Status:        product.SPU.Status,
-					Images: func() []string {
-						if product.SPU.Images == "" {
-							return []string{}
+					images := strings.Split(product.SPU.Images, ",")
+					var result []string
+					for _, img := range images {
+						img = strings.TrimSpace(img)
+						if img == "" {
+							continue
 						}
-						images := strings.Split(product.SPU.Images, ",")
-						var result []string
-						for _, img := range images {
-							img = strings.TrimSpace(img)
-							if img == "" {
-								continue
-							}
-							if strings.HasPrefix(img, "http://") ||
-								strings.HasPrefix(img, "https://") ||
-								strings.HasPrefix(img, "/") {
-								result = append(result, img)
-							}
+						if strings.HasPrefix(img, "http://") || strings.HasPrefix(img, "https://") || strings.HasPrefix(img, "/") {
+							result = append(result, img)
 						}
-						return result
-					}(),
-					Description: product.SPU.Description,
-					Attributes: &v1.ProductAttrs{
-						BasicAttrs: basicAttrs,
-						SaleAttrs:  saleAttrs,
-						SpecAttrs:  specAttrs,
-					},
-					SkuList: skuList, // 添加 SKU 列表到返回结构
-				})
-				count++
-			}
+					}
+					return result
+				}(),
+				Description: product.SPU.Description,
+			})
 		}
 
-		categoryProducts.ProductCount = count
-		categoryProducts.Products = ps
-		response.Categories = append(response.Categories, &categoryProducts)
+		productCategories = append(productCategories, &v1.CategoryProducts{
+			CategoryId:   int64(category.ID),
+			CategoryCode: category.Code,
+			CategoryName: category.Name,
+			ProductCount: total,
+			Products:     productSpus,
+		})
 	}
 
-	response.Total = total
-
-	return &response, nil
+	return &v1.ProductListResponse{
+		Categories: productCategories,
+	}, nil
 }
