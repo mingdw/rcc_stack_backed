@@ -1,4 +1,5 @@
 -- 1.商品目录分类表
+drop table if exists `sys_category`;
 CREATE TABLE `sys_category` (
     `id` BIGINT NOT NULL AUTO_INCREMENT,
     `code` VARCHAR(255) NOT NULL default '' COMMENT '编码',
@@ -17,6 +18,7 @@ CREATE TABLE `sys_category` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- 2.属性组
+drop table if exists `sys_attr_group`;
 CREATE TABLE `sys_attr_group` (
     `id` BIGINT NOT NULL AUTO_INCREMENT,
     `attr_group_name` VARCHAR(255) NOT NULL default '' COMMENT '名称',
@@ -34,6 +36,7 @@ CREATE TABLE `sys_attr_group` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- 3.属性
+drop table if exists `sys_attr`;
 CREATE TABLE `sys_attr` (
     `id` BIGINT NOT NULL AUTO_INCREMENT,
     `attr_name` VARCHAR(255) NOT NULL default '' COMMENT '名称',
@@ -55,6 +58,7 @@ CREATE TABLE `sys_attr` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- 4.目录属性组关联表
+drop table if exists `sys_category_attr_group`;
 CREATE TABLE `sys_category_attr_group` (
     `id` BIGINT NOT NULL AUTO_INCREMENT,
     `category_id` BIGINT NOT NULL default 0 COMMENT '商品目录分类id',
@@ -72,6 +76,7 @@ CREATE TABLE `sys_category_attr_group` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- 5.商品spu
+drop table if exists `sys_product_spu`;
 CREATE TABLE `sys_product_spu` (
     `id` BIGINT NOT NULL AUTO_INCREMENT,
     `code` VARCHAR(255) NOT NULL default '' COMMENT '编码',
@@ -100,6 +105,7 @@ CREATE TABLE `sys_product_spu` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- 6.商品spu详情
+drop table if exists `sys_product_spu_detail`;
 CREATE TABLE `sys_product_spu_detail` (
     `id` BIGINT NOT NULL AUTO_INCREMENT,
     `product_spu_id` BIGINT NOT NULL default 0 COMMENT '商品spu id',
@@ -117,6 +123,7 @@ CREATE TABLE `sys_product_spu_detail` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- 7.商品spu属性详情表
+drop table if exists `sys_product_spu_attr_params`;
 CREATE TABLE `sys_product_spu_attr_params` (
     `id` BIGINT NOT NULL AUTO_INCREMENT,
     `product_spu_id` BIGINT NOT NULL default 0 COMMENT '商品spu id',
@@ -140,6 +147,7 @@ CREATE TABLE `sys_product_spu_attr_params` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- 8.商品sku
+drop table if exists `sys_product_sku`;
 CREATE TABLE `sys_product_sku` (
     `id` BIGINT NOT NULL AUTO_INCREMENT,
     `product_spu_id` BIGINT NOT NULL default 0 COMMENT '商品spu id',
@@ -167,6 +175,7 @@ CREATE TABLE `sys_product_sku` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- 9.订单表
+drop table if exists `sys_order`;
 CREATE TABLE `sys_order` (
     `id` BIGINT NOT NULL AUTO_INCREMENT,
     `order_code` VARCHAR(255) NOT NULL default '' COMMENT '订单编码',
@@ -191,6 +200,7 @@ CREATE TABLE `sys_order` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- 10.订单商品表
+drop table if exists `sys_order_product`;
 CREATE TABLE `sys_order_product` (
     `id` BIGINT NOT NULL AUTO_INCREMENT,
     `order_id` BIGINT NOT NULL default 0 COMMENT '订单id',
@@ -213,6 +223,7 @@ CREATE TABLE `sys_order_product` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- 11.订单支付表
+drop table if exists `sys_order_payment`;
 CREATE TABLE `sys_order_payment` (
     `id` BIGINT NOT NULL AUTO_INCREMENT,
     `order_id` BIGINT NOT NULL default 0 COMMENT '订单id',
@@ -233,6 +244,7 @@ CREATE TABLE `sys_order_payment` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- 12.订单配送地址
+drop table if exists `sys_order_delivery_address`;
 CREATE TABLE `sys_order_delivery_address` ( 
     `id` BIGINT NOT NULL AUTO_INCREMENT,
     `order_id` BIGINT NOT NULL default 0 COMMENT '订单id',
@@ -257,6 +269,7 @@ CREATE TABLE `sys_order_delivery_address` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- 13.订单物流表
+drop table if exists `sys_order_logistics`;
 CREATE TABLE `sys_order_logistics` (
     `id` BIGINT NOT NULL AUTO_INCREMENT,
     `order_id` BIGINT NOT NULL default 0 COMMENT '订单id',
@@ -277,6 +290,7 @@ CREATE TABLE `sys_order_logistics` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- 14. 售后表
+drop table if exists `sys_order_after_sale`;
 CREATE TABLE `sys_order_after_sale` (
     `id` BIGINT NOT NULL AUTO_INCREMENT,
     `order_id` BIGINT NOT NULL default 0 COMMENT '订单id',
@@ -298,6 +312,7 @@ CREATE TABLE `sys_order_after_sale` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- 15.订单评价表
+drop table if exists `sys_order_reviews`;
 CREATE TABLE `sys_order_reviews` (
     `id` BIGINT NOT NULL AUTO_INCREMENT,
     `order_id` BIGINT NOT NULL default 0 COMMENT '订单id',
@@ -318,6 +333,7 @@ CREATE TABLE `sys_order_reviews` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- 16.用户表
+drop table if exists `sys_user`;
 CREATE TABLE `sys_user` (
     `id` BIGINT NOT NULL AUTO_INCREMENT,
     `user_id` BIGINT NOT NULL default 0 COMMENT '用户id',
@@ -344,6 +360,7 @@ CREATE TABLE `sys_user` (
 
 
 -- 17.全国地址表
+drop table if exists `sys_address`;
 CREATE TABLE `sys_address` (
     `id` BIGINT NOT NULL AUTO_INCREMENT,
     `code` VARCHAR(255) NOT NULL default '' COMMENT '地址编码',
@@ -371,6 +388,7 @@ CREATE TABLE `sys_address` (
 
 
 -- 18. 用户地址表
+drop table if exists `sys_user_address`;
 CREATE TABLE `sys_user_address` (
     `id` BIGINT NOT NULL AUTO_INCREMENT,
     `user_id` BIGINT NOT NULL default 0 COMMENT '用户id',
@@ -397,8 +415,6 @@ CREATE TABLE `sys_user_address` (
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- 清理所有已有目录数据
-DELETE FROM sys_category where id>0;
 
 -- 1. 一级目录
 INSERT INTO sys_category (code, name, parent_id, parent_code, level, sort, icon, created_at, updated_at, is_deleted, creator, updator) VALUES
@@ -484,7 +500,29 @@ FROM sys_category WHERE code = '130000'
 UNION ALL
 SELECT 
     '133000', '游戏角色NFT', id, '130000', 3, 3, '', NOW(), NOW(), 0, 'admin', 'admin'
+FROM sys_category WHERE code = '130000'
+UNION ALL
+SELECT 
+    '134000', '游戏皮肤NFT', id, '130000', 3, 4, '', NOW(), NOW(), 0, 'admin', 'admin'
+FROM sys_category WHERE code = '130000'
+UNION ALL
+SELECT 
+    '135000', '游戏宠物NFT', id, '130000', 3, 5, '', NOW(), NOW(), 0, 'admin', 'admin'
+FROM sys_category WHERE code = '130000'
+UNION ALL
+SELECT 
+    '136000', '游戏建筑NFT', id, '130000', 3, 6, '', NOW(), NOW(), 0, 'admin', 'admin'
+FROM sys_category WHERE code = '130000'
+UNION ALL
+SELECT 
+    '137000', '游戏载具NFT', id, '130000', 3, 6, '', NOW(), NOW(), 0, 'admin', 'admin'
+FROM sys_category WHERE code = '130000'
+UNION ALL
+SELECT 
+    '138000', '游戏土地NFT', id, '130000', 3, 6, '', NOW(), NOW(), 0, 'admin', 'admin'
 FROM sys_category WHERE code = '130000';
+
+
 
 -- 1.4.x 收藏品三级目录
 INSERT INTO sys_category (code, name, parent_id, parent_code, level, sort, icon, created_at, updated_at, is_deleted, creator, updator)
@@ -4425,7 +4463,7 @@ INSERT INTO `sys_product_spu_attr_params` (
 3, 1, 1, 0);
 
 
--- ================ 9. 游戏资产 - 游戏角色NFT (132000) ================
+-- ================ 9. 游戏资产 - 游戏角色NFT (133000) ================
 
 -- 商品1: 传奇英雄角色NFT
 INSERT INTO `sys_product_spu` (
@@ -4436,10 +4474,10 @@ INSERT INTO `sys_product_spu` (
     `price`, `real_price`, `status`, `images`,
     `created_at`, `updated_at`, `is_deleted`, `creator`, `updator`
 ) SELECT 
-    'SPU_GAME_CHAR_001', '传奇英雄角色NFT',
+    'CQYX_001', '传奇英雄角色NFT',
     (SELECT id FROM sys_category WHERE code = '100000'), '100000',
     (SELECT id FROM sys_category WHERE code = '130000'), '130000',
-    (SELECT id FROM sys_category WHERE code = '132000'), '132000',
+    (SELECT id FROM sys_category WHERE code = '133000'), '133000',
     60, 100, 'LegendaryHero', '限量版传奇英雄角色NFT，跨游戏平台使用',
     2499.00, 2999.00, 1, 'http://example.com/images/legendary_hero.png',
     NOW(), NOW(), 0, 'admin', 'admin';
@@ -4447,7 +4485,7 @@ INSERT INTO `sys_product_spu` (
 INSERT INTO `sys_product_spu_detail` (
     `product_spu_id`, `product_spu_code`, `detail`, `packing_list`, `after_sale`
 ) SELECT 
-    (SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_CHAR_001'), 'SPU_GAME_CHAR_001',
+    (SELECT id FROM sys_product_spu WHERE code = 'CQYX_001'), 'CQYX_001',
     '这是一款限量版传奇英雄角色NFT，由游戏角色设计师精心打造，拥有独特的外观、技能和背景故事，可在支持NFT资产的多个游戏平台中使用，是收藏家和游戏玩家的珍贵资产。',
     '游戏角色NFT、区块链所有权证书、3D模型文件、角色背景故事、使用指南',
     '区块链永久认证，资产真实性终身保障，新游戏平台适配支持';
@@ -4457,19 +4495,19 @@ INSERT INTO `sys_product_spu_attr_params` (
     `attr_type`, `value_type`, `value`, `sort`, `status`, `is_required`, `is_generic`
 ) VALUES 
 -- 基础属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_CHAR_001'), 'SPU_GAME_CHAR_001', 
+((SELECT id FROM sys_product_spu WHERE code = 'CQYX_001'), 'CQYX_001', 
 'BASIC_ATTRS', '基础属性', 1, 3, 
 '{"角色类型":"英雄","创作工具":"ZBrush+Maya+Substance Painter","艺术风格":"史诗/奇幻","多边形数":"50K-80K"}', 
 1, 1, 1, 1),
 
 -- 销售属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_CHAR_001'), 'SPU_GAME_CHAR_001',
+((SELECT id FROM sys_product_spu WHERE code = 'CQYX_001'), 'CQYX_001',
 'SALE_ATTRS', '销售属性', 2, 3, 
 '{"设计师":"Hero Creator","创作时间":"2023-04-05","区块链平台":"Ethereum","发行数量":"100","作品编号":"GCHAR2023001"}', 
 2, 1, 1, 1),
 
 -- 规格属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_CHAR_001'), 'SPU_GAME_CHAR_001',
+((SELECT id FROM sys_product_spu WHERE code = 'CQYX_001'), 'CQYX_001',
 'SPEC_ATTRS', '规格属性', 3, 3, 
 '{"职业":["战士","法师","刺客","射手","坦克"],"种族":["人类","精灵","矮人","兽人","龙裔"]}', 
 3, 1, 1, 0);
@@ -4483,10 +4521,10 @@ INSERT INTO `sys_product_spu` (
     `price`, `real_price`, `status`, `images`,
     `created_at`, `updated_at`, `is_deleted`, `creator`, `updator`
 ) SELECT 
-    'SPU_GAME_CHAR_002', '稀有怪物角色NFT',
+    'XYGWJS_001', '稀有怪物角色NFT',
     (SELECT id FROM sys_category WHERE code = '100000'), '100000',
     (SELECT id FROM sys_category WHERE code = '130000'), '130000',
-    (SELECT id FROM sys_category WHERE code = '132000'), '132000',
+    (SELECT id FROM sys_category WHERE code = '133000'), '133000',
     55, 85, 'RareMonster', '限量版稀有怪物角色NFT，跨游戏平台使用',
     1999.00, 2499.00, 1, 'http://example.com/images/rare_monster.png',
     NOW(), NOW(), 0, 'admin', 'admin';
@@ -4494,7 +4532,7 @@ INSERT INTO `sys_product_spu` (
 INSERT INTO `sys_product_spu_detail` (
     `product_spu_id`, `product_spu_code`, `detail`, `packing_list`, `after_sale`
 ) SELECT 
-    (SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_CHAR_002'), 'SPU_GAME_CHAR_002',
+    (SELECT id FROM sys_product_spu WHERE code = 'XYGWJS_001'), 'XYGWJS_001',
     '这是一款限量版稀有怪物角色NFT，由生物设计师精心打造，拥有独特的外观、能力和生态背景，可在支持NFT资产的多个游戏平台中使用，是收藏家和游戏玩家的珍贵资产。',
     '游戏角色NFT、区块链所有权证书、3D模型文件、角色背景故事、使用指南',
     '区块链永久认证，资产真实性终身保障，新游戏平台适配支持';
@@ -4504,19 +4542,19 @@ INSERT INTO `sys_product_spu_attr_params` (
     `attr_type`, `value_type`, `value`, `sort`, `status`, `is_required`, `is_generic`
 ) VALUES 
 -- 基础属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_CHAR_002'), 'SPU_GAME_CHAR_002', 
+((SELECT id FROM sys_product_spu WHERE code = 'XYGWJS_001'), 'XYGWJS_001', 
 'BASIC_ATTRS', '基础属性', 1, 3, 
 '{"角色类型":"怪物","创作工具":"ZBrush+3ds Max+Substance Painter","艺术风格":"恐怖/奇幻","多边形数":"40K-70K"}', 
 1, 1, 1, 1),
 
 -- 销售属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_CHAR_002'), 'SPU_GAME_CHAR_002',
+((SELECT id FROM sys_product_spu WHERE code = 'XYGWJS_001'), 'XYGWJS_001',
 'SALE_ATTRS', '销售属性', 2, 3, 
 '{"设计师":"Monster Designer","创作时间":"2023-05-15","区块链平台":"Ethereum","发行数量":"85","作品编号":"GCHAR2023002"}', 
 2, 1, 1, 1),
 
 -- 规格属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_CHAR_002'), 'SPU_GAME_CHAR_002',
+((SELECT id FROM sys_product_spu WHERE code = 'XYGWJS_001'), 'XYGWJS_001',
 'SPEC_ATTRS', '规格属性', 3, 3, 
 '{"怪物类型":["亡灵","元素","野兽","异形","构造体"],"特殊能力":["腐蚀","隐形","再生","心灵控制","元素操控"]}', 
 3, 1, 1, 0);
@@ -4530,10 +4568,10 @@ INSERT INTO `sys_product_spu` (
     `price`, `real_price`, `status`, `images`,
     `created_at`, `updated_at`, `is_deleted`, `creator`, `updator`
 ) SELECT 
-    'SPU_GAME_CHAR_003', '机甲战士角色NFT',
+    'JJZS_003', '机甲战士角色NFT',
     (SELECT id FROM sys_category WHERE code = '100000'), '100000',
     (SELECT id FROM sys_category WHERE code = '130000'), '130000',
-    (SELECT id FROM sys_category WHERE code = '132000'), '132000',
+    (SELECT id FROM sys_category WHERE code = '133000'), '133000',
     65, 90, 'MechWarrior', '限量版机甲战士角色NFT，跨游戏平台使用',
     2299.00, 2799.00, 1, 'http://example.com/images/mech_warrior.png',
     NOW(), NOW(), 0, 'admin', 'admin';
@@ -4541,7 +4579,7 @@ INSERT INTO `sys_product_spu` (
 INSERT INTO `sys_product_spu_detail` (
     `product_spu_id`, `product_spu_code`, `detail`, `packing_list`, `after_sale`
 ) SELECT 
-    (SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_CHAR_003'), 'SPU_GAME_CHAR_003',
+    (SELECT id FROM sys_product_spu WHERE code = 'JJZS_003'), 'JJZS_003',
     '这是一款限量版机甲战士角色NFT，由机械设计师精心打造，拥有独特的外观、武器系统和技术背景，可在支持NFT资产的多个游戏平台中使用，是收藏家和游戏玩家的珍贵资产。',
     '游戏角色NFT、区块链所有权证书、3D模型文件、角色背景故事、使用指南',
     '区块链永久认证，资产真实性终身保障，新游戏平台适配支持';
@@ -4551,19 +4589,19 @@ INSERT INTO `sys_product_spu_attr_params` (
     `attr_type`, `value_type`, `value`, `sort`, `status`, `is_required`, `is_generic`
 ) VALUES 
 -- 基础属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_CHAR_003'), 'SPU_GAME_CHAR_003', 
+((SELECT id FROM sys_product_spu WHERE code = 'JJZS_003'), 'JJZS_003', 
 'BASIC_ATTRS', '基础属性', 1, 3, 
 '{"角色类型":"机甲","创作工具":"3ds Max+Substance Painter","艺术风格":"科幻/机械","多边形数":"60K-90K"}', 
 1, 1, 1, 1),
 
 -- 销售属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_CHAR_003'), 'SPU_GAME_CHAR_003',
+((SELECT id FROM sys_product_spu WHERE code = 'JJZS_003'), 'JJZS_003',
 'SALE_ATTRS', '销售属性', 2, 3, 
 '{"设计师":"Mech Engineer","创作时间":"2023-06-20","区块链平台":"Ethereum","发行数量":"90","作品编号":"GCHAR2023003"}', 
 2, 1, 1, 1),
 
 -- 规格属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_CHAR_003'), 'SPU_GAME_CHAR_003',
+((SELECT id FROM sys_product_spu WHERE code = 'JJZS_003'), 'JJZS_003',
 'SPEC_ATTRS', '规格属性', 3, 3, 
 '{"机甲类型":["轻型","中型","重型","超重型"],"武器系统":["能量武器","实弹武器","导弹系统","近战武器","特殊武器"]}', 
 3, 1, 1, 0);
@@ -4577,10 +4615,10 @@ INSERT INTO `sys_product_spu` (
     `price`, `real_price`, `status`, `images`,
     `created_at`, `updated_at`, `is_deleted`, `creator`, `updator`
 ) SELECT 
-    'SPU_GAME_CHAR_004', '神话生物角色NFT',
+    'SHSW_004', '神话生物角色NFT',
     (SELECT id FROM sys_category WHERE code = '100000'), '100000',
     (SELECT id FROM sys_category WHERE code = '130000'), '130000',
-    (SELECT id FROM sys_category WHERE code = '132000'), '132000',
+    (SELECT id FROM sys_category WHERE code = '133000'), '133000',
     50, 80, 'MythicalBeing', '限量版神话生物角色NFT，跨游戏平台使用',
     2199.00, 2699.00, 1, 'http://example.com/images/mythical_being.png',
     NOW(), NOW(), 0, 'admin', 'admin';
@@ -4588,7 +4626,7 @@ INSERT INTO `sys_product_spu` (
 INSERT INTO `sys_product_spu_detail` (
     `product_spu_id`, `product_spu_code`, `detail`, `packing_list`, `after_sale`
 ) SELECT 
-    (SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_CHAR_004'), 'SPU_GAME_CHAR_004',
+    (SELECT id FROM sys_product_spu WHERE code = 'SHSW_004'), 'SHSW_004',
     '这是一款限量版神话生物角色NFT，由神话概念艺术家精心打造，基于世界各地神话传说，拥有独特的外观、神力和背景故事，可在支持NFT资产的多个游戏平台中使用。',
     '游戏角色NFT、区块链所有权证书、3D模型文件、角色背景故事、使用指南',
     '区块链永久认证，资产真实性终身保障，新游戏平台适配支持';
@@ -4598,19 +4636,19 @@ INSERT INTO `sys_product_spu_attr_params` (
     `attr_type`, `value_type`, `value`, `sort`, `status`, `is_required`, `is_generic`
 ) VALUES 
 -- 基础属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_CHAR_004'), 'SPU_GAME_CHAR_004', 
+((SELECT id FROM sys_product_spu WHERE code = 'SHSW_004'), 'SHSW_004', 
 'BASIC_ATTRS', '基础属性', 1, 3, 
 '{"角色类型":"神话生物","创作工具":"ZBrush+Maya+Substance Painter","艺术风格":"神话/奇幻","多边形数":"45K-75K"}', 
 1, 1, 1, 1),
 
 -- 销售属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_CHAR_004'), 'SPU_GAME_CHAR_004',
+((SELECT id FROM sys_product_spu WHERE code = 'SHSW_004'), 'SHSW_004',
 'SALE_ATTRS', '销售属性', 2, 3, 
 '{"设计师":"Myth Creator","创作时间":"2023-07-25","区块链平台":"Ethereum","发行数量":"80","作品编号":"GCHAR2023004"}', 
 2, 1, 1, 1),
 
 -- 规格属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_CHAR_004'), 'SPU_GAME_CHAR_004',
+((SELECT id FROM sys_product_spu WHERE code = 'SHSW_004'), 'SHSW_004',
 'SPEC_ATTRS', '规格属性', 3, 3, 
 '{"神话体系":["希腊","北欧","东方","埃及","玛雅"],"神力属性":["创造","毁灭","自然","命运","时间"]}', 
 3, 1, 1, 0);
@@ -4627,7 +4665,7 @@ INSERT INTO `sys_product_spu` (
     'SPU_GAME_CHAR_005', '未来战士角色NFT',
     (SELECT id FROM sys_category WHERE code = '100000'), '100000',
     (SELECT id FROM sys_category WHERE code = '130000'), '130000',
-    (SELECT id FROM sys_category WHERE code = '132000'), '132000',
+    (SELECT id FROM sys_category WHERE code = '133000'), '133000',
     70, 95, 'FutureWarrior', '限量版未来战士角色NFT，跨游戏平台使用',
     2399.00, 2899.00, 1, 'http://example.com/images/future_warrior.png',
     NOW(), NOW(), 0, 'admin', 'admin';
@@ -4663,7 +4701,7 @@ INSERT INTO `sys_product_spu_attr_params` (
 3, 1, 1, 0);
 
 
--- ================ 10. 游戏资产 - 游戏土地NFT (133000) ================
+-- ================ 10. 游戏资产 - 游戏土地NFT (138000) ================
 
 -- 商品1: 元宇宙黄金地段NFT
 INSERT INTO `sys_product_spu` (
@@ -4677,7 +4715,7 @@ INSERT INTO `sys_product_spu` (
     'SPU_GAME_LAND_001', '元宇宙黄金地段NFT',
     (SELECT id FROM sys_category WHERE code = '100000'), '100000',
     (SELECT id FROM sys_category WHERE code = '130000'), '130000',
-    (SELECT id FROM sys_category WHERE code = '133000'), '133000',
+    (SELECT id FROM sys_category WHERE code = '138000'), '138000',
     40, 100, 'PrimeLand', '限量版元宇宙黄金地段NFT，核心商业区位置',
     9999.00, 12999.00, 1, 'http://example.com/images/prime_land.png',
     NOW(), NOW(), 0, 'admin', 'admin';
@@ -4725,7 +4763,7 @@ INSERT INTO `sys_product_spu` (
     'SPU_GAME_LAND_002', '奇幻世界地块NFT',
     (SELECT id FROM sys_category WHERE code = '100000'), '100000',
     (SELECT id FROM sys_category WHERE code = '130000'), '130000',
-    (SELECT id FROM sys_category WHERE code = '133000'), '133000',
+    (SELECT id FROM sys_category WHERE code = '138000'), '138000',
     35, 80, 'FantasyLand', '限量版奇幻世界地块NFT，魔法森林区域',
     7999.00, 9999.00, 1, 'http://example.com/images/fantasy_land.png',
     NOW(), NOW(), 0, 'admin', 'admin';
@@ -4772,7 +4810,7 @@ INSERT INTO `sys_product_spu` (
     'SPU_GAME_LAND_003', '科幻城市地块NFT',
     (SELECT id FROM sys_category WHERE code = '100000'), '100000',
     (SELECT id FROM sys_category WHERE code = '130000'), '130000',
-    (SELECT id FROM sys_category WHERE code = '133000'), '133000',
+    (SELECT id FROM sys_category WHERE code = '138000'), '138000',
     45, 90, 'CyberLand', '限量版科幻城市地块NFT，高科技区域',
     8999.00, 10999.00, 1, 'http://example.com/images/cyber_land.png',
     NOW(), NOW(), 0, 'admin', 'admin';
@@ -4819,7 +4857,7 @@ INSERT INTO `sys_product_spu` (
     'SPU_GAME_LAND_004', '海洋世界地块NFT',
     (SELECT id FROM sys_category WHERE code = '100000'), '100000',
     (SELECT id FROM sys_category WHERE code = '130000'), '130000',
-    (SELECT id FROM sys_category WHERE code = '133000'), '133000',
+    (SELECT id FROM sys_category WHERE code = '138000'), '138000',
     30, 75, 'OceanLand', '限量版海洋世界地块NFT，水下王国区域',
     7499.00, 9499.00, 1, 'http://example.com/images/ocean_land.png',
     NOW(), NOW(), 0, 'admin', 'admin';
@@ -4866,7 +4904,7 @@ INSERT INTO `sys_product_spu` (
     'SPU_GAME_LAND_005', '太空基地地块NFT',
     (SELECT id FROM sys_category WHERE code = '100000'), '100000',
     (SELECT id FROM sys_category WHERE code = '130000'), '130000',
-    (SELECT id FROM sys_category WHERE code = '133000'), '133000',
+    (SELECT id FROM sys_category WHERE code = '138000'), '138000',
     25, 60, 'SpaceLand', '限量版太空基地地块NFT，星际前哨区域',
     8499.00, 10499.00, 1, 'http://example.com/images/space_land.png',
     NOW(), NOW(), 0, 'admin', 'admin';
@@ -4913,7 +4951,7 @@ INSERT INTO `sys_product_spu` (
     `price`, `real_price`, `status`, `images`,
     `created_at`, `updated_at`, `is_deleted`, `creator`, `updator`
 ) SELECT 
-    'SPU_GAME_SKIN_001', '传奇武器皮肤NFT',
+    'CQWQPF_001', '传奇武器皮肤NFT',
     (SELECT id FROM sys_category WHERE code = '100000'), '100000',
     (SELECT id FROM sys_category WHERE code = '130000'), '130000',
     (SELECT id FROM sys_category WHERE code = '134000'), '134000',
@@ -4924,7 +4962,7 @@ INSERT INTO `sys_product_spu` (
 INSERT INTO `sys_product_spu_detail` (
     `product_spu_id`, `product_spu_code`, `detail`, `packing_list`, `after_sale`
 ) SELECT 
-    (SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_SKIN_001'), 'SPU_GAME_SKIN_001',
+    (SELECT id FROM sys_product_spu WHERE code = 'CQWQPF_001'), 'CQWQPF_001',
     '这是一款限量版传奇武器皮肤NFT，由游戏艺术家精心打造，拥有独特的外观和特效，可在支持NFT资产的多个游戏平台中使用，为您的游戏武器增添独特魅力。',
     '皮肤NFT、区块链所有权证书、材质文件、使用指南',
     '区块链永久认证，资产真实性终身保障，新游戏平台适配支持';
@@ -4934,19 +4972,19 @@ INSERT INTO `sys_product_spu_attr_params` (
     `attr_type`, `value_type`, `value`, `sort`, `status`, `is_required`, `is_generic`
 ) VALUES 
 -- 基础属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_SKIN_001'), 'SPU_GAME_SKIN_001', 
+((SELECT id FROM sys_product_spu WHERE code = 'CQWQPF_001'), 'CQWQPF_001', 
 'BASIC_ATTRS', '基础属性', 1, 3, 
 '{"皮肤类型":"武器皮肤","创作工具":"Substance Painter","艺术风格":"奇幻/史诗","适用武器":"多种"}', 
 1, 1, 1, 1),
 
 -- 销售属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_SKIN_001'), 'SPU_GAME_SKIN_001',
+((SELECT id FROM sys_product_spu WHERE code = 'CQWQPF_001'), 'CQWQPF_001',
 'SALE_ATTRS', '销售属性', 2, 3, 
 '{"设计师":"Skin Master","创作时间":"2023-04-10","区块链平台":"Ethereum","发行数量":"100","作品编号":"GSKIN2023001"}', 
 2, 1, 1, 1),
 
 -- 规格属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_SKIN_001'), 'SPU_GAME_SKIN_001',
+((SELECT id FROM sys_product_spu WHERE code = 'CQWQPF_001'), 'CQWQPF_001',
 'SPEC_ATTRS', '规格属性', 3, 3, 
 '{"皮肤风格":["龙焰","寒冰","暗影","神圣","远古"],"特效":["粒子效果","光晕","轨迹","声音"]}', 
 3, 1, 1, 0);
@@ -5008,7 +5046,7 @@ INSERT INTO `sys_product_spu` (
     `price`, `real_price`, `status`, `images`,
     `created_at`, `updated_at`, `is_deleted`, `creator`, `updator`
 ) SELECT 
-    'SPU_GAME_SKIN_003', '限定载具皮肤NFT',
+    'XDZJPF_003', '限定载具皮肤NFT',
     (SELECT id FROM sys_category WHERE code = '100000'), '100000',
     (SELECT id FROM sys_category WHERE code = '130000'), '130000',
     (SELECT id FROM sys_category WHERE code = '134000'), '134000',
@@ -5019,7 +5057,7 @@ INSERT INTO `sys_product_spu` (
 INSERT INTO `sys_product_spu_detail` (
     `product_spu_id`, `product_spu_code`, `detail`, `packing_list`, `after_sale`
 ) SELECT 
-    (SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_SKIN_003'), 'SPU_GAME_SKIN_003',
+    (SELECT id FROM sys_product_spu WHERE code = 'XDZJPF_003'), 'XDZJPF_003',
     '这是一款限量版载具皮肤NFT，由游戏载具设计师精心打造，拥有独特的外观和特效，可在支持NFT资产的多个游戏平台中使用，为您的游戏载具增添独特魅力。',
     '皮肤NFT、区块链所有权证书、材质文件、使用指南',
     '区块链永久认证，资产真实性终身保障，新游戏平台适配支持';
@@ -5029,19 +5067,19 @@ INSERT INTO `sys_product_spu_attr_params` (
     `attr_type`, `value_type`, `value`, `sort`, `status`, `is_required`, `is_generic`
 ) VALUES 
 -- 基础属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_SKIN_003'), 'SPU_GAME_SKIN_003', 
+((SELECT id FROM sys_product_spu WHERE code = 'XDZJPF_003'), 'XDZJPF_003', 
 'BASIC_ATTRS', '基础属性', 1, 3, 
 '{"皮肤类型":"载具皮肤","创作工具":"3ds Max+Substance Painter","艺术风格":"科幻/赛博朋克","适用载具":"多种"}', 
 1, 1, 1, 1),
 
 -- 销售属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_SKIN_003'), 'SPU_GAME_SKIN_003',
+((SELECT id FROM sys_product_spu WHERE code = 'XDZJPF_003'), 'XDZJPF_003',
 'SALE_ATTRS', '销售属性', 2, 3, 
 '{"设计师":"Vehicle Designer","创作时间":"2023-06-20","区块链平台":"Ethereum","发行数量":"85","作品编号":"GSKIN2023003"}', 
 2, 1, 1, 1),
 
 -- 规格属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_SKIN_003'), 'SPU_GAME_SKIN_003',
+((SELECT id FROM sys_product_spu WHERE code = 'XDZJPF_003'), 'XDZJPF_003',
 'SPEC_ATTRS', '规格属性', 3, 3, 
 '{"载具类型":["飞行器","陆地车辆","水下载具","太空船"],"特效":["尾迹","引擎光效","声音","环境交互"]}', 
 3, 1, 1, 0);
@@ -5055,7 +5093,7 @@ INSERT INTO `sys_product_spu` (
     `price`, `real_price`, `status`, `images`,
     `created_at`, `updated_at`, `is_deleted`, `creator`, `updator`
 ) SELECT 
-    'SPU_GAME_SKIN_004', '传说级装备皮肤NFT',
+    'CSJZBPF_004', '传说级装备皮肤NFT',
     (SELECT id FROM sys_category WHERE code = '100000'), '100000',
     (SELECT id FROM sys_category WHERE code = '130000'), '130000',
     (SELECT id FROM sys_category WHERE code = '134000'), '134000',
@@ -5066,7 +5104,7 @@ INSERT INTO `sys_product_spu` (
 INSERT INTO `sys_product_spu_detail` (
     `product_spu_id`, `product_spu_code`, `detail`, `packing_list`, `after_sale`
 ) SELECT 
-    (SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_SKIN_004'), 'SPU_GAME_SKIN_004',
+    (SELECT id FROM sys_product_spu WHERE code = 'CSJZBPF_004'), 'CSJZBPF_004',
     '这是一款限量版传说级装备皮肤NFT，由游戏装备设计师精心打造，拥有独特的外观和特效，可在支持NFT资产的多个游戏平台中使用，为您的游戏装备增添独特魅力。',
     '皮肤NFT、区块链所有权证书、材质文件、使用指南',
     '区块链永久认证，资产真实性终身保障，新游戏平台适配支持';
@@ -5076,19 +5114,19 @@ INSERT INTO `sys_product_spu_attr_params` (
     `attr_type`, `value_type`, `value`, `sort`, `status`, `is_required`, `is_generic`
 ) VALUES 
 -- 基础属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_SKIN_004'), 'SPU_GAME_SKIN_004', 
+((SELECT id FROM sys_product_spu WHERE code = 'CSJZBPF_004'), 'CSJZBPF_004', 
 'BASIC_ATTRS', '基础属性', 1, 3, 
 '{"皮肤类型":"装备皮肤","创作工具":"ZBrush+Substance Painter","艺术风格":"神话/史诗","适用装备":"多种"}', 
 1, 1, 1, 1),
 
 -- 销售属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_SKIN_004'), 'SPU_GAME_SKIN_004',
+((SELECT id FROM sys_product_spu WHERE code = 'CSJZBPF_004'), 'CSJZBPF_004',
 'SALE_ATTRS', '销售属性', 2, 3, 
 '{"设计师":"Mythic Artist","创作时间":"2023-07-25","区块链平台":"Ethereum","发行数量":"80","作品编号":"GSKIN2023004"}', 
 2, 1, 1, 1),
 
 -- 规格属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_SKIN_004'), 'SPU_GAME_SKIN_004',
+((SELECT id FROM sys_product_spu WHERE code = 'CSJZBPF_004'), 'CSJZBPF_004',
 'SPEC_ATTRS', '规格属性', 3, 3, 
 '{"装备类型":["头盔","胸甲","护腕","护腿","武器"],"神话主题":["北欧","希腊","东方","埃及","亚特兰蒂斯"]}', 
 3, 1, 1, 0);
@@ -5102,7 +5140,7 @@ INSERT INTO `sys_product_spu` (
     `price`, `real_price`, `status`, `images`,
     `created_at`, `updated_at`, `is_deleted`, `creator`, `updator`
 ) SELECT 
-    'SPU_GAME_SKIN_005', '科幻宠物皮肤NFT',
+    'KHCWPF_005', '科幻宠物皮肤NFT',
     (SELECT id FROM sys_category WHERE code = '100000'), '100000',
     (SELECT id FROM sys_category WHERE code = '130000'), '130000',
     (SELECT id FROM sys_category WHERE code = '134000'), '134000',
@@ -5113,7 +5151,7 @@ INSERT INTO `sys_product_spu` (
 INSERT INTO `sys_product_spu_detail` (
     `product_spu_id`, `product_spu_code`, `detail`, `packing_list`, `after_sale`
 ) SELECT 
-    (SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_SKIN_005'), 'SPU_GAME_SKIN_005',
+    (SELECT id FROM sys_product_spu WHERE code = 'KHCWPF_005'), 'KHCWPF_005',
     '这是一款限量版科幻宠物皮肤NFT，由游戏生物设计师精心打造，拥有独特的外观和特效，可在支持NFT资产的多个游戏平台中使用，为您的游戏宠物增添独特魅力。',
     '皮肤NFT、区块链所有权证书、材质文件、使用指南',
     '区块链永久认证，资产真实性终身保障，新游戏平台适配支持';
@@ -5123,25 +5161,25 @@ INSERT INTO `sys_product_spu_attr_params` (
     `attr_type`, `value_type`, `value`, `sort`, `status`, `is_required`, `is_generic`
 ) VALUES 
 -- 基础属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_SKIN_005'), 'SPU_GAME_SKIN_005', 
+((SELECT id FROM sys_product_spu WHERE code = 'KHCWPF_005'), 'KHCWPF_005', 
 'BASIC_ATTRS', '基础属性', 1, 3, 
 '{"皮肤类型":"宠物皮肤","创作工具":"Blender+Substance Painter","艺术风格":"科幻/生物科技","适用宠物":"多种"}', 
 1, 1, 1, 1),
 
 -- 销售属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_SKIN_005'), 'SPU_GAME_SKIN_005',
+((SELECT id FROM sys_product_spu WHERE code = 'KHCWPF_005'), 'KHCWPF_005',
 'SALE_ATTRS', '销售属性', 2, 3, 
 '{"设计师":"Creature Designer","创作时间":"2023-08-30","区块链平台":"Ethereum","发行数量":"90","作品编号":"GSKIN2023005"}', 
 2, 1, 1, 1),
 
 -- 规格属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_SKIN_005'), 'SPU_GAME_SKIN_005',
+((SELECT id FROM sys_product_spu WHERE code = 'KHCWPF_005'), 'KHCWPF_005',
 'SPEC_ATTRS', '规格属性', 3, 3, 
 '{"宠物类型":["陆地生物","飞行生物","水生生物","机械生物","能量生物"],"科技特性":["生物发光","机械部件","能量场","全息投影"]}', 
 3, 1, 1, 0);
 
 
--- ================ 12. 游戏资产 - 游戏装备NFT (135000) ================
+-- ================ 12. 游戏资产 - 游戏装备NFT (132000) ================
 
 -- 商品1: 传奇套装NFT
 INSERT INTO `sys_product_spu` (
@@ -5155,7 +5193,7 @@ INSERT INTO `sys_product_spu` (
     'SPU_GAME_EQUIP_001', '传奇套装NFT',
     (SELECT id FROM sys_category WHERE code = '100000'), '100000',
     (SELECT id FROM sys_category WHERE code = '130000'), '130000',
-    (SELECT id FROM sys_category WHERE code = '135000'), '135000',
+    (SELECT id FROM sys_category WHERE code = '132000'), '132000',
     60, 100, 'LegendarySet', '限量版传奇套装NFT，跨游戏平台使用',
     2999.00, 3999.00, 1, 'http://example.com/images/legendary_set.png',
     NOW(), NOW(), 0, 'admin', 'admin';
@@ -5203,7 +5241,7 @@ INSERT INTO `sys_product_spu` (
     'SPU_GAME_EQUIP_002', '稀有武器NFT',
     (SELECT id FROM sys_category WHERE code = '100000'), '100000',
     (SELECT id FROM sys_category WHERE code = '130000'), '130000',
-    (SELECT id FROM sys_category WHERE code = '135000'), '135000',
+    (SELECT id FROM sys_category WHERE code = '132000'), '132000',
     75, 90, 'RareWeapon', '限量版稀有武器NFT，跨游戏平台使用',
     1999.00, 2499.00, 1, 'http://example.com/images/rare_weapon.png',
     NOW(), NOW(), 0, 'admin', 'admin';
@@ -5250,7 +5288,7 @@ INSERT INTO `sys_product_spu` (
     'SPU_GAME_EQUIP_003', '神话防具NFT',
     (SELECT id FROM sys_category WHERE code = '100000'), '100000',
     (SELECT id FROM sys_category WHERE code = '130000'), '130000',
-    (SELECT id FROM sys_category WHERE code = '135000'), '135000',
+    (SELECT id FROM sys_category WHERE code = '132000'), '132000',
     65, 85, 'MythicArmor', '限量版神话防具NFT，跨游戏平台使用',
     2499.00, 2999.00, 1, 'http://example.com/images/mythic_armor.png',
     NOW(), NOW(), 0, 'admin', 'admin';
@@ -5297,7 +5335,7 @@ INSERT INTO `sys_product_spu` (
     'SPU_GAME_EQUIP_004', '科幻装备NFT',
     (SELECT id FROM sys_category WHERE code = '100000'), '100000',
     (SELECT id FROM sys_category WHERE code = '130000'), '130000',
-    (SELECT id FROM sys_category WHERE code = '135000'), '135000',
+    (SELECT id FROM sys_category WHERE code = '132000'), '132000',
     70, 90, 'SciFiGear', '限量版科幻装备NFT，跨游戏平台使用',
     2299.00, 2799.00, 1, 'http://example.com/images/scifi_gear.png',
     NOW(), NOW(), 0, 'admin', 'admin';
@@ -5344,7 +5382,7 @@ INSERT INTO `sys_product_spu` (
     'SPU_GAME_EQUIP_005', '元素法器NFT',
     (SELECT id FROM sys_category WHERE code = '100000'), '100000',
     (SELECT id FROM sys_category WHERE code = '130000'), '130000',
-    (SELECT id FROM sys_category WHERE code = '135000'), '135000',
+    (SELECT id FROM sys_category WHERE code = '132000'), '132000',
     55, 80, 'ElementalArtifact', '限量版元素法器NFT，跨游戏平台使用',
     2199.00, 2699.00, 1, 'http://example.com/images/elemental_artifact.png',
     NOW(), NOW(), 0, 'admin', 'admin';
@@ -5380,7 +5418,7 @@ INSERT INTO `sys_product_spu_attr_params` (
 3, 1, 1, 0);
 
 
--- ================ 13. 游戏资产 - 游戏宠物NFT (136000) ================
+-- ================ 13. 游戏资产 - 132000 (135000) ================
 
 -- 商品1: 传奇龙宠NFT
 INSERT INTO `sys_product_spu` (
@@ -5394,7 +5432,7 @@ INSERT INTO `sys_product_spu` (
     'SPU_GAME_PET_001', '传奇龙宠NFT',
     (SELECT id FROM sys_category WHERE code = '100000'), '100000',
     (SELECT id FROM sys_category WHERE code = '130000'), '130000',
-    (SELECT id FROM sys_category WHERE code = '136000'), '136000',
+    (SELECT id FROM sys_category WHERE code = '135000'), '135000',
     60, 100, 'LegendaryDragon', '限量版传奇龙宠NFT，跨游戏平台使用',
     2499.00, 2999.00, 1, 'http://example.com/images/legendary_dragon.png',
     NOW(), NOW(), 0, 'admin', 'admin';
@@ -5441,7 +5479,7 @@ INSERT INTO `sys_product_spu` (
     'SPU_GAME_PET_002', '稀有神兽NFT',
     (SELECT id FROM sys_category WHERE code = '100000'), '100000',
     (SELECT id FROM sys_category WHERE code = '130000'), '130000',
-    (SELECT id FROM sys_category WHERE code = '136000'), '136000',
+    (SELECT id FROM sys_category WHERE code = '135000'), '135000',
     55, 85, 'MythicalBeast', '限量版稀有神兽NFT，跨游戏平台使用',
     2299.00, 2799.00, 1, 'http://example.com/images/mythical_beast.png',
     NOW(), NOW(), 0, 'admin', 'admin';
@@ -5488,7 +5526,7 @@ INSERT INTO `sys_product_spu` (
     'SPU_GAME_PET_003', '机械宠物NFT',
     (SELECT id FROM sys_category WHERE code = '100000'), '100000',
     (SELECT id FROM sys_category WHERE code = '130000'), '130000',
-    (SELECT id FROM sys_category WHERE code = '136000'), '136000',
+    (SELECT id FROM sys_category WHERE code = '135000'), '135000',
     65, 90, 'MechPet', '限量版机械宠物NFT，跨游戏平台使用',
     1999.00, 2499.00, 1, 'http://example.com/images/mech_pet.png',
     NOW(), NOW(), 0, 'admin', 'admin';
@@ -5535,7 +5573,7 @@ INSERT INTO `sys_product_spu` (
     'SPU_GAME_PET_004', '元素精灵NFT',
     (SELECT id FROM sys_category WHERE code = '100000'), '100000',
     (SELECT id FROM sys_category WHERE code = '130000'), '130000',
-    (SELECT id FROM sys_category WHERE code = '136000'), '136000',
+    (SELECT id FROM sys_category WHERE code = '135000'), '135000',
     70, 95, 'ElementalSpirit', '限量版元素精灵NFT，跨游戏平台使用',
     1899.00, 2399.00, 1, 'http://example.com/images/elemental_spirit.png',
     NOW(), NOW(), 0, 'admin', 'admin';
@@ -5582,7 +5620,7 @@ INSERT INTO `sys_product_spu` (
     'SPU_GAME_PET_005', '外星生物NFT',
     (SELECT id FROM sys_category WHERE code = '100000'), '100000',
     (SELECT id FROM sys_category WHERE code = '130000'), '130000',
-    (SELECT id FROM sys_category WHERE code = '136000'), '136000',
+    (SELECT id FROM sys_category WHERE code = '135000'), '135000',
     50, 80, 'AlienCreature', '限量版外星生物NFT，跨游戏平台使用',
     2099.00, 2599.00, 1, 'http://example.com/images/alien_creature.png',
     NOW(), NOW(), 0, 'admin', 'admin';
@@ -5618,7 +5656,7 @@ INSERT INTO `sys_product_spu_attr_params` (
 3, 1, 1, 0);
 
 
--- ================ 14. 游戏资产 - 游戏道具NFT (137000) ================
+-- ================ 14. 游戏资产 - 游戏道具NFT (131000) ================
 
 -- 商品1: 传奇魔法卷轴NFT
 INSERT INTO `sys_product_spu` (
@@ -5629,10 +5667,10 @@ INSERT INTO `sys_product_spu` (
     `price`, `real_price`, `status`, `images`,
     `created_at`, `updated_at`, `is_deleted`, `creator`, `updator`
 ) SELECT 
-    'SPU_GAME_ITEM_001', '传奇魔法卷轴NFT',
+    'SPU_GAME_ITEM_001_N1', '传奇魔法卷轴NFT',
     (SELECT id FROM sys_category WHERE code = '100000'), '100000',
     (SELECT id FROM sys_category WHERE code = '130000'), '130000',
-    (SELECT id FROM sys_category WHERE code = '137000'), '137000',
+    (SELECT id FROM sys_category WHERE code = '131000'), '131000',
     60, 100, 'LegendaryScroll', '限量版传奇魔法卷轴NFT，跨游戏平台使用',
     1499.00, 1999.00, 1, 'http://example.com/images/legendary_scroll.png',
     NOW(), NOW(), 0, 'admin', 'admin';
@@ -5640,7 +5678,7 @@ INSERT INTO `sys_product_spu` (
 INSERT INTO `sys_product_spu_detail` (
     `product_spu_id`, `product_spu_code`, `detail`, `packing_list`, `after_sale`
 ) SELECT 
-    (SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_ITEM_001'), 'SPU_GAME_ITEM_001',
+    (SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_ITEM_001_N1'), 'SPU_GAME_ITEM_001_N1',
     '这是一款限量版传奇魔法卷轴NFT，由游戏道具设计师精心打造，拥有独特的外观和特效，可在支持NFT资产的多个游戏平台中使用，是收藏家和游戏玩家的珍贵资产。',
     '道具NFT、区块链所有权证书、3D模型文件、使用指南',
     '区块链永久认证，资产真实性终身保障，新游戏平台适配支持';
@@ -5650,19 +5688,19 @@ INSERT INTO `sys_product_spu_attr_params` (
     `attr_type`, `value_type`, `value`, `sort`, `status`, `is_required`, `is_generic`
 ) VALUES 
 -- 基础属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_ITEM_001'), 'SPU_GAME_ITEM_001', 
+((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_ITEM_001_N1'), 'SPU_GAME_ITEM_001_N1', 
 'BASIC_ATTRS', '基础属性', 1, 3, 
 '{"道具类型":"魔法卷轴","创作工具":"Blender+Substance Painter","艺术风格":"奇幻/古代","多边形数":"15K-25K"}', 
 1, 1, 1, 1),
 
 -- 销售属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_ITEM_001'), 'SPU_GAME_ITEM_001',
+((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_ITEM_001_N1'), 'SPU_GAME_ITEM_001_N1',
 'SALE_ATTRS', '销售属性', 2, 3, 
 '{"设计师":"Scroll Master","创作时间":"2023-04-10","区块链平台":"Ethereum","发行数量":"100","作品编号":"GITEM2023001"}', 
 2, 1, 1, 1),
 
 -- 规格属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_ITEM_001'), 'SPU_GAME_ITEM_001',
+((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_ITEM_001_N1'), 'SPU_GAME_ITEM_001_N1',
 'SPEC_ATTRS', '规格属性', 3, 3, 
 '{"卷轴类型":["召唤卷轴","传送卷轴","变形卷轴","元素卷轴","神圣卷轴"],"魔法效果":["召唤生物","空间传送","形态变化","元素爆发","神圣净化"]}', 
 3, 1, 1, 0);
@@ -5676,10 +5714,10 @@ INSERT INTO `sys_product_spu` (
     `price`, `real_price`, `status`, `images`,
     `created_at`, `updated_at`, `is_deleted`, `creator`, `updator`
 ) SELECT 
-    'SPU_GAME_ITEM_002', '神秘宝箱NFT',
+    'SMBX_002', '神秘宝箱NFT',
     (SELECT id FROM sys_category WHERE code = '100000'), '100000',
     (SELECT id FROM sys_category WHERE code = '130000'), '130000',
-    (SELECT id FROM sys_category WHERE code = '137000'), '137000',
+    (SELECT id FROM sys_category WHERE code = '131000'), '131000',
     75, 90, 'MysteryChest', '限量版神秘宝箱NFT，跨游戏平台使用',
     1299.00, 1799.00, 1, 'http://example.com/images/mystery_chest.png',
     NOW(), NOW(), 0, 'admin', 'admin';
@@ -5687,7 +5725,7 @@ INSERT INTO `sys_product_spu` (
 INSERT INTO `sys_product_spu_detail` (
     `product_spu_id`, `product_spu_code`, `detail`, `packing_list`, `after_sale`
 ) SELECT 
-    (SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_ITEM_002'), 'SPU_GAME_ITEM_002',
+    (SELECT id FROM sys_product_spu WHERE code = 'SMBX_002'), 'SMBX_002',
     '这是一款限量版神秘宝箱NFT，由游戏道具设计师精心打造，拥有独特的外观和开启动画，可在支持NFT资产的多个游戏平台中使用，开启后有机会获得稀有游戏物品。',
     '道具NFT、区块链所有权证书、3D模型文件、使用指南',
     '区块链永久认证，资产真实性终身保障，新游戏平台适配支持';
@@ -5697,19 +5735,19 @@ INSERT INTO `sys_product_spu_attr_params` (
     `attr_type`, `value_type`, `value`, `sort`, `status`, `is_required`, `is_generic`
 ) VALUES 
 -- 基础属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_ITEM_002'), 'SPU_GAME_ITEM_002', 
+((SELECT id FROM sys_product_spu WHERE code = 'SMBX_002'), 'SMBX_002', 
 'BASIC_ATTRS', '基础属性', 1, 3, 
 '{"道具类型":"宝箱","创作工具":"Blender+Substance Painter","艺术风格":"奇幻/宝藏","多边形数":"20K-30K"}', 
 1, 1, 1, 1),
 
 -- 销售属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_ITEM_002'), 'SPU_GAME_ITEM_002',
+((SELECT id FROM sys_product_spu WHERE code = 'SMBX_002'), 'SMBX_002',
 'SALE_ATTRS', '销售属性', 2, 3, 
 '{"设计师":"Treasure Maker","创作时间":"2023-05-15","区块链平台":"Ethereum","发行数量":"90","作品编号":"GITEM2023002"}', 
 2, 1, 1, 1),
 
 -- 规格属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_ITEM_002'), 'SPU_GAME_ITEM_002',
+((SELECT id FROM sys_product_spu WHERE code = 'SMBX_002'), 'SMBX_002',
 'SPEC_ATTRS', '规格属性', 3, 3, 
 '{"宝箱类型":["古代宝箱","海盗宝箱","龙族宝箱","精灵宝箱","机械宝箱"],"稀有度":["普通","稀有","史诗","传说","神话"]}', 
 3, 1, 1, 0);
@@ -5723,10 +5761,10 @@ INSERT INTO `sys_product_spu` (
     `price`, `real_price`, `status`, `images`,
     `created_at`, `updated_at`, `is_deleted`, `creator`, `updator`
 ) SELECT 
-    'SPU_GAME_ITEM_003', '魔法药水NFT',
+    'MFYS_003', '魔法药水NFT',
     (SELECT id FROM sys_category WHERE code = '100000'), '100000',
     (SELECT id FROM sys_category WHERE code = '130000'), '130000',
-    (SELECT id FROM sys_category WHERE code = '137000'), '137000',
+    (SELECT id FROM sys_category WHERE code = '131000'), '131000',
     85, 95, 'MagicPotion', '限量版魔法药水NFT，跨游戏平台使用',
     999.00, 1499.00, 1, 'http://example.com/images/magic_potion.png',
     NOW(), NOW(), 0, 'admin', 'admin';
@@ -5734,7 +5772,7 @@ INSERT INTO `sys_product_spu` (
 INSERT INTO `sys_product_spu_detail` (
     `product_spu_id`, `product_spu_code`, `detail`, `packing_list`, `after_sale`
 ) SELECT 
-    (SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_ITEM_003'), 'SPU_GAME_ITEM_003',
+    (SELECT id FROM sys_product_spu WHERE code = 'MFYS_003'), 'MFYS_003',
     '这是一款限量版魔法药水NFT，由游戏道具设计师精心打造，拥有独特的外观和粒子效果，可在支持NFT资产的多个游戏平台中使用，为角色提供各种增益效果。',
     '道具NFT、区块链所有权证书、3D模型文件、使用指南',
     '区块链永久认证，资产真实性终身保障，新游戏平台适配支持';
@@ -5744,19 +5782,19 @@ INSERT INTO `sys_product_spu_attr_params` (
     `attr_type`, `value_type`, `value`, `sort`, `status`, `is_required`, `is_generic`
 ) VALUES 
 -- 基础属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_ITEM_003'), 'SPU_GAME_ITEM_003', 
+((SELECT id FROM sys_product_spu WHERE code = 'MFYS_003'), 'MFYS_003', 
 'BASIC_ATTRS', '基础属性', 1, 3, 
 '{"道具类型":"药水","创作工具":"Blender+Substance Painter","艺术风格":"奇幻/炼金","多边形数":"10K-20K"}', 
 1, 1, 1, 1),
 
 -- 销售属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_ITEM_003'), 'SPU_GAME_ITEM_003',
+((SELECT id FROM sys_product_spu WHERE code = 'MFYS_003'), 'MFYS_003',
 'SALE_ATTRS', '销售属性', 2, 3, 
 '{"设计师":"Potion Master","创作时间":"2023-06-20","区块链平台":"Ethereum","发行数量":"95","作品编号":"GITEM2023003"}', 
 2, 1, 1, 1),
 
 -- 规格属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_ITEM_003'), 'SPU_GAME_ITEM_003',
+((SELECT id FROM sys_product_spu WHERE code = 'MFYS_003'), 'MFYS_003',
 'SPEC_ATTRS', '规格属性', 3, 3, 
 '{"药水类型":["治疗药水","魔力药水","力量药水","敏捷药水","抗性药水"],"效果持续时间":["短效","中效","长效","永久"]}', 
 3, 1, 1, 0);
@@ -5770,10 +5808,10 @@ INSERT INTO `sys_product_spu` (
     `price`, `real_price`, `status`, `images`,
     `created_at`, `updated_at`, `is_deleted`, `creator`, `updator`
 ) SELECT 
-    'SPU_GAME_ITEM_004', '神器碎片NFT',
+    'SMSP_004', '神器碎片NFT',
     (SELECT id FROM sys_category WHERE code = '100000'), '100000',
     (SELECT id FROM sys_category WHERE code = '130000'), '130000',
-    (SELECT id FROM sys_category WHERE code = '137000'), '137000',
+    (SELECT id FROM sys_category WHERE code = '131000'), '131000',
     65, 85, 'ArtifactShard', '限量版神器碎片NFT，跨游戏平台使用',
     1799.00, 2299.00, 1, 'http://example.com/images/artifact_shard.png',
     NOW(), NOW(), 0, 'admin', 'admin';
@@ -5781,7 +5819,7 @@ INSERT INTO `sys_product_spu` (
 INSERT INTO `sys_product_spu_detail` (
     `product_spu_id`, `product_spu_code`, `detail`, `packing_list`, `after_sale`
 ) SELECT 
-    (SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_ITEM_004'), 'SPU_GAME_ITEM_004',
+    (SELECT id FROM sys_product_spu WHERE code = 'SMSP_004'), 'SMSP_004',
     '这是一款限量版神器碎片NFT，由游戏道具设计师精心打造，拥有独特的外观和能量效果，可在支持NFT资产的多个游戏平台中使用，收集完整套碎片可以合成强大神器。',
     '道具NFT、区块链所有权证书、3D模型文件、使用指南',
     '区块链永久认证，资产真实性终身保障，新游戏平台适配支持';
@@ -5791,19 +5829,19 @@ INSERT INTO `sys_product_spu_attr_params` (
     `attr_type`, `value_type`, `value`, `sort`, `status`, `is_required`, `is_generic`
 ) VALUES 
 -- 基础属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_ITEM_004'), 'SPU_GAME_ITEM_004', 
+((SELECT id FROM sys_product_spu WHERE code = 'SMSP_004'), 'SMSP_004', 
 'BASIC_ATTRS', '基础属性', 1, 3, 
 '{"道具类型":"神器碎片","创作工具":"ZBrush+Substance Painter","艺术风格":"史诗/神话","多边形数":"15K-25K"}', 
 1, 1, 1, 1),
 
 -- 销售属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_ITEM_004'), 'SPU_GAME_ITEM_004',
+((SELECT id FROM sys_product_spu WHERE code = 'SMSP_004'), 'SMSP_004',
 'SALE_ATTRS', '销售属性', 2, 3, 
 '{"设计师":"Artifact Creator","创作时间":"2023-07-25","区块链平台":"Ethereum","发行数量":"85","作品编号":"GITEM2023004"}', 
 2, 1, 1, 1),
 
 -- 规格属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_ITEM_004'), 'SPU_GAME_ITEM_004',
+((SELECT id FROM sys_product_spu WHERE code = 'SMSP_004'), 'SMSP_004',
 'SPEC_ATTRS', '规格属性', 3, 3, 
 '{"神器类型":["武器神器","防具神器","饰品神器","法器神器","混合神器"],"碎片稀有度":["普通碎片","稀有碎片","史诗碎片","传说碎片"]}', 
 3, 1, 1, 0);
@@ -5817,10 +5855,10 @@ INSERT INTO `sys_product_spu` (
     `price`, `real_price`, `status`, `images`,
     `created_at`, `updated_at`, `is_deleted`, `creator`, `updator`
 ) SELECT 
-    'SPU_GAME_ITEM_005', '科技装置NFT',
+    'KJZZ_005', '科技装置NFT',
     (SELECT id FROM sys_category WHERE code = '100000'), '100000',
     (SELECT id FROM sys_category WHERE code = '130000'), '130000',
-    (SELECT id FROM sys_category WHERE code = '137000'), '137000',
+    (SELECT id FROM sys_category WHERE code = '131000'), '131000',
     70, 90, 'TechGadget', '限量版科技装置NFT，跨游戏平台使用',
     1599.00, 2099.00, 1, 'http://example.com/images/tech_gadget.png',
     NOW(), NOW(), 0, 'admin', 'admin';
@@ -5828,7 +5866,7 @@ INSERT INTO `sys_product_spu` (
 INSERT INTO `sys_product_spu_detail` (
     `product_spu_id`, `product_spu_code`, `detail`, `packing_list`, `after_sale`
 ) SELECT 
-    (SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_ITEM_005'), 'SPU_GAME_ITEM_005',
+    (SELECT id FROM sys_product_spu WHERE code = 'KJZZ_005'), 'KJZZ_005',
     '这是一款限量版科技装置NFT，由科幻道具设计师精心打造，拥有未来感十足的外观和特效，可在支持NFT资产的多个游戏平台中使用，为角色提供各种科技增强能力。',
     '道具NFT、区块链所有权证书、3D模型文件、使用指南',
     '区块链永久认证，资产真实性终身保障，新游戏平台适配支持';
@@ -5838,24 +5876,24 @@ INSERT INTO `sys_product_spu_attr_params` (
     `attr_type`, `value_type`, `value`, `sort`, `status`, `is_required`, `is_generic`
 ) VALUES 
 -- 基础属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_ITEM_005'), 'SPU_GAME_ITEM_005', 
+((SELECT id FROM sys_product_spu WHERE code = 'KJZZ_005'), 'KJZZ_005', 
 'BASIC_ATTRS', '基础属性', 1, 3, 
 '{"道具类型":"科技装置","创作工具":"3ds Max+Substance Painter","艺术风格":"科幻/赛博朋克","多边形数":"25K-40K"}', 
 1, 1, 1, 1),
 
 -- 销售属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_ITEM_005'), 'SPU_GAME_ITEM_005',
+((SELECT id FROM sys_product_spu WHERE code = 'KJZZ_005'), 'KJZZ_005',
 'SALE_ATTRS', '销售属性', 2, 3, 
 '{"设计师":"Tech Engineer","创作时间":"2023-08-30","区块链平台":"Ethereum","发行数量":"90","作品编号":"GITEM2023005"}', 
 2, 1, 1, 1),
 
 -- 规格属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_ITEM_005'), 'SPU_GAME_ITEM_005',
+((SELECT id FROM sys_product_spu WHERE code = 'KJZZ_005'), 'KJZZ_005',
 'SPEC_ATTRS', '规格属性', 3, 3, 
 '{"装置类型":["扫描仪","能量发生器","传送装置","黑客工具","防御系统"],"科技特性":["隐形","扫描","能量操控","时空干扰","信息处理"]}', 
 3, 1, 1, 0);
 
--- ================ 15. 游戏资产 - 游戏建筑NFT (138000) ================
+-- ================ 15. 游戏资产 - 游戏建筑NFT (136000) ================
 
 -- 商品1: 奇幻城堡NFT
 INSERT INTO `sys_product_spu` (
@@ -5866,10 +5904,10 @@ INSERT INTO `sys_product_spu` (
     `price`, `real_price`, `status`, `images`,
     `created_at`, `updated_at`, `is_deleted`, `creator`, `updator`
 ) SELECT 
-    'SPU_GAME_BUILD_001', '奇幻城堡NFT',
+    'QHCB_001', '奇幻城堡NFT',
     (SELECT id FROM sys_category WHERE code = '100000'), '100000',
     (SELECT id FROM sys_category WHERE code = '130000'), '130000',
-    (SELECT id FROM sys_category WHERE code = '138000'), '138000',
+    (SELECT id FROM sys_category WHERE code = '136000'), '136000',
     40, 100, 'FantasyCastle', '限量版奇幻城堡NFT，跨游戏平台使用',
     4999.00, 5999.00, 1, 'http://example.com/images/fantasy_castle.png',
     NOW(), NOW(), 0, 'admin', 'admin';
@@ -5877,7 +5915,7 @@ INSERT INTO `sys_product_spu` (
 INSERT INTO `sys_product_spu_detail` (
     `product_spu_id`, `product_spu_code`, `detail`, `packing_list`, `after_sale`
 ) SELECT 
-    (SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_BUILD_001'), 'SPU_GAME_BUILD_001',
+    (SELECT id FROM sys_product_spu WHERE code = 'QHCB_001'), 'QHCB_001',
     '这是一款限量版奇幻城堡NFT，由游戏建筑设计师精心打造，拥有独特的外观和内部结构，可在支持NFT资产的多个游戏平台中使用，是收藏家和游戏玩家的珍贵资产。',
     '建筑NFT、区块链所有权证书、3D模型文件、使用指南',
     '区块链永久认证，资产真实性终身保障，新游戏平台适配支持';
@@ -5887,19 +5925,19 @@ INSERT INTO `sys_product_spu_attr_params` (
     `attr_type`, `value_type`, `value`, `sort`, `status`, `is_required`, `is_generic`
 ) VALUES 
 -- 基础属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_BUILD_001'), 'SPU_GAME_BUILD_001', 
+((SELECT id FROM sys_product_spu WHERE code = 'QHCB_001'), 'QHCB_001', 
 'BASIC_ATTRS', '基础属性', 1, 3, 
 '{"建筑类型":"城堡","创作工具":"Blender+Substance Painter","艺术风格":"奇幻/中世纪","多边形数":"200K-300K"}', 
 1, 1, 1, 1),
 
 -- 销售属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_BUILD_001'), 'SPU_GAME_BUILD_001',
+((SELECT id FROM sys_product_spu WHERE code = 'QHCB_001'), 'QHCB_001',
 'SALE_ATTRS', '销售属性', 2, 3, 
 '{"设计师":"Castle Architect","创作时间":"2023-04-05","区块链平台":"Ethereum","发行数量":"100","作品编号":"GBUILD2023001"}', 
 2, 1, 1, 1),
 
 -- 规格属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_BUILD_001'), 'SPU_GAME_BUILD_001',
+((SELECT id FROM sys_product_spu WHERE code = 'QHCB_001'), 'QHCB_001',
 'SPEC_ATTRS', '规格属性', 3, 3, 
 '{"建筑风格":["哥特式","罗马式","拜占庭式","东方式","精灵式"],"建筑规模":["小型","中型","大型","超大型"],"功能区域":["主堡","庭院","塔楼","城墙","地下室"]}', 
 3, 1, 1, 0);
@@ -5913,10 +5951,10 @@ INSERT INTO `sys_product_spu` (
     `price`, `real_price`, `status`, `images`,
     `created_at`, `updated_at`, `is_deleted`, `creator`, `updator`
 ) SELECT 
-    'SPU_GAME_BUILD_002', '未来城市建筑NFT',
+    'WLCSJZ_002', '未来城市建筑NFT',
     (SELECT id FROM sys_category WHERE code = '100000'), '100000',
     (SELECT id FROM sys_category WHERE code = '130000'), '130000',
-    (SELECT id FROM sys_category WHERE code = '138000'), '138000',
+    (SELECT id FROM sys_category WHERE code = '136000'), '136000',
     35, 90, 'FutureCity', '限量版未来城市建筑NFT，跨游戏平台使用',
     4599.00, 5599.00, 1, 'http://example.com/images/future_city.png',
     NOW(), NOW(), 0, 'admin', 'admin';
@@ -5924,7 +5962,7 @@ INSERT INTO `sys_product_spu` (
 INSERT INTO `sys_product_spu_detail` (
     `product_spu_id`, `product_spu_code`, `detail`, `packing_list`, `after_sale`
 ) SELECT 
-    (SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_BUILD_002'), 'SPU_GAME_BUILD_002',
+    (SELECT id FROM sys_product_spu WHERE code = 'WLCSJZ_002'), 'WLCSJZ_002',
     '这是一款限量版未来城市建筑NFT，由科幻建筑设计师精心打造，拥有未来感十足的外观和内部结构，可在支持NFT资产的多个游戏平台中使用，是收藏家和游戏玩家的珍贵资产。',
     '建筑NFT、区块链所有权证书、3D模型文件、使用指南',
     '区块链永久认证，资产真实性终身保障，新游戏平台适配支持';
@@ -5934,19 +5972,19 @@ INSERT INTO `sys_product_spu_attr_params` (
     `attr_type`, `value_type`, `value`, `sort`, `status`, `is_required`, `is_generic`
 ) VALUES 
 -- 基础属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_BUILD_002'), 'SPU_GAME_BUILD_002', 
+((SELECT id FROM sys_product_spu WHERE code = 'WLCSJZ_002'), 'WLCSJZ_002', 
 'BASIC_ATTRS', '基础属性', 1, 3, 
 '{"建筑类型":"未来建筑","创作工具":"3ds Max+Substance Painter","艺术风格":"科幻/赛博朋克","多边形数":"250K-350K"}', 
 1, 1, 1, 1),
 
 -- 销售属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_BUILD_002'), 'SPU_GAME_BUILD_002',
+((SELECT id FROM sys_product_spu WHERE code = 'WLCSJZ_002'), 'WLCSJZ_002',
 'SALE_ATTRS', '销售属性', 2, 3, 
 '{"设计师":"Future Architect","创作时间":"2023-05-15","区块链平台":"Ethereum","发行数量":"90","作品编号":"GBUILD2023002"}', 
 2, 1, 1, 1),
 
 -- 规格属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_BUILD_002'), 'SPU_GAME_BUILD_002',
+((SELECT id FROM sys_product_spu WHERE code = 'WLCSJZ_002'), 'WLCSJZ_002',
 'SPEC_ATTRS', '规格属性', 3, 3, 
 '{"建筑风格":["高科技","生态融合","极简主义","浮空","地下"],"建筑规模":["小型","中型","大型","超大型"],"功能区域":["居住区","商业区","研究区","娱乐区","能源中心"]}', 
 3, 1, 1, 0);
@@ -5960,10 +5998,10 @@ INSERT INTO `sys_product_spu` (
     `price`, `real_price`, `status`, `images`,
     `created_at`, `updated_at`, `is_deleted`, `creator`, `updator`
 ) SELECT 
-    'SPU_GAME_BUILD_003', '神秘神殿NFT',
+    'SMSD_003', '神秘神殿NFT',
     (SELECT id FROM sys_category WHERE code = '100000'), '100000',
     (SELECT id FROM sys_category WHERE code = '130000'), '130000',
-    (SELECT id FROM sys_category WHERE code = '138000'), '138000',
+    (SELECT id FROM sys_category WHERE code = '136000'), '136000',
     45, 85, 'MysticalTemple', '限量版神秘神殿NFT，跨游戏平台使用',
     4799.00, 5799.00, 1, 'http://example.com/images/mystical_temple.png',
     NOW(), NOW(), 0, 'admin', 'admin';
@@ -5971,7 +6009,7 @@ INSERT INTO `sys_product_spu` (
 INSERT INTO `sys_product_spu_detail` (
     `product_spu_id`, `product_spu_code`, `detail`, `packing_list`, `after_sale`
 ) SELECT 
-    (SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_BUILD_003'), 'SPU_GAME_BUILD_003',
+    (SELECT id FROM sys_product_spu WHERE code = 'SMSD_003'), 'SMSD_003',
     '这是一款限量版神秘神殿NFT，由古代建筑设计师精心打造，融合多种古代文明风格，拥有独特的外观和内部结构，可在支持NFT资产的多个游戏平台中使用。',
     '建筑NFT、区块链所有权证书、3D模型文件、使用指南',
     '区块链永久认证，资产真实性终身保障，新游戏平台适配支持';
@@ -5981,19 +6019,19 @@ INSERT INTO `sys_product_spu_attr_params` (
     `attr_type`, `value_type`, `value`, `sort`, `status`, `is_required`, `is_generic`
 ) VALUES 
 -- 基础属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_BUILD_003'), 'SPU_GAME_BUILD_003', 
+((SELECT id FROM sys_product_spu WHERE code = 'SMSD_003'), 'SMSD_003', 
 'BASIC_ATTRS', '基础属性', 1, 3, 
 '{"建筑类型":"神殿","创作工具":"ZBrush+Maya+Substance Painter","艺术风格":"古代/神秘","多边形数":"180K-280K"}', 
 1, 1, 1, 1),
 
 -- 销售属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_BUILD_003'), 'SPU_GAME_BUILD_003',
+((SELECT id FROM sys_product_spu WHERE code = 'SMSD_003'), 'SMSD_003',
 'SALE_ATTRS', '销售属性', 2, 3, 
 '{"设计师":"Temple Builder","创作时间":"2023-06-20","区块链平台":"Ethereum","发行数量":"85","作品编号":"GBUILD2023003"}', 
 2, 1, 1, 1),
 
 -- 规格属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_BUILD_003'), 'SPU_GAME_BUILD_003',
+((SELECT id FROM sys_product_spu WHERE code = 'SMSD_003'), 'SMSD_003',
 'SPEC_ATTRS', '规格属性', 3, 3, 
 '{"神殿风格":["埃及","玛雅","希腊","东方","亚特兰蒂斯"],"建筑规模":["小型","中型","大型","超大型"],"功能区域":["主殿","祭坛","密室","地下墓穴","藏宝室"]}', 
 3, 1, 1, 0);
@@ -6007,10 +6045,10 @@ INSERT INTO `sys_product_spu` (
     `price`, `real_price`, `status`, `images`,
     `created_at`, `updated_at`, `is_deleted`, `creator`, `updator`
 ) SELECT 
-    'SPU_GAME_BUILD_004', '浮空岛屿NFT',
+    'FKDY_004', '浮空岛屿NFT',
     (SELECT id FROM sys_category WHERE code = '100000'), '100000',
     (SELECT id FROM sys_category WHERE code = '130000'), '130000',
-    (SELECT id FROM sys_category WHERE code = '138000'), '138000',
+    (SELECT id FROM sys_category WHERE code = '136000'), '136000',
     30, 80, 'FloatingIsland', '限量版浮空岛屿NFT，跨游戏平台使用',
     5299.00, 6299.00, 1, 'http://example.com/images/floating_island.png',
     NOW(), NOW(), 0, 'admin', 'admin';
@@ -6018,7 +6056,7 @@ INSERT INTO `sys_product_spu` (
 INSERT INTO `sys_product_spu_detail` (
     `product_spu_id`, `product_spu_code`, `detail`, `packing_list`, `after_sale`
 ) SELECT 
-    (SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_BUILD_004'), 'SPU_GAME_BUILD_004',
+    (SELECT id FROM sys_product_spu WHERE code = 'FKDY_004'), 'FKDY_004',
     '这是一款限量版浮空岛屿NFT，由奇幻环境设计师精心打造，拥有独特的地形和生态系统，可在支持NFT资产的多个游戏平台中使用，是收藏家和游戏玩家的珍贵资产。',
     '建筑NFT、区块链所有权证书、3D模型文件、使用指南',
     '区块链永久认证，资产真实性终身保障，新游戏平台适配支持';
@@ -6028,19 +6066,19 @@ INSERT INTO `sys_product_spu_attr_params` (
     `attr_type`, `value_type`, `value`, `sort`, `status`, `is_required`, `is_generic`
 ) VALUES 
 -- 基础属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_BUILD_004'), 'SPU_GAME_BUILD_004', 
+((SELECT id FROM sys_product_spu WHERE code = 'FKDY_004'), 'FKDY_004', 
 'BASIC_ATTRS', '基础属性', 1, 3, 
 '{"建筑类型":"浮空岛屿","创作工具":"World Machine+Blender+Substance Painter","艺术风格":"奇幻/自然","多边形数":"300K-400K"}', 
 1, 1, 1, 1),
 
 -- 销售属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_BUILD_004'), 'SPU_GAME_BUILD_004',
+((SELECT id FROM sys_product_spu WHERE code = 'FKDY_004'), 'FKDY_004',
 'SALE_ATTRS', '销售属性', 2, 3, 
 '{"设计师":"Island Creator","创作时间":"2023-07-25","区块链平台":"Ethereum","发行数量":"80","作品编号":"GBUILD2023004"}', 
 2, 1, 1, 1),
 
 -- 规格属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_BUILD_004'), 'SPU_GAME_BUILD_004',
+((SELECT id FROM sys_product_spu WHERE code = 'FKDY_004'), 'FKDY_004',
 'SPEC_ATTRS', '规格属性', 3, 3, 
 '{"岛屿风格":["热带","极地","沙漠","森林","火山"],"岛屿规模":["小型","中型","大型","超大型"],"地形特征":["瀑布","悬崖","洞穴","湖泊","奇观"]}', 
 3, 1, 1, 0);
@@ -6054,10 +6092,10 @@ INSERT INTO `sys_product_spu` (
     `price`, `real_price`, `status`, `images`,
     `created_at`, `updated_at`, `is_deleted`, `creator`, `updator`
 ) SELECT 
-    'SPU_GAME_BUILD_005', '古代遗迹NFT',
+    'GDYJ_005', '古代遗迹NFT',
     (SELECT id FROM sys_category WHERE code = '100000'), '100000',
     (SELECT id FROM sys_category WHERE code = '130000'), '130000',
-    (SELECT id FROM sys_category WHERE code = '138000'), '138000',
+    (SELECT id FROM sys_category WHERE code = '136000'), '136000',
     25, 75, 'AncientRuins', '限量版古代遗迹NFT，跨游戏平台使用',
     4399.00, 5399.00, 1, 'http://example.com/images/ancient_ruins.png',
     NOW(), NOW(), 0, 'admin', 'admin';
@@ -6065,7 +6103,7 @@ INSERT INTO `sys_product_spu` (
 INSERT INTO `sys_product_spu_detail` (
     `product_spu_id`, `product_spu_code`, `detail`, `packing_list`, `after_sale`
 ) SELECT 
-    (SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_BUILD_005'), 'SPU_GAME_BUILD_005',
+    (SELECT id FROM sys_product_spu WHERE code = 'GDYJ_005'), 'GDYJ_005',
     '这是一款限量版古代遗迹NFT，由历史建筑设计师精心打造，拥有独特的风化外观和神秘氛围，可在支持NFT资产的多个游戏平台中使用，是收藏家和游戏玩家的珍贵资产。',
     '建筑NFT、区块链所有权证书、3D模型文件、使用指南',
     '区块链永久认证，资产真实性终身保障，新游戏平台适配支持';
@@ -6075,25 +6113,25 @@ INSERT INTO `sys_product_spu_attr_params` (
     `attr_type`, `value_type`, `value`, `sort`, `status`, `is_required`, `is_generic`
 ) VALUES 
 -- 基础属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_BUILD_005'), 'SPU_GAME_BUILD_005', 
+((SELECT id FROM sys_product_spu WHERE code = 'GDYJ_005'), 'GDYJ_005', 
 'BASIC_ATTRS', '基础属性', 1, 3, 
 '{"建筑类型":"遗迹","创作工具":"ZBrush+Blender+Substance Painter","艺术风格":"古代/神秘","多边形数":"220K-320K"}', 
 1, 1, 1, 1),
 
 -- 销售属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_BUILD_005'), 'SPU_GAME_BUILD_005',
+((SELECT id FROM sys_product_spu WHERE code = 'GDYJ_005'), 'GDYJ_005',
 'SALE_ATTRS', '销售属性', 2, 3, 
 '{"设计师":"Ruins Architect","创作时间":"2023-08-30","区块链平台":"Ethereum","发行数量":"75","作品编号":"GBUILD2023005"}', 
 2, 1, 1, 1),
 
 -- 规格属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_BUILD_005'), 'SPU_GAME_BUILD_005',
+((SELECT id FROM sys_product_spu WHERE code = 'GDYJ_005'), 'GDYJ_005',
 'SPEC_ATTRS', '规格属性', 3, 3, 
 '{"遗迹风格":["罗马","玛雅","亚特兰蒂斯","东方","未知文明"],"遗迹规模":["小型","中型","大型","超大型"],"特殊区域":["祭坛","图书馆","宝库","机关室","传送门"]}', 
 3, 1, 1, 0);
 
 
--- ================ 16. 游戏资产 - 游戏载具NFT (139000) ================
+-- ================ 16. 游戏资产 - 游戏载具NFT (137000) ================
 
 -- 商品1: 传奇飞船NFT
 INSERT INTO `sys_product_spu` (
@@ -6107,7 +6145,7 @@ INSERT INTO `sys_product_spu` (
     'SPU_GAME_VEHICLE_001', '传奇飞船NFT',
     (SELECT id FROM sys_category WHERE code = '100000'), '100000',
     (SELECT id FROM sys_category WHERE code = '130000'), '130000',
-    (SELECT id FROM sys_category WHERE code = '139000'), '139000',
+    (SELECT id FROM sys_category WHERE code = '137000'), '137000',
     50, 100, 'LegendarySpaceship', '限量版传奇飞船NFT，跨游戏平台使用',
     3999.00, 4999.00, 1, 'http://example.com/images/legendary_spaceship.png',
     NOW(), NOW(), 0, 'admin', 'admin';
@@ -6154,7 +6192,7 @@ INSERT INTO `sys_product_spu` (
     'SPU_GAME_VEHICLE_002', '战斗机甲NFT',
     (SELECT id FROM sys_category WHERE code = '100000'), '100000',
     (SELECT id FROM sys_category WHERE code = '130000'), '130000',
-    (SELECT id FROM sys_category WHERE code = '139000'), '139000',
+    (SELECT id FROM sys_category WHERE code = '137000'), '137000',
     45, 90, 'BattleMech', '限量版战斗机甲NFT，跨游戏平台使用',
     3799.00, 4799.00, 1, 'http://example.com/images/battle_mech.png',
     NOW(), NOW(), 0, 'admin', 'admin';
@@ -6201,7 +6239,7 @@ INSERT INTO `sys_product_spu` (
     'SPU_GAME_VEHICLE_003', '奇幻坐骑NFT',
     (SELECT id FROM sys_category WHERE code = '100000'), '100000',
     (SELECT id FROM sys_category WHERE code = '130000'), '130000',
-    (SELECT id FROM sys_category WHERE code = '139000'), '139000',
+    (SELECT id FROM sys_category WHERE code = '137000'), '137000',
     55, 85, 'FantasyMount', '限量版奇幻坐骑NFT，跨游戏平台使用',
     2999.00, 3999.00, 1, 'http://example.com/images/fantasy_mount.png',
     NOW(), NOW(), 0, 'admin', 'admin';
@@ -6248,7 +6286,7 @@ INSERT INTO `sys_product_spu` (
     'SPU_GAME_VEHICLE_004', '赛车NFT',
     (SELECT id FROM sys_category WHERE code = '100000'), '100000',
     (SELECT id FROM sys_category WHERE code = '130000'), '130000',
-    (SELECT id FROM sys_category WHERE code = '139000'), '139000',
+    (SELECT id FROM sys_category WHERE code = '137000'), '137000',
     60, 95, 'RacingCar', '限量版赛车NFT，跨游戏平台使用',
     2799.00, 3799.00, 1, 'http://example.com/images/racing_car.png',
     NOW(), NOW(), 0, 'admin', 'admin';
@@ -6295,7 +6333,7 @@ INSERT INTO `sys_product_spu` (
     'SPU_GAME_VEHICLE_005', '潜水艇NFT',
     (SELECT id FROM sys_category WHERE code = '100000'), '100000',
     (SELECT id FROM sys_category WHERE code = '130000'), '130000',
-    (SELECT id FROM sys_category WHERE code = '139000'), '139000',
+    (SELECT id FROM sys_category WHERE code = '137000'), '137000',
     40, 80, 'Submarine', '限量版潜水艇NFT，跨游戏平台使用',
     3599.00, 4599.00, 1, 'http://example.com/images/submarine.png',
     NOW(), NOW(), 0, 'admin', 'admin';
@@ -6330,246 +6368,8 @@ INSERT INTO `sys_product_spu_attr_params` (
 '{"潜水艇类型":["探索型","战斗型","科研型","运输型","混合型"],"特殊功能":["深海潜行","声呐系统","武器系统","采集系统","隐形系统"]}', 
 3, 1, 1, 0);
 
--- ================ 17. 游戏资产 - 游戏土地NFT (140000) ================
 
--- 商品1: 虚拟世界地块NFT
-INSERT INTO `sys_product_spu` (
-    `code`, `name`, `category1_id`, `category1_code`, 
-    `category2_id`, `category2_code`, 
-    `category3_id`, `category3_code`,
-    `total_sales`, `total_stock`, `brand`, `description`,
-    `price`, `real_price`, `status`, `images`,
-    `created_at`, `updated_at`, `is_deleted`, `creator`, `updator`
-) SELECT 
-    'SPU_GAME_LAND_001', '虚拟世界地块NFT',
-    (SELECT id FROM sys_category WHERE code = '100000'), '100000',
-    (SELECT id FROM sys_category WHERE code = '130000'), '130000',
-    (SELECT id FROM sys_category WHERE code = '140000'), '140000',
-    30, 100, 'VirtualLand', '限量版虚拟世界地块NFT，元宇宙核心资产',
-    9999.00, 12999.00, 1, 'http://example.com/images/virtual_land.png',
-    NOW(), NOW(), 0, 'admin', 'admin';
-
-INSERT INTO `sys_product_spu_detail` (
-    `product_spu_id`, `product_spu_code`, `detail`, `packing_list`, `after_sale`
-) SELECT 
-    (SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_LAND_001'), 'SPU_GAME_LAND_001',
-    '这是一款限量版虚拟世界地块NFT，位于知名元宇宙平台的核心区域，拥有独特的地理位置和开发权限，可用于建造虚拟建筑、开展商业活动或举办活动，是元宇宙投资者的珍贵资产。',
-    '土地NFT、区块链所有权证书、地块坐标文件、开发指南',
-    '区块链永久认证，资产真实性终身保障，平台持续更新支持';
-
-INSERT INTO `sys_product_spu_attr_params` (
-    `product_spu_id`, `product_spu_code`, `code`, `name`, 
-    `attr_type`, `value_type`, `value`, `sort`, `status`, `is_required`, `is_generic`
-) VALUES 
--- 基础属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_LAND_001'), 'SPU_GAME_LAND_001', 
-'BASIC_ATTRS', '基础属性', 1, 3, 
-'{"资产类型":"虚拟土地","所属平台":"Decentraland","土地面积":"16x16米","最大建筑高度":"无限制"}', 
-1, 1, 1, 1),
-
--- 销售属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_LAND_001'), 'SPU_GAME_LAND_001',
-'SALE_ATTRS', '销售属性', 2, 3, 
-'{"发行方":"Metaverse Holdings","发行时间":"2023-04-05","区块链平台":"Ethereum","发行数量":"100","地块编号":"LAND2023001"}', 
-2, 1, 1, 1),
-
--- 规格属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_LAND_001'), 'SPU_GAME_LAND_001',
-'SPEC_ATTRS', '规格属性', 3, 3, 
-'{"地块位置":["中心区","商业区","娱乐区","艺术区","住宅区"],"周边设施":["传送门","公共广场","知名建筑","交通枢纽","自然景观"]}', 
-3, 1, 1, 0);
-
-
--- 商品2: 游戏世界岛屿NFT
-INSERT INTO `sys_product_spu` (
-    `code`, `name`, `category1_id`, `category1_code`, 
-    `category2_id`, `category2_code`, 
-    `category3_id`, `category3_code`,
-    `total_sales`, `total_stock`, `brand`, `description`,
-    `price`, `real_price`, `status`, `images`,
-    `created_at`, `updated_at`, `is_deleted`, `creator`, `updator`
-) SELECT 
-    'SPU_GAME_LAND_002', '游戏世界岛屿NFT',
-    (SELECT id FROM sys_category WHERE code = '100000'), '100000',
-    (SELECT id FROM sys_category WHERE code = '130000'), '130000',
-    (SELECT id FROM sys_category WHERE code = '140000'), '140000',
-    25, 90, 'GameIsland', '限量版游戏世界岛屿NFT，元宇宙稀有资产',
-    8999.00, 11999.00, 1, 'http://example.com/images/game_island.png',
-    NOW(), NOW(), 0, 'admin', 'admin';
-
-INSERT INTO `sys_product_spu_detail` (
-    `product_spu_id`, `product_spu_code`, `detail`, `packing_list`, `after_sale`
-) SELECT 
-    (SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_LAND_002'), 'SPU_GAME_LAND_002',
-    '这是一款限量版游戏世界岛屿NFT，位于知名游戏平台的海洋世界中，拥有独特的地形和资源分布，可用于建造基地、开发资源或创建专属游戏玩法，是游戏投资者的珍贵资产。',
-    '土地NFT、区块链所有权证书、岛屿坐标文件、开发指南',
-    '区块链永久认证，资产真实性终身保障，平台持续更新支持';
-
-INSERT INTO `sys_product_spu_attr_params` (
-    `product_spu_id`, `product_spu_code`, `code`, `name`, 
-    `attr_type`, `value_type`, `value`, `sort`, `status`, `is_required`, `is_generic`
-) VALUES 
--- 基础属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_LAND_002'), 'SPU_GAME_LAND_002', 
-'BASIC_ATTRS', '基础属性', 1, 3, 
-'{"资产类型":"游戏岛屿","所属平台":"Atlas Earth","土地面积":"500x500米","最大建筑数量":"50"}', 
-1, 1, 1, 1),
-
--- 销售属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_LAND_002'), 'SPU_GAME_LAND_002',
-'SALE_ATTRS', '销售属性', 2, 3, 
-'{"发行方":"Game World Holdings","发行时间":"2023-05-15","区块链平台":"Ethereum","发行数量":"90","地块编号":"LAND2023002"}', 
-2, 1, 1, 1),
-
--- 规格属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_LAND_002'), 'SPU_GAME_LAND_002',
-'SPEC_ATTRS', '规格属性', 3, 3, 
-'{"岛屿类型":["热带岛屿","火山岛屿","冰川岛屿","沙漠岛屿","森林岛屿"],"资源丰富度":["稀缺","一般","丰富","极其丰富"],"特殊地形":["山脉","湖泊","洞穴","瀑布","峡谷"]}', 
-3, 1, 1, 0);
-
--- 商品3: 虚拟商业地产NFT
-INSERT INTO `sys_product_spu` (
-    `code`, `name`, `category1_id`, `category1_code`, 
-    `category2_id`, `category2_code`, 
-    `category3_id`, `category3_code`,
-    `total_sales`, `total_stock`, `brand`, `description`,
-    `price`, `real_price`, `status`, `images`,
-    `created_at`, `updated_at`, `is_deleted`, `creator`, `updator`
-) SELECT 
-    'SPU_GAME_LAND_003', '虚拟商业地产NFT',
-    (SELECT id FROM sys_category WHERE code = '100000'), '100000',
-    (SELECT id FROM sys_category WHERE code = '130000'), '130000',
-    (SELECT id FROM sys_category WHERE code = '140000'), '140000',
-    20, 85, 'VirtualEstate', '限量版虚拟商业地产NFT，元宇宙商业资产',
-    12999.00, 15999.00, 1, 'http://example.com/images/virtual_estate.png',
-    NOW(), NOW(), 0, 'admin', 'admin';
-
-INSERT INTO `sys_product_spu_detail` (
-    `product_spu_id`, `product_spu_code`, `detail`, `packing_list`, `after_sale`
-) SELECT 
-    (SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_LAND_003'), 'SPU_GAME_LAND_003',
-    '这是一款限量版虚拟商业地产NFT，位于知名元宇宙平台的商业区核心位置，拥有独特的商业价值和流量优势，可用于开设虚拟店铺、举办活动或出租获利，是元宇宙商业投资者的珍贵资产。',
-    '土地NFT、区块链所有权证书、地产坐标文件、商业开发指南',
-    '区块链永久认证，资产真实性终身保障，平台持续更新支持';
-
-INSERT INTO `sys_product_spu_attr_params` (
-    `product_spu_id`, `product_spu_code`, `code`, `name`, 
-    `attr_type`, `value_type`, `value`, `sort`, `status`, `is_required`, `is_generic`
-) VALUES 
--- 基础属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_LAND_003'), 'SPU_GAME_LAND_003', 
-'BASIC_ATTRS', '基础属性', 1, 3, 
-'{"资产类型":"商业地产","所属平台":"The Sandbox","土地面积":"24x24米","最大建筑高度":"100米"}', 
-1, 1, 1, 1),
-
--- 销售属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_LAND_003'), 'SPU_GAME_LAND_003',
-'SALE_ATTRS', '销售属性', 2, 3, 
-'{"发行方":"Virtual Estate Group","发行时间":"2023-06-20","区块链平台":"Ethereum","发行数量":"85","地块编号":"LAND2023003"}', 
-2, 1, 1, 1),
-
--- 规格属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_LAND_003'), 'SPU_GAME_LAND_003',
-'SPEC_ATTRS', '规格属性', 3, 3, 
-'{"地产位置":["商业中心","购物区","娱乐区","展览区","金融区"],"客流量":["低","中","高","极高"],"周边配套":["交通枢纽","知名品牌","公共设施","活动场所","景观"]}', 
-3, 1, 1, 0);
-
--- 商品4: 游戏资源矿区NFT
-INSERT INTO `sys_product_spu` (
-    `code`, `name`, `category1_id`, `category1_code`, 
-    `category2_id`, `category2_code`, 
-    `category3_id`, `category3_code`,
-    `total_sales`, `total_stock`, `brand`, `description`,
-    `price`, `real_price`, `status`, `images`,
-    `created_at`, `updated_at`, `is_deleted`, `creator`, `updator`
-) SELECT 
-    'SPU_GAME_LAND_004', '游戏资源矿区NFT',
-    (SELECT id FROM sys_category WHERE code = '100000'), '100000',
-    (SELECT id FROM sys_category WHERE code = '130000'), '130000',
-    (SELECT id FROM sys_category WHERE code = '140000'), '140000',
-    35, 80, 'ResourceMine', '限量版游戏资源矿区NFT，游戏经济核心资产',
-    7999.00, 9999.00, 1, 'http://example.com/images/resource_mine.png',
-    NOW(), NOW(), 0, 'admin', 'admin';
-
-INSERT INTO `sys_product_spu_detail` (
-    `product_spu_id`, `product_spu_code`, `detail`, `packing_list`, `after_sale`
-) SELECT 
-    (SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_LAND_004'), 'SPU_GAME_LAND_004',
-    '这是一款限量版游戏资源矿区NFT，位于知名游戏平台的资源丰富区域，拥有独特的资源分布和产出效率，可用于采集游戏资源、建造生产设施或出租获利，是游戏经济投资者的珍贵资产。',
-    '土地NFT、区块链所有权证书、矿区坐标文件、资源开发指南',
-    '区块链永久认证，资产真实性终身保障，平台持续更新支持';
-
-INSERT INTO `sys_product_spu_attr_params` (
-    `product_spu_id`, `product_spu_code`, `code`, `name`, 
-    `attr_type`, `value_type`, `value`, `sort`, `status`, `is_required`, `is_generic`
-) VALUES 
--- 基础属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_LAND_004'), 'SPU_GAME_LAND_004', 
-'BASIC_ATTRS', '基础属性', 1, 3, 
-'{"资产类型":"资源矿区","所属平台":"Axie Infinity","土地面积":"300x300米","资源产出效率":"150%"}', 
-1, 1, 1, 1),
-
--- 销售属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_LAND_004'), 'SPU_GAME_LAND_004',
-'SALE_ATTRS', '销售属性', 2, 3, 
-'{"发行方":"Resource Holdings","发行时间":"2023-07-25","区块链平台":"Ethereum","发行数量":"80","地块编号":"LAND2023004"}', 
-2, 1, 1, 1),
-
--- 规格属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_LAND_004'), 'SPU_GAME_LAND_004',
-'SPEC_ATTRS', '规格属性', 3, 3, 
-'{"矿区类型":["金属矿区","能源矿区","宝石矿区","魔法矿区","混合矿区"],"资源种类":["稀有金属","能源晶体","宝石原石","魔法精华","混合资源"],"开采难度":["简单","中等","困难","极难"]}', 
-3, 1, 1, 0);
-
--- 商品5: 虚拟农场NFT
-INSERT INTO `sys_product_spu` (
-    `code`, `name`, `category1_id`, `category1_code`, 
-    `category2_id`, `category2_code`, 
-    `category3_id`, `category3_code`,
-    `total_sales`, `total_stock`, `brand`, `description`,
-    `price`, `real_price`, `status`, `images`,
-    `created_at`, `updated_at`, `is_deleted`, `creator`, `updator`
-) SELECT 
-    'SPU_GAME_LAND_005', '虚拟农场NFT',
-    (SELECT id FROM sys_category WHERE code = '100000'), '100000',
-    (SELECT id FROM sys_category WHERE code = '130000'), '130000',
-    (SELECT id FROM sys_category WHERE code = '140000'), '140000',
-    40, 75, 'VirtualFarm', '限量版虚拟农场NFT，游戏生产类资产',
-    6999.00, 8999.00, 1, 'http://example.com/images/virtual_farm.png',
-    NOW(), NOW(), 0, 'admin', 'admin';
-
-INSERT INTO `sys_product_spu_detail` (
-    `product_spu_id`, `product_spu_code`, `detail`, `packing_list`, `after_sale`
-) SELECT 
-    (SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_LAND_005'), 'SPU_GAME_LAND_005',
-    '这是一款限量版虚拟农场NFT，位于知名游戏平台的肥沃地区，拥有独特的土壤条件和气候特点，可用于种植作物、饲养动物或建造农业设施，是游戏生产类投资者的珍贵资产。',
-    '土地NFT、区块链所有权证书、农场坐标文件、农业生产指南',
-    '区块链永久认证，资产真实性终身保障，平台持续更新支持';
-
-INSERT INTO `sys_product_spu_attr_params` (
-    `product_spu_id`, `product_spu_code`, `code`, `name`, 
-    `attr_type`, `value_type`, `value`, `sort`, `status`, `is_required`, `is_generic`
-) VALUES 
--- 基础属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_LAND_005'), 'SPU_GAME_LAND_005', 
-'BASIC_ATTRS', '基础属性', 1, 3, 
-'{"资产类型":"农场土地","所属平台":"Farm World","土地面积":"400x400米","土壤肥沃度":"A级"}', 
-1, 1, 1, 1),
-
--- 销售属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_LAND_005'), 'SPU_GAME_LAND_005',
-'SALE_ATTRS', '销售属性', 2, 3, 
-'{"发行方":"Farm Holdings","发行时间":"2023-08-30","区块链平台":"Ethereum","发行数量":"75","地块编号":"LAND2023005"}', 
-2, 1, 1, 1),
-
--- 规格属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_LAND_005'), 'SPU_GAME_LAND_005',
-'SPEC_ATTRS', '规格属性', 3, 3, 
-'{"农场类型":["种植农场","牧场","果园","混合农场","特种农场"],"气候类型":["温带","热带","寒带","干旱","湿润"],"水源条件":["河流","湖泊","地下水","雨水","灌溉系统"]}', 
-3, 1, 1, 0);
-
-
--- ================ 18. 游戏资产 - 游戏角色NFT (141000) ================
+-- ================ 18. 游戏资产 - 游戏角色NFT (133000) ================
 
 -- 商品1: 传奇英雄角色NFT
 INSERT INTO `sys_product_spu` (
@@ -6583,7 +6383,7 @@ INSERT INTO `sys_product_spu` (
     'SPU_GAME_CHAR_001', '传奇英雄角色NFT',
     (SELECT id FROM sys_category WHERE code = '100000'), '100000',
     (SELECT id FROM sys_category WHERE code = '130000'), '130000',
-    (SELECT id FROM sys_category WHERE code = '141000'), '141000',
+    (SELECT id FROM sys_category WHERE code = '133000'), '133000',
     60, 100, 'LegendaryHero', '限量版传奇英雄角色NFT，跨游戏平台使用',
     5999.00, 7999.00, 1, 'http://example.com/images/legendary_hero.png',
     NOW(), NOW(), 0, 'admin', 'admin';
@@ -6630,7 +6430,7 @@ INSERT INTO `sys_product_spu` (
     'SPU_GAME_CHAR_002', '神话生物角色NFT',
     (SELECT id FROM sys_category WHERE code = '100000'), '100000',
     (SELECT id FROM sys_category WHERE code = '130000'), '130000',
-    (SELECT id FROM sys_category WHERE code = '141000'), '141000',
+    (SELECT id FROM sys_category WHERE code = '133000'), '133000',
     55, 90, 'MythicalCreature', '限量版神话生物角色NFT，跨游戏平台使用',
     5599.00, 7599.00, 1, 'http://example.com/images/mythical_creature.png',
     NOW(), NOW(), 0, 'admin', 'admin';
@@ -6677,7 +6477,7 @@ INSERT INTO `sys_product_spu` (
     'SPU_GAME_CHAR_003', '未来战士角色NFT',
     (SELECT id FROM sys_category WHERE code = '100000'), '100000',
     (SELECT id FROM sys_category WHERE code = '130000'), '130000',
-    (SELECT id FROM sys_category WHERE code = '141000'), '141000',
+    (SELECT id FROM sys_category WHERE code = '133000'), '133000',
     65, 85, 'FutureWarrior', '限量版未来战士角色NFT，跨游戏平台使用',
     5799.00, 7799.00, 1, 'http://example.com/images/future_warrior.png',
     NOW(), NOW(), 0, 'admin', 'admin';
@@ -6724,7 +6524,7 @@ INSERT INTO `sys_product_spu` (
     'SPU_GAME_CHAR_004', '魔法师角色NFT',
     (SELECT id FROM sys_category WHERE code = '100000'), '100000',
     (SELECT id FROM sys_category WHERE code = '130000'), '130000',
-    (SELECT id FROM sys_category WHERE code = '141000'), '141000',
+    (SELECT id FROM sys_category WHERE code = '133000'), '133000',
     70, 95, 'MagicWizard', '限量版魔法师角色NFT，跨游戏平台使用',
     5499.00, 7499.00, 1, 'http://example.com/images/magic_wizard.png',
     NOW(), NOW(), 0, 'admin', 'admin';
@@ -6768,10 +6568,10 @@ INSERT INTO `sys_product_spu` (
     `price`, `real_price`, `status`, `images`,
     `created_at`, `updated_at`, `is_deleted`, `creator`, `updator`
 ) SELECT 
-    'SPU_GAME_CHAR_005', '异形生物角色NFT',
+    'YXSWJS_005', '异形生物角色NFT',
     (SELECT id FROM sys_category WHERE code = '100000'), '100000',
     (SELECT id FROM sys_category WHERE code = '130000'), '130000',
-    (SELECT id FROM sys_category WHERE code = '141000'), '141000',
+    (SELECT id FROM sys_category WHERE code = '133000'), '133000',
     50, 80, 'AlienCreature', '限量版异形生物角色NFT，跨游戏平台使用',
     5899.00, 7899.00, 1, 'http://example.com/images/alien_creature.png',
     NOW(), NOW(), 0, 'admin', 'admin';
@@ -6779,7 +6579,7 @@ INSERT INTO `sys_product_spu` (
 INSERT INTO `sys_product_spu_detail` (
     `product_spu_id`, `product_spu_code`, `detail`, `packing_list`, `after_sale`
 ) SELECT 
-    (SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_CHAR_005'), 'SPU_GAME_CHAR_005',
+    (SELECT id FROM sys_product_spu WHERE code = 'YXSWJS_005'), 'YXSWJS_005',
     '这是一款限量版异形生物角色NFT，由外星生物设计师精心打造，拥有独特的外观、特殊能力和背景故事，可在支持NFT资产的多个游戏平台中使用，是收藏家和游戏玩家的珍贵资产。',
     '角色NFT、区块链所有权证书、3D模型文件、角色背景故事、使用指南',
     '区块链永久认证，资产真实性终身保障，新游戏平台适配支持';
@@ -6789,25 +6589,25 @@ INSERT INTO `sys_product_spu_attr_params` (
     `attr_type`, `value_type`, `value`, `sort`, `status`, `is_required`, `is_generic`
 ) VALUES 
 -- 基础属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_CHAR_005'), 'SPU_GAME_CHAR_005', 
+((SELECT id FROM sys_product_spu WHERE code = 'YXSWJS_005'), 'YXSWJS_005', 
 'BASIC_ATTRS', '基础属性', 1, 3, 
 '{"角色类型":"异形生物","创作工具":"ZBrush+Blender+Substance Painter","艺术风格":"科幻/异形","多边形数":"130K-180K"}', 
 1, 1, 1, 1),
 
 -- 销售属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_CHAR_005'), 'SPU_GAME_CHAR_005',
+((SELECT id FROM sys_product_spu WHERE code = 'YXSWJS_005'), 'YXSWJS_005',
 'SALE_ATTRS', '销售属性', 2, 3, 
 '{"设计师":"Alien Creator","创作时间":"2023-08-30","区块链平台":"Ethereum","发行数量":"80","作品编号":"GCHAR2023005"}', 
 2, 1, 1, 1),
 
 -- 规格属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_CHAR_005'), 'SPU_GAME_CHAR_005',
+((SELECT id FROM sys_product_spu WHERE code = 'YXSWJS_005'), 'YXSWJS_005',
 'SPEC_ATTRS', '规格属性', 3, 3, 
 '{"生物类型":["昆虫型","爬行型","哺乳型","晶体型","能量型"],"生物等级":["幼体","成熟体","完全体","变异体","终极体"],"特殊能力":["适应性","再生","心灵感应","分泌物","能量操控"]}', 
 3, 1, 1, 0);
 
 
--- ================ 19. 游戏资产 - 游戏宠物NFT (142000) ================
+-- ================ 19. 游戏资产 - 135000 (135000) ================
 
 -- 商品1: 传奇龙宠NFT
 INSERT INTO `sys_product_spu` (
@@ -6818,10 +6618,10 @@ INSERT INTO `sys_product_spu` (
     `price`, `real_price`, `status`, `images`,
     `created_at`, `updated_at`, `is_deleted`, `creator`, `updator`
 ) SELECT 
-    'SPU_GAME_PET_001', '传奇龙宠NFT',
+    'CQLQW_001', '传奇龙宠NFT',
     (SELECT id FROM sys_category WHERE code = '100000'), '100000',
     (SELECT id FROM sys_category WHERE code = '130000'), '130000',
-    (SELECT id FROM sys_category WHERE code = '142000'), '142000',
+    (SELECT id FROM sys_category WHERE code = '135000'), '135000',
     60, 100, 'LegendaryDragon', '限量版传奇龙宠NFT，跨游戏平台使用',
     2999.00, 3999.00, 1, 'http://example.com/images/legendary_dragon.png',
     NOW(), NOW(), 0, 'admin', 'admin';
@@ -6829,7 +6629,7 @@ INSERT INTO `sys_product_spu` (
 INSERT INTO `sys_product_spu_detail` (
     `product_spu_id`, `product_spu_code`, `detail`, `packing_list`, `after_sale`
 ) SELECT 
-    (SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_PET_001'), 'SPU_GAME_PET_001',
+    (SELECT id FROM sys_product_spu WHERE code = 'CQLQW_001'), 'CQLQW_001',
     '这是一款限量版传奇龙宠NFT，由宠物设计师精心打造，拥有独特的外观、技能和成长系统，可在支持NFT资产的多个游戏平台中使用，是收藏家和游戏玩家的珍贵资产。',
     '宠物NFT、区块链所有权证书、3D模型文件、宠物背景故事、使用指南',
     '区块链永久认证，资产真实性终身保障，新游戏平台适配支持';
@@ -6839,19 +6639,19 @@ INSERT INTO `sys_product_spu_attr_params` (
     `attr_type`, `value_type`, `value`, `sort`, `status`, `is_required`, `is_generic`
 ) VALUES 
 -- 基础属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_PET_001'), 'SPU_GAME_PET_001', 
+((SELECT id FROM sys_product_spu WHERE code = 'CQLQW_001'), 'CQLQW_001', 
 'BASIC_ATTRS', '基础属性', 1, 3, 
 '{"宠物类型":"龙","创作工具":"ZBrush+Maya+Substance Painter","艺术风格":"奇幻/史诗","多边形数":"80K-120K"}', 
 1, 1, 1, 1),
 
 -- 销售属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_PET_001'), 'SPU_GAME_PET_001',
+((SELECT id FROM sys_product_spu WHERE code = 'CQLQW_001'), 'CQLQW_001',
 'SALE_ATTRS', '销售属性', 2, 3, 
 '{"设计师":"Dragon Designer","创作时间":"2023-04-05","区块链平台":"Ethereum","发行数量":"100","作品编号":"GPET2023001"}', 
 2, 1, 1, 1),
 
 -- 规格属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_PET_001'), 'SPU_GAME_PET_001',
+((SELECT id FROM sys_product_spu WHERE code = 'CQLQW_001'), 'CQLQW_001',
 'SPEC_ATTRS', '规格属性', 3, 3, 
 '{"龙种类型":["火龙","冰龙","雷龙","风龙","暗影龙"],"成长阶段":["幼龙","成年龙","古龙","神龙"],"特殊能力":["元素吐息","飞行","护盾","治愈","召唤"]}', 
 3, 1, 1, 0);
@@ -6866,10 +6666,10 @@ INSERT INTO `sys_product_spu` (
     `price`, `real_price`, `status`, `images`,
     `created_at`, `updated_at`, `is_deleted`, `creator`, `updator`
 ) SELECT 
-    'SPU_GAME_PET_002', '神秘精灵宠物NFT',
+    'SMJLCW_002', '神秘精灵宠物NFT',
     (SELECT id FROM sys_category WHERE code = '100000'), '100000',
     (SELECT id FROM sys_category WHERE code = '130000'), '130000',
-    (SELECT id FROM sys_category WHERE code = '142000'), '142000',
+    (SELECT id FROM sys_category WHERE code = '135000'), '135000',
     55, 90, 'MysticalFairy', '限量版神秘精灵宠物NFT，跨游戏平台使用',
     2799.00, 3799.00, 1, 'http://example.com/images/mystical_fairy.png',
     NOW(), NOW(), 0, 'admin', 'admin';
@@ -6877,7 +6677,7 @@ INSERT INTO `sys_product_spu` (
 INSERT INTO `sys_product_spu_detail` (
     `product_spu_id`, `product_spu_code`, `detail`, `packing_list`, `after_sale`
 ) SELECT 
-    (SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_PET_002'), 'SPU_GAME_PET_002',
+    (SELECT id FROM sys_product_spu WHERE code = 'SMJLCW_002'), 'SMJLCW_002',
     '这是一款限量版神秘精灵宠物NFT，由精灵设计师精心打造，拥有独特的外观、魔法能力和成长系统，可在支持NFT资产的多个游戏平台中使用，是收藏家和游戏玩家的珍贵资产。',
     '宠物NFT、区块链所有权证书、3D模型文件、宠物背景故事、使用指南',
     '区块链永久认证，资产真实性终身保障，新游戏平台适配支持';
@@ -6887,19 +6687,19 @@ INSERT INTO `sys_product_spu_attr_params` (
     `attr_type`, `value_type`, `value`, `sort`, `status`, `is_required`, `is_generic`
 ) VALUES 
 -- 基础属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_PET_002'), 'SPU_GAME_PET_002', 
+((SELECT id FROM sys_product_spu WHERE code = 'SMJLCW_002'), 'SMJLCW_002', 
 'BASIC_ATTRS', '基础属性', 1, 3, 
 '{"宠物类型":"精灵","创作工具":"ZBrush+Blender+Substance Painter","艺术风格":"奇幻/梦幻","多边形数":"60K-90K"}', 
 1, 1, 1, 1),
 
 -- 销售属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_PET_002'), 'SPU_GAME_PET_002',
+((SELECT id FROM sys_product_spu WHERE code = 'SMJLCW_002'), 'SMJLCW_002',
 'SALE_ATTRS', '销售属性', 2, 3, 
 '{"设计师":"Fairy Designer","创作时间":"2023-05-15","区块链平台":"Ethereum","发行数量":"90","作品编号":"GPET2023002"}', 
 2, 1, 1, 1),
 
 -- 规格属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_PET_002'), 'SPU_GAME_PET_002',
+((SELECT id FROM sys_product_spu WHERE code = 'SMJLCW_002'), 'SMJLCW_002',
 'SPEC_ATTRS', '规格属性', 3, 3, 
 '{"精灵类型":["光明精灵","自然精灵","水系精灵","风系精灵","暗影精灵"],"成长阶段":["幼精灵","成熟精灵","高等精灵","精灵长老"],"特殊能力":["治愈","自然操控","隐形","预言","元素掌控"]}', 
 3, 1, 1, 0);
@@ -6913,10 +6713,10 @@ INSERT INTO `sys_product_spu` (
     `price`, `real_price`, `status`, `images`,
     `created_at`, `updated_at`, `is_deleted`, `creator`, `updator`
 ) SELECT 
-    'SPU_GAME_PET_003', '机械宠物NFT',
+    'JXCW_003', '机械宠物NFT',
     (SELECT id FROM sys_category WHERE code = '100000'), '100000',
     (SELECT id FROM sys_category WHERE code = '130000'), '130000',
-    (SELECT id FROM sys_category WHERE code = '142000'), '142000',
+    (SELECT id FROM sys_category WHERE code = '135000'), '135000',
     65, 85, 'MechanicalPet', '限量版机械宠物NFT，跨游戏平台使用',
     2899.00, 3899.00, 1, 'http://example.com/images/mechanical_pet.png',
     NOW(), NOW(), 0, 'admin', 'admin';
@@ -6924,7 +6724,7 @@ INSERT INTO `sys_product_spu` (
 INSERT INTO `sys_product_spu_detail` (
     `product_spu_id`, `product_spu_code`, `detail`, `packing_list`, `after_sale`
 ) SELECT 
-    (SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_PET_003'), 'SPU_GAME_PET_003',
+    (SELECT id FROM sys_product_spu WHERE code = 'JXCW_003'), 'JXCW_003',
     '这是一款限量版机械宠物NFT，由机械设计师精心打造，拥有独特的外观、功能模块和升级系统，可在支持NFT资产的多个游戏平台中使用，是收藏家和游戏玩家的珍贵资产。',
     '宠物NFT、区块链所有权证书、3D模型文件、宠物背景故事、使用指南',
     '区块链永久认证，资产真实性终身保障，新游戏平台适配支持';
@@ -6934,19 +6734,19 @@ INSERT INTO `sys_product_spu_attr_params` (
     `attr_type`, `value_type`, `value`, `sort`, `status`, `is_required`, `is_generic`
 ) VALUES 
 -- 基础属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_PET_003'), 'SPU_GAME_PET_003', 
+((SELECT id FROM sys_product_spu WHERE code = 'JXCW_003'), 'JXCW_003', 
 'BASIC_ATTRS', '基础属性', 1, 3, 
 '{"宠物类型":"机械宠物","创作工具":"3ds Max+Substance Painter","艺术风格":"科幻/机械","多边形数":"70K-100K"}', 
 1, 1, 1, 1),
 
 -- 销售属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_PET_003'), 'SPU_GAME_PET_003',
+((SELECT id FROM sys_product_spu WHERE code = 'JXCW_003'), 'JXCW_003',
 'SALE_ATTRS', '销售属性', 2, 3, 
 '{"设计师":"Mech Pet Designer","创作时间":"2023-06-20","区块链平台":"Ethereum","发行数量":"85","作品编号":"GPET2023003"}', 
 2, 1, 1, 1),
 
 -- 规格属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_PET_003'), 'SPU_GAME_PET_003',
+((SELECT id FROM sys_product_spu WHERE code = 'JXCW_003'), 'JXCW_003',
 'SPEC_ATTRS', '规格属性', 3, 3, 
 '{"机械类型":["四足机械","飞行机械","水陆两用","多功能","微型机械"],"科技等级":["基础型","高级型","实验型","原型机","未来型"],"特殊功能":["扫描","修复","战斗","侦察","资源收集"]}', 
 3, 1, 1, 0);
@@ -6960,10 +6760,10 @@ INSERT INTO `sys_product_spu` (
     `price`, `real_price`, `status`, `images`,
     `created_at`, `updated_at`, `is_deleted`, `creator`, `updator`
 ) SELECT 
-    'SPU_GAME_PET_004', '幻兽宠物NFT',
+    'HSCW_004', '幻兽宠物NFT',
     (SELECT id FROM sys_category WHERE code = '100000'), '100000',
     (SELECT id FROM sys_category WHERE code = '130000'), '130000',
-    (SELECT id FROM sys_category WHERE code = '142000'), '142000',
+    (SELECT id FROM sys_category WHERE code = '135000'), '135000',
     70, 95, 'MythicalBeast', '限量版幻兽宠物NFT，跨游戏平台使用',
     2699.00, 3699.00, 1, 'http://example.com/images/mythical_beast.png',
     NOW(), NOW(), 0, 'admin', 'admin';
@@ -6971,7 +6771,7 @@ INSERT INTO `sys_product_spu` (
 INSERT INTO `sys_product_spu_detail` (
     `product_spu_id`, `product_spu_code`, `detail`, `packing_list`, `after_sale`
 ) SELECT 
-    (SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_PET_004'), 'SPU_GAME_PET_004',
+    (SELECT id FROM sys_product_spu WHERE code = 'HSCW_004'), 'HSCW_004',
     '这是一款限量版幻兽宠物NFT，由生物设计师精心打造，融合多种神话生物特征，拥有独特的外观、能力和成长系统，可在支持NFT资产的多个游戏平台中使用，是收藏家和游戏玩家的珍贵资产。',
     '宠物NFT、区块链所有权证书、3D模型文件、宠物背景故事、使用指南',
     '区块链永久认证，资产真实性终身保障，新游戏平台适配支持';
@@ -6981,19 +6781,19 @@ INSERT INTO `sys_product_spu_attr_params` (
     `attr_type`, `value_type`, `value`, `sort`, `status`, `is_required`, `is_generic`
 ) VALUES 
 -- 基础属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_PET_004'), 'SPU_GAME_PET_004', 
+((SELECT id FROM sys_product_spu WHERE code = 'HSCW_004'), 'HSCW_004', 
 'BASIC_ATTRS', '基础属性', 1, 3, 
 '{"宠物类型":"幻兽","创作工具":"ZBrush+Maya+Substance Painter","艺术风格":"奇幻/混合","多边形数":"75K-110K"}', 
 1, 1, 1, 1),
 
 -- 销售属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_PET_004'), 'SPU_GAME_PET_004',
+((SELECT id FROM sys_product_spu WHERE code = 'HSCW_004'), 'HSCW_004',
 'SALE_ATTRS', '销售属性', 2, 3, 
 '{"设计师":"Beast Designer","创作时间":"2023-07-25","区块链平台":"Ethereum","发行数量":"95","作品编号":"GPET2023004"}', 
 2, 1, 1, 1),
 
 -- 规格属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_PET_004'), 'SPU_GAME_PET_004',
+((SELECT id FROM sys_product_spu WHERE code = 'HSCW_004'), 'HSCW_004',
 'SPEC_ATTRS', '规格属性', 3, 3, 
 '{"幻兽类型":["奇美拉","麒麟","九尾狐","独角兽","海妖"],"稀有度":["普通","稀有","史诗","传说","神话"],"特殊能力":["变形","元素操控","幻术","治愈","预言"]}', 
 3, 1, 1, 0);
@@ -7007,10 +6807,10 @@ INSERT INTO `sys_product_spu` (
     `price`, `real_price`, `status`, `images`,
     `created_at`, `updated_at`, `is_deleted`, `creator`, `updator`
 ) SELECT 
-    'SPU_GAME_PET_005', '元素精灵宠物NFT',
+    'YSJLCW_005', '元素精灵宠物NFT',
     (SELECT id FROM sys_category WHERE code = '100000'), '100000',
     (SELECT id FROM sys_category WHERE code = '130000'), '130000',
-    (SELECT id FROM sys_category WHERE code = '142000'), '142000',
+    (SELECT id FROM sys_category WHERE code = '135000'), '135000',
     50, 80, 'ElementalSpirit', '限量版元素精灵宠物NFT，跨游戏平台使用',
     2599.00, 3599.00, 1, 'http://example.com/images/elemental_spirit.png',
     NOW(), NOW(), 0, 'admin', 'admin';
@@ -7018,7 +6818,7 @@ INSERT INTO `sys_product_spu` (
 INSERT INTO `sys_product_spu_detail` (
     `product_spu_id`, `product_spu_code`, `detail`, `packing_list`, `after_sale`
 ) SELECT 
-    (SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_PET_005'), 'SPU_GAME_PET_005',
+    (SELECT id FROM sys_product_spu WHERE code = 'YSJLCW_005'), 'YSJLCW_005',
     '这是一款限量版元素精灵宠物NFT，由元素设计师精心打造，代表自然界的基本元素，拥有独特的外观、元素能力和成长系统，可在支持NFT资产的多个游戏平台中使用，是收藏家和游戏玩家的珍贵资产。',
     '宠物NFT、区块链所有权证书、3D模型文件、宠物背景故事、使用指南',
     '区块链永久认证，资产真实性终身保障，新游戏平台适配支持';
@@ -7028,25 +6828,25 @@ INSERT INTO `sys_product_spu_attr_params` (
     `attr_type`, `value_type`, `value`, `sort`, `status`, `is_required`, `is_generic`
 ) VALUES 
 -- 基础属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_PET_005'), 'SPU_GAME_PET_005', 
+((SELECT id FROM sys_product_spu WHERE code = 'YSJLCW_005'), 'YSJLCW_005', 
 'BASIC_ATTRS', '基础属性', 1, 3, 
 '{"宠物类型":"元素精灵","创作工具":"Blender+Substance Painter","艺术风格":"元素/抽象","多边形数":"50K-80K"}', 
 1, 1, 1, 1),
 
 -- 销售属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_PET_005'), 'SPU_GAME_PET_005',
+((SELECT id FROM sys_product_spu WHERE code = 'YSJLCW_005'), 'YSJLCW_005',
 'SALE_ATTRS', '销售属性', 2, 3, 
 '{"设计师":"Elemental Designer","创作时间":"2023-08-30","区块链平台":"Ethereum","发行数量":"80","作品编号":"GPET2023005"}', 
 2, 1, 1, 1),
 
 -- 规格属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_PET_005'), 'SPU_GAME_PET_005',
+((SELECT id FROM sys_product_spu WHERE code = 'YSJLCW_005'), 'YSJLCW_005',
 'SPEC_ATTRS', '规格属性', 3, 3, 
 '{"元素类型":["火元素","水元素","土元素","风元素","雷元素"],"纯净度":["基础","纯净","高纯","完美","原初"],"特殊能力":["元素操控","环境适应","元素转化","元素吸收","元素爆发"]}', 
 3, 1, 1, 0);
 
 
--- ================ 20. 游戏资产 - 游戏装备NFT (143000) ================
+-- ================ 20. 游戏资产 - 游戏装备NFT (132000) ================
 
 -- 商品1: 传奇武器NFT
 INSERT INTO `sys_product_spu` (
@@ -7057,10 +6857,10 @@ INSERT INTO `sys_product_spu` (
     `price`, `real_price`, `status`, `images`,
     `created_at`, `updated_at`, `is_deleted`, `creator`, `updator`
 ) SELECT 
-    'SPU_GAME_EQUIP_001', '传奇武器NFT',
+    'CQWQ_001', '传奇武器NFT',
     (SELECT id FROM sys_category WHERE code = '100000'), '100000',
     (SELECT id FROM sys_category WHERE code = '130000'), '130000',
-    (SELECT id FROM sys_category WHERE code = '143000'), '143000',
+    (SELECT id FROM sys_category WHERE code = '132000'), '132000',
     60, 100, 'LegendaryWeapon', '限量版传奇武器NFT，跨游戏平台使用',
     1999.00, 2999.00, 1, 'http://example.com/images/legendary_weapon.png',
     NOW(), NOW(), 0, 'admin', 'admin';
@@ -7068,7 +6868,7 @@ INSERT INTO `sys_product_spu` (
 INSERT INTO `sys_product_spu_detail` (
     `product_spu_id`, `product_spu_code`, `detail`, `packing_list`, `after_sale`
 ) SELECT 
-    (SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_EQUIP_001'), 'SPU_GAME_EQUIP_001',
+    (SELECT id FROM sys_product_spu WHERE code = 'CQWQ_001'), 'CQWQ_001',
     '这是一款限量版传奇武器NFT，由武器设计师精心打造，拥有独特的外观、特殊效果和背景故事，可在支持NFT资产的多个游戏平台中使用，是收藏家和游戏玩家的珍贵资产。',
     '装备NFT、区块链所有权证书、3D模型文件、装备背景故事、使用指南',
     '区块链永久认证，资产真实性终身保障，新游戏平台适配支持';
@@ -7078,19 +6878,19 @@ INSERT INTO `sys_product_spu_attr_params` (
     `attr_type`, `value_type`, `value`, `sort`, `status`, `is_required`, `is_generic`
 ) VALUES 
 -- 基础属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_EQUIP_001'), 'SPU_GAME_EQUIP_001', 
+((SELECT id FROM sys_product_spu WHERE code = 'CQWQ_001'), 'CQWQ_001', 
 'BASIC_ATTRS', '基础属性', 1, 3, 
 '{"装备类型":"武器","创作工具":"ZBrush+Maya+Substance Painter","艺术风格":"奇幻/史诗","多边形数":"50K-80K"}', 
 1, 1, 1, 1),
 
 -- 销售属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_EQUIP_001'), 'SPU_GAME_EQUIP_001',
+((SELECT id FROM sys_product_spu WHERE code = 'CQWQ_001'), 'CQWQ_001',
 'SALE_ATTRS', '销售属性', 2, 3, 
 '{"设计师":"Weapon Designer","创作时间":"2023-04-05","区块链平台":"Ethereum","发行数量":"100","作品编号":"GEQUIP2023001"}', 
 2, 1, 1, 1),
 
 -- 规格属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_EQUIP_001'), 'SPU_GAME_EQUIP_001',
+((SELECT id FROM sys_product_spu WHERE code = 'CQWQ_001'), 'CQWQ_001',
 'SPEC_ATTRS', '规格属性', 3, 3, 
 '{"武器类型":["剑","斧","弓","法杖","匕首"],"稀有度":["普通","稀有","史诗","传说","神话"],"特殊效果":["元素伤害","吸血","暴击强化","穿透","范围攻击"]}', 
 3, 1, 1, 0);
@@ -7104,10 +6904,10 @@ INSERT INTO `sys_product_spu` (
     `price`, `real_price`, `status`, `images`,
     `created_at`, `updated_at`, `is_deleted`, `creator`, `updator`
 ) SELECT 
-    'SPU_GAME_EQUIP_002', '神话防具NFT',
+    'SHFJ_002', '神话防具NFT',
     (SELECT id FROM sys_category WHERE code = '100000'), '100000',
     (SELECT id FROM sys_category WHERE code = '130000'), '130000',
-    (SELECT id FROM sys_category WHERE code = '143000'), '143000',
+    (SELECT id FROM sys_category WHERE code = '132000'), '132000',
     55, 90, 'MythicalArmor', '限量版神话防具NFT，跨游戏平台使用',
     1899.00, 2899.00, 1, 'http://example.com/images/mythical_armor.png',
     NOW(), NOW(), 0, 'admin', 'admin';
@@ -7115,7 +6915,7 @@ INSERT INTO `sys_product_spu` (
 INSERT INTO `sys_product_spu_detail` (
     `product_spu_id`, `product_spu_code`, `detail`, `packing_list`, `after_sale`
 ) SELECT 
-    (SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_EQUIP_002'), 'SPU_GAME_EQUIP_002',
+    (SELECT id FROM sys_product_spu WHERE code = 'SHFJ_002'), 'SHFJ_002',
     '这是一款限量版神话防具NFT，由防具设计师精心打造，基于各国神话传说创作，拥有独特的外观、防护能力和背景故事，可在支持NFT资产的多个游戏平台中使用，是收藏家和游戏玩家的珍贵资产。',
     '装备NFT、区块链所有权证书、3D模型文件、装备背景故事、使用指南',
     '区块链永久认证，资产真实性终身保障，新游戏平台适配支持';
@@ -7125,19 +6925,19 @@ INSERT INTO `sys_product_spu_attr_params` (
     `attr_type`, `value_type`, `value`, `sort`, `status`, `is_required`, `is_generic`
 ) VALUES 
 -- 基础属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_EQUIP_002'), 'SPU_GAME_EQUIP_002', 
+((SELECT id FROM sys_product_spu WHERE code = 'SHFJ_002'), 'SHFJ_002', 
 'BASIC_ATTRS', '基础属性', 1, 3, 
 '{"装备类型":"防具","创作工具":"ZBrush+Maya+Substance Painter","艺术风格":"神话/古典","多边形数":"60K-90K"}', 
 1, 1, 1, 1),
 
 -- 销售属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_EQUIP_002'), 'SPU_GAME_EQUIP_002',
+((SELECT id FROM sys_product_spu WHERE code = 'SHFJ_002'), 'SHFJ_002',
 'SALE_ATTRS', '销售属性', 2, 3, 
 '{"设计师":"Armor Designer","创作时间":"2023-05-15","区块链平台":"Ethereum","发行数量":"90","作品编号":"GEQUIP2023002"}', 
 2, 1, 1, 1),
 
 -- 规格属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_EQUIP_002'), 'SPU_GAME_EQUIP_002',
+((SELECT id FROM sys_product_spu WHERE code = 'SHFJ_002'), 'SHFJ_002',
 'SPEC_ATTRS', '规格属性', 3, 3, 
 '{"防具类型":["头盔","胸甲","护腿","护臂","全套"],"神话体系":["希腊","北欧","东方","埃及","美洲"],"特殊效果":["元素抗性","生命恢复","伤害反弹","移动速度","技能强化"]}', 
 3, 1, 1, 0);
@@ -7151,10 +6951,10 @@ INSERT INTO `sys_product_spu` (
     `price`, `real_price`, `status`, `images`,
     `created_at`, `updated_at`, `is_deleted`, `creator`, `updator`
 ) SELECT 
-    'SPU_GAME_EQUIP_003', '未来科技装备NFT',
+    'WLKJZB_003', '未来科技装备NFT',
     (SELECT id FROM sys_category WHERE code = '100000'), '100000',
     (SELECT id FROM sys_category WHERE code = '130000'), '130000',
-    (SELECT id FROM sys_category WHERE code = '143000'), '143000',
+    (SELECT id FROM sys_category WHERE code = '132000'), '132000',
     65, 85, 'FutureTech', '限量版未来科技装备NFT，跨游戏平台使用',
     2099.00, 3099.00, 1, 'http://example.com/images/future_tech.png',
     NOW(), NOW(), 0, 'admin', 'admin';
@@ -7162,7 +6962,7 @@ INSERT INTO `sys_product_spu` (
 INSERT INTO `sys_product_spu_detail` (
     `product_spu_id`, `product_spu_code`, `detail`, `packing_list`, `after_sale`
 ) SELECT 
-    (SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_EQUIP_003'), 'SPU_GAME_EQUIP_003',
+    (SELECT id FROM sys_product_spu WHERE code = 'WLKJZB_003'), 'WLKJZB_003',
     '这是一款限量版未来科技装备NFT，由科幻装备设计师精心打造，拥有未来感十足的外观、高科技功能和背景故事，可在支持NFT资产的多个游戏平台中使用，是收藏家和游戏玩家的珍贵资产。',
     '装备NFT、区块链所有权证书、3D模型文件、装备背景故事、使用指南',
     '区块链永久认证，资产真实性终身保障，新游戏平台适配支持';
@@ -7172,19 +6972,19 @@ INSERT INTO `sys_product_spu_attr_params` (
     `attr_type`, `value_type`, `value`, `sort`, `status`, `is_required`, `is_generic`
 ) VALUES 
 -- 基础属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_EQUIP_003'), 'SPU_GAME_EQUIP_003', 
+((SELECT id FROM sys_product_spu WHERE code = 'WLKJZB_003'), 'WLKJZB_003', 
 'BASIC_ATTRS', '基础属性', 1, 3, 
 '{"装备类型":"科技装备","创作工具":"3ds Max+Substance Painter","艺术风格":"科幻/未来","多边形数":"70K-100K"}', 
 1, 1, 1, 1),
 
 -- 销售属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_EQUIP_003'), 'SPU_GAME_EQUIP_003',
+((SELECT id FROM sys_product_spu WHERE code = 'WLKJZB_003'), 'WLKJZB_003',
 'SALE_ATTRS', '销售属性', 2, 3, 
 '{"设计师":"Tech Designer","创作时间":"2023-06-20","区块链平台":"Ethereum","发行数量":"85","作品编号":"GEQUIP2023003"}', 
 2, 1, 1, 1),
 
 -- 规格属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_EQUIP_003'), 'SPU_GAME_EQUIP_003',
+((SELECT id FROM sys_product_spu WHERE code = 'WLKJZB_003'), 'WLKJZB_003',
 'SPEC_ATTRS', '规格属性', 3, 3, 
 '{"装备类型":["外骨骼","能量武器","隐形装置","增强义肢","纳米装甲"],"科技等级":["现代","近未来","远未来","黑科技","外星科技"],"特殊功能":["增强力量","隐形","飞行","能量护盾","生命维持"]}', 
 3, 1, 1, 0);
@@ -7198,10 +6998,10 @@ INSERT INTO `sys_product_spu` (
     `price`, `real_price`, `status`, `images`,
     `created_at`, `updated_at`, `is_deleted`, `creator`, `updator`
 ) SELECT 
-    'SPU_GAME_EQUIP_004', '魔法饰品NFT',
+    'MFSP_004', '魔法饰品NFT',
     (SELECT id FROM sys_category WHERE code = '100000'), '100000',
     (SELECT id FROM sys_category WHERE code = '130000'), '130000',
-    (SELECT id FROM sys_category WHERE code = '143000'), '143000',
+    (SELECT id FROM sys_category WHERE code = '132000'), '132000',
     70, 95, 'MagicalAccessory', '限量版魔法饰品NFT，跨游戏平台使用',
     1799.00, 2799.00, 1, 'http://example.com/images/magical_accessory.png',
     NOW(), NOW(), 0, 'admin', 'admin';
@@ -7209,7 +7009,7 @@ INSERT INTO `sys_product_spu` (
 INSERT INTO `sys_product_spu_detail` (
     `product_spu_id`, `product_spu_code`, `detail`, `packing_list`, `after_sale`
 ) SELECT 
-    (SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_EQUIP_004'), 'SPU_GAME_EQUIP_004',
+    (SELECT id FROM sys_product_spu WHERE code = 'MFSP_004'), 'MFSP_004',
     '这是一款限量版魔法饰品NFT，由奇幻饰品设计师精心打造，拥有独特的外观、魔法效果和背景故事，可在支持NFT资产的多个游戏平台中使用，是收藏家和游戏玩家的珍贵资产。',
     '装备NFT、区块链所有权证书、3D模型文件、装备背景故事、使用指南',
     '区块链永久认证，资产真实性终身保障，新游戏平台适配支持';
@@ -7219,19 +7019,19 @@ INSERT INTO `sys_product_spu_attr_params` (
     `attr_type`, `value_type`, `value`, `sort`, `status`, `is_required`, `is_generic`
 ) VALUES 
 -- 基础属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_EQUIP_004'), 'SPU_GAME_EQUIP_004', 
+((SELECT id FROM sys_product_spu WHERE code = 'MFSP_004'), 'MFSP_004', 
 'BASIC_ATTRS', '基础属性', 1, 3, 
 '{"装备类型":"饰品","创作工具":"ZBrush+Blender+Substance Painter","艺术风格":"奇幻/神秘","多边形数":"40K-70K"}', 
 1, 1, 1, 1),
 
 -- 销售属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_EQUIP_004'), 'SPU_GAME_EQUIP_004',
+((SELECT id FROM sys_product_spu WHERE code = 'MFSP_004'), 'MFSP_004',
 'SALE_ATTRS', '销售属性', 2, 3, 
 '{"设计师":"Accessory Designer","创作时间":"2023-07-25","区块链平台":"Ethereum","发行数量":"95","作品编号":"GEQUIP2023004"}', 
 2, 1, 1, 1),
 
 -- 规格属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_EQUIP_004'), 'SPU_GAME_EQUIP_004',
+((SELECT id FROM sys_product_spu WHERE code = 'MFSP_004'), 'MFSP_004',
 'SPEC_ATTRS', '规格属性', 3, 3, 
 '{"饰品类型":["戒指","项链","耳环","手镯","护符"],"魔法属性":["火","水","土","风","光暗"],"特殊效果":["属性增强","技能冷却","资源获取","经验加成","稀有掉落"]}', 
 3, 1, 1, 0);
@@ -7245,10 +7045,10 @@ INSERT INTO `sys_product_spu` (
     `price`, `real_price`, `status`, `images`,
     `created_at`, `updated_at`, `is_deleted`, `creator`, `updator`
 ) SELECT 
-    'SPU_GAME_EQUIP_005', '远古神器NFT',
+    'YGSQ_005', '远古神器NFT',
     (SELECT id FROM sys_category WHERE code = '100000'), '100000',
     (SELECT id FROM sys_category WHERE code = '130000'), '130000',
-    (SELECT id FROM sys_category WHERE code = '143000'), '143000',
+    (SELECT id FROM sys_category WHERE code = '132000'), '132000',
     50, 80, 'AncientRelic', '限量版远古神器NFT，跨游戏平台使用',
     2199.00, 3199.00, 1, 'http://example.com/images/ancient_relic.png',
     NOW(), NOW(), 0, 'admin', 'admin';
@@ -7256,7 +7056,7 @@ INSERT INTO `sys_product_spu` (
 INSERT INTO `sys_product_spu_detail` (
     `product_spu_id`, `product_spu_code`, `detail`, `packing_list`, `after_sale`
 ) SELECT 
-    (SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_EQUIP_005'), 'SPU_GAME_EQUIP_005',
+    (SELECT id FROM sys_product_spu WHERE code = 'YGSQ_005'), 'YGSQ_005',
     '这是一款限量版远古神器NFT，由神器设计师精心打造，基于远古文明传说创作，拥有独特的外观、神秘力量和背景故事，可在支持NFT资产的多个游戏平台中使用，是收藏家和游戏玩家的珍贵资产。',
     '装备NFT、区块链所有权证书、3D模型文件、装备背景故事、使用指南',
     '区块链永久认证，资产真实性终身保障，新游戏平台适配支持';
@@ -7266,24 +7066,24 @@ INSERT INTO `sys_product_spu_attr_params` (
     `attr_type`, `value_type`, `value`, `sort`, `status`, `is_required`, `is_generic`
 ) VALUES 
 -- 基础属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_EQUIP_005'), 'SPU_GAME_EQUIP_005', 
+((SELECT id FROM sys_product_spu WHERE code = 'YGSQ_005'), 'YGSQ_005', 
 'BASIC_ATTRS', '基础属性', 1, 3, 
 '{"装备类型":"神器","创作工具":"ZBrush+Maya+Substance Painter","艺术风格":"远古/神秘","多边形数":"80K-120K"}', 
 1, 1, 1, 1),
 
 -- 销售属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_EQUIP_005'), 'SPU_GAME_EQUIP_005',
+((SELECT id FROM sys_product_spu WHERE code = 'YGSQ_005'), 'YGSQ_005',
 'SALE_ATTRS', '销售属性', 2, 3, 
 '{"设计师":"Relic Designer","创作时间":"2023-08-30","区块链平台":"Ethereum","发行数量":"80","作品编号":"GEQUIP2023005"}', 
 2, 1, 1, 1),
 
 -- 规格属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_EQUIP_005'), 'SPU_GAME_EQUIP_005',
+((SELECT id FROM sys_product_spu WHERE code = 'YGSQ_005'), 'YGSQ_005',
 'SPEC_ATTRS', '规格属性', 3, 3, 
 '{"神器类型":["权杖","神剑","圣盾","王冠","神秘宝珠"],"文明来源":["亚特兰蒂斯","利莫里亚","埃及","玛雅","巴比伦"],"特殊能力":["时间操控","空间扭曲","生死掌控","元素主宰","心灵支配"]}', 
 3, 1, 1, 0);
 
--- ================ 21. 游戏资产 - 游戏皮肤NFT (144000) ================
+-- ================ 21. 游戏资产 - 游戏皮肤NFT (134000) ================
 
 -- 商品1: 传奇英雄皮肤NFT
 INSERT INTO `sys_product_spu` (
@@ -7297,7 +7097,7 @@ INSERT INTO `sys_product_spu` (
     'SPU_GAME_SKIN_001', '传奇英雄皮肤NFT',
     (SELECT id FROM sys_category WHERE code = '100000'), '100000',
     (SELECT id FROM sys_category WHERE code = '130000'), '130000',
-    (SELECT id FROM sys_category WHERE code = '144000'), '144000',
+    (SELECT id FROM sys_category WHERE code = '134000'), '134000',
     60, 100, 'LegendarySkin', '限量版传奇英雄皮肤NFT，跨游戏平台使用',
     1499.00, 2499.00, 1, 'http://example.com/images/legendary_skin.png',
     NOW(), NOW(), 0, 'admin', 'admin';
@@ -7341,10 +7141,10 @@ INSERT INTO `sys_product_spu` (
     `price`, `real_price`, `status`, `images`,
     `created_at`, `updated_at`, `is_deleted`, `creator`, `updator`
 ) SELECT 
-    'SPU_GAME_SKIN_002', '科幻载具皮肤NFT',
+    'KHZJPF_002', '科幻载具皮肤NFT',
     (SELECT id FROM sys_category WHERE code = '100000'), '100000',
     (SELECT id FROM sys_category WHERE code = '130000'), '130000',
-    (SELECT id FROM sys_category WHERE code = '144000'), '144000',
+    (SELECT id FROM sys_category WHERE code = '134000'), '134000',
     55, 90, 'SciFiVehicleSkin', '限量版科幻载具皮肤NFT，跨游戏平台使用',
     1399.00, 2399.00, 1, 'http://example.com/images/scifi_vehicle_skin.png',
     NOW(), NOW(), 0, 'admin', 'admin';
@@ -7352,7 +7152,7 @@ INSERT INTO `sys_product_spu` (
 INSERT INTO `sys_product_spu_detail` (
     `product_spu_id`, `product_spu_code`, `detail`, `packing_list`, `after_sale`
 ) SELECT 
-    (SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_SKIN_002'), 'SPU_GAME_SKIN_002',
+    (SELECT id FROM sys_product_spu WHERE code = 'KHZJPF_002'), 'KHZJPF_002',
     '这是一款限量版科幻载具皮肤NFT，由载具设计师精心打造，拥有未来感十足的外观、特效和背景故事，可在支持NFT资产的多个游戏平台中使用，是收藏家和游戏玩家的珍贵资产。',
     '皮肤NFT、区块链所有权证书、3D模型文件、皮肤背景故事、使用指南',
     '区块链永久认证，资产真实性终身保障，新游戏平台适配支持';
@@ -7362,19 +7162,19 @@ INSERT INTO `sys_product_spu_attr_params` (
     `attr_type`, `value_type`, `value`, `sort`, `status`, `is_required`, `is_generic`
 ) VALUES 
 -- 基础属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_SKIN_002'), 'SPU_GAME_SKIN_002', 
+((SELECT id FROM sys_product_spu WHERE code = 'KHZJPF_002'), 'KHZJPF_002', 
 'BASIC_ATTRS', '基础属性', 1, 3, 
 '{"皮肤类型":"载具皮肤","创作工具":"3ds Max+Substance Painter","艺术风格":"科幻/未来","多边形数":"70K-110K"}', 
 1, 1, 1, 1),
 
 -- 销售属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_SKIN_002'), 'SPU_GAME_SKIN_002',
+((SELECT id FROM sys_product_spu WHERE code = 'KHZJPF_002'), 'KHZJPF_002',
 'SALE_ATTRS', '销售属性', 2, 3, 
 '{"设计师":"Vehicle Skin Designer","创作时间":"2023-05-15","区块链平台":"Ethereum","发行数量":"90","作品编号":"GSKIN2023002"}', 
 2, 1, 1, 1),
 
 -- 规格属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_SKIN_002'), 'SPU_GAME_SKIN_002',
+((SELECT id FROM sys_product_spu WHERE code = 'KHZJPF_002'), 'KHZJPF_002',
 'SPEC_ATTRS', '规格属性', 3, 3, 
 '{"适用载具类型":["飞行器","陆地车辆","水上载具","太空飞船","机甲"],"科技风格":["赛博朋克","太空歌剧","后启示录","军事科技","生物科技"],"特殊效果":["引擎特效","武器特效","能量场","光影效果","声音效果"]}', 
 3, 1, 1, 0);
@@ -7388,10 +7188,10 @@ INSERT INTO `sys_product_spu` (
     `price`, `real_price`, `status`, `images`,
     `created_at`, `updated_at`, `is_deleted`, `creator`, `updator`
 ) SELECT 
-    'SPU_GAME_SKIN_003', '魔法武器皮肤NFT',
+    'MFWQPF_003', '魔法武器皮肤NFT',
     (SELECT id FROM sys_category WHERE code = '100000'), '100000',
     (SELECT id FROM sys_category WHERE code = '130000'), '130000',
-    (SELECT id FROM sys_category WHERE code = '144000'), '144000',
+    (SELECT id FROM sys_category WHERE code = '134000'), '134000',
     65, 85, 'MagicalWeaponSkin', '限量版魔法武器皮肤NFT，跨游戏平台使用',
     1599.00, 2599.00, 1, 'http://example.com/images/magical_weapon_skin.png',
     NOW(), NOW(), 0, 'admin', 'admin';
@@ -7399,7 +7199,7 @@ INSERT INTO `sys_product_spu` (
 INSERT INTO `sys_product_spu_detail` (
     `product_spu_id`, `product_spu_code`, `detail`, `packing_list`, `after_sale`
 ) SELECT 
-    (SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_SKIN_003'), 'SPU_GAME_SKIN_003',
+    (SELECT id FROM sys_product_spu WHERE code = 'MFWQPF_003'), 'MFWQPF_003',
     '这是一款限量版魔法武器皮肤NFT，由武器设计师精心打造，拥有奇幻风格的外观、魔法特效和背景故事，可在支持NFT资产的多个游戏平台中使用，是收藏家和游戏玩家的珍贵资产。',
     '皮肤NFT、区块链所有权证书、3D模型文件、皮肤背景故事、使用指南',
     '区块链永久认证，资产真实性终身保障，新游戏平台适配支持';
@@ -7409,19 +7209,19 @@ INSERT INTO `sys_product_spu_attr_params` (
     `attr_type`, `value_type`, `value`, `sort`, `status`, `is_required`, `is_generic`
 ) VALUES 
 -- 基础属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_SKIN_003'), 'SPU_GAME_SKIN_003', 
+((SELECT id FROM sys_product_spu WHERE code = 'MFWQPF_003'), 'MFWQPF_003', 
 'BASIC_ATTRS', '基础属性', 1, 3, 
 '{"皮肤类型":"武器皮肤","创作工具":"ZBrush+Maya+Substance Painter","艺术风格":"奇幻/魔法","多边形数":"50K-80K"}', 
 1, 1, 1, 1),
 
 -- 销售属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_SKIN_003'), 'SPU_GAME_SKIN_003',
+((SELECT id FROM sys_product_spu WHERE code = 'MFWQPF_003'), 'MFWQPF_003',
 'SALE_ATTRS', '销售属性', 2, 3, 
 '{"设计师":"Magical Weapon Designer","创作时间":"2023-06-20","区块链平台":"Ethereum","发行数量":"85","作品编号":"GSKIN2023003"}', 
 2, 1, 1, 1),
 
 -- 规格属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_SKIN_003'), 'SPU_GAME_SKIN_003',
+((SELECT id FROM sys_product_spu WHERE code = 'MFWQPF_003'), 'MFWQPF_003',
 'SPEC_ATTRS', '规格属性', 3, 3, 
 '{"适用武器类型":["法杖","魔剑","符文弓","元素匕首","神秘卷轴"],"魔法元素":["火","水","土","风","光暗"],"特殊效果":["元素轨迹","施法特效","充能特效","命中特效","持有姿态"]}', 
 3, 1, 1, 0);
@@ -7435,10 +7235,10 @@ INSERT INTO `sys_product_spu` (
     `price`, `real_price`, `status`, `images`,
     `created_at`, `updated_at`, `is_deleted`, `creator`, `updator`
 ) SELECT 
-    'SPU_GAME_SKIN_004', '神话生物皮肤NFT',
+    'SHSWPF_004', '神话生物皮肤NFT',
     (SELECT id FROM sys_category WHERE code = '100000'), '100000',
     (SELECT id FROM sys_category WHERE code = '130000'), '130000',
-    (SELECT id FROM sys_category WHERE code = '144000'), '144000',
+    (SELECT id FROM sys_category WHERE code = '134000'), '134000',
     70, 95, 'MythicalCreatureSkin', '限量版神话生物皮肤NFT，跨游戏平台使用',
     1699.00, 2699.00, 1, 'http://example.com/images/mythical_creature_skin.png',
     NOW(), NOW(), 0, 'admin', 'admin';
@@ -7446,7 +7246,7 @@ INSERT INTO `sys_product_spu` (
 INSERT INTO `sys_product_spu_detail` (
     `product_spu_id`, `product_spu_code`, `detail`, `packing_list`, `after_sale`
 ) SELECT 
-    (SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_SKIN_004'), 'SPU_GAME_SKIN_004',
+    (SELECT id FROM sys_product_spu WHERE code = 'SHSWPF_004'), 'SHSWPF_004',
     '这是一款限量版神话生物皮肤NFT，由生物设计师精心打造，基于各国神话传说创作，拥有独特的外观、动画效果和背景故事，可在支持NFT资产的多个游戏平台中使用，是收藏家和游戏玩家的珍贵资产。',
     '皮肤NFT、区块链所有权证书、3D模型文件、皮肤背景故事、使用指南',
     '区块链永久认证，资产真实性终身保障，新游戏平台适配支持';
@@ -7456,19 +7256,19 @@ INSERT INTO `sys_product_spu_attr_params` (
     `attr_type`, `value_type`, `value`, `sort`, `status`, `is_required`, `is_generic`
 ) VALUES 
 -- 基础属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_SKIN_004'), 'SPU_GAME_SKIN_004', 
+((SELECT id FROM sys_product_spu WHERE code = 'SHSWPF_004'), 'SHSWPF_004', 
 'BASIC_ATTRS', '基础属性', 1, 3, 
 '{"皮肤类型":"生物皮肤","创作工具":"ZBrush+Maya+Substance Painter","艺术风格":"神话/古典","多边形数":"90K-130K"}', 
 1, 1, 1, 1),
 
 -- 销售属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_SKIN_004'), 'SPU_GAME_SKIN_004',
+((SELECT id FROM sys_product_spu WHERE code = 'SHSWPF_004'), 'SHSWPF_004',
 'SALE_ATTRS', '销售属性', 2, 3, 
 '{"设计师":"Mythical Creature Designer","创作时间":"2023-07-25","区块链平台":"Ethereum","发行数量":"95","作品编号":"GSKIN2023004"}', 
 2, 1, 1, 1),
 
 -- 规格属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_SKIN_004'), 'SPU_GAME_SKIN_004',
+((SELECT id FROM sys_product_spu WHERE code = 'SHSWPF_004'), 'SHSWPF_004',
 'SPEC_ATTRS', '规格属性', 3, 3, 
 '{"适用生物类型":["龙","凤凰","独角兽","海妖","奇美拉"],"神话体系":["希腊","北欧","东方","埃及","美洲"],"特殊效果":["形态变化","环境互动","光影效果","音效","粒子效果"]}', 
 3, 1, 1, 0);
@@ -7482,10 +7282,10 @@ INSERT INTO `sys_product_spu` (
     `price`, `real_price`, `status`, `images`,
     `created_at`, `updated_at`, `is_deleted`, `creator`, `updator`
 ) SELECT 
-    'SPU_GAME_SKIN_005', '机械装甲皮肤NFT',
+    'JXZJPF_005', '机械装甲皮肤NFT',
     (SELECT id FROM sys_category WHERE code = '100000'), '100000',
     (SELECT id FROM sys_category WHERE code = '130000'), '130000',
-    (SELECT id FROM sys_category WHERE code = '144000'), '144000',
+    (SELECT id FROM sys_category WHERE code = '134000'), '134000',
     50, 80, 'MechanicalArmorSkin', '限量版机械装甲皮肤NFT，跨游戏平台使用',
     1599.00, 2599.00, 1, 'http://example.com/images/mechanical_armor_skin.png',
     NOW(), NOW(), 0, 'admin', 'admin';
@@ -7493,7 +7293,7 @@ INSERT INTO `sys_product_spu` (
 INSERT INTO `sys_product_spu_detail` (
     `product_spu_id`, `product_spu_code`, `detail`, `packing_list`, `after_sale`
 ) SELECT 
-    (SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_SKIN_005'), 'SPU_GAME_SKIN_005',
+    (SELECT id FROM sys_product_spu WHERE code = 'JXZJPF_005'), 'JXZJPF_005',
     '这是一款限量版机械装甲皮肤NFT，由装甲设计师精心打造，拥有精密机械感的外观、动态部件和背景故事，可在支持NFT资产的多个游戏平台中使用，是收藏家和游戏玩家的珍贵资产。',
     '皮肤NFT、区块链所有权证书、3D模型文件、皮肤背景故事、使用指南',
     '区块链永久认证，资产真实性终身保障，新游戏平台适配支持';
@@ -7503,25 +7303,25 @@ INSERT INTO `sys_product_spu_attr_params` (
     `attr_type`, `value_type`, `value`, `sort`, `status`, `is_required`, `is_generic`
 ) VALUES 
 -- 基础属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_SKIN_005'), 'SPU_GAME_SKIN_005', 
+((SELECT id FROM sys_product_spu WHERE code = 'JXZJPF_005'), 'JXZJPF_005', 
 'BASIC_ATTRS', '基础属性', 1, 3, 
 '{"皮肤类型":"装甲皮肤","创作工具":"3ds Max+Substance Painter","艺术风格":"机械/工业","多边形数":"85K-125K"}', 
 1, 1, 1, 1),
 
 -- 销售属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_SKIN_005'), 'SPU_GAME_SKIN_005',
+((SELECT id FROM sys_product_spu WHERE code = 'JXZJPF_005'), 'JXZJPF_005',
 'SALE_ATTRS', '销售属性', 2, 3, 
 '{"设计师":"Mechanical Armor Designer","创作时间":"2023-08-30","区块链平台":"Ethereum","发行数量":"80","作品编号":"GSKIN2023005"}', 
 2, 1, 1, 1),
 
 -- 规格属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_SKIN_005'), 'SPU_GAME_SKIN_005',
+((SELECT id FROM sys_product_spu WHERE code = 'JXZJPF_005'), 'JXZJPF_005',
 'SPEC_ATTRS', '规格属性', 3, 3, 
 '{"适用装甲类型":["轻型装甲","中型装甲","重型装甲","动力装甲","飞行装甲"],"机械风格":["工业风","军事风","未来风","蒸汽朋克","生物机械"],"特殊效果":["机械运动","能量流动","散热系统","武器展示","驾驶舱视角"]}', 
 3, 1, 1, 0);
 
 
--- ================ 22. 游戏资产 - 游戏道具NFT (145000) ================
+-- ================ 22. 游戏资产 - 游戏道具NFT (131000) ================
 
 -- 商品1: 传奇魔法卷轴NFT
 INSERT INTO `sys_product_spu` (
@@ -7532,10 +7332,10 @@ INSERT INTO `sys_product_spu` (
     `price`, `real_price`, `status`, `images`,
     `created_at`, `updated_at`, `is_deleted`, `creator`, `updator`
 ) SELECT 
-    'SPU_GAME_ITEM_001', '传奇魔法卷轴NFT',
+    'CQMFJC_001', '传奇魔法卷轴NFT',
     (SELECT id FROM sys_category WHERE code = '100000'), '100000',
     (SELECT id FROM sys_category WHERE code = '130000'), '130000',
-    (SELECT id FROM sys_category WHERE code = '145000'), '145000',
+    (SELECT id FROM sys_category WHERE code = '131000'), '131000',
     60, 100, 'LegendaryScroll', '限量版传奇魔法卷轴NFT，跨游戏平台使用',
     999.00, 1999.00, 1, 'http://example.com/images/legendary_scroll.png',
     NOW(), NOW(), 0, 'admin', 'admin';
@@ -7543,7 +7343,7 @@ INSERT INTO `sys_product_spu` (
 INSERT INTO `sys_product_spu_detail` (
     `product_spu_id`, `product_spu_code`, `detail`, `packing_list`, `after_sale`
 ) SELECT 
-    (SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_ITEM_001'), 'SPU_GAME_ITEM_001',
+    (SELECT id FROM sys_product_spu WHERE code = 'CQMFJC_001'), 'CQMFJC_001',
     '这是一款限量版传奇魔法卷轴NFT，由道具设计师精心打造，拥有独特的外观、魔法效果和背景故事，可在支持NFT资产的多个游戏平台中使用，是收藏家和游戏玩家的珍贵资产。',
     '道具NFT、区块链所有权证书、3D模型文件、道具背景故事、使用指南',
     '区块链永久认证，资产真实性终身保障，新游戏平台适配支持';
@@ -7553,70 +7353,25 @@ INSERT INTO `sys_product_spu_attr_params` (
     `attr_type`, `value_type`, `value`, `sort`, `status`, `is_required`, `is_generic`
 ) VALUES 
 -- 基础属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_ITEM_001'), 'SPU_GAME_ITEM_001', 
+((SELECT id FROM sys_product_spu WHERE code = 'CQMFJC_001'), 'CQMFJC_001', 
 'BASIC_ATTRS', '基础属性', 1, 3, 
 '{"道具类型":"魔法卷轴","创作工具":"Photoshop+Substance Painter","艺术风格":"奇幻/古典","使用次数":"无限"}', 
 1, 1, 1, 1),
 
 -- 销售属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_ITEM_001'), 'SPU_GAME_ITEM_001',
+((SELECT id FROM sys_product_spu WHERE code = 'CQMFJC_001'), 'CQMFJC_001',
 'SALE_ATTRS', '销售属性', 2, 3, 
 '{"设计师":"Scroll Designer","创作时间":"2023-04-05","区块链平台":"Ethereum","发行数量":"100","作品编号":"GITEM2023001"}', 
 2, 1, 1, 1),
 
 -- 规格属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_ITEM_001'), 'SPU_GAME_ITEM_001',
+((SELECT id FROM sys_product_spu WHERE code = 'CQMFJC_001'), 'CQMFJC_001',
 'SPEC_ATTRS', '规格属性', 3, 3, 
 '{"魔法类型":["召唤魔法","元素魔法","变形魔法","治愈魔法","禁忌魔法"],"稀有度":["普通","稀有","史诗","传说","神话"],"使用效果":["召唤生物","元素攻击","变形","治愈","时空扭曲"]}', 
 3, 1, 1, 0);
 
 
--- 商品2: 神秘宝箱NFT
-INSERT INTO `sys_product_spu` (
-    `code`, `name`, `category1_id`, `category1_code`, 
-    `category2_id`, `category2_code`, 
-    `category3_id`, `category3_code`,
-    `total_sales`, `total_stock`, `brand`, `description`,
-    `price`, `real_price`, `status`, `images`,
-    `created_at`, `updated_at`, `is_deleted`, `creator`, `updator`
-) SELECT 
-    'SPU_GAME_ITEM_002', '神秘宝箱NFT',
-    (SELECT id FROM sys_category WHERE code = '100000'), '100000',
-    (SELECT id FROM sys_category WHERE code = '130000'), '130000',
-    (SELECT id FROM sys_category WHERE code = '145000'), '145000',
-    55, 90, 'MysteryChest', '限量版神秘宝箱NFT，跨游戏平台使用',
-    899.00, 1899.00, 1, 'http://example.com/images/mystery_chest.png',
-    NOW(), NOW(), 0, 'admin', 'admin';
 
-INSERT INTO `sys_product_spu_detail` (
-    `product_spu_id`, `product_spu_code`, `detail`, `packing_list`, `after_sale`
-) SELECT 
-    (SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_ITEM_002'), 'SPU_GAME_ITEM_002',
-    '这是一款限量版神秘宝箱NFT，由道具设计师精心打造，拥有独特的外观、开启机制和背景故事，可在支持NFT资产的多个游戏平台中使用，是收藏家和游戏玩家的珍贵资产。',
-    '道具NFT、区块链所有权证书、3D模型文件、道具背景故事、使用指南',
-    '区块链永久认证，资产真实性终身保障，新游戏平台适配支持';
-
-INSERT INTO `sys_product_spu_attr_params` (
-    `product_spu_id`, `product_spu_code`, `code`, `name`, 
-    `attr_type`, `value_type`, `value`, `sort`, `status`, `is_required`, `is_generic`
-) VALUES 
--- 基础属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_ITEM_002'), 'SPU_GAME_ITEM_002', 
-'BASIC_ATTRS', '基础属性', 1, 3, 
-'{"道具类型":"宝箱","创作工具":"ZBrush+Substance Painter","艺术风格":"奇幻/神秘","使用次数":"1次"}', 
-1, 1, 1, 1),
-
--- 销售属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_ITEM_002'), 'SPU_GAME_ITEM_002',
-'SALE_ATTRS', '销售属性', 2, 3, 
-'{"设计师":"Chest Designer","创作时间":"2023-05-15","区块链平台":"Ethereum","发行数量":"90","作品编号":"GITEM2023002"}', 
-2, 1, 1, 1),
-
--- 规格属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_ITEM_002'), 'SPU_GAME_ITEM_002',
-'SPEC_ATTRS', '规格属性', 3, 3, 
-'{"宝箱类型":["普通宝箱","稀有宝箱","史诗宝箱","传说宝箱","神话宝箱"],"开启方式":["钥匙开启","密码开启","谜题开启","时间开启","特定条件开启"],"可能获得":["装备","宠物","皮肤","货币","特殊道具"]}', 
-3, 1, 1, 0);
 
 -- 商品3: 高级药水NFT
 INSERT INTO `sys_product_spu` (
@@ -7627,10 +7382,10 @@ INSERT INTO `sys_product_spu` (
     `price`, `real_price`, `status`, `images`,
     `created_at`, `updated_at`, `is_deleted`, `creator`, `updator`
 ) SELECT 
-    'SPU_GAME_ITEM_003', '高级药水NFT',
+    'GJYS_003', '高级药水NFT',
     (SELECT id FROM sys_category WHERE code = '100000'), '100000',
     (SELECT id FROM sys_category WHERE code = '130000'), '130000',
-    (SELECT id FROM sys_category WHERE code = '145000'), '145000',
+    (SELECT id FROM sys_category WHERE code = '131000'), '131000',
     65, 85, 'PremiumPotion', '限量版高级药水NFT，跨游戏平台使用',
     799.00, 1799.00, 1, 'http://example.com/images/premium_potion.png',
     NOW(), NOW(), 0, 'admin', 'admin';
@@ -7638,7 +7393,7 @@ INSERT INTO `sys_product_spu` (
 INSERT INTO `sys_product_spu_detail` (
     `product_spu_id`, `product_spu_code`, `detail`, `packing_list`, `after_sale`
 ) SELECT 
-    (SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_ITEM_003'), 'SPU_GAME_ITEM_003',
+    (SELECT id FROM sys_product_spu WHERE code = 'GJYS_003'), 'GJYS_003',
     '这是一款限量版高级药水NFT，由炼金术师精心打造，拥有独特的外观、效果和背景故事，可在支持NFT资产的多个游戏平台中使用，是收藏家和游戏玩家的珍贵资产。',
     '道具NFT、区块链所有权证书、3D模型文件、道具背景故事、使用指南',
     '区块链永久认证，资产真实性终身保障，新游戏平台适配支持';
@@ -7648,19 +7403,19 @@ INSERT INTO `sys_product_spu_attr_params` (
     `attr_type`, `value_type`, `value`, `sort`, `status`, `is_required`, `is_generic`
 ) VALUES 
 -- 基础属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_ITEM_003'), 'SPU_GAME_ITEM_003', 
+((SELECT id FROM sys_product_spu WHERE code = 'GJYS_003'), 'GJYS_003', 
 'BASIC_ATTRS', '基础属性', 1, 3, 
 '{"道具类型":"药水","创作工具":"Blender+Substance Painter","艺术风格":"奇幻/炼金","使用次数":"无限"}', 
 1, 1, 1, 1),
 
 -- 销售属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_ITEM_003'), 'SPU_GAME_ITEM_003',
+((SELECT id FROM sys_product_spu WHERE code = 'GJYS_003'), 'GJYS_003',
 'SALE_ATTRS', '销售属性', 2, 3, 
 '{"设计师":"Potion Designer","创作时间":"2023-06-20","区块链平台":"Ethereum","发行数量":"85","作品编号":"GITEM2023003"}', 
 2, 1, 1, 1),
 
 -- 规格属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_ITEM_003'), 'SPU_GAME_ITEM_003',
+((SELECT id FROM sys_product_spu WHERE code = 'GJYS_003'), 'GJYS_003',
 'SPEC_ATTRS', '规格属性', 3, 3, 
 '{"药水类型":["治疗药水","增益药水","变形药水","抗性药水","特殊效果药水"],"药水品质":["普通","高级","精良","完美","神话"],"使用效果":["生命恢复","属性提升","形态变化","伤害减免","特殊能力"]}', 
 3, 1, 1, 0);
@@ -7674,10 +7429,10 @@ INSERT INTO `sys_product_spu` (
     `price`, `real_price`, `status`, `images`,
     `created_at`, `updated_at`, `is_deleted`, `creator`, `updator`
 ) SELECT 
-    'SPU_GAME_ITEM_004', '魔法符文NFT',
+    'MFFW_004', '魔法符文NFT',
     (SELECT id FROM sys_category WHERE code = '100000'), '100000',
     (SELECT id FROM sys_category WHERE code = '130000'), '130000',
-    (SELECT id FROM sys_category WHERE code = '145000'), '145000',
+    (SELECT id FROM sys_category WHERE code = '131000'), '131000',
     70, 95, 'MagicalRune', '限量版魔法符文NFT，跨游戏平台使用',
     899.00, 1899.00, 1, 'http://example.com/images/magical_rune.png',
     NOW(), NOW(), 0, 'admin', 'admin';
@@ -7685,7 +7440,7 @@ INSERT INTO `sys_product_spu` (
 INSERT INTO `sys_product_spu_detail` (
     `product_spu_id`, `product_spu_code`, `detail`, `packing_list`, `after_sale`
 ) SELECT 
-    (SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_ITEM_004'), 'SPU_GAME_ITEM_004',
+    (SELECT id FROM sys_product_spu WHERE code = 'MFFW_004'), 'MFFW_004',
     '这是一款限量版魔法符文NFT，由符文大师精心打造，拥有独特的外观、魔法效果和背景故事，可在支持NFT资产的多个游戏平台中使用，是收藏家和游戏玩家的珍贵资产。',
     '道具NFT、区块链所有权证书、3D模型文件、道具背景故事、使用指南',
     '区块链永久认证，资产真实性终身保障，新游戏平台适配支持';
@@ -7695,19 +7450,19 @@ INSERT INTO `sys_product_spu_attr_params` (
     `attr_type`, `value_type`, `value`, `sort`, `status`, `is_required`, `is_generic`
 ) VALUES 
 -- 基础属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_ITEM_004'), 'SPU_GAME_ITEM_004', 
+((SELECT id FROM sys_product_spu WHERE code = 'MFFW_004'), 'MFFW_004', 
 'BASIC_ATTRS', '基础属性', 1, 3, 
 '{"道具类型":"符文","创作工具":"Photoshop+Substance Designer","艺术风格":"神秘/古代","使用次数":"无限"}', 
 1, 1, 1, 1),
 
 -- 销售属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_ITEM_004'), 'SPU_GAME_ITEM_004',
+((SELECT id FROM sys_product_spu WHERE code = 'MFFW_004'), 'MFFW_004',
 'SALE_ATTRS', '销售属性', 2, 3, 
 '{"设计师":"Rune Designer","创作时间":"2023-07-25","区块链平台":"Ethereum","发行数量":"95","作品编号":"GITEM2023004"}', 
 2, 1, 1, 1),
 
 -- 规格属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_ITEM_004'), 'SPU_GAME_ITEM_004',
+((SELECT id FROM sys_product_spu WHERE code = 'MFFW_004'), 'MFFW_004',
 'SPEC_ATTRS', '规格属性', 3, 3, 
 '{"符文类型":["攻击符文","防御符文","增益符文","控制符文","特殊符文"],"符文体系":["北欧","精灵","矮人","龙族","远古"],"使用效果":["武器强化","防具强化","技能强化","特殊能力","被动效果"]}', 
 3, 1, 1, 0);
@@ -7721,10 +7476,10 @@ INSERT INTO `sys_product_spu` (
     `price`, `real_price`, `status`, `images`,
     `created_at`, `updated_at`, `is_deleted`, `creator`, `updator`
 ) SELECT 
-    'SPU_GAME_ITEM_005', '传送门道具NFT',
+    'CSMDJ_005', '传送门道具NFT',
     (SELECT id FROM sys_category WHERE code = '100000'), '100000',
     (SELECT id FROM sys_category WHERE code = '130000'), '130000',
-    (SELECT id FROM sys_category WHERE code = '145000'), '145000',
+    (SELECT id FROM sys_category WHERE code = '131000'), '131000',
     50, 80, 'PortalItem', '限量版传送门道具NFT，跨游戏平台使用',
     999.00, 1999.00, 1, 'http://example.com/images/portal_item.png',
     NOW(), NOW(), 0, 'admin', 'admin';
@@ -7732,7 +7487,7 @@ INSERT INTO `sys_product_spu` (
 INSERT INTO `sys_product_spu_detail` (
     `product_spu_id`, `product_spu_code`, `detail`, `packing_list`, `after_sale`
 ) SELECT 
-    (SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_ITEM_005'), 'SPU_GAME_ITEM_005',
+    (SELECT id FROM sys_product_spu WHERE code = 'CSMDJ_005'), 'CSMDJ_005',
     '这是一款限量版传送门道具NFT，由空间法师精心打造，拥有独特的外观、传送效果和背景故事，可在支持NFT资产的多个游戏平台中使用，是收藏家和游戏玩家的珍贵资产。',
     '道具NFT、区块链所有权证书、3D模型文件、道具背景故事、使用指南',
     '区块链永久认证，资产真实性终身保障，新游戏平台适配支持';
@@ -7742,548 +7497,21 @@ INSERT INTO `sys_product_spu_attr_params` (
     `attr_type`, `value_type`, `value`, `sort`, `status`, `is_required`, `is_generic`
 ) VALUES 
 -- 基础属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_ITEM_005'), 'SPU_GAME_ITEM_005', 
+((SELECT id FROM sys_product_spu WHERE code = 'CSMDJ_005'), 'CSMDJ_005', 
 'BASIC_ATTRS', '基础属性', 1, 3, 
 '{"道具类型":"传送门","创作工具":"Maya+Substance Painter","艺术风格":"魔法/科幻","使用次数":"无限"}', 
 1, 1, 1, 1),
 
 -- 销售属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_ITEM_005'), 'SPU_GAME_ITEM_005',
+((SELECT id FROM sys_product_spu WHERE code = 'CSMDJ_005'), 'CSMDJ_005',
 'SALE_ATTRS', '销售属性', 2, 3, 
 '{"设计师":"Portal Designer","创作时间":"2023-08-30","区块链平台":"Ethereum","发行数量":"80","作品编号":"GITEM2023005"}', 
 2, 1, 1, 1),
 
 -- 规格属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_ITEM_005'), 'SPU_GAME_ITEM_005',
+((SELECT id FROM sys_product_spu WHERE code = 'CSMDJ_005'), 'CSMDJ_005',
 'SPEC_ATTRS', '规格属性', 3, 3, 
 '{"传送类型":["地点传送","维度传送","时间传送","随机传送","指定传送"],"传送范围":["短距离","中距离","长距离","跨地图","跨服务器"],"特殊效果":["群体传送","物品传送","记忆传送","隐形传送","紧急逃脱"]}', 
-3, 1, 1, 0);
-
-
--- ================ 23. 游戏资产 - 游戏土地NFT (146000) ================
-
--- 商品1: 虚拟世界地块NFT
-INSERT INTO `sys_product_spu` (
-    `code`, `name`, `category1_id`, `category1_code`, 
-    `category2_id`, `category2_code`, 
-    `category3_id`, `category3_code`,
-    `total_sales`, `total_stock`, `brand`, `description`,
-    `price`, `real_price`, `status`, `images`,
-    `created_at`, `updated_at`, `is_deleted`, `creator`, `updator`
-) SELECT 
-    'SPU_GAME_LAND_001', '虚拟世界地块NFT',
-    (SELECT id FROM sys_category WHERE code = '100000'), '100000',
-    (SELECT id FROM sys_category WHERE code = '130000'), '130000',
-    (SELECT id FROM sys_category WHERE code = '146000'), '146000',
-    60, 100, 'VirtualLand', '限量版虚拟世界地块NFT，跨游戏平台使用',
-    9999.00, 19999.00, 1, 'http://example.com/images/virtual_land.png',
-    NOW(), NOW(), 0, 'admin', 'admin';
-
-INSERT INTO `sys_product_spu_detail` (
-    `product_spu_id`, `product_spu_code`, `detail`, `packing_list`, `after_sale`
-) SELECT 
-    (SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_LAND_001'), 'SPU_GAME_LAND_001',
-    '这是一款限量版虚拟世界地块NFT，由地块设计师精心打造，拥有独特的位置、资源和开发潜力，可在支持NFT资产的多个游戏平台中使用，是收藏家和游戏玩家的珍贵资产。',
-    '地块NFT、区块链所有权证书、3D模型文件、地块背景资料、使用指南',
-    '区块链永久认证，资产真实性终身保障，新游戏平台适配支持';
-
-INSERT INTO `sys_product_spu_attr_params` (
-    `product_spu_id`, `product_spu_code`, `code`, `name`, 
-    `attr_type`, `value_type`, `value`, `sort`, `status`, `is_required`, `is_generic`
-) VALUES 
--- 基础属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_LAND_001'), 'SPU_GAME_LAND_001', 
-'BASIC_ATTRS', '基础属性', 1, 3, 
-'{"地块类型":"虚拟世界地块","创作工具":"Unity+Blender","艺术风格":"开放世界","面积":"16x16"}', 
-1, 1, 1, 1),
-
--- 销售属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_LAND_001'), 'SPU_GAME_LAND_001',
-'SALE_ATTRS', '销售属性', 2, 3, 
-'{"发行方":"Metaverse Holdings","发行时间":"2023-04-05","区块链平台":"Ethereum","发行数量":"100","地块编号":"LAND2023001"}', 
-2, 1, 1, 1),
-
--- 规格属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_LAND_001'), 'SPU_GAME_LAND_001',
-'SPEC_ATTRS', '规格属性', 3, 3, 
-'{"位置类型":["中心区","商业区","娱乐区","住宅区","边缘区"],"资源丰富度":["稀少","一般","丰富","极其丰富","独特资源"],"开发权限":["建筑","商业","活动","广告","API接入"]}', 
-3, 1, 1, 0);
-
-
--- 商品2: 魔法森林地块NFT
-INSERT INTO `sys_product_spu` (
-    `code`, `name`, `category1_id`, `category1_code`, 
-    `category2_id`, `category2_code`, 
-    `category3_id`, `category3_code`,
-    `total_sales`, `total_stock`, `brand`, `description`,
-    `price`, `real_price`, `status`, `images`,
-    `created_at`, `updated_at`, `is_deleted`, `creator`, `updator`
-) SELECT 
-    'SPU_GAME_LAND_002', '魔法森林地块NFT',
-    (SELECT id FROM sys_category WHERE code = '100000'), '100000',
-    (SELECT id FROM sys_category WHERE code = '130000'), '130000',
-    (SELECT id FROM sys_category WHERE code = '146000'), '146000',
-    55, 90, 'MagicalForest', '限量版魔法森林地块NFT，跨游戏平台使用',
-    8999.00, 18999.00, 1, 'http://example.com/images/magical_forest.png',
-    NOW(), NOW(), 0, 'admin', 'admin';
-
-INSERT INTO `sys_product_spu_detail` (
-    `product_spu_id`, `product_spu_code`, `detail`, `packing_list`, `after_sale`
-) SELECT 
-    (SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_LAND_002'), 'SPU_GAME_LAND_002',
-    '这是一款限量版魔法森林地块NFT，由地块设计师精心打造，拥有独特的魔法生态系统、稀有资源和开发潜力，可在支持NFT资产的多个游戏平台中使用，是收藏家和游戏玩家的珍贵资产。',
-    '地块NFT、区块链所有权证书、3D模型文件、地块背景资料、使用指南',
-    '区块链永久认证，资产真实性终身保障，新游戏平台适配支持';
-
-INSERT INTO `sys_product_spu_attr_params` (
-    `product_spu_id`, `product_spu_code`, `code`, `name`, 
-    `attr_type`, `value_type`, `value`, `sort`, `status`, `is_required`, `is_generic`
-) VALUES 
--- 基础属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_LAND_002'), 'SPU_GAME_LAND_002', 
-'BASIC_ATTRS', '基础属性', 1, 3, 
-'{"地块类型":"魔法森林地块","创作工具":"Unity+Blender","艺术风格":"奇幻/自然","面积":"24x24"}', 
-1, 1, 1, 1),
-
--- 销售属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_LAND_002'), 'SPU_GAME_LAND_002',
-'SALE_ATTRS', '销售属性', 2, 3, 
-'{"发行方":"Fantasy Realms","发行时间":"2023-05-15","区块链平台":"Ethereum","发行数量":"90","地块编号":"LAND2023002"}', 
-2, 1, 1, 1),
-
--- 规格属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_LAND_002'), 'SPU_GAME_LAND_002',
-'SPEC_ATTRS', '规格属性', 3, 3, 
-'{"森林类型":["古老森林","精灵森林","魔法树林","神秘丛林","荧光森林"],"魔法元素":["自然魔法","元素魔法","生命魔法","时空魔法","混沌魔法"],"特殊资源":["魔法水晶","生命之树","魔法生物","药草","远古遗迹"]}', 
-3, 1, 1, 0);
-
--- 商品3: 未来城市地块NFT
-INSERT INTO `sys_product_spu` (
-    `code`, `name`, `category1_id`, `category1_code`, 
-    `category2_id`, `category2_code`, 
-    `category3_id`, `category3_code`,
-    `total_sales`, `total_stock`, `brand`, `description`,
-    `price`, `real_price`, `status`, `images`,
-    `created_at`, `updated_at`, `is_deleted`, `creator`, `updator`
-) SELECT 
-    'SPU_GAME_LAND_003', '未来城市地块NFT',
-    (SELECT id FROM sys_category WHERE code = '100000'), '100000',
-    (SELECT id FROM sys_category WHERE code = '130000'), '130000',
-    (SELECT id FROM sys_category WHERE code = '146000'), '146000',
-    65, 85, 'FutureCity', '限量版未来城市地块NFT，跨游戏平台使用',
-    9599.00, 19599.00, 1, 'http://example.com/images/future_city.png',
-    NOW(), NOW(), 0, 'admin', 'admin';
-
-INSERT INTO `sys_product_spu_detail` (
-    `product_spu_id`, `product_spu_code`, `detail`, `packing_list`, `after_sale`
-) SELECT 
-    (SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_LAND_003'), 'SPU_GAME_LAND_003',
-    '这是一款限量版未来城市地块NFT，由地块设计师精心打造，拥有未来科技风格的建筑、高科技设施和开发潜力，可在支持NFT资产的多个游戏平台中使用，是收藏家和游戏玩家的珍贵资产。',
-    '地块NFT、区块链所有权证书、3D模型文件、地块背景资料、使用指南',
-    '区块链永久认证，资产真实性终身保障，新游戏平台适配支持';
-
-INSERT INTO `sys_product_spu_attr_params` (
-    `product_spu_id`, `product_spu_code`, `code`, `name`, 
-    `attr_type`, `value_type`, `value`, `sort`, `status`, `is_required`, `is_generic`
-) VALUES 
--- 基础属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_LAND_003'), 'SPU_GAME_LAND_003', 
-'BASIC_ATTRS', '基础属性', 1, 3, 
-'{"地块类型":"未来城市地块","创作工具":"Unity+3ds Max","艺术风格":"科幻/未来","面积":"32x32"}', 
-1, 1, 1, 1),
-
--- 销售属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_LAND_003'), 'SPU_GAME_LAND_003',
-'SALE_ATTRS', '销售属性', 2, 3, 
-'{"发行方":"Future Developments","发行时间":"2023-06-20","区块链平台":"Ethereum","发行数量":"85","地块编号":"LAND2023003"}', 
-2, 1, 1, 1),
-
--- 规格属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_LAND_003'), 'SPU_GAME_LAND_003',
-'SPEC_ATTRS', '规格属性', 3, 3, 
-'{"城市区域":["高科技区","商业中心","居住区","娱乐区","工业区"],"科技设施":["能源中心","传送站","AI中心","研究所","太空港"],"开发权限":["建筑","商业","活动","广告","API接入"]}', 
-3, 1, 1, 0);
-
--- 商品4: 远古遗迹地块NFT
-INSERT INTO `sys_product_spu` (
-    `code`, `name`, `category1_id`, `category1_code`, 
-    `category2_id`, `category2_code`, 
-    `category3_id`, `category3_code`,
-    `total_sales`, `total_stock`, `brand`, `description`,
-    `price`, `real_price`, `status`, `images`,
-    `created_at`, `updated_at`, `is_deleted`, `creator`, `updator`
-) SELECT 
-    'SPU_GAME_LAND_004', '远古遗迹地块NFT',
-    (SELECT id FROM sys_category WHERE code = '100000'), '100000',
-    (SELECT id FROM sys_category WHERE code = '130000'), '130000',
-    (SELECT id FROM sys_category WHERE code = '146000'), '146000',
-    70, 95, 'AncientRuins', '限量版远古遗迹地块NFT，跨游戏平台使用',
-    8799.00, 18799.00, 1, 'http://example.com/images/ancient_ruins.png',
-    NOW(), NOW(), 0, 'admin', 'admin';
-
-INSERT INTO `sys_product_spu_detail` (
-    `product_spu_id`, `product_spu_code`, `detail`, `packing_list`, `after_sale`
-) SELECT 
-    (SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_LAND_004'), 'SPU_GAME_LAND_004',
-    '这是一款限量版远古遗迹地块NFT，由地块设计师精心打造，拥有神秘的远古文明遗迹、宝藏和开发潜力，可在支持NFT资产的多个游戏平台中使用，是收藏家和游戏玩家的珍贵资产。',
-    '地块NFT、区块链所有权证书、3D模型文件、地块背景资料、使用指南',
-    '区块链永久认证，资产真实性终身保障，新游戏平台适配支持';
-
-INSERT INTO `sys_product_spu_attr_params` (
-    `product_spu_id`, `product_spu_code`, `code`, `name`, 
-    `attr_type`, `value_type`, `value`, `sort`, `status`, `is_required`, `is_generic`
-) VALUES 
--- 基础属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_LAND_004'), 'SPU_GAME_LAND_004', 
-'BASIC_ATTRS', '基础属性', 1, 3, 
-'{"地块类型":"远古遗迹地块","创作工具":"Unity+ZBrush","艺术风格":"古代/神秘","面积":"20x20"}', 
-1, 1, 1, 1),
-
--- 销售属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_LAND_004'), 'SPU_GAME_LAND_004',
-'SALE_ATTRS', '销售属性', 2, 3, 
-'{"发行方":"Ancient Discoveries","发行时间":"2023-07-25","区块链平台":"Ethereum","发行数量":"95","地块编号":"LAND2023004"}', 
-2, 1, 1, 1),
-
--- 规格属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_LAND_004'), 'SPU_GAME_LAND_004',
-'SPEC_ATTRS', '规格属性', 3, 3, 
-'{"遗迹类型":["神庙","宫殿","城市","金字塔","地下迷宫"],"文明来源":["亚特兰蒂斯","利莫里亚","埃及","玛雅","巴比伦"],"特殊资源":["古代文物","神秘能量","失落知识","远古材料","神器碎片"]}', 
-3, 1, 1, 0);
-
--- 商品5: 浮空岛屿地块NFT
-INSERT INTO `sys_product_spu` (
-    `code`, `name`, `category1_id`, `category1_code`, 
-    `category2_id`, `category2_code`, 
-    `category3_id`, `category3_code`,
-    `total_sales`, `total_stock`, `brand`, `description`,
-    `price`, `real_price`, `status`, `images`,
-    `created_at`, `updated_at`, `is_deleted`, `creator`, `updator`
-) SELECT 
-    'SPU_GAME_LAND_005', '浮空岛屿地块NFT',
-    (SELECT id FROM sys_category WHERE code = '100000'), '100000',
-    (SELECT id FROM sys_category WHERE code = '130000'), '130000',
-    (SELECT id FROM sys_category WHERE code = '146000'), '146000',
-    50, 80, 'FloatingIsland', '限量版浮空岛屿地块NFT，跨游戏平台使用',
-    9299.00, 19299.00, 1, 'http://example.com/images/floating_island.png',
-    NOW(), NOW(), 0, 'admin', 'admin';
-
-INSERT INTO `sys_product_spu_detail` (
-    `product_spu_id`, `product_spu_code`, `detail`, `packing_list`, `after_sale`
-) SELECT 
-    (SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_LAND_005'), 'SPU_GAME_LAND_005',
-    '这是一款限量版浮空岛屿地块NFT，由地块设计师精心打造，拥有独特的悬浮在空中的岛屿、特殊资源和开发潜力，可在支持NFT资产的多个游戏平台中使用，是收藏家和游戏玩家的珍贵资产。',
-    '地块NFT、区块链所有权证书、3D模型文件、地块背景资料、使用指南',
-    '区块链永久认证，资产真实性终身保障，新游戏平台适配支持';
-
-INSERT INTO `sys_product_spu_attr_params` (
-    `product_spu_id`, `product_spu_code`, `code`, `name`, 
-    `attr_type`, `value_type`, `value`, `sort`, `status`, `is_required`, `is_generic`
-) VALUES 
--- 基础属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_LAND_005'), 'SPU_GAME_LAND_005', 
-'BASIC_ATTRS', '基础属性', 1, 3, 
-'{"地块类型":"浮空岛屿地块","创作工具":"Unity+Blender","艺术风格":"奇幻/空中","面积":"28x28"}', 
-1, 1, 1, 1),
-
--- 销售属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_LAND_005'), 'SPU_GAME_LAND_005',
-'SALE_ATTRS', '销售属性', 2, 3, 
-'{"发行方":"Sky Domains","发行时间":"2023-08-30","区块链平台":"Ethereum","发行数量":"80","地块编号":"LAND2023005"}', 
-2, 1, 1, 1),
-
--- 规格属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_LAND_005'), 'SPU_GAME_LAND_005',
-'SPEC_ATTRS', '规格属性', 3, 3, 
-'{"岛屿类型":["自然岛屿","魔法岛屿","科技岛屿","混合岛屿","远古岛屿"],"高度层级":["低空","中空","高空","极高空","天界"],"特殊资源":["浮空晶体","云雾精华","风元素","天空矿物","飞行生物"]}', 
-3, 1, 1, 0);
-
-
--- ================ 24. 游戏资产 - 游戏建筑NFT (147000) ================
-
--- 商品1: 奇幻城堡建筑NFT
-INSERT INTO `sys_product_spu` (
-    `code`, `name`, `category1_id`, `category1_code`, 
-    `category2_id`, `category2_code`, 
-    `category3_id`, `category3_code`,
-    `total_sales`, `total_stock`, `brand`, `description`,
-    `price`, `real_price`, `status`, `images`,
-    `created_at`, `updated_at`, `is_deleted`, `creator`, `updator`
-) SELECT 
-    'SPU_GAME_BUILD_001', '奇幻城堡建筑NFT',
-    (SELECT id FROM sys_category WHERE code = '100000'), '100000',
-    (SELECT id FROM sys_category WHERE code = '130000'), '130000',
-    (SELECT id FROM sys_category WHERE code = '147000'), '147000',
-    60, 100, 'FantasyCastle', '限量版奇幻城堡建筑NFT，跨游戏平台使用',
-    7999.00, 17999.00, 1, 'http://example.com/images/fantasy_castle.png',
-    NOW(), NOW(), 0, 'admin', 'admin';
-
-INSERT INTO `sys_product_spu_detail` (
-    `product_spu_id`, `product_spu_code`, `detail`, `packing_list`, `after_sale`
-) SELECT 
-    (SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_BUILD_001'), 'SPU_GAME_BUILD_001',
-    '这是一款限量版奇幻城堡建筑NFT，由建筑设计师精心打造，拥有独特的外观、内部结构和功能，可在支持NFT资产的多个游戏平台中使用，是收藏家和游戏玩家的珍贵资产。',
-    '建筑NFT、区块链所有权证书、3D模型文件、建筑背景资料、使用指南',
-    '区块链永久认证，资产真实性终身保障，新游戏平台适配支持';
-
-INSERT INTO `sys_product_spu_attr_params` (
-    `product_spu_id`, `product_spu_code`, `code`, `name`, 
-    `attr_type`, `value_type`, `value`, `sort`, `status`, `is_required`, `is_generic`
-) VALUES 
--- 基础属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_BUILD_001'), 'SPU_GAME_BUILD_001', 
-'BASIC_ATTRS', '基础属性', 1, 3, 
-'{"建筑类型":"城堡","创作工具":"3ds Max+ZBrush+Substance Painter","艺术风格":"奇幻/中世纪","多边形数":"150K-250K"}', 
-1, 1, 1, 1),
-
--- 销售属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_BUILD_001'), 'SPU_GAME_BUILD_001',
-'SALE_ATTRS', '销售属性', 2, 3, 
-'{"设计师":"Castle Designer","创作时间":"2023-04-05","区块链平台":"Ethereum","发行数量":"100","作品编号":"GBUILD2023001"}', 
-2, 1, 1, 1),
-
--- 规格属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_BUILD_001'), 'SPU_GAME_BUILD_001',
-'SPEC_ATTRS', '规格属性', 3, 3, 
-'{"城堡风格":["哥特式","罗马式","拜占庭式","东方式","混合式"],"规模":["小型堡垒","中型城堡","大型要塞","皇家宫殿","传奇巨城"],"特殊功能":["防御系统","魔法系统","生产系统","交易系统","传送系统"]}', 
-3, 1, 1, 0);
-
-
--- 商品2: 未来科技建筑NFT
-INSERT INTO `sys_product_spu` (
-    `code`, `name`, `category1_id`, `category1_code`, 
-    `category2_id`, `category2_code`, 
-    `category3_id`, `category3_code`,
-    `total_sales`, `total_stock`, `brand`, `description`,
-    `price`, `real_price`, `status`, `images`,
-    `created_at`, `updated_at`, `is_deleted`, `creator`, `updator`
-) SELECT 
-    'SPU_GAME_BUILD_002', '未来科技建筑NFT',
-    (SELECT id FROM sys_category WHERE code = '100000'), '100000',
-    (SELECT id FROM sys_category WHERE code = '130000'), '130000',
-    (SELECT id FROM sys_category WHERE code = '147000'), '147000',
-    55, 90, 'FuturisticTech', '限量版未来科技建筑NFT，跨游戏平台使用',
-    7599.00, 17599.00, 1, 'http://example.com/images/futuristic_tech.png',
-    NOW(), NOW(), 0, 'admin', 'admin';
-
-INSERT INTO `sys_product_spu_detail` (
-    `product_spu_id`, `product_spu_code`, `detail`, `packing_list`, `after_sale`
-) SELECT 
-    (SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_BUILD_002'), 'SPU_GAME_BUILD_002',
-    '这是一款限量版未来科技建筑NFT，由建筑设计师精心打造，拥有未来感十足的外观、高科技内部结构和功能，可在支持NFT资产的多个游戏平台中使用，是收藏家和游戏玩家的珍贵资产。',
-    '建筑NFT、区块链所有权证书、3D模型文件、建筑背景资料、使用指南',
-    '区块链永久认证，资产真实性终身保障，新游戏平台适配支持';
-
-INSERT INTO `sys_product_spu_attr_params` (
-    `product_spu_id`, `product_spu_code`, `code`, `name`, 
-    `attr_type`, `value_type`, `value`, `sort`, `status`, `is_required`, `is_generic`
-) VALUES 
--- 基础属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_BUILD_002'), 'SPU_GAME_BUILD_002', 
-'BASIC_ATTRS', '基础属性', 1, 3, 
-'{"建筑类型":"科技建筑","创作工具":"3ds Max+Substance Painter","艺术风格":"科幻/未来","多边形数":"180K-280K"}', 
-1, 1, 1, 1),
-
--- 销售属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_BUILD_002'), 'SPU_GAME_BUILD_002',
-'SALE_ATTRS', '销售属性', 2, 3, 
-'{"设计师":"Tech Building Designer","创作时间":"2023-05-15","区块链平台":"Ethereum","发行数量":"90","作品编号":"GBUILD2023002"}', 
-2, 1, 1, 1),
-
--- 规格属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_BUILD_002'), 'SPU_GAME_BUILD_002',
-'SPEC_ATTRS', '规格属性', 3, 3, 
-'{"建筑类型":["研究中心","能源设施","居住区","太空港","AI中心"],"科技风格":["赛博朋克","太空时代","生物科技","量子科技","纳米科技"],"特殊功能":["能源生产","研究加成","自动化系统","防御系统","传送系统"]}', 
-3, 1, 1, 0);
-
--- 商品3: 东方神庙建筑NFT
-INSERT INTO `sys_product_spu` (
-    `code`, `name`, `category1_id`, `category1_code`, 
-    `category2_id`, `category2_code`, 
-    `category3_id`, `category3_code`,
-    `total_sales`, `total_stock`, `brand`, `description`,
-    `price`, `real_price`, `status`, `images`,
-    `created_at`, `updated_at`, `is_deleted`, `creator`, `updator`
-) SELECT 
-    'SPU_GAME_BUILD_003', '东方神庙建筑NFT',
-    (SELECT id FROM sys_category WHERE code = '100000'), '100000',
-    (SELECT id FROM sys_category WHERE code = '130000'), '130000',
-    (SELECT id FROM sys_category WHERE code = '147000'), '147000',
-    65, 85, 'OrientalTemple', '限量版东方神庙建筑NFT，跨游戏平台使用',
-    6999.00, 16999.00, 1, 'http://example.com/images/oriental_temple.png',
-    NOW(), NOW(), 0, 'admin', 'admin';
-
-INSERT INTO `sys_product_spu_detail` (
-    `product_spu_id`, `product_spu_code`, `detail`, `packing_list`, `after_sale`
-) SELECT 
-    (SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_BUILD_003'), 'SPU_GAME_BUILD_003',
-    '这是一款限量版东方神庙建筑NFT，由建筑设计师精心打造，拥有东方古典风格的外观、精致的内部结构和功能，可在支持NFT资产的多个游戏平台中使用，是收藏家和游戏玩家的珍贵资产。',
-    '建筑NFT、区块链所有权证书、3D模型文件、建筑背景资料、使用指南',
-    '区块链永久认证，资产真实性终身保障，新游戏平台适配支持';
-
-INSERT INTO `sys_product_spu_attr_params` (
-    `product_spu_id`, `product_spu_code`, `code`, `name`, 
-    `attr_type`, `value_type`, `value`, `sort`, `status`, `is_required`, `is_generic`
-) VALUES 
--- 基础属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_BUILD_003'), 'SPU_GAME_BUILD_003', 
-'BASIC_ATTRS', '基础属性', 1, 3, 
-'{"建筑类型":"神庙","创作工具":"Maya+ZBrush+Substance Painter","艺术风格":"东方/古典","多边形数":"160K-260K"}', 
-1, 1, 1, 1),
-
--- 销售属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_BUILD_003'), 'SPU_GAME_BUILD_003',
-'SALE_ATTRS', '销售属性', 2, 3, 
-'{"设计师":"Temple Designer","创作时间":"2023-06-20","区块链平台":"Ethereum","发行数量":"85","作品编号":"GBUILD2023003"}', 
-2, 1, 1, 1),
-
--- 规格属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_BUILD_003'), 'SPU_GAME_BUILD_003',
-'SPEC_ATTRS', '规格属性', 3, 3, 
-'{"神庙风格":["中国","日本","韩国","泰国","印度"],"规模":["小型祠堂","中型神庙","大型寺院","皇家庙宇","圣地"],"特殊功能":["修炼系统","冥想系统","治疗系统","祝福系统","传承系统"]}', 
-3, 1, 1, 0);
-
--- 商品4: 水下城市建筑NFT
-INSERT INTO `sys_product_spu` (
-    `code`, `name`, `category1_id`, `category1_code`, 
-    `category2_id`, `category2_code`, 
-    `category3_id`, `category3_code`,
-    `total_sales`, `total_stock`, `brand`, `description`,
-    `price`, `real_price`, `status`, `images`,
-    `created_at`, `updated_at`, `is_deleted`, `creator`, `updator`
-) SELECT 
-    'SPU_GAME_BUILD_004', '水下城市建筑NFT',
-    (SELECT id FROM sys_category WHERE code = '100000'), '100000',
-    (SELECT id FROM sys_category WHERE code = '130000'), '130000',
-    (SELECT id FROM sys_category WHERE code = '147000'), '147000',
-    70, 95, 'UnderwaterCity', '限量版水下城市建筑NFT，跨游戏平台使用',
-    7299.00, 17299.00, 1, 'http://example.com/images/underwater_city.png',
-    NOW(), NOW(), 0, 'admin', 'admin';
-
-INSERT INTO `sys_product_spu_detail` (
-    `product_spu_id`, `product_spu_code`, `detail`, `packing_list`, `after_sale`
-) SELECT 
-    (SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_BUILD_004'), 'SPU_GAME_BUILD_004',
-    '这是一款限量版水下城市建筑NFT，由建筑设计师精心打造，拥有独特的水下建筑风格、防水系统和功能，可在支持NFT资产的多个游戏平台中使用，是收藏家和游戏玩家的珍贵资产。',
-    '建筑NFT、区块链所有权证书、3D模型文件、建筑背景资料、使用指南',
-    '区块链永久认证，资产真实性终身保障，新游戏平台适配支持';
-
-INSERT INTO `sys_product_spu_attr_params` (
-    `product_spu_id`, `product_spu_code`, `code`, `name`, 
-    `attr_type`, `value_type`, `value`, `sort`, `status`, `is_required`, `is_generic`
-) VALUES 
--- 基础属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_BUILD_004'), 'SPU_GAME_BUILD_004', 
-'BASIC_ATTRS', '基础属性', 1, 3, 
-'{"建筑类型":"水下城市","创作工具":"Blender+Substance Painter","艺术风格":"海洋/科幻","多边形数":"200K-300K"}', 
-1, 1, 1, 1),
-
--- 销售属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_BUILD_004'), 'SPU_GAME_BUILD_004',
-'SALE_ATTRS', '销售属性', 2, 3, 
-'{"设计师":"Underwater Architect","创作时间":"2023-07-25","区块链平台":"Ethereum","发行数量":"95","作品编号":"GBUILD2023004"}', 
-2, 1, 1, 1),
-
--- 规格属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_BUILD_004'), 'SPU_GAME_BUILD_004',
-'SPEC_ATTRS', '规格属性', 3, 3, 
-'{"城市类型":["穹顶城市","气泡城市","珊瑚城市","沉船改造","深海基地"],"水下环境":["浅海","珊瑚礁","深海","海沟","海底火山"],"特殊功能":["氧气系统","水压调节","海洋资源采集","水下交通","防御系统"]}', 
-3, 1, 1, 0);
-
--- 商品5: 魔法学院建筑NFT
-INSERT INTO `sys_product_spu` (
-    `code`, `name`, `category1_id`, `category1_code`, 
-    `category2_id`, `category2_code`, 
-    `category3_id`, `category3_code`,
-    `total_sales`, `total_stock`, `brand`, `description`,
-    `price`, `real_price`, `status`, `images`,
-    `created_at`, `updated_at`, `is_deleted`, `creator`, `updator`
-) SELECT 
-    'SPU_GAME_BUILD_005', '魔法学院建筑NFT',
-    (SELECT id FROM sys_category WHERE code = '100000'), '100000',
-    (SELECT id FROM sys_category WHERE code = '130000'), '130000',
-    (SELECT id FROM sys_category WHERE code = '147000'), '147000',
-    50, 80, 'MagicAcademy', '限量版魔法学院建筑NFT，跨游戏平台使用',
-    7499.00, 17499.00, 1, 'http://example.com/images/magic_academy.png',
-    NOW(), NOW(), 0, 'admin', 'admin';
-
-INSERT INTO `sys_product_spu_detail` (
-    `product_spu_id`, `product_spu_code`, `detail`, `packing_list`, `after_sale`
-) SELECT 
-    (SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_BUILD_005'), 'SPU_GAME_BUILD_005',
-    '这是一款限量版魔法学院建筑NFT，由建筑设计师精心打造，拥有神秘的魔法学院风格、魔法系统和功能，可在支持NFT资产的多个游戏平台中使用，是收藏家和游戏玩家的珍贵资产。',
-    '建筑NFT、区块链所有权证书、3D模型文件、建筑背景资料、使用指南',
-    '区块链永久认证，资产真实性终身保障，新游戏平台适配支持';
-
-INSERT INTO `sys_product_spu_attr_params` (
-    `product_spu_id`, `product_spu_code`, `code`, `name`, 
-    `attr_type`, `value_type`, `value`, `sort`, `status`, `is_required`, `is_generic`
-) VALUES 
--- 基础属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_BUILD_005'), 'SPU_GAME_BUILD_005', 
-'BASIC_ATTRS', '基础属性', 1, 3, 
-'{"建筑类型":"魔法学院","创作工具":"3ds Max+ZBrush+Substance Painter","艺术风格":"奇幻/哥特","多边形数":"190K-290K"}', 
-1, 1, 1, 1),
-
--- 销售属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_BUILD_005'), 'SPU_GAME_BUILD_005',
-'SALE_ATTRS', '销售属性', 2, 3, 
-'{"设计师":"Magic Academy Designer","创作时间":"2023-08-30","区块链平台":"Ethereum","发行数量":"80","作品编号":"GBUILD2023005"}', 
-2, 1, 1, 1),
-
--- 规格属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_BUILD_005'), 'SPU_GAME_BUILD_005',
-'SPEC_ATTRS', '规格属性', 3, 3, 
-'{"学院风格":["古典魔法","元素魔法","禁忌魔法","自然魔法","混合魔法"],"规模":["小型学院","中型学院","大型学院","魔法大学","传奇学府"],"特殊功能":["魔法研究","魔法训练","魔法图书馆","魔法实验室","魔法传送"]}', 
-3, 1, 1, 0);
-
--- ================ 25. 游戏资产 - 游戏货币NFT (148000) ================
-
--- 商品1: 传奇金币NFT
-INSERT INTO `sys_product_spu` (
-    `code`, `name`, `category1_id`, `category1_code`, 
-    `category2_id`, `category2_code`, 
-    `category3_id`, `category3_code`,
-    `total_sales`, `total_stock`, `brand`, `description`,
-    `price`, `real_price`, `status`, `images`,
-    `created_at`, `updated_at`, `is_deleted`, `creator`, `updator`
-) SELECT 
-    'SPU_GAME_CURR_001', '传奇金币NFT',
-    (SELECT id FROM sys_category WHERE code = '100000'), '100000',
-    (SELECT id FROM sys_category WHERE code = '130000'), '130000',
-    (SELECT id FROM sys_category WHERE code = '148000'), '148000',
-    60, 100, 'LegendaryCoin', '限量版传奇金币NFT，跨游戏平台使用',
-    499.00, 999.00, 1, 'http://example.com/images/legendary_coin.png',
-    NOW(), NOW(), 0, 'admin', 'admin';
-
-INSERT INTO `sys_product_spu_detail` (
-    `product_spu_id`, `product_spu_code`, `detail`, `packing_list`, `after_sale`
-) SELECT 
-    (SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_CURR_001'), 'SPU_GAME_CURR_001',
-    '这是一款限量版传奇金币NFT，由货币设计师精心打造，拥有独特的外观、价值和背景故事，可在支持NFT资产的多个游戏平台中使用，是收藏家和游戏玩家的珍贵资产。',
-    '货币NFT、区块链所有权证书、3D模型文件、货币背景资料、使用指南',
-    '区块链永久认证，资产真实性终身保障，新游戏平台适配支持';
-
-INSERT INTO `sys_product_spu_attr_params` (
-    `product_spu_id`, `product_spu_code`, `code`, `name`, 
-    `attr_type`, `value_type`, `value`, `sort`, `status`, `is_required`, `is_generic`
-) VALUES 
--- 基础属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_CURR_001'), 'SPU_GAME_CURR_001', 
-'BASIC_ATTRS', '基础属性', 1, 3, 
-'{"货币类型":"金币","创作工具":"ZBrush+Substance Painter","艺术风格":"奇幻/古典","面额":"1000"}', 
-1, 1, 1, 1),
-
--- 销售属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_CURR_001'), 'SPU_GAME_CURR_001',
-'SALE_ATTRS', '销售属性', 2, 3, 
-'{"设计师":"Coin Designer","创作时间":"2023-04-05","区块链平台":"Ethereum","发行数量":"100","作品编号":"GCURR2023001"}', 
-2, 1, 1, 1),
-
--- 规格属性
-((SELECT id FROM sys_product_spu WHERE code = 'SPU_GAME_CURR_001'), 'SPU_GAME_CURR_001',
-'SPEC_ATTRS', '规格属性', 3, 3, 
-'{"金币材质":["黄金","白银","铂金","秘银","魔法合金"],"稀有度":["普通","稀有","史诗","传说","神话"],"特殊效果":["幸运加成","交易加成","经验加成","掉落加成","声望加成"]}', 
 3, 1, 1, 0);
 
 
@@ -9096,171 +8324,610 @@ INSERT INTO `sys_product_spu_attr_params` (
 3, 1, 1, 0);
 
 
-
-// ... existing code ...
-
 -- 17.全国地址表示例数据
 -- 清空现有数据
 DELETE FROM sys_address WHERE id > 0;
 
--- 插入省级数据
-INSERT INTO sys_address (code, name, parent_code, level, province_code, province_name, city_code, city_name, district_code, district_name, street_code, street_name, house_address, full_address, longitude, latitude, postcode, sort, created_at, updated_at, creator, updator, is_deleted) VALUES
-('110000', '北京市', '', 1, '110000', '北京市', '', '', '', '', '', '', '', '北京市', '116.405285', '39.904989', '100000', 1, NOW(), NOW(), 'admin', 'admin', 0),
-('120000', '天津市', '', 1, '120000', '天津市', '', '', '', '', '', '', '', '天津市', '117.190182', '39.125596', '300000', 2, NOW(), NOW(), 'admin', 'admin', 0),
-('130000', '河北省', '', 1, '130000', '河北省', '', '', '', '', '', '', '', '河北省', '114.502461', '38.045474', '050000', 3, NOW(), NOW(), 'admin', 'admin', 0),
-('140000', '山西省', '', 1, '140000', '山西省', '', '', '', '', '', '', '', '山西省', '112.549248', '37.857014', '030000', 4, NOW(), NOW(), 'admin', 'admin', 0),
-('150000', '内蒙古自治区', '', 1, '150000', '内蒙古自治区', '', '', '', '', '', '', '', '内蒙古自治区', '111.670801', '40.818311', '010000', 5, NOW(), NOW(), 'admin', 'admin', 0),
-('210000', '辽宁省', '', 1, '210000', '辽宁省', '', '', '', '', '', '', '', '辽宁省', '123.429096', '41.796767', '110000', 6, NOW(), NOW(), 'admin', 'admin', 0),
-('220000', '吉林省', '', 1, '220000', '吉林省', '', '', '', '', '', '', '', '吉林省', '125.3245', '43.886841', '130000', 7, NOW(), NOW(), 'admin', 'admin', 0),
-('230000', '黑龙江省', '', 1, '230000', '黑龙江省', '', '', '', '', '', '', '', '黑龙江省', '126.642464', '45.756967', '150000', 8, NOW(), NOW(), 'admin', 'admin', 0),
-('310000', '上海市', '', 1, '310000', '上海市', '', '', '', '', '', '', '', '上海市', '121.472644', '31.231706', '200000', 9, NOW(), NOW(), 'admin', 'admin', 0),
-('320000', '江苏省', '', 1, '320000', '江苏省', '', '', '', '', '', '', '', '江苏省', '118.767413', '32.041544', '210000', 10, NOW(), NOW(), 'admin', 'admin', 0),
-('330000', '浙江省', '', 1, '330000', '浙江省', '', '', '', '', '', '', '', '浙江省', '120.153576', '30.287459', '310000', 11, NOW(), NOW(), 'admin', 'admin', 0),
-('340000', '安徽省', '', 1, '340000', '安徽省', '', '', '', '', '', '', '', '安徽省', '117.283042', '31.86119', '230000', 12, NOW(), NOW(), 'admin', 'admin', 0),
-('350000', '福建省', '', 1, '350000', '福建省', '', '', '', '', '', '', '', '福建省', '119.306239', '26.075302', '350000', 13, NOW(), NOW(), 'admin', 'admin', 0),
-('360000', '江西省', '', 1, '360000', '江西省', '', '', '', '', '', '', '', '江西省', '115.892151', '28.676493', '330000', 14, NOW(), NOW(), 'admin', 'admin', 0),
-('370000', '山东省', '', 1, '370000', '山东省', '', '', '', '', '', '', '', '山东省', '117.000923', '36.675807', '250000', 15, NOW(), NOW(), 'admin', 'admin', 0),
-('410000', '河南省', '', 1, '410000', '河南省', '', '', '', '', '', '', '', '河南省', '113.665412', '34.757975', '450000', 16, NOW(), NOW(), 'admin', 'admin', 0),
-('420000', '湖北省', '', 1, '420000', '湖北省', '', '', '', '', '', '', '', '湖北省', '114.298572', '30.584355', '430000', 17, NOW(), NOW(), 'admin', 'admin', 0),
-('430000', '湖南省', '', 1, '430000', '湖南省', '', '', '', '', '', '', '', '湖南省', '112.982279', '28.19409', '410000', 18, NOW(), NOW(), 'admin', 'admin', 0),
-('440000', '广东省', '', 1, '440000', '广东省', '', '', '', '', '', '', '', '广东省', '113.280637', '23.125178', '510000', 19, NOW(), NOW(), 'admin', 'admin', 0),
-('450000', '广西壮族自治区', '', 1, '450000', '广西壮族自治区', '', '', '', '', '', '', '', '广西壮族自治区', '108.320004', '22.82402', '530000', 20, NOW(), NOW(), 'admin', 'admin', 0),
-('460000', '海南省', '', 1, '460000', '海南省', '', '', '', '', '', '', '', '海南省', '110.33119', '20.031971', '570000', 21, NOW(), NOW(), 'admin', 'admin', 0),
-('500000', '重庆市', '', 1, '500000', '重庆市', '', '', '', '', '', '', '', '重庆市', '106.504962', '29.533155', '400000', 22, NOW(), NOW(), 'admin', 'admin', 0),
-('510000', '四川省', '', 1, '510000', '四川省', '', '', '', '', '', '', '', '四川省', '104.065735', '30.659462', '610000', 23, NOW(), NOW(), 'admin', 'admin', 0),
-('520000', '贵州省', '', 1, '520000', '贵州省', '', '', '', '', '', '', '', '贵州省', '106.713478', '26.578343', '550000', 24, NOW(), NOW(), 'admin', 'admin', 0),
-('530000', '云南省', '', 1, '530000', '云南省', '', '', '', '', '', '', '', '云南省', '102.712251', '25.040609', '650000', 25, NOW(), NOW(), 'admin', 'admin', 0),
-('540000', '西藏自治区', '', 1, '540000', '西藏自治区', '', '', '', '', '', '', '', '西藏自治区', '91.132212', '29.660361', '850000', 26, NOW(), NOW(), 'admin', 'admin', 0),
-('610000', '陕西省', '', 1, '610000', '陕西省', '', '', '', '', '', '', '', '陕西省', '108.948024', '34.263161', '710000', 27, NOW(), NOW(), 'admin', 'admin', 0),
-('620000', '甘肃省', '', 1, '620000', '甘肃省', '', '', '', '', '', '', '', '甘肃省', '103.823557', '36.058039', '730000', 28, NOW(), NOW(), 'admin', 'admin', 0),
-('630000', '青海省', '', 1, '630000', '青海省', '', '', '', '', '', '', '', '青海省', '101.778916', '36.623178', '810000', 29, NOW(), NOW(), 'admin', 'admin', 0),
-('640000', '宁夏回族自治区', '', 1, '640000', '宁夏回族自治区', '', '', '', '', '', '', '', '宁夏回族自治区', '106.278179', '38.46637', '750000', 30, NOW(), NOW(), 'admin', 'admin', 0),
-('650000', '新疆维吾尔自治区', '', 1, '650000', '新疆维吾尔自治区', '', '', '', '', '', '', '', '新疆维吾尔自治区', '87.617733', '43.792818', '830000', 31, NOW(), NOW(), 'admin', 'admin', 0),
-('710000', '台湾省', '', 1, '710000', '台湾省', '', '', '', '', '', '', '', '台湾省', '121.509062', '25.044332', '100000', 32, NOW(), NOW(), 'admin', 'admin', 0),
-('810000', '香港特别行政区', '', 1, '810000', '香港特别行政区', '', '', '', '', '', '', '', '香港特别行政区', '114.173355', '22.320048', '999077', 33, NOW(), NOW(), 'admin', 'admin', 0),
-('820000', '澳门特别行政区', '', 1, '820000', '澳门特别行政区', '', '', '', '', '', '', '', '澳门特别行政区', '113.54909', '22.198951', '999078', 34, NOW(), NOW(), 'admin', 'admin', 0);
+-- 清空现有数据
+TRUNCATE TABLE sys_address;
 
--- 插入部分市级数据（以北京、上海、广东为例）
--- 北京市辖区
-INSERT INTO sys_address (code, name, parent_code, level, province_code, province_name, city_code, city_name, district_code, district_name, street_code, street_name, house_address, full_address, longitude, latitude, postcode, sort, created_at, updated_at, creator, updator, is_deleted) VALUES
-('110100', '北京市', '110000', 2, '110000', '北京市', '110100', '北京市', '', '', '', '', '', '北京市', '116.405285', '39.904989', '100000', 1, NOW(), NOW(), 'admin', 'admin', 0),
-('110101', '东城区', '110100', 3, '110000', '北京市', '110100', '北京市', '110101', '东城区', '', '', '', '北京市东城区', '116.410925', '39.93157', '100010', 1, NOW(), NOW(), 'admin', 'admin', 0),
-('110102', '西城区', '110100', 3, '110000', '北京市', '110100', '北京市', '110102', '西城区', '', '', '', '北京市西城区', '116.365868', '39.912289', '100032', 2, NOW(), NOW(), 'admin', 'admin', 0),
-('110105', '朝阳区', '110100', 3, '110000', '北京市', '110100', '北京市', '110105', '朝阳区', '', '', '', '北京市朝阳区', '116.443108', '39.92147', '100020', 3, NOW(), NOW(), 'admin', 'admin', 0),
-('110106', '丰台区', '110100', 3, '110000', '北京市', '110100', '北京市', '110106', '丰台区', '', '', '', '北京市丰台区', '116.287149', '39.858427', '100071', 4, NOW(), NOW(), 'admin', 'admin', 0),
-('110107', '石景山区', '110100', 3, '110000', '北京市', '110100', '北京市', '110107', '石景山区', '', '', '', '北京市石景山区', '116.223053', '39.906217', '100043', 5, NOW(), NOW(), 'admin', 'admin', 0),
-('110108', '海淀区', '110100', 3, '110000', '北京市', '110100', '北京市', '110108', '海淀区', '', '', '', '北京市海淀区', '116.298271', '39.959409', '100089', 6, NOW(), NOW(), 'admin', 'admin', 0),
-('110109', '门头沟区', '110100', 3, '110000', '北京市', '110100', '北京市', '110109', '门头沟区', '', '', '', '北京市门头沟区', '116.101716', '39.940659', '102300', 7, NOW(), NOW(), 'admin', 'admin', 0),
-('110111', '房山区', '110100', 3, '110000', '北京市', '110100', '北京市', '110111', '房山区', '', '', '', '北京市房山区', '116.143267', '39.748923', '102488', 8, NOW(), NOW(), 'admin', 'admin', 0),
-('110112', '通州区', '110100', 3, '110000', '北京市', '110100', '北京市', '110112', '通州区', '', '', '', '北京市通州区', '116.656435', '39.909946', '101149', 9, NOW(), NOW(), 'admin', 'admin', 0),
-('110113', '顺义区', '110100', 3, '110000', '北京市', '110100', '北京市', '110113', '顺义区', '', '', '', '北京市顺义区', '116.654651', '40.130347', '101300', 10, NOW(), NOW(), 'admin', 'admin', 0),
-('110114', '昌平区', '110100', 3, '110000', '北京市', '110100', '北京市', '110114', '昌平区', '', '', '', '北京市昌平区', '116.231204', '40.220663', '102200', 11, NOW(), NOW(), 'admin', 'admin', 0),
-('110115', '大兴区', '110100', 3, '110000', '北京市', '110100', '北京市', '110115', '大兴区', '', '', '', '北京市大兴区', '116.341014', '39.726917', '102600', 12, NOW(), NOW(), 'admin', 'admin', 0),
-('110116', '怀柔区', '110100', 3, '110000', '北京市', '110100', '北京市', '110116', '怀柔区', '', '', '', '北京市怀柔区', '116.631889', '40.316876', '101400', 13, NOW(), NOW(), 'admin', 'admin', 0),
-('110117', '平谷区', '110100', 3, '110000', '北京市', '110100', '北京市', '110117', '平谷区', '', '', '', '北京市平谷区', '117.121383', '40.140701', '101200', 14, NOW(), NOW(), 'admin', 'admin', 0),
-('110118', '密云区', '110100', 3, '110000', '北京市', '110100', '北京市', '110118', '密云区', '', '', '', '北京市密云区', '116.843177', '40.376834', '101500', 15, NOW(), NOW(), 'admin', 'admin', 0),
-('110119', '延庆区', '110100', 3, '110000', '北京市', '110100', '北京市', '110119', '延庆区', '', '', '', '北京市延庆区', '115.974848', '40.456951', '102100', 16, NOW(), NOW(), 'admin', 'admin', 0);
+-- 1. 直辖市数据
+INSERT INTO sys_address (code, name, parent_code, level, province_code, province_name, city_code, city_name, district_code, district_name, street_code, street_name, full_address, postcode, sort, creator, updator) VALUES
+-- 北京市
+('110000', '北京市', '0', 1, '110000', '北京市', '', '', '', '', '', '', '北京市', '100000', 1, 'admin', 'admin'),
+('110100', '北京市', '110000', 2, '110000', '北京市', '110100', '北京市', '', '', '', '', '北京市', '100000', 1, 'admin', 'admin'),
 
--- 上海市辖区
-INSERT INTO sys_address (code, name, parent_code, level, province_code, province_name, city_code, city_name, district_code, district_name, street_code, street_name, house_address, full_address, longitude, latitude, postcode, sort, created_at, updated_at, creator, updator, is_deleted) VALUES
-('310100', '上海市', '310000', 2, '310000', '上海市', '310100', '上海市', '', '', '', '', '', '上海市', '121.472644', '31.231706', '200000', 1, NOW(), NOW(), 'admin', 'admin', 0),
-('310101', '黄浦区', '310100', 3, '310000', '上海市', '310100', '上海市', '310101', '黄浦区', '', '', '', '上海市黄浦区', '121.484443', '31.231763', '200001', 1, NOW(), NOW(), 'admin', 'admin', 0),
-('310104', '徐汇区', '310100', 3, '310000', '上海市', '310100', '上海市', '310104', '徐汇区', '', '', '', '上海市徐汇区', '121.436525', '31.188523', '200030', 2, NOW(), NOW(), 'admin', 'admin', 0),
-('310105', '长宁区', '310100', 3, '310000', '上海市', '310100', '上海市', '310105', '长宁区', '', '', '', '上海市长宁区', '121.424624', '31.220367', '200050', 3, NOW(), NOW(), 'admin', 'admin', 0),
-('310106', '静安区', '310100', 3, '310000', '上海市', '310100', '上海市', '310106', '静安区', '', '', '', '上海市静安区', '121.459384', '31.247105', '200040', 4, NOW(), NOW(), 'admin', 'admin', 0),
-('310107', '普陀区', '310100', 3, '310000', '上海市', '310100', '上海市', '310107', '普陀区', '', '', '', '上海市普陀区', '121.395555', '31.249612', '200333', 5, NOW(), NOW(), 'admin', 'admin', 0),
-('310109', '虹口区', '310100', 3, '310000', '上海市', '310100', '上海市', '310109', '虹口区', '', '', '', '上海市虹口区', '121.505133', '31.2646', '200086', 6, NOW(), NOW(), 'admin', 'admin', 0),
-('310110', '杨浦区', '310100', 3, '310000', '上海市', '310100', '上海市', '310110', '杨浦区', '', '', '', '上海市杨浦区', '121.526077', '31.259541', '200082', 7, NOW(), NOW(), 'admin', 'admin', 0),
-('310112', '闵行区', '310100', 3, '310000', '上海市', '310100', '上海市', '310112', '闵行区', '', '', '', '上海市闵行区', '121.381709', '31.112813', '201100', 8, NOW(), NOW(), 'admin', 'admin', 0),
-('310113', '宝山区', '310100', 3, '310000', '上海市', '310100', '上海市', '310113', '宝山区', '', '', '', '上海市宝山区', '121.489612', '31.405457', '201900', 9, NOW(), NOW(), 'admin', 'admin', 0),
-('310114', '嘉定区', '310100', 3, '310000', '上海市', '310100', '上海市', '310114', '嘉定区', '', '', '', '上海市嘉定区', '121.265025', '31.375602', '201800', 10, NOW(), NOW(), 'admin', 'admin', 0),
-('310115', '浦东新区', '310100', 3, '310000', '上海市', '310100', '上海市', '310115', '浦东新区', '', '', '', '上海市浦东新区', '121.544379', '31.221517', '200120', 11, NOW(), NOW(), 'admin', 'admin', 0),
-('310116', '金山区', '310100', 3, '310000', '上海市', '310100', '上海市', '310116', '金山区', '', '', '', '上海市金山区', '121.341604', '30.741818', '201508', 12, NOW(), NOW(), 'admin', 'admin', 0),
-('310117', '松江区', '310100', 3, '310000', '上海市', '310100', '上海市', '310117', '松江区', '', '', '', '上海市松江区', '121.227747', '31.032243', '201600', 13, NOW(), NOW(), 'admin', 'admin', 0),
-('310118', '青浦区', '310100', 3, '310000', '上海市', '310100', '上海市', '310118', '青浦区', '', '', '', '上海市青浦区', '121.124178', '31.150681', '201700', 14, NOW(), NOW(), 'admin', 'admin', 0),
-('310120', '奉贤区', '310100', 3, '310000', '上海市', '310100', '上海市', '310120', '奉贤区', '', '', '', '上海市奉贤区', '121.474042', '30.917795', '201400', 15, NOW(), NOW(), 'admin', 'admin', 0),
-('310151', '崇明区', '310100', 3, '310000', '上海市', '310100', '上海市', '310151', '崇明区', '', '', '', '上海市崇明区', '121.397516', '31.626946', '202150', 16, NOW(), NOW(), 'admin', 'admin', 0);
+-- 北京市下属区县
+('110101', '东城区', '110100', 3, '110000', '北京市', '110100', '北京市', '110101', '东城区', '', '', '北京市东城区', '100010', 1, 'admin', 'admin'),
+('110102', '西城区', '110100', 3, '110000', '北京市', '110100', '北京市', '110102', '西城区', '', '', '北京市西城区', '100032', 2, 'admin', 'admin'),
+('110105', '朝阳区', '110100', 3, '110000', '北京市', '110100', '北京市', '110105', '朝阳区', '', '', '北京市朝阳区', '100020', 3, 'admin', 'admin'),
+('110106', '丰台区', '110100', 3, '110000', '北京市', '110100', '北京市', '110106', '丰台区', '', '', '北京市丰台区', '100071', 4, 'admin', 'admin'),
+('110107', '石景山区', '110100', 3, '110000', '北京市', '110100', '北京市', '110107', '石景山区', '', '', '北京市石景山区', '100043', 5, 'admin', 'admin'),
+('110108', '海淀区', '110100', 3, '110000', '北京市', '110100', '北京市', '110108', '海淀区', '', '', '北京市海淀区', '100089', 6, 'admin', 'admin'),
+('110109', '门头沟区', '110100', 3, '110000', '北京市', '110100', '北京市', '110109', '门头沟区', '', '', '北京市门头沟区', '102300', 7, 'admin', 'admin'),
+('110111', '房山区', '110100', 3, '110000', '北京市', '110100', '北京市', '110111', '房山区', '', '', '北京市房山区', '102488', 8, 'admin', 'admin'),
+('110112', '通州区', '110100', 3, '110000', '北京市', '110100', '北京市', '110112', '通州区', '', '', '北京市通州区', '101100', 9, 'admin', 'admin'),
+('110113', '顺义区', '110100', 3, '110000', '北京市', '110100', '北京市', '110113', '顺义区', '', '', '北京市顺义区', '101300', 10, 'admin', 'admin'),
+('110114', '昌平区', '110100', 3, '110000', '北京市', '110100', '北京市', '110114', '昌平区', '', '', '北京市昌平区', '102200', 11, 'admin', 'admin'),
+('110115', '大兴区', '110100', 3, '110000', '北京市', '110100', '北京市', '110115', '大兴区', '', '', '北京市大兴区', '102600', 12, 'admin', 'admin'),
+('110116', '怀柔区', '110100', 3, '110000', '北京市', '110100', '北京市', '110116', '怀柔区', '', '', '北京市怀柔区', '101400', 13, 'admin', 'admin'),
+('110117', '平谷区', '110100', 3, '110000', '北京市', '110100', '北京市', '110117', '平谷区', '', '', '北京市平谷区', '101200', 14, 'admin', 'admin'),
+('110118', '密云区', '110100', 3, '110000', '北京市', '110100', '北京市', '110118', '密云区', '', '', '北京市密云区', '101500', 15, 'admin', 'admin'),
+('110119', '延庆区', '110100', 3, '110000', '北京市', '110100', '北京市', '110119', '延庆区', '', '', '北京市延庆区', '102100', 16, 'admin', 'admin');
 
--- 广东省部分城市
-INSERT INTO sys_address (code, name, parent_code, level, province_code, province_name, city_code, city_name, district_code, district_name, street_code, street_name, house_address, full_address, longitude, latitude, postcode, sort, created_at, updated_at, creator, updator, is_deleted) VALUES
-('440100', '广州市', '440000', 2, '440000', '广东省', '440100', '广州市', '', '', '', '', '', '广东省广州市', '113.280637', '23.125178', '510000', 1, NOW(), NOW(), 'admin', 'admin', 0),
-('440300', '深圳市', '440000', 2, '440000', '广东省', '440300', '深圳市', '', '', '', '', '', '广东省深圳市', '114.085947', '22.547', '518000', 2, NOW(), NOW(), 'admin', 'admin', 0),
-('440400', '珠海市', '440000', 2, '440000', '广东省', '440400', '珠海市', '', '', '', '', '', '广东省珠海市', '113.553986', '22.224979', '519000', 3, NOW(), NOW(), 'admin', 'admin', 0),
-('440600', '佛山市', '440000', 2, '440000', '广东省', '440600', '佛山市', '', '', '', '', '', '广东省佛山市', '113.122717', '23.028762', '528000', 4, NOW(), NOW(), 'admin', 'admin', 0),
-('441900', '东莞市', '440000', 2, '440000', '广东省', '441900', '东莞市', '', '', '', '', '', '广东省东莞市', '113.746262', '23.046237', '523000', 5, NOW(), NOW(), 'admin', 'admin', 0);
+-- 北京市朝阳区街道示例
+INSERT INTO sys_address (code, name, parent_code, level, province_code, province_name, city_code, city_name, district_code, district_name, street_code, street_name, full_address, postcode, sort, creator, updator) VALUES
+('110105001', '朝阳门街道', '110105', 4, '110000', '北京市', '110100', '北京市', '110105', '朝阳区', '110105001', '朝阳门街道', '北京市朝阳区朝阳门街道', '100020', 1, 'admin', 'admin'),
+('110105002', '建国门外街道', '110105', 4, '110000', '北京市', '110100', '北京市', '110105', '朝阳区', '110105002', '建国门外街道', '北京市朝阳区建国门外街道', '100020', 2, 'admin', 'admin'),
+('110105003', '呼家楼街道', '110105', 4, '110000', '北京市', '110100', '北京市', '110105', '朝阳区', '110105003', '呼家楼街道', '北京市朝阳区呼家楼街道', '100020', 3, 'admin', 'admin'),
+('110105004', '三里屯街道', '110105', 4, '110000', '北京市', '110100', '北京市', '110105', '朝阳区', '110105004', '三里屯街道', '北京市朝阳区三里屯街道', '100020', 4, 'admin', 'admin');
 
--- 广州市部分区县
-INSERT INTO sys_address (code, name, parent_code, level, province_code, province_name, city_code, city_name, district_code, district_name, street_code, street_name, house_address, full_address, longitude, latitude, postcode, sort, created_at, updated_at, creator, updator, is_deleted) VALUES
-('440103', '荔湾区', '440100', 3, '440000', '广东省', '440100', '广州市', '440103', '荔湾区', '', '', '', '广东省广州市荔湾区', '113.244261', '23.125624', '510145', 1, NOW(), NOW(), 'admin', 'admin', 0),
-('440104', '越秀区', '440100', 3, '440000', '广东省', '440100', '广州市', '440104', '越秀区', '', '', '', '广东省广州市越秀区', '113.266857', '23.128521', '510030', 2, NOW(), NOW(), 'admin', 'admin', 0),
-('440105', '海珠区', '440100', 3, '440000', '广东省', '440100', '广州市', '440105', '海珠区', '', '', '', '广东省广州市海珠区', '113.317388', '23.083738', '510220', 3, NOW(), NOW(), 'admin', 'admin', 0),
-('440106', '天河区', '440100', 3, '440000', '广东省', '440100', '广州市', '440106', '天河区', '', '', '', '广东省广州市天河区', '113.361559', '23.124807', '510630', 4, NOW(), NOW(), 'admin', 'admin', 0),
-('440111', '白云区', '440100', 3, '440000', '广东省', '440100', '广州市', '440111', '白云区', '', '', '', '广东省广州市白云区', '113.273289', '23.157387', '510080', 5, NOW(), NOW(), 'admin', 'admin', 0),
-('440112', '黄埔区', '440100', 3, '440000', '广东省', '440100', '广州市', '440112', '黄埔区', '', '', '', '广东省广州市黄埔区', '113.459749', '23.106402', '510700', 6, NOW(), NOW(), 'admin', 'admin', 0);
+-- 北京市海淀区街道示例
+INSERT INTO sys_address (code, name, parent_code, level, province_code, province_name, city_code, city_name, district_code, district_name, street_code, street_name, full_address, postcode, sort, creator, updator) VALUES
+('110108001', '万寿路街道', '110108', 4, '110000', '北京市', '110100', '北京市', '110108', '海淀区', '110108001', '万寿路街道', '北京市海淀区万寿路街道', '100089', 1, 'admin', 'admin'),
+('110108002', '中关村街道', '110108', 4, '110000', '北京市', '110100', '北京市', '110108', '海淀区', '110108002', '中关村街道', '北京市海淀区中关村街道', '100089', 2, 'admin', 'admin'),
+('110108003', '海淀街道', '110108', 4, '110000', '北京市', '110100', '北京市', '110108', '海淀区', '110108003', '海淀街道', '北京市海淀区海淀街道', '100089', 3, 'admin', 'admin'),
+('110108004', '清华园街道', '110108', 4, '110000', '北京市', '110100', '北京市', '110108', '海淀区', '110108004', '清华园街道', '北京市海淀区清华园街道', '100089', 4, 'admin', 'admin');
 
--- 深圳市部分区县
-INSERT INTO sys_address (code, name, parent_code, level, province_code, province_name, city_code, city_name, district_code, district_name, street_code, street_name, house_address, full_address, longitude, latitude, postcode, sort, created_at, updated_at, creator, updator, is_deleted) VALUES
-('440303', '罗湖区', '440300', 3, '440000', '广东省', '440300', '深圳市', '440303', '罗湖区', '', '', '', '广东省深圳市罗湖区', '114.131764', '22.548171', '518001', 1, NOW(), NOW(), 'admin', 'admin', 0),
-('440304', '福田区', '440300', 3, '440000', '广东省', '440300', '深圳市', '440304', '福田区', '', '', '', '广东省深圳市福田区', '114.055036', '22.52153', '518048', 2, NOW(), NOW(), 'admin', 'admin', 0),
-('440305', '南山区', '440300', 3, '440000', '广东省', '440300', '深圳市', '440305', '南山区', '', '', '', '广东省深圳市南山区', '113.930476', '22.533013', '518052', 3, NOW(), NOW(), 'admin', 'admin', 0),
-('440306', '宝安区', '440300', 3, '440000', '广东省', '440300', '深圳市', '440306', '宝安区', '', '', '', '广东省深圳市宝安区', '113.884099', '22.555259', '518101', 4, NOW(), NOW(), 'admin', 'admin', 0),
-('440307', '龙岗区', '440300', 3, '440000', '广东省', '440300', '深圳市', '440307', '龙岗区', '', '', '', '广东省深圳市龙岗区', '114.246899', '22.720968', '518172', 5, NOW(), NOW(), 'admin', 'admin', 0),
-('440308', '盐田区', '440300', 3, '440000', '广东省', '440300', '深圳市', '440308', '盐田区', '', '', '', '广东省深圳市盐田区', '114.236875', '22.556499', '518081', 6, NOW(), NOW(), 'admin', 'admin', 0),
-('440309', '龙华区', '440300', 3, '440000', '广东省', '440300', '深圳市', '440309', '龙华区', '', '', '', '广东省深圳市龙华区', '114.045422', '22.713346', '518110', 7, NOW(), NOW(), 'admin', 'admin', 0),
-('440310', '坪山区', '440300', 3, '440000', '广东省', '440300', '深圳市', '440310', '坪山区', '', '', '', '广东// ... existing code ...
+-- 上海市
+INSERT INTO sys_address (code, name, parent_code, level, province_code, province_name, city_code, city_name, district_code, district_name, street_code, street_name, full_address, postcode, sort, creator, updator) VALUES
+('310000', '上海市', '0', 1, '310000', '上海市', '', '', '', '', '', '', '上海市', '200000', 2, 'admin', 'admin'),
+('310100', '上海市', '310000', 2, '310000', '上海市', '310100', '上海市', '', '', '', '', '上海市', '200000', 1, 'admin', 'admin');
 
-省深圳市坪山区', '114.338441', '22.69423', '518118', 8, NOW(), NOW(), 'admin', 'admin', 0),
-('440311', '光明区', '440300', 3, '440000', '广东省', '440300', '深圳市', '440311', '光明区', '', '', '', '广东省深圳市光明区', '113.935895', '22.748816', '518107', 9, NOW(), NOW(), 'admin', 'admin', 0);
+-- 上海市下属区县
+INSERT INTO sys_address (code, name, parent_code, level, province_code, province_name, city_code, city_name, district_code, district_name, street_code, street_name, full_address, postcode, sort, creator, updator) VALUES
+('310101', '黄浦区', '310100', 3, '310000', '上海市', '310100', '上海市', '310101', '黄浦区', '', '', '上海市黄浦区', '200001', 1, 'admin', 'admin'),
+('310104', '徐汇区', '310100', 3, '310000', '上海市', '310100', '上海市', '310104', '徐汇区', '', '', '上海市徐汇区', '200030', 2, 'admin', 'admin'),
+('310105', '长宁区', '310100', 3, '310000', '上海市', '310100', '上海市', '310105', '长宁区', '', '', '上海市长宁区', '200050', 3, 'admin', 'admin'),
+('310106', '静安区', '310100', 3, '310000', '上海市', '310100', '上海市', '310106', '静安区', '', '', '上海市静安区', '200040', 4, 'admin', 'admin'),
+('310107', '普陀区', '310100', 3, '310000', '上海市', '310100', '上海市', '310107', '普陀区', '', '', '上海市普陀区', '200333', 5, 'admin', 'admin'),
+('310109', '虹口区', '310100', 3, '310000', '上海市', '310100', '上海市', '310109', '虹口区', '', '', '上海市虹口区', '200086', 6, 'admin', 'admin'),
+('310110', '杨浦区', '310100', 3, '310000', '上海市', '310100', '上海市', '310110', '杨浦区', '', '', '上海市杨浦区', '200082', 7, 'admin', 'admin'),
+('310112', '闵行区', '310100', 3, '310000', '上海市', '310100', '上海市', '310112', '闵行区', '', '', '上海市闵行区', '201100', 8, 'admin', 'admin'),
+('310113', '宝山区', '310100', 3, '310000', '上海市', '310100', '上海市', '310113', '宝山区', '', '', '上海市宝山区', '201900', 9, 'admin', 'admin'),
+('310114', '嘉定区', '310100', 3, '310000', '上海市', '310100', '上海市', '310114', '嘉定区', '', '', '上海市嘉定区', '201800', 10, 'admin', 'admin'),
+('310115', '浦东新区', '310100', 3, '310000', '上海市', '310100', '上海市', '310115', '浦东新区', '', '', '上海市浦东新区', '200120', 11, 'admin', 'admin'),
+('310116', '金山区', '310100', 3, '310000', '上海市', '310100', '上海市', '310116', '金山区', '', '', '上海市金山区', '200540', 12, 'admin', 'admin'),
+('310117', '松江区', '310100', 3, '310000', '上海市', '310100', '上海市', '310117', '松江区', '', '', '上海市松江区', '201600', 13, 'admin', 'admin'),
+('310118', '青浦区', '310100', 3, '310000', '上海市', '310100', '上海市', '310118', '青浦区', '', '', '上海市青浦区', '201700', 14, 'admin', 'admin'),
+('310120', '奉贤区', '310100', 3, '310000', '上海市', '310100', '上海市', '310120', '奉贤区', '', '', '上海市奉贤区', '201400', 15, 'admin', 'admin'),
+('310151', '崇明区', '310100', 3, '310000', '上海市', '310100', '上海市', '310151', '崇明区', '', '', '上海市崇明区', '202150', 16, 'admin', 'admin');
 
--- 添加部分街道数据（以北京市朝阳区为例）
-INSERT INTO sys_address (code, name, parent_code, level, province_code, province_name, city_code, city_name, district_code, district_name, street_code, street_name, house_address, full_address, longitude, latitude, postcode, sort, created_at, updated_at, creator, updator, is_deleted) VALUES
-('110105001', '朝外街道', '110105', 4, '110000', '北京市', '110100', '北京市', '110105', '朝阳区', '110105001', '朝外街道', '', '北京市朝阳区朝外街道', '116.448287', '39.921143', '100020', 1, NOW(), NOW(), 'admin', 'admin', 0),
-('110105002', '建外街道', '110105', 4, '110000', '北京市', '110100', '北京市', '110105', '朝阳区', '110105002', '建外街道', '', '北京市朝阳区建外街道', '116.461873', '39.909538', '100022', 2, NOW(), NOW(), 'admin', 'admin', 0),
-('110105003', '呼家楼街道', '110105', 4, '110000', '北京市', '110100', '北京市', '110105', '朝阳区', '110105003', '呼家楼街道', '', '北京市朝阳区呼家楼街道', '116.466307', '39.922141', '100020', 3, NOW(), NOW(), 'admin', 'admin', 0),
-('110105004', '三里屯街道', '110105', 4, '110000', '北京市', '110100', '北京市', '110105', '朝阳区', '110105004', '三里屯街道', '', '北京市朝阳区三里屯街道', '116.454833', '39.938367', '100027', 4, NOW(), NOW(), 'admin', 'admin', 0),
-('110105005', '工体街道', '110105', 4, '110000', '北京市', '110100', '北京市', '110105', '朝阳区', '110105005', '工体街道', '', '北京市朝阳区工体街道', '116.446839', '39.933411', '100027', 5, NOW(), NOW(), 'admin', 'admin', 0),
-('110105006', '团结湖街道', '110105', 4, '110000', '北京市', '110100', '北京市', '110105', '朝阳区', '110105006', '团结湖街道', '', '北京市朝阳区团结湖街道', '116.471204', '39.933815', '100026', 6, NOW(), NOW(), 'admin', 'admin', 0),
-('110105007', '望京街道', '110105', 4, '110000', '北京市', '110100', '北京市', '110105', '朝阳区', '110105007', '望京街道', '', '北京市朝阳区望京街道', '116.477499', '40.008585', '100102', 7, NOW(), NOW(), 'admin', 'admin', 0),
-('110105008', '大屯街道', '110105', 4, '110000', '北京市', '110100', '北京市', '110105', '朝阳区', '110105008', '大屯街道', '', '北京市朝阳区大屯街道', '116.407285', '40.010633', '100101', 8, NOW(), NOW(), 'admin', 'admin', 0);
 
--- 添加部分街道数据（以上海市浦东新区为例）
-INSERT INTO sys_address (code, name, parent_code, level, province_code, province_name, city_code, city_name, district_code, district_name, street_code, street_name, house_address, full_address, longitude, latitude, postcode, sort, created_at, updated_at, creator, updator, is_deleted) VALUES
-('310115001', '陆家嘴街道', '310115', 4, '310000', '上海市', '310100', '上海市', '310115', '浦东新区', '310115001', '陆家嘴街道', '', '上海市浦东新区陆家嘴街道', '121.501011', '31.238619', '200120', 1, NOW(), NOW(), 'admin', 'admin', 0),
-('310115002', '花木街道', '310115', 4, '310000', '上海市', '310100', '上海市', '310115', '浦东新区', '310115002', '花木街道', '', '上海市浦东新区花木街道', '121.557293', '31.207123', '201204', 2, NOW(), NOW(), 'admin', 'admin', 0),
-('310115003', '张江镇', '310115', 4, '310000', '上海市', '310100', '上海市', '310115', '浦东新区', '310115003', '张江镇', '', '上海市浦东新区张江镇', '121.586953', '31.203803', '201203', 3, NOW(), NOW(), 'admin', 'admin', 0),
-('310115004', '金桥街道', '310115', 4, '310000', '上海市', '310100', '上海市', '310115', '浦东新区', '310115004', '金桥街道', '', '上海市浦东新区金桥街道', '121.603469', '31.250823', '201206', 4, NOW(), NOW(), 'admin', 'admin', 0),
-('310115005', '塘桥街道', '310115', 4, '310000', '上海市', '310100', '上海市', '310115', '浦东新区', '310115005', '塘桥街道', '', '上海市浦东新区塘桥街道', '121.518634', '31.209572', '200125', 5, NOW(), NOW(), 'admin', 'admin', 0),
-('310115006', '川沙新镇', '310115', 4, '310000', '上海市', '310100', '上海市', '310115', '浦东新区', '310115006', '川沙新镇', '', '上海市浦东新区川沙新镇', '121.700796', '31.189335', '201200', 6, NOW(), NOW(), 'admin', 'admin', 0),
-('310115007', '北蔡镇', '310115', 4, '310000', '上海市', '310100', '上海市', '310115', '浦东新区', '310115007', '北蔡镇', '', '上海市浦东新区北蔡镇', '121.556582', '31.168953', '201209', 7, NOW(), NOW(), 'admin', 'admin', 0),
-('310115008', '康桥镇', '310115', 4, '310000', '上海市', '310100', '上海市', '310115', '浦东新区', '310115008', '康桥镇', '', '上海市浦东新区康桥镇', '121.602818', '31.150036', '201315', 8, NOW(), NOW(), 'admin', 'admin', 0);
+-- 天津市
+INSERT INTO sys_address (code, name, parent_code, level, province_code, province_name, city_code, city_name, district_code, district_name, street_code, street_name, full_address, postcode, sort, creator, updator) VALUES
+('120000', '天津市', '0', 1, '120000', '天津市', '', '', '', '', '', '', '天津市', '300000', 3, 'admin', 'admin'),
+('120100', '天津市', '120000', 2, '120000', '天津市', '120100', '天津市', '', '', '', '', '天津市', '300000', 1, 'admin', 'admin');
 
--- 添加部分街道数据（以广州市天河区为例）
-INSERT INTO sys_address (code, name, parent_code, level, province_code, province_name, city_code, city_name, district_code, district_name, street_code, street_name, house_address, full_address, longitude, latitude, postcode, sort, created_at, updated_at, creator, updator, is_deleted) VALUES
-('440106001', '天河南街道', '440106', 4, '440000', '广东省', '440100', '广州市', '440106', '天河区', '440106001', '天河南街道', '', '广东省广州市天河区天河南街道', '113.347519', '23.125429', '510620', 1, NOW(), NOW(), 'admin', 'admin', 0),
-('440106002', '天河北街道', '440106', 4, '440000', '广东省', '440100', '广州市', '440106', '天河区', '440106002', '天河北街道', '', '广东省广州市天河区天河北街道', '113.349627', '23.137388', '510610', 2, NOW(), NOW(), 'admin', 'admin', 0),
-('440106003', '车陂街道', '440106', 4, '440000', '广东省', '440100', '广州市', '440106', '天河区', '440106003', '车陂街道', '', '广东省广州市天河区车陂街道', '113.368953', '23.125536', '510660', 3, NOW(), NOW(), 'admin', 'admin', 0),
-('440106004', '沙河街道', '440106', 4, '440000', '广东省', '440100', '广州市', '440106', '天河区', '440106004', '沙河街道', '', '广东省广州市天河区沙河街道', '113.340356', '23.145224', '510630', 4, NOW(), NOW(), 'admin', 'admin', 0),
-('440106005', '员村街道', '440106', 4, '440000', '广东省', '440100', '广州市', '440106', '天河区', '440106005', '员村街道', '', '广东省广州市天河区员村街道', '113.368953', '23.115536', '510655', 5, NOW(), NOW(), 'admin', 'admin', 0),
-('440106006', '五山街道', '440106', 4, '440000', '广东省', '440100', '广州市', '440106', '天河区', '440106006', '五山街道', '', '广东省广州市天河区五山街道', '113.368953', '23.145536', '510640', 6, NOW(), NOW(), 'admin', 'admin', 0),
-('440106007', '林和街道', '440106', 4, '440000', '广东省', '440100', '广州市', '440106', '天河区', '440106007', '林和街道', '', '广东省广州市天河区林和街道', '113.328953', '23.155536', '510610', 7, NOW(), NOW(), 'admin', 'admin', 0),
-('440106008', '珠江新城街道', '440106', 4, '440000', '广东省', '440100', '广州市', '440106', '天河区', '440106008', '珠江新城街道', '', '广东省广州市天河区珠江新城街道', '113.330356', '23.125224', '510623', 8, NOW(), NOW(), 'admin', 'admin', 0);
+-- 天津市下属区县
+INSERT INTO sys_address (code, name, parent_code, level, province_code, province_name, city_code, city_name, district_code, district_name, street_code, street_name, full_address, postcode, sort, creator, updator) VALUES
+('120101', '和平区', '120100', 3, '120000', '天津市', '120100', '天津市', '120101', '和平区', '', '', '天津市和平区', '300041', 1, 'admin', 'admin'),
+('120102', '河东区', '120100', 3, '120000', '天津市', '120100', '天津市', '120102', '河东区', '', '', '天津市河东区', '300171', 2, 'admin', 'admin'),
+('120103', '河西区', '120100', 3, '120000', '天津市', '120100', '天津市', '120103', '河西区', '', '', '天津市河西区', '300202', 3, 'admin', 'admin'),
+('120104', '南开区', '120100', 3, '120000', '天津市', '120100', '天津市', '120104', '南开区', '', '', '天津市南开区', '300100', 4, 'admin', 'admin'),
+('120105', '河北区', '120100', 3, '120000', '天津市', '120100', '天津市', '120105', '河北区', '', '', '天津市河北区', '300143', 5, 'admin', 'admin'),
+('120106', '红桥区', '120100', 3, '120000', '天津市', '120100', '天津市', '120106', '红桥区', '', '', '天津市红桥区', '300131', 6, 'admin', 'admin'),
+('120110', '东丽区', '120100', 3, '120000', '天津市', '120100', '天津市', '120110', '东丽区', '', '', '天津市东丽区', '300300', 7, 'admin', 'admin'),
+('120111', '西青区', '120100', 3, '120000', '天津市', '120100', '天津市', '120111', '西青区', '', '', '天津市西青区', '300380', 8, 'admin', 'admin'),
+('120112', '津南区', '120100', 3, '120000', '天津市', '120100', '天津市', '120112', '津南区', '', '', '天津市津南区', '300350', 9, 'admin', 'admin'),
+('120113', '北辰区', '120100', 3, '120000', '天津市', '120100', '天津市', '120113', '北辰区', '', '', '天津市北辰区', '300400', 10, 'admin', 'admin'),
+('120114', '武清区', '120100', 3, '120000', '天津市', '120100', '天津市', '120114', '武清区', '', '', '天津市武清区', '301700', 11, 'admin', 'admin'),
+('120115', '宝坻区', '120100', 3, '120000', '天津市', '120100', '天津市', '120115', '宝坻区', '', '', '天津市宝坻区', '301800', 12, 'admin', 'admin'),
+('120116', '滨海新区', '120100', 3, '120000', '天津市', '120100', '天津市', '120116', '滨海新区', '', '', '天津市滨海新区', '300450', 13, 'admin', 'admin'),
+('120117', '宁河区', '120100', 3, '120000', '天津市', '120100', '天津市', '120117', '宁河区', '', '', '天津市宁河区', '301500', 14, 'admin', 'admin'),
+('120118', '静海区', '120100', 3, '120000', '天津市', '120100', '天津市', '120118', '静海区', '', '', '天津市静海区', '301600', 15, 'admin', 'admin'),
+('120119', '蓟州区', '120100', 3, '120000', '天津市', '120100', '天津市', '120119', '蓟州区', '', '', '天津市蓟州区', '301900', 16, 'admin', 'admin');
 
--- 添加部分详细地址（以北京市朝阳区三里屯街道为例）
-INSERT INTO sys_address (code, name, parent_code, level, province_code, province_name, city_code, city_name, district_code, district_name, street_code, street_name, house_address, full_address, longitude, latitude, postcode, sort, created_at, updated_at, creator, updator, is_deleted) VALUES
-('11010500401', '三里屯SOHO', '110105004', 5, '110000', '北京市', '110100', '北京市', '110105', '朝阳区', '110105004', '三里屯街道', '三里屯SOHO', '北京市朝阳区三里屯街道三里屯SOHO', '116.454369', '39.932670', '100027', 1, NOW(), NOW(), 'admin', 'admin', 0),
-('11010500402', '工人体育场北路13号院', '110105004', 5, '110000', '北京市', '110100', '北京市', '110105', '朝阳区', '110105004', '三里屯街道', '工人体育场北路13号院', '北京市朝阳区三里屯街道工人体育场北路13号院', '116.452369', '39.934670', '100027', 2, NOW(), NOW(), 'admin', 'admin', 0),
-('11010500403', '三里屯太古里', '110105004', 5, '110000', '北京市', '110100', '北京市', '110105', '朝阳区', '110105004', '三里屯街道', '三里屯太古里', '北京市朝阳区三里屯街道三里屯太古里', '116.454833', '39.938367', '100027', 3, NOW(), NOW(), 'admin', 'admin', 0);
+-- 天津市和平区街道示例
+INSERT INTO sys_address (code, name, parent_code, level, province_code, province_name, city_code, city_name, district_code, district_name, street_code, street_name, full_address, postcode, sort, creator, updator) VALUES
+('120101001', '劝业场街道', '120101', 4, '120000', '天津市', '120100', '天津市', '120101', '和平区', '120101001', '劝业场街道', '天津市和平区劝业场街道', '300041', 1, 'admin', 'admin'),
+('120101002', '小白楼街道', '120101', 4, '120000', '天津市', '120100', '天津市', '120101', '和平区', '120101002', '小白楼街道', '天津市和平区小白楼街道', '300041', 2, 'admin', 'admin'),
+('120101003', '新兴街道', '120101', 4, '120000', '天津市', '120100', '天津市', '120101', '和平区', '120101003', '新兴街道', '天津市和平区新兴街道', '300041', 3, 'admin', 'admin'),
+('120101004', '五大道街道', '120101', 4, '120000', '天津市', '120100', '天津市', '120101', '和平区', '120101004', '五大道街道', '天津市和平区五大道街道', '300041', 4, 'admin', 'admin');
 
--- 添加部分详细地址（以上海市浦东新区陆家嘴街道为例）
-INSERT INTO sys_address (code, name, parent_code, level, province_code, province_name, city_code, city_name, district_code, district_name, street_code, street_name, house_address, full_address, longitude, latitude, postcode, sort, created_at, updated_at, creator, updator, is_deleted) VALUES
-('31011500101', '上海中心大厦', '310115001', 5, '310000', '上海市', '310100', '上海市', '310115', '浦东新区', '310115001', '陆家嘴街道', '上海中心大厦', '上海市浦东新区陆家嘴街道上海中心大厦', '121.505846', '31.233915', '200120', 1, NOW(), NOW(), 'admin', 'admin', 0),
-('31011500102', '环球金融中心', '310115001', 5, '310000', '上海市', '310100', '上海市', '310115', '浦东新区', '310115001', '陆家嘴街道', '环球金融中心', '上海市浦东新区陆家嘴街道环球金融中心', '121.506846', '31.234915', '200120', 2, NOW(), NOW(), 'admin', 'admin', 0),
-('31011500103', '金茂大厦', '310115001', 5, '310000', '上海市', '310100', '上海市', '310115', '浦东新区', '310115001', '陆家嘴街道', '金茂大厦', '上海市浦东新区陆家嘴街道金茂大厦', '121.504846', '31.235915', '200120', 3, NOW(), NOW(), 'admin', 'admin', 0);
+-- 重庆市
+INSERT INTO sys_address (code, name, parent_code, level, province_code, province_name, city_code, city_name, district_code, district_name, street_code, street_name, full_address, postcode, sort, creator, updator) VALUES
+('500000', '重庆市', '0', 1, '500000', '重庆市', '', '', '', '', '', '', '重庆市', '400000', 4, 'admin', 'admin'),
+('500100', '重庆市', '500000', 2, '500000', '重庆市', '500100', '重庆市', '', '', '', '', '重庆市', '400000', 1, 'admin', 'admin');
 
--- 添加部分详细地址（以广州市天河区珠江新城街道为例）
-INSERT INTO sys_address (code, name, parent_code, level, province_code, province_name, city_code, city_name, district_code, district_name, street_code, street_name, house_address, full_address, longitude, latitude, postcode, sort, created_at, updated_at, creator, updator, is_deleted) VALUES
-('44010600801', '广州国际金融中心', '440106008', 5, '440000', '广东省', '440100', '广州市', '440106', '天河区', '440106008', '珠江新城街道', '广州国际金融中心', '广东省广州市天河区珠江新城街道广州国际金融中心', '113.329083', '23.118368', '510623', 1, NOW(), NOW(), 'admin', 'admin', 0),
-('44010600802', '广州四季酒店', '440106008', 5, '440000', '广东省', '440100', '广州市', '440106', '天河区', '440106008', '珠江新城街道', '广州四季酒店', '广东省广州市天河区珠江新城街道广州四季酒店', '113.330083', '23.119368', '510623', 2, NOW(), NOW(), 'admin', 'admin', 0),
-('44010600803', '广州图书馆', '440106008', 5, '440000', '广东省', '440100', '广州市', '440106', '天河区', '440106008', '珠江新城街道', '广州图书馆', '广东省广州市天河区珠江新城街道广州图书馆', '113.331083', '23.120368', '510623', 3, NOW(), NOW(), 'admin', 'admin', 0);
+-- 重庆市下属区县
+INSERT INTO sys_address (code, name, parent_code, level, province_code, province_name, city_code, city_name, district_code, district_name, street_code, street_name, full_address, postcode, sort, creator, updator) VALUES
+('500101', '万州区', '500100', 3, '500000', '重庆市', '500100', '重庆市', '500101', '万州区', '', '', '重庆市万州区', '404000', 1, 'admin', 'admin'),
+('500102', '涪陵区', '500100', 3, '500000', '重庆市', '500100', '重庆市', '500102', '涪陵区', '', '', '重庆市涪陵区', '408000', 2, 'admin', 'admin'),
+('500103', '渝中区', '500100', 3, '500000', '重庆市', '500100', '重庆市', '500103', '渝中区', '', '', '重庆市渝中区', '400010', 3, 'admin', 'admin'),
+('500104', '大渡口区', '500100', 3, '500000', '重庆市', '500100', '重庆市', '500104', '大渡口区', '', '', '重庆市大渡口区', '400080', 4, 'admin', 'admin'),
+('500105', '江北区', '500100', 3, '500000', '重庆市', '500100', '重庆市', '500105', '江北区', '', '', '重庆市江北区', '400020', 5, 'admin', 'admin'),
+('500106', '沙坪坝区', '500100', 3, '500000', '重庆市', '500100', '重庆市', '500106', '沙坪坝区', '', '', '重庆市沙坪坝区', '400030', 6, 'admin', 'admin'),
+('500107', '九龙坡区', '500100', 3, '500000', '重庆市', '500100', '重庆市', '500107', '九龙坡区', '', '', '重庆市九龙坡区', '400050', 7, 'admin', 'admin'),
+('500108', '南岸区', '500100', 3, '500000', '重庆市', '500100', '重庆市', '500108', '南岸区', '', '', '重庆市南岸区', '400064', 8, 'admin', 'admin'),
+('500109', '北碚区', '500100', 3, '500000', '重庆市', '500100', '重庆市', '500109', '北碚区', '', '', '重庆市北碚区', '400700', 9, 'admin', 'admin'),
+('500110', '綦江区', '500100', 3, '500000', '重庆市', '500100', '重庆市', '500110', '綦江区', '', '', '重庆市綦江区', '401420', 10, 'admin', 'admin'),
+('500111', '大足区', '500100', 3, '500000', '重庆市', '500100', '重庆市', '500111', '大足区', '', '', '重庆市大足区', '402360', 11, 'admin', 'admin'),
+('500112', '渝北区', '500100', 3, '500000', '重庆市', '500100', '重庆市', '500112', '渝北区', '', '', '重庆市渝北区', '401120', 12, 'admin', 'admin'),
+('500113', '巴南区', '500100', 3, '500000', '重庆市', '500100', '重庆市', '500113', '巴南区', '', '', '重庆市巴南区', '401320', 13, 'admin', 'admin'),
+('500114', '黔江区', '500100', 3, '500000', '重庆市', '500100', '重庆市', '500114', '黔江区', '', '', '重庆市黔江区', '409700', 14, 'admin', 'admin'),
+('500115', '长寿区', '500100', 3, '500000', '重庆市', '500100', '重庆市', '500115', '长寿区', '', '', '重庆市长寿区', '401220', 15, 'admin', 'admin'),
+('500116', '江津区', '500100', 3, '500000', '重庆市', '500100', '重庆市', '500116', '江津区', '', '', '重庆市江津区', '402260', 16, 'admin', 'admin'),
+('500117', '合川区', '500100', 3, '500000', '重庆市', '500100', '重庆市', '500117', '合川区', '', '', '重庆市合川区', '401520', 17, 'admin', 'admin'),
+('500118', '永川区', '500100', 3, '500000', '重庆市', '500100', '重庆市', '500118', '永川区', '', '', '重庆市永川区', '402160', 18, 'admin', 'admin'),
+('500119', '南川区', '500100', 3, '500000', '重庆市', '500100', '重庆市', '500119', '南川区', '', '', '重庆市南川区', '408400', 19, 'admin', 'admin'),
+('500120', '璧山区', '500100', 3, '500000', '重庆市', '500100', '重庆市', '500120', '璧山区', '', '', '重庆市璧山区', '402760', 20, 'admin', 'admin'),
+('500151', '铜梁区', '500100', 3, '500000', '重庆市', '500100', '重庆市', '500151', '铜梁区', '', '', '重庆市铜梁区', '402560', 21, 'admin', 'admin'),
+('500152', '潼南区', '500100', 3, '500000', '重庆市', '500100', '重庆市', '500152', '潼南区', '', '', '重庆市潼南区', '402660', 22, 'admin', 'admin'),
+('500153', '荣昌区', '500100', 3, '500000', '重庆市', '500100', '重庆市', '500153', '荣昌区', '', '', '重庆市荣昌区', '402460', 23, 'admin', 'admin'),
+('500154', '开州区', '500100', 3, '500000', '重庆市', '500100', '重庆市', '500154', '开州区', '', '', '重庆市开州区', '405400', 24, 'admin', 'admin'),
+('500155', '梁平区', '500100', 3, '500000', '重庆市', '500100', '重庆市', '500155', '梁平区', '', '', '重庆市梁平区', '405200', 25, 'admin', 'admin'),
+('500156', '武隆区', '500100', 3, '500000', '重庆市', '500100', '重庆市', '500156', '武隆区', '', '', '重庆市武隆区', '408500', 26, 'admin', 'admin');
 
-// ... existing code ...
+-- 重庆市渝中区街道示例
+INSERT INTO sys_address (code, name, parent_code, level, province_code, province_name, city_code, city_name, district_code, district_name, street_code, street_name, full_address, postcode, sort, creator, updator) VALUES
+('500103001', '解放碑街道', '500103', 4, '500000', '重庆市', '500100', '重庆市', '500103', '渝中区', '500103001', '解放碑街道', '重庆市渝中区解放碑街道', '400010', 1, 'admin', 'admin'),
+('500103002', '南纪门街道', '500103', 4, '500000', '重庆市', '500100', '重庆市', '500103', '渝中区', '500103002', '南纪门街道', '重庆市渝中区南纪门街道', '400010', 2, 'admin', 'admin'),
+('500103003', '七星岗街道', '500103', 4, '500000', '重庆市', '500100', '重庆市', '500103', '渝中区', '500103003', '七星岗街道', '重庆市渝中区七星岗街道', '400010', 3, 'admin', 'admin'),
+('500103004', '大坪街道', '500103', 4, '500000', '重庆市', '500100', '重庆市', '500103', '渝中区', '500103004', '大坪街道', '重庆市渝中区大坪街道', '400010', 4, 'admin', 'admin');
+
+-- 江苏省
+INSERT INTO sys_address (code, name, parent_code, level, province_code, province_name, city_code, city_name, district_code, district_name, street_code, street_name, full_address, postcode, sort, creator, updator) VALUES
+('320000', '江苏省', '0', 1, '320000', '江苏省', '', '', '', '', '', '', '江苏省', '', 5, 'admin', 'admin');
+
+-- 江苏省下属地级市
+INSERT INTO sys_address (code, name, parent_code, level, province_code, province_name, city_code, city_name, district_code, district_name, street_code, street_name, full_address, postcode, sort, creator, updator) VALUES
+('320100', '南京市', '320000', 2, '320000', '江苏省', '320100', '南京市', '', '', '', '', '江苏省南京市', '210008', 1, 'admin', 'admin'),
+('320200', '无锡市', '320000', 2, '320000', '江苏省', '320200', '无锡市', '', '', '', '', '江苏省无锡市', '214000', 2, 'admin', 'admin'),
+('320300', '徐州市', '320000', 2, '320000', '江苏省', '320300', '徐州市', '', '', '', '', '江苏省徐州市', '221000', 3, 'admin', 'admin'),
+('320400', '常州市', '320000', 2, '320000', '江苏省', '320400', '常州市', '', '', '', '', '江苏省常州市', '213000', 4, 'admin', 'admin'),
+('320500', '苏州市', '320000', 2, '320000', '江苏省', '320500', '苏州市', '', '', '', '', '江苏省苏州市', '215000', 5, 'admin', 'admin'),
+('320600', '南通市', '320000', 2, '320000', '江苏省', '320600', '南通市', '', '', '', '', '江苏省南通市', '226000', 6, 'admin', 'admin'),
+('320700', '连云港市', '320000', 2, '320000', '江苏省', '320700', '连云港市', '', '', '', '', '江苏省连云港市', '222000', 7, 'admin', 'admin'),
+('320800', '淮安市', '320000', 2, '320000', '江苏省', '320800', '淮安市', '', '', '', '', '江苏省淮安市', '223001', 8, 'admin', 'admin'),
+('320900', '盐城市', '320000', 2, '320000', '江苏省', '320900', '盐城市', '', '', '', '', '江苏省盐城市', '224000', 9, 'admin', 'admin'),
+('321000', '扬州市', '320000', 2, '320000', '江苏省', '321000', '扬州市', '', '', '', '', '江苏省扬州市', '225000', 10, 'admin', 'admin'),
+('321100', '镇江市', '320000', 2, '320000', '江苏省', '321100', '镇江市', '', '', '', '', '江苏省镇江市', '212000', 11, 'admin', 'admin'),
+('321200', '泰州市', '320000', 2, '320000', '江苏省', '321200', '泰州市', '', '', '', '', '江苏省泰州市', '225300', 12, 'admin', 'admin'),
+('321300', '宿迁市', '320000', 2, '320000', '江苏省', '321300', '宿迁市', '', '', '', '', '江苏省宿迁市', '223800', 13, 'admin', 'admin');
+
+-- 浙江省
+INSERT INTO sys_address (code, name, parent_code, level, province_code, province_name, city_code, city_name, district_code, district_name, street_code, street_name, full_address, postcode, sort, creator, updator) VALUES
+('330000', '浙江省', '0', 1, '330000', '浙江省', '', '', '', '', '', '', '浙江省', '', 6, 'admin', 'admin');
+
+-- 浙江省下属地级市
+INSERT INTO sys_address (code, name, parent_code, level, province_code, province_name, city_code, city_name, district_code, district_name, street_code, street_name, full_address, postcode, sort, creator, updator) VALUES
+('330100', '杭州市', '330000', 2, '330000', '浙江省', '330100', '杭州市', '', '', '', '', '浙江省杭州市', '310000', 1, 'admin', 'admin'),
+('330200', '宁波市', '330000', 2, '330000', '浙江省', '330200', '宁波市', '', '', '', '', '浙江省宁波市', '315000', 2, 'admin', 'admin'),
+('330300', '温州市', '330000', 2, '330000', '浙江省', '330300', '温州市', '', '', '', '', '浙江省温州市', '325000', 3, 'admin', 'admin'),
+('330400', '嘉兴市', '330000', 2, '330000', '浙江省', '330400', '嘉兴市', '', '', '', '', '浙江省嘉兴市', '314000', 4, 'admin', 'admin'),
+('330500', '湖州市', '330000', 2, '330000', '浙江省', '330500', '湖州市', '', '', '', '', '浙江省湖州市', '313000', 5, 'admin', 'admin'),
+('330600', '绍兴市', '330000', 2, '330000', '浙江省', '330600', '绍兴市', '', '', '', '', '浙江省绍兴市', '312000', 6, 'admin', 'admin'),
+('330700', '金华市', '330000', 2, '330000', '浙江省', '330700', '金华市', '', '', '', '', '浙江省金华市', '321000', 7, 'admin', 'admin'),
+('330800', '衢州市', '330000', 2, '330000', '浙江省', '330800', '衢州市', '', '', '', '', '浙江省衢州市', '324000', 8, 'admin', 'admin'),
+('330900', '舟山市', '330000', 2, '330000', '浙江省', '330900', '舟山市', '', '', '', '', '浙江省舟山市', '316000', 9, 'admin', 'admin'),
+('331000', '台州市', '330000', 2, '330000', '浙江省', '331000', '台州市', '', '', '', '', '浙江省台州市', '318000', 10, 'admin', 'admin'),
+('331100', '丽水市', '330000', 2, '330000', '浙江省', '331100', '丽水市', '', '', '', '', '浙江省丽水市', '323000', 11, 'admin', 'admin');
+
+-- 安徽省
+INSERT INTO sys_address (code, name, parent_code, level, province_code, province_name, city_code, city_name, district_code, district_name, street_code, street_name, full_address, postcode, sort, creator, updator) VALUES
+('340000', '安徽省', '0', 1, '340000', '安徽省', '', '', '', '', '', '', '安徽省', '', 7, 'admin', 'admin');
+
+-- 安徽省下属地级市
+INSERT INTO sys_address (code, name, parent_code, level, province_code, province_name, city_code, city_name, district_code, district_name, street_code, street_name, full_address, postcode, sort, creator, updator) VALUES
+('340100', '合肥市', '340000', 2, '340000', '安徽省', '340100', '合肥市', '', '', '', '', '安徽省合肥市', '230000', 1, 'admin', 'admin'),
+('340200', '芜湖市', '340000', 2, '340000', '安徽省', '340200', '芜湖市', '', '', '', '', '安徽省芜湖市', '241000', 2, 'admin', 'admin'),
+('340300', '蚌埠市', '340000', 2, '340000', '安徽省', '340300', '蚌埠市', '', '', '', '', '安徽省蚌埠市', '233000', 3, 'admin', 'admin'),
+('340400', '淮南市', '340000', 2, '340000', '安徽省', '340400', '淮南市', '', '', '', '', '安徽省淮南市', '232000', 4, 'admin', 'admin'),
+('340500', '马鞍山市', '340000', 2, '340000', '安徽省', '340500', '马鞍山市', '', '', '', '', '安徽省马鞍山市', '243000', 5, 'admin', 'admin'),
+('340600', '淮北市', '340000', 2, '340000', '安徽省', '340600', '淮北市', '', '', '', '', '安徽省淮北市', '235000', 6, 'admin', 'admin'),
+('340700', '铜陵市', '340000', 2, '340000', '安徽省', '340700', '铜陵市', '', '', '', '', '安徽省铜陵市', '244000', 7, 'admin', 'admin'),
+('340800', '安庆市', '340000', 2, '340000', '安徽省', '340800', '安庆市', '', '', '', '', '安徽省安庆市', '246000', 8, 'admin', 'admin'),
+('341000', '黄山市', '340000', 2, '340000', '安徽省', '341000', '黄山市', '', '', '', '', '安徽省黄山市', '245000', 9, 'admin', 'admin'),
+('341100', '滁州市', '340000', 2, '340000', '安徽省', '341100', '滁州市', '', '', '', '', '安徽省滁州市', '239000', 10, 'admin', 'admin'),
+('341200', '阜阳市', '340000', 2, '340000', '安徽省', '341200', '阜阳市', '', '', '', '', '安徽省阜阳市', '236000', 11, 'admin', 'admin'),
+('341300', '宿州市', '340000', 2, '340000', '安徽省', '341300', '宿州市', '', '', '', '', '安徽省宿州市', '234000', 12, 'admin', 'admin'),
+('341500', '六安市', '340000', 2, '340000', '安徽省', '341500', '六安市', '', '', '', '', '安徽省六安市', '237000', 13, 'admin', 'admin'),
+('341600', '亳州市', '340000', 2, '340000', '安徽省', '341600', '亳州市', '', '', '', '', '安徽省亳州市', '236800', 14, 'admin', 'admin'),
+('341700', '池州市', '340000', 2, '340000', '安徽省', '341700', '池州市', '', '', '', '', '安徽省池州市', '247100', 15, 'admin', 'admin'),
+('341800', '宣城市', '340000', 2, '340000', '安徽省', '341800', '宣城市', '', '', '', '', '安徽省宣城市', '242000', 16, 'admin', 'admin');
+
+-- 福建省
+INSERT INTO sys_address (code, name, parent_code, level, province_code, province_name, city_code, city_name, district_code, district_name, street_code, street_name, full_address, postcode, sort, creator, updator) VALUES
+('350000', '福建省', '0', 1, '350000', '福建省', '', '', '', '', '', '', '福建省', '', 8, 'admin', 'admin');
+
+-- 福建省下属地级市
+INSERT INTO sys_address (code, name, parent_code, level, province_code, province_name, city_code, city_name, district_code, district_name, street_code, street_name, full_address, postcode, sort, creator, updator) VALUES
+('350100', '福州市', '350000', 2, '350000', '福建省', '350100', '福州市', '', '', '', '', '福建省福州市', '350000', 1, 'admin', 'admin'),
+('350200', '厦门市', '350000', 2, '350000', '福建省', '350200', '厦门市', '', '', '', '', '福建省厦门市', '361000', 2, 'admin', 'admin'),
+('350300', '莆田市', '350000', 2, '350000', '福建省', '350300', '莆田市', '', '', '', '', '福建省莆田市', '351100', 3, 'admin', 'admin'),
+('350400', '三明市', '350000', 2, '350000', '福建省', '350400', '三明市', '', '', '', '', '福建省三明市', '365000', 4, 'admin', 'admin'),
+('350500', '泉州市', '350000', 2, '350000', '福建省', '350500', '泉州市', '', '', '', '', '福建省泉州市', '362000', 5, 'admin', 'admin'),
+('350600', '漳州市', '350000', 2, '350000', '福建省', '350600', '漳州市', '', '', '', '', '福建省漳州市', '363000', 6, 'admin', 'admin'),
+('350700', '南平市', '350000', 2, '350000', '福建省', '350700', '南平市', '', '', '', '', '福建省南平市', '353000', 7, 'admin', 'admin'),
+('350800', '龙岩市', '350000', 2, '350000', '福建省', '350800', '龙岩市', '', '', '', '', '福建省龙岩市', '364000', 8, 'admin', 'admin'),
+('350900', '宁德市', '350000', 2, '350000', '福建省', '350900', '宁德市', '', '', '', '', '福建省宁德市', '352100', 9, 'admin', 'admin');
+
+-- 广东省
+INSERT INTO sys_address (code, name, parent_code, level, province_code, province_name, city_code, city_name, district_code, district_name, street_code, street_name, full_address, postcode, sort, creator, updator) VALUES
+('440000', '广东省', '0', 1, '440000', '广东省', '', '', '', '', '', '', '广东省', '', 9, 'admin', 'admin');
+
+-- 广东省下属地级市
+INSERT INTO sys_address (code, name, parent_code, level, province_code, province_name, city_code, city_name, district_code, district_name, street_code, street_name, full_address, postcode, sort, creator, updator) VALUES
+('440100', '广州市', '440000', 2, '440000', '广东省', '440100', '广州市', '', '', '', '', '广东省广州市', '510000', 1, 'admin', 'admin'),
+('440200', '韶关市', '440000', 2, '440000', '广东省', '440200', '韶关市', '', '', '', '', '广东省韶关市', '512000', 2, 'admin', 'admin'),
+('440300', '深圳市', '440000', 2, '440000', '广东省', '440300', '深圳市', '', '', '', '', '广东省深圳市', '518000', 3, 'admin', 'admin'),
+('440400', '珠海市', '440000', 2, '440000', '广东省', '440400', '珠海市', '', '', '', '', '广东省珠海市', '519000', 4, 'admin', 'admin'),
+('440500', '汕头市', '440000', 2, '440000', '广东省', '440500', '汕头市', '', '', '', '', '广东省汕头市', '515000', 5, 'admin', 'admin'),
+('440600', '佛山市', '440000', 2, '440000', '广东省', '440600', '佛山市', '', '', '', '', '广东省佛山市', '528000', 6, 'admin', 'admin'),
+('440700', '江门市', '440000', 2, '440000', '广东省', '440700', '江门市', '', '', '', '', '广东省江门市', '529000', 7, 'admin', 'admin'),
+('440800', '湛江市', '440000', 2, '440000', '广东省', '440800', '湛江市', '', '', '', '', '广东省湛江市', '524000', 8, 'admin', 'admin'),
+('440900', '茂名市', '440000', 2, '440000', '广东省', '440900', '茂名市', '', '', '', '', '广东省茂名市', '525000', 9, 'admin', 'admin'),
+('441200', '肇庆市', '440000', 2, '440000', '广东省', '441200', '肇庆市', '', '', '', '', '广东省肇庆市', '526000', 10, 'admin', 'admin'),
+('441300', '惠州市', '440000', 2, '440000', '广东省', '441300', '惠州市', '', '', '', '', '广东省惠州市', '516000', 11, 'admin', 'admin'),
+('441400', '梅州市', '440000', 2, '440000', '广东省', '441400', '梅州市', '', '', '', '', '广东省梅州市', '514000', 12, 'admin', 'admin'),
+('441500', '汕尾市', '440000', 2, '440000', '广东省', '441500', '汕尾市', '', '', '', '', '广东省汕尾市', '516600', 13, 'admin', 'admin'),
+('441600', '河源市', '440000', 2, '440000', '广东省', '441600', '河源市', '', '', '', '', '广东省河源市', '517000', 14, 'admin', 'admin'),
+('441700', '阳江市', '440000', 2, '440000', '广东省', '441700', '阳江市', '', '', '', '', '广东省阳江市', '529500', 15, 'admin', 'admin'),
+('441800', '清远市', '440000', 2, '440000', '广东省', '441800', '清远市', '', '', '', '', '广东省清远市', '511500', 16, 'admin', 'admin'),
+('441900', '东莞市', '440000', 2, '440000', '广东省', '441900', '东莞市', '', '', '', '', '广东省东莞市', '523000', 17, 'admin', 'admin'),
+('442000', '中山市', '440000', 2, '440000', '广东省', '442000', '中山市', '', '', '', '', '广东省中山市', '528400', 18, 'admin', 'admin'),
+('445100', '潮州市', '440000', 2, '440000', '广东省', '445100', '潮州市', '', '', '', '', '广东省潮州市', '521000', 19, 'admin', 'admin'),
+('445200', '揭阳市', '440000', 2, '440000', '广东省', '445200', '揭阳市', '', '', '', '', '广东省揭阳市', '522000', 20, 'admin', 'admin'),
+('445300', '云浮市', '440000', 2, '440000', '广东省', '445300', '云浮市', '', '', '', '', '广东省云浮市', '527300', 21, 'admin', 'admin');
+
+-- 广西壮族自治区
+INSERT INTO sys_address (code, name, parent_code, level, province_code, province_name, city_code, city_name, district_code, district_name, street_code, street_name, full_address, postcode, sort, creator, updator) VALUES
+('450000', '广西壮族自治区', '0', 1, '450000', '广西壮族自治区', '', '', '', '', '', '', '广西壮族自治区', '', 10, 'admin', 'admin');
+
+-- 广西壮族自治区下属地级市
+INSERT INTO sys_address (code, name, parent_code, level, province_code, province_name, city_code, city_name, district_code, district_name, street_code, street_name, full_address, postcode, sort, creator, updator) VALUES
+('450100', '南宁市', '450000', 2, '450000', '广西壮族自治区', '450100', '南宁市', '', '', '', '', '广西壮族自治区南宁市', '530000', 1, 'admin', 'admin'),
+('450200', '柳州市', '450000', 2, '450000', '广西壮族自治区', '450200', '柳州市', '', '', '', '', '广西壮族自治区柳州市', '545000', 2, 'admin', 'admin'),
+('450300', '桂林市', '450000', 2, '450000', '广西壮族自治区', '450300', '桂林市', '', '', '', '', '广西壮族自治区桂林市', '541000', 3, 'admin', 'admin'),
+('450400', '梧州市', '450000', 2, '450000', '广西壮族自治区', '450400', '梧州市', '', '', '', '', '广西壮族自治区梧州市', '543000', 4, 'admin', 'admin'),
+('450500', '北海市', '450000', 2, '450000', '广西壮族自治区', '450500', '北海市', '', '', '', '', '广西壮族自治区北海市', '536000', 5, 'admin', 'admin'),
+('450600', '防城港市', '450000', 2, '450000', '广西壮族自治区', '450600', '防城港市', '', '', '', '', '广西壮族自治区防城港市', '538000', 6, 'admin', 'admin'),
+('450700', '钦州市', '450000', 2, '450000', '广西壮族自治区', '450700', '钦州市', '', '', '', '', '广西壮族自治区钦州市', '535000', 7, 'admin', 'admin'),
+('450800', '贵港市', '450000', 2, '450000', '广西壮族自治区', '450800', '贵港市', '', '', '', '', '广西壮族自治区贵港市', '537100', 8, 'admin', 'admin'),
+('450900', '玉林市', '450000', 2, '450000', '广西壮族自治区', '450900', '玉林市', '', '', '', '', '广西壮族自治区玉林市', '537000', 9, 'admin', 'admin'),
+('451000', '百色市', '450000', 2, '450000', '广西壮族自治区', '451000', '百色市', '', '', '', '', '广西壮族自治区百色市', '533000', 10, 'admin', 'admin'),
+('451100', '贺州市', '450000', 2, '450000', '广西壮族自治区', '451100', '贺州市', '', '', '', '', '广西壮族自治区贺州市', '542800', 11, 'admin', 'admin'),
+('451200', '河池市', '450000', 2, '450000', '广西壮族自治区', '451200', '河池市', '', '', '', '', '广西壮族自治区河池市', '547000', 12, 'admin', 'admin'),
+('451300', '来宾市', '450000', 2, '450000', '广西壮族自治区', '451300', '来宾市', '', '', '', '', '广西壮族自治区来宾市', '546100', 13, 'admin', 'admin'),
+('451400', '崇左市', '450000', 2, '450000', '广西壮族自治区', '451400', '崇左市', '', '', '', '', '广西壮族自治区崇左市', '532200', 14, 'admin', 'admin');
+
+-- 海南省
+INSERT INTO sys_address (code, name, parent_code, level, province_code, province_name, city_code, city_name, district_code, district_name, street_code, street_name, full_address, postcode, sort, creator, updator) VALUES
+('460000', '海南省', '0', 1, '460000', '海南省', '', '', '', '', '', '', '海南省', '', 11, 'admin', 'admin');
+
+-- 海南省下属地级市
+INSERT INTO sys_address (code, name, parent_code, level, province_code, province_name, city_code, city_name, district_code, district_name, street_code, street_name, full_address, postcode, sort, creator, updator) VALUES
+('460100', '海口市', '460000', 2, '460000', '海南省', '460100', '海口市', '', '', '', '', '海南省海口市', '570000', 1, 'admin', 'admin'),
+('460200', '三亚市', '460000', 2, '460000', '海南省', '460200', '三亚市', '', '', '', '', '海南省三亚市', '572000', 2, 'admin', 'admin'),
+('460300', '三沙市', '460000', 2, '460000', '海南省', '460300', '三沙市', '', '', '', '', '海南省三沙市', '573100', 3, 'admin', 'admin'),
+('460400', '儋州市', '460000', 2, '460000', '海南省', '460400', '儋州市', '', '', '', '', '海南省儋州市', '571700', 4, 'admin', 'admin');
+
+-- 河南省
+INSERT INTO sys_address (code, name, parent_code, level, province_code, province_name, city_code, city_name, district_code, district_name, street_code, street_name, full_address, postcode, sort, creator, updator) VALUES
+('410000', '河南省', '0', 1, '410000', '河南省', '', '', '', '', '', '', '河南省', '', 12, 'admin', 'admin');
+
+-- 河南省下属地级市
+INSERT INTO sys_address (code, name, parent_code, level, province_code, province_name, city_code, city_name, district_code, district_name, street_code, street_name, full_address, postcode, sort, creator, updator) VALUES
+('410100', '郑州市', '410000', 2, '410000', '河南省', '410100', '郑州市', '', '', '', '', '河南省郑州市', '450000', 1, 'admin', 'admin'),
+('410200', '开封市', '410000', 2, '410000', '河南省', '410200', '开封市', '', '', '', '', '河南省开封市', '475000', 2, 'admin', 'admin'),
+('410300', '洛阳市', '410000', 2, '410000', '河南省', '410300', '洛阳市', '', '', '', '', '河南省洛阳市', '471000', 3, 'admin', 'admin'),
+('410400', '平顶山市', '410000', 2, '410000', '河南省', '410400', '平顶山市', '', '', '', '', '河南省平顶山市', '467000', 4, 'admin', 'admin'),
+('410500', '安阳市', '410000', 2, '410000', '河南省', '410500', '安阳市', '', '', '', '', '河南省安阳市', '455000', 5, 'admin', 'admin'),
+('410600', '鹤壁市', '410000', 2, '410000', '河南省', '410600', '鹤壁市', '', '', '', '', '河南省鹤壁市', '458000', 6, 'admin', 'admin'),
+('410700', '新乡市', '410000', 2, '410000', '河南省', '410700', '新乡市', '', '', '', '', '河南省新乡市', '453000', 7, 'admin', 'admin'),
+('410800', '焦作市', '410000', 2, '410000', '河南省', '410800', '焦作市', '', '', '', '', '河南省焦作市', '454000', 8, 'admin', 'admin'),
+('410900', '濮阳市', '410000', 2, '410000', '河南省', '410900', '濮阳市', '', '', '', '', '河南省濮阳市', '457000', 9, 'admin', 'admin'),
+('411000', '许昌市', '410000', 2, '410000', '河南省', '411000', '许昌市', '', '', '', '', '河南省许昌市', '461000', 10, 'admin', 'admin'),
+('411100', '漯河市', '410000', 2, '410000', '河南省', '411100', '漯河市', '', '', '', '', '河南省漯河市', '462000', 11, 'admin', 'admin'),
+('411200', '三门峡市', '410000', 2, '410000', '河南省', '411200', '三门峡市', '', '', '', '', '河南省三门峡市', '472000', 12, 'admin', 'admin'),
+('411300', '南阳市', '410000', 2, '410000', '河南省', '411300', '南阳市', '', '', '', '', '河南省南阳市', '473000', 13, 'admin', 'admin'),
+('411400', '商丘市', '410000', 2, '410000', '河南省', '411400', '商丘市', '', '', '', '', '河南省商丘市', '476000', 14, 'admin', 'admin'),
+('411500', '信阳市', '410000', 2, '410000', '河南省', '411500', '信阳市', '', '', '', '', '河南省信阳市', '464000', 15, 'admin', 'admin'),
+('411600', '周口市', '410000', 2, '410000', '河南省', '411600', '周口市', '', '', '', '', '河南省周口市', '466000', 16, 'admin', 'admin'),
+('411700', '驻马店市', '410000', 2, '410000', '河南省', '411700', '驻马店市', '', '', '', '', '河南省驻马店市', '463000', 17, 'admin', 'admin'),
+('419001', '济源市', '410000', 2, '410000', '河南省', '419001', '济源市', '', '', '', '', '河南省济源市', '454650', 18, 'admin', 'admin');
+
+-- 湖北省
+INSERT INTO sys_address (code, name, parent_code, level, province_code, province_name, city_code, city_name, district_code, district_name, street_code, street_name, full_address, postcode, sort, creator, updator) VALUES
+('420000', '湖北省', '0', 1, '420000', '湖北省', '', '', '', '', '', '', '湖北省', '', 13, 'admin', 'admin');
+
+-- 湖北省下属地级市
+INSERT INTO sys_address (code, name, parent_code, level, province_code, province_name, city_code, city_name, district_code, district_name, street_code, street_name, full_address, postcode, sort, creator, updator) VALUES
+('420100', '武汉市', '420000', 2, '420000', '湖北省', '420100', '武汉市', '', '', '', '', '湖北省武汉市', '430000', 1, 'admin', 'admin'),
+('420200', '黄石市', '420000', 2, '420000', '湖北省', '420200', '黄石市', '', '', '', '', '湖北省黄石市', '435000', 2, 'admin', 'admin'),
+('420300', '十堰市', '420000', 2, '420000', '湖北省', '420300', '十堰市', '', '', '', '', '湖北省十堰市', '442000', 3, 'admin', 'admin'),
+('420500', '宜昌市', '420000', 2, '420000', '湖北省', '420500', '宜昌市', '', '', '', '', '湖北省宜昌市', '443000', 4, 'admin', 'admin'),
+('420600', '襄阳市', '420000', 2, '420000', '湖北省', '420600', '襄阳市', '', '', '', '', '湖北省襄阳市', '441000', 5, 'admin', 'admin'),
+('420700', '鄂州市', '420000', 2, '420000', '湖北省', '420700', '鄂州市', '', '', '', '', '湖北省鄂州市', '436000', 6, 'admin', 'admin'),
+('420800', '荆门市', '420000', 2, '420000', '湖北省', '420800', '荆门市', '', '', '', '', '湖北省荆门市', '448000', 7, 'admin', 'admin'),
+('420900', '孝感市', '420000', 2, '420000', '湖北省', '420900', '孝感市', '', '', '', '', '湖北省孝感市', '432100', 8, 'admin', 'admin'),
+('421000', '荆州市', '420000', 2, '420000', '湖北省', '421000', '荆州市', '', '', '', '', '湖北省荆州市', '434000', 9, 'admin', 'admin'),
+('421100', '黄冈市', '420000', 2, '420000', '湖北省', '421100', '黄冈市', '', '', '', '', '湖北省黄冈市', '438000', 10, 'admin', 'admin'),
+('421200', '咸宁市', '420000', 2, '420000', '湖北省', '421200', '咸宁市', '', '', '', '', '湖北省咸宁市', '437000', 11, 'admin', 'admin'),
+('421300', '随州市', '420000', 2, '420000', '湖北省', '421300', '随州市', '', '', '', '', '湖北省随州市', '441300', 12, 'admin', 'admin'),
+('422800', '恩施土家族苗族自治州', '420000', 2, '420000', '湖北省', '422800', '恩施土家族苗族自治州', '', '', '', '', '湖北省恩施土家族苗族自治州', '445000', 13, 'admin', 'admin'),
+('429004', '仙桃市', '420000', 2, '420000', '湖北省', '429004', '仙桃市', '', '', '', '', '湖北省仙桃市', '433000', 14, 'admin', 'admin'),
+('429005', '潜江市', '420000', 2, '420000', '湖北省', '429005', '潜江市', '', '', '', '', '湖北省潜江市', '433100', 15, 'admin', 'admin'),
+('429006', '天门市', '420000', 2, '420000', '湖北省', '429006', '天门市', '', '', '', '', '湖北省天门市', '431700', 16, 'admin', 'admin'),
+('429021', '神农架林区', '420000', 2, '420000', '湖北省', '429021', '神农架林区', '', '', '', '', '湖北省神农架林区', '442400', 17, 'admin', 'admin');
+
+-- 湖南省
+INSERT INTO sys_address (code, name, parent_code, level, province_code, province_name, city_code, city_name, district_code, district_name, street_code, street_name, full_address, postcode, sort, creator, updator) VALUES
+('430000', '湖南省', '0', 1, '430000', '湖南省', '', '', '', '', '', '', '湖南省', '', 14, 'admin', 'admin');
+
+-- 湖南省下属地级市
+INSERT INTO sys_address (code, name, parent_code, level, province_code, province_name, city_code, city_name, district_code, district_name, street_code, street_name, full_address, postcode, sort, creator, updator) VALUES
+('430100', '长沙市', '430000', 2, '430000', '湖南省', '430100', '长沙市', '', '', '', '', '湖南省长沙市', '410000', 1, 'admin', 'admin'),
+('430200', '株洲市', '430000', 2, '430000', '湖南省', '430200', '株洲市', '', '', '', '', '湖南省株洲市', '412000', 2, 'admin', 'admin'),
+('430300', '湘潭市', '430000', 2, '430000', '湖南省', '430300', '湘潭市', '', '', '', '', '湖南省湘潭市', '411100', 3, 'admin', 'admin'),
+('430400', '衡阳市', '430000', 2, '430000', '湖南省', '430400', '衡阳市', '', '', '', '', '湖南省衡阳市', '421000', 4, 'admin', 'admin'),
+('430500', '邵阳市', '430000', 2, '430000', '湖南省', '430500', '邵阳市', '', '', '', '', '湖南省邵阳市', '422000', 5, 'admin', 'admin'),
+('430600', '岳阳市', '430000', 2, '430000', '湖南省', '430600', '岳阳市', '', '', '', '', '湖南省岳阳市', '414000', 6, 'admin', 'admin'),
+('430700', '常德市', '430000', 2, '430000', '湖南省', '430700', '常德市', '', '', '', '', '湖南省常德市', '415000', 7, 'admin', 'admin'),
+('430800', '张家界市', '430000', 2, '430000', '湖南省', '430800', '张家界市', '', '', '', '', '湖南省张家界市', '427000', 8, 'admin', 'admin'),
+('430900', '益阳市', '430000', 2, '430000', '湖南省', '430900', '益阳市', '', '', '', '', '湖南省益阳市', '413000', 9, 'admin', 'admin'),
+('431000', '郴州市', '430000', 2, '430000', '湖南省', '431000', '郴州市', '', '', '', '', '湖南省郴州市', '423000', 10, 'admin', 'admin'),
+('431100', '永州市', '430000', 2, '430000', '湖南省', '431100', '永州市', '', '', '', '', '湖南省永州市', '425000', 11, 'admin', 'admin'),
+('431200', '怀化市', '430000', 2, '430000', '湖南省', '431200', '怀化市', '', '', '', '', '湖南省怀化市', '418000', 12, 'admin', 'admin'),
+('431300', '娄底市', '430000', 2, '430000', '湖南省', '431300', '娄底市', '', '', '', '', '湖南省娄底市', '417000', 13, 'admin', 'admin'),
+('433100', '湘西土家族苗族自治州', '430000', 2, '430000', '湖南省', '433100', '湘西土家族苗族自治州', '', '', '', '', '湖南省湘西土家族苗族自治州', '416000', 14, 'admin', 'admin');
+
+-- 山西省
+INSERT INTO sys_address (code, name, parent_code, level, province_code, province_name, city_code, city_name, district_code, district_name, street_code, street_name, full_address, postcode, sort, creator, updator) VALUES
+('140000', '山西省', '0', 1, '140000', '山西省', '', '', '', '', '', '', '山西省', '', 15, 'admin', 'admin');
+
+-- 山西省下属地级市
+INSERT INTO sys_address (code, name, parent_code, level, province_code, province_name, city_code, city_name, district_code, district_name, street_code, street_name, full_address, postcode, sort, creator, updator) VALUES
+('140100', '太原市', '140000', 2, '140000', '山西省', '140100', '太原市', '', '', '', '', '山西省太原市', '030000', 1, 'admin', 'admin'),
+('140200', '大同市', '140000', 2, '140000', '山西省', '140200', '大同市', '', '', '', '', '山西省大同市', '037000', 2, 'admin', 'admin'),
+('140300', '阳泉市', '140000', 2, '140000', '山西省', '140300', '阳泉市', '', '', '', '', '山西省阳泉市', '045000', 3, 'admin', 'admin'),
+('140400', '长治市', '140000', 2, '140000', '山西省', '140400', '长治市', '', '', '', '', '山西省长治市', '046000', 4, 'admin', 'admin'),
+('140500', '晋城市', '140000', 2, '140000', '山西省', '140500', '晋城市', '', '', '', '', '山西省晋城市', '048000', 5, 'admin', 'admin'),
+('140600', '朔州市', '140000', 2, '140000', '山西省', '140600', '朔州市', '', '', '', '', '山西省朔州市', '038500', 6, 'admin', 'admin'),
+('140700', '晋中市', '140000', 2, '140000', '山西省', '140700', '晋中市', '', '', '', '', '山西省晋中市', '030600', 7, 'admin', 'admin'),
+('140800', '运城市', '140000', 2, '140000', '山西省', '140800', '运城市', '', '', '', '', '山西省运城市', '044000', 8, 'admin', 'admin'),
+('140900', '忻州市', '140000', 2, '140000', '山西省', '140900', '忻州市', '', '', '', '', '山西省忻州市', '034000', 9, 'admin', 'admin'),
+('141000', '临汾市', '140000', 2, '140000', '山西省', '141000', '临汾市', '', '', '', '', '山西省临汾市', '041000', 10, 'admin', 'admin'),
+('141100', '吕梁市', '140000', 2, '140000', '山西省', '141100', '吕梁市', '', '', '', '', '山西省吕梁市', '033000', 11, 'admin', 'admin');
+
+-- 内蒙古自治区
+INSERT INTO sys_address (code, name, parent_code, level, province_code, province_name, city_code, city_name, district_code, district_name, street_code, street_name, full_address, postcode, sort, creator, updator) VALUES
+('150000', '内蒙古自治区', '0', 1, '150000', '内蒙古自治区', '', '', '', '', '', '', '内蒙古自治区', '', 16, 'admin', 'admin');
+
+-- 内蒙古自治区下属地级市
+INSERT INTO sys_address (code, name, parent_code, level, province_code, province_name, city_code, city_name, district_code, district_name, street_code, street_name, full_address, postcode, sort, creator, updator) VALUES
+('150100', '呼和浩特市', '150000', 2, '150000', '内蒙古自治区', '150100', '呼和浩特市', '', '', '', '', '内蒙古自治区呼和浩特市', '010000', 1, 'admin', 'admin'),
+('150200', '包头市', '150000', 2, '150000', '内蒙古自治区', '150200', '包头市', '', '', '', '', '内蒙古自治区包头市', '014000', 2, 'admin', 'admin'),
+('150300', '乌海市', '150000', 2, '150000', '内蒙古自治区', '150300', '乌海市', '', '', '', '', '内蒙古自治区乌海市', '016000', 3, 'admin', 'admin'),
+('150400', '赤峰市', '150000', 2, '150000', '内蒙古自治区', '150400', '赤峰市', '', '', '', '', '内蒙古自治区赤峰市', '024000', 4, 'admin', 'admin'),
+('150500', '通辽市', '150000', 2, '150000', '内蒙古自治区', '150500', '通辽市', '', '', '', '', '内蒙古自治区通辽市', '028000', 5, 'admin', 'admin'),
+('150600', '鄂尔多斯市', '150000', 2, '150000', '内蒙古自治区', '150600', '鄂尔多斯市', '', '', '', '', '内蒙古自治区鄂尔多斯市', '017000', 6, 'admin', 'admin'),
+('150700', '呼伦贝尔市', '150000', 2, '150000', '内蒙古自治区', '150700', '呼伦贝尔市', '', '', '', '', '内蒙古自治区呼伦贝尔市', '021000', 7, 'admin', 'admin'),
+('150800', '巴彦淖尔市', '150000', 2, '150000', '内蒙古自治区', '150800', '巴彦淖尔市', '', '', '', '', '内蒙古自治区巴彦淖尔市', '015000', 8, 'admin', 'admin'),
+('150900', '乌兰察布市', '150000', 2, '150000', '内蒙古自治区', '150900', '乌兰察布市', '', '', '', '', '内蒙古自治区乌兰察布市', '012000', 9, 'admin', 'admin'),
+('152200', '兴安盟', '150000', 2, '150000', '内蒙古自治区', '152200', '兴安盟', '', '', '', '', '内蒙古自治区兴安盟', '137400', 10, 'admin', 'admin'),
+('152500', '锡林郭勒盟', '150000', 2, '150000', '内蒙古自治区', '152500', '锡林郭勒盟', '', '', '', '', '内蒙古自治区锡林郭勒盟', '026000', 11, 'admin', 'admin'),
+('152900', '阿拉善盟', '150000', 2, '150000', '内蒙古自治区', '152900', '阿拉善盟', '', '', '', '', '内蒙古自治区阿拉善盟', '750306', 12, 'admin', 'admin');
+
+-- 河北省
+INSERT INTO sys_address (code, name, parent_code, level, province_code, province_name, city_code, city_name, district_code, district_name, street_code, street_name, full_address, postcode, sort, creator, updator) VALUES
+('130000', '河北省', '0', 1, '130000', '河北省', '', '', '', '', '', '', '河北省', '', 17, 'admin', 'admin');
+
+-- 河北省下属地级市
+INSERT INTO sys_address (code, name, parent_code, level, province_code, province_name, city_code, city_name, district_code, district_name, street_code, street_name, full_address, postcode, sort, creator, updator) VALUES
+('130100', '石家庄市', '130000', 2, '130000', '河北省', '130100', '石家庄市', '', '', '', '', '河北省石家庄市', '050000', 1, 'admin', 'admin'),
+('130200', '唐山市', '130000', 2, '130000', '河北省', '130200', '唐山市', '', '', '', '', '河北省唐山市', '063000', 2, 'admin', 'admin'),
+('130300', '秦皇岛市', '130000', 2, '130000', '河北省', '130300', '秦皇岛市', '', '', '', '', '河北省秦皇岛市', '066000', 3, 'admin', 'admin'),
+('130400', '邯郸市', '130000', 2, '130000', '河北省', '130400', '邯郸市', '', '', '', '', '河北省邯郸市', '056000', 4, 'admin', 'admin'),
+('130500', '邢台市', '130000', 2, '130000', '河北省', '130500', '邢台市', '', '', '', '', '河北省邢台市', '054000', 5, 'admin', 'admin'),
+('130600', '保定市', '130000', 2, '130000', '河北省', '130600', '保定市', '', '', '', '', '河北省保定市', '071000', 6, 'admin', 'admin'),
+('130700', '张家口市', '130000', 2, '130000', '河北省', '130700', '张家口市', '', '', '', '', '河北省张家口市', '075000', 7, 'admin', 'admin'),
+('130800', '承德市', '130000', 2, '130000', '河北省', '130800', '承德市', '', '', '', '', '河北省承德市', '067000', 8, 'admin', 'admin'),
+('130900', '沧州市', '130000', 2, '130000', '河北省', '130900', '沧州市', '', '', '', '', '河北省沧州市', '061000', 9, 'admin', 'admin'),
+('131000', '廊坊市', '130000', 2, '130000', '河北省', '131000', '廊坊市', '', '', '', '', '河北省廊坊市', '065000', 10, 'admin', 'admin'),
+('131100', '衡水市', '130000', 2, '130000', '河北省', '131100', '衡水市', '', '', '', '', '河北省衡水市', '053000', 11, 'admin', 'admin');
+
+
+-- 辽宁省
+INSERT INTO sys_address (code, name, parent_code, level, province_code, province_name, city_code, city_name, district_code, district_name, street_code, street_name, full_address, postcode, sort, creator, updator) VALUES
+('210000', '辽宁省', '0', 1, '210000', '辽宁省', '', '', '', '', '', '', '辽宁省', '', 18, 'admin', 'admin');
+
+-- 辽宁省下属地级市
+INSERT INTO sys_address (code, name, parent_code, level, province_code, province_name, city_code, city_name, district_code, district_name, street_code, street_name, full_address, postcode, sort, creator, updator) VALUES
+('210100', '沈阳市', '210000', 2, '210000', '辽宁省', '210100', '沈阳市', '', '', '', '', '辽宁省沈阳市', '110000', 1, 'admin', 'admin'),
+('210200', '大连市', '210000', 2, '210000', '辽宁省', '210200', '大连市', '', '', '', '', '辽宁省大连市', '116000', 2, 'admin', 'admin'),
+('210300', '鞍山市', '210000', 2, '210000', '辽宁省', '210300', '鞍山市', '', '', '', '', '辽宁省鞍山市', '114000', 3, 'admin', 'admin'),
+('210400', '抚顺市', '210000', 2, '210000', '辽宁省', '210400', '抚顺市', '', '', '', '', '辽宁省抚顺市', '113000', 4, 'admin', 'admin'),
+('210500', '本溪市', '210000', 2, '210000', '辽宁省', '210500', '本溪市', '', '', '', '', '辽宁省本溪市', '117000', 5, 'admin', 'admin'),
+('210600', '丹东市', '210000', 2, '210000', '辽宁省', '210600', '丹东市', '', '', '', '', '辽宁省丹东市', '118000', 6, 'admin', 'admin'),
+('210700', '锦州市', '210000', 2, '210000', '辽宁省', '210700', '锦州市', '', '', '', '', '辽宁省锦州市', '121000', 7, 'admin', 'admin'),
+('210800', '营口市', '210000', 2, '210000', '辽宁省', '210800', '营口市', '', '', '', '', '辽宁省营口市', '115000', 8, 'admin', 'admin'),
+('210900', '阜新市', '210000', 2, '210000', '辽宁省', '210900', '阜新市', '', '', '', '', '辽宁省阜新市', '123000', 9, 'admin', 'admin'),
+('211000', '辽阳市', '210000', 2, '210000', '辽宁省', '211000', '辽阳市', '', '', '', '', '辽宁省辽阳市', '111000', 10, 'admin', 'admin'),
+('211100', '盘锦市', '210000', 2, '210000', '辽宁省', '211100', '盘锦市', '', '', '', '', '辽宁省盘锦市', '124000', 11, 'admin', 'admin'),
+('211200', '铁岭市', '210000', 2, '210000', '辽宁省', '211200', '铁岭市', '', '', '', '', '辽宁省铁岭市', '112000', 12, 'admin', 'admin'),
+('211300', '朝阳市', '210000', 2, '210000', '辽宁省', '211300', '朝阳市', '', '', '', '', '辽宁省朝阳市', '122000', 13, 'admin', 'admin'),
+('211400', '葫芦岛市', '210000', 2, '210000', '辽宁省', '211400', '葫芦岛市', '', '', '', '', '辽宁省葫芦岛市', '125000', 14, 'admin', 'admin');
+
+-- 吉林省
+INSERT INTO sys_address (code, name, parent_code, level, province_code, province_name, city_code, city_name, district_code, district_name, street_code, street_name, full_address, postcode, sort, creator, updator) VALUES
+('220000', '吉林省', '0', 1, '220000', '吉林省', '', '', '', '', '', '', '吉林省', '', 19, 'admin', 'admin');
+
+-- 吉林省下属地级市
+INSERT INTO sys_address (code, name, parent_code, level, province_code, province_name, city_code, city_name, district_code, district_name, street_code, street_name, full_address, postcode, sort, creator, updator) VALUES
+('220100', '长春市', '220000', 2, '220000', '吉林省', '220100', '长春市', '', '', '', '', '吉林省长春市', '130000', 1, 'admin', 'admin'),
+('220200', '吉林市', '220000', 2, '220000', '吉林省', '220200', '吉林市', '', '', '', '', '吉林省吉林市', '132000', 2, 'admin', 'admin'),
+('220300', '四平市', '220000', 2, '220000', '吉林省', '220300', '四平市', '', '', '', '', '吉林省四平市', '136000', 3, 'admin', 'admin'),
+('220400', '辽源市', '220000', 2, '220000', '吉林省', '220400', '辽源市', '', '', '', '', '吉林省辽源市', '136200', 4, 'admin', 'admin'),
+('220500', '通化市', '220000', 2, '220000', '吉林省', '220500', '通化市', '', '', '', '', '吉林省通化市', '134000', 5, 'admin', 'admin'),
+('220600', '白山市', '220000', 2, '220000', '吉林省', '220600', '白山市', '', '', '', '', '吉林省白山市', '134300', 6, 'admin', 'admin'),
+('220700', '松原市', '220000', 2, '220000', '吉林省', '220700', '松原市', '', '', '', '', '吉林省松原市', '138000', 7, 'admin', 'admin'),
+('220800', '白城市', '220000', 2, '220000', '吉林省', '220800', '白城市', '', '', '', '', '吉林省白城市', '137000', 8, 'admin', 'admin'),
+('222400', '延边朝鲜族自治州', '220000', 2, '220000', '吉林省', '222400', '延边朝鲜族自治州', '', '', '', '', '吉林省延边朝鲜族自治州', '133000', 9, 'admin', 'admin');
+
+-- 黑龙江省
+INSERT INTO sys_address (code, name, parent_code, level, province_code, province_name, city_code, city_name, district_code, district_name, street_code, street_name, full_address, postcode, sort, creator, updator) VALUES
+('230000', '黑龙江省', '0', 1, '230000', '黑龙江省', '', '', '', '', '', '', '黑龙江省', '', 20, 'admin', 'admin');
+
+-- 黑龙江省下属地级市
+INSERT INTO sys_address (code, name, parent_code, level, province_code, province_name, city_code, city_name, district_code, district_name, street_code, street_name, full_address, postcode, sort, creator, updator) VALUES
+('230100', '哈尔滨市', '230000', 2, '230000', '黑龙江省', '230100', '哈尔滨市', '', '', '', '', '黑龙江省哈尔滨市', '150000', 1, 'admin', 'admin'),
+('230200', '齐齐哈尔市', '230000', 2, '230000', '黑龙江省', '230200', '齐齐哈尔市', '', '', '', '', '黑龙江省齐齐哈尔市', '161000', 2, 'admin', 'admin'),
+('230300', '鸡西市', '230000', 2, '230000', '黑龙江省', '230300', '鸡西市', '', '', '', '', '黑龙江省鸡西市', '158100', 3, 'admin', 'admin'),
+('230400', '鹤岗市', '230000', 2, '230000', '黑龙江省', '230400', '鹤岗市', '', '', '', '', '黑龙江省鹤岗市', '154100', 4, 'admin', 'admin'),
+('230500', '双鸭山市', '230000', 2, '230000', '黑龙江省', '230500', '双鸭山市', '', '', '', '', '黑龙江省双鸭山市', '155100', 5, 'admin', 'admin'),
+('230600', '大庆市', '230000', 2, '230000', '黑龙江省', '230600', '大庆市', '', '', '', '', '黑龙江省大庆市', '163000', 6, 'admin', 'admin'),
+('230700', '伊春市', '230000', 2, '230000', '黑龙江省', '230700', '伊春市', '', '', '', '', '黑龙江省伊春市', '153000', 7, 'admin', 'admin'),
+('230800', '佳木斯市', '230000', 2, '230000', '黑龙江省', '230800', '佳木斯市', '', '', '', '', '黑龙江省佳木斯市', '154000', 8, 'admin', 'admin'),
+('230900', '七台河市', '230000', 2, '230000', '黑龙江省', '230900', '七台河市', '', '', '', '', '黑龙江省七台河市', '154600', 9, 'admin', 'admin'),
+('231000', '牡丹江市', '230000', 2, '230000', '黑龙江省', '231000', '牡丹江市', '', '', '', '', '黑龙江省牡丹江市', '157000', 10, 'admin', 'admin'),
+('231100', '黑河市', '230000', 2, '230000', '黑龙江省', '231100', '黑河市', '', '', '', '', '黑龙江省黑河市', '164300', 11, 'admin', 'admin'),
+('231200', '绥化市', '230000', 2, '230000', '黑龙江省', '231200', '绥化市', '', '', '', '', '黑龙江省绥化市', '152000', 12, 'admin', 'admin'),
+('232700', '大兴安岭地区', '230000', 2, '230000', '黑龙江省', '232700', '大兴安岭地区', '', '', '', '', '黑龙江省大兴安岭地区', '165000', 13, 'admin', 'admin');
+
+-- 陕西省
+INSERT INTO sys_address (code, name, parent_code, level, province_code, province_name, city_code, city_name, district_code, district_name, street_code, street_name, full_address, postcode, sort, creator, updator) VALUES
+('610000', '陕西省', '0', 1, '610000', '陕西省', '', '', '', '', '', '', '陕西省', '', 21, 'admin', 'admin');
+
+-- 陕西省下属地级市
+INSERT INTO sys_address (code, name, parent_code, level, province_code, province_name, city_code, city_name, district_code, district_name, street_code, street_name, full_address, postcode, sort, creator, updator) VALUES
+('610100', '西安市', '610000', 2, '610000', '陕西省', '610100', '西安市', '', '', '', '', '陕西省西安市', '710000', 1, 'admin', 'admin'),
+('610200', '铜川市', '610000', 2, '610000', '陕西省', '610200', '铜川市', '', '', '', '', '陕西省铜川市', '727000', 2, 'admin', 'admin'),
+('610300', '宝鸡市', '610000', 2, '610000', '陕西省', '610300', '宝鸡市', '', '', '', '', '陕西省宝鸡市', '721000', 3, 'admin', 'admin'),
+('610400', '咸阳市', '610000', 2, '610000', '陕西省', '610400', '咸阳市', '', '', '', '', '陕西省咸阳市', '712000', 4, 'admin', 'admin'),
+('610500', '渭南市', '610000', 2, '610000', '陕西省', '610500', '渭南市', '', '', '', '', '陕西省渭南市', '714000', 5, 'admin', 'admin'),
+('610600', '延安市', '610000', 2, '610000', '陕西省', '610600', '延安市', '', '', '', '', '陕西省延安市', '716000', 6, 'admin', 'admin'),
+('610700', '汉中市', '610000', 2, '610000', '陕西省', '610700', '汉中市', '', '', '', '', '陕西省汉中市', '723000', 7, 'admin', 'admin'),
+('610800', '榆林市', '610000', 2, '610000', '陕西省', '610800', '榆林市', '', '', '', '', '陕西省榆林市', '719000', 8, 'admin', 'admin'),
+('610900', '安康市', '610000', 2, '610000', '陕西省', '610900', '安康市', '', '', '', '', '陕西省安康市', '725000', 9, 'admin', 'admin'),
+('611000', '商洛市', '610000', 2, '610000', '陕西省', '611000', '商洛市', '', '', '', '', '陕西省商洛市', '726000', 10, 'admin', 'admin');
+
+-- 甘肃省
+INSERT INTO sys_address (code, name, parent_code, level, province_code, province_name, city_code, city_name, district_code, district_name, street_code, street_name, full_address, postcode, sort, creator, updator) VALUES
+('620000', '甘肃省', '0', 1, '620000', '甘肃省', '', '', '', '', '', '', '甘肃省', '', 22, 'admin', 'admin');
+
+-- 甘肃省下属地级市
+INSERT INTO sys_address (code, name, parent_code, level, province_code, province_name, city_code, city_name, district_code, district_name, street_code, street_name, full_address, postcode, sort, creator, updator) VALUES
+('620100', '兰州市', '620000', 2, '620000', '甘肃省', '620100', '兰州市', '', '', '', '', '甘肃省兰州市', '730000', 1, 'admin', 'admin'),
+('620200', '嘉峪关市', '620000', 2, '620000', '甘肃省', '620200', '嘉峪关市', '', '', '', '', '甘肃省嘉峪关市', '735100', 2, 'admin', 'admin'),
+('620300', '金昌市', '620000', 2, '620000', '甘肃省', '620300', '金昌市', '', '', '', '', '甘肃省金昌市', '737100', 3, 'admin', 'admin'),
+('620400', '白银市', '620000', 2, '620000', '甘肃省', '620400', '白银市', '', '', '', '', '甘肃省白银市', '730900', 4, 'admin', 'admin'),
+('620500', '天水市', '620000', 2, '620000', '甘肃省', '620500', '天水市', '', '', '', '', '甘肃省天水市', '741000', 5, 'admin', 'admin'),
+('620600', '武威市', '620000', 2, '620000', '甘肃省', '620600', '武威市', '', '', '', '', '甘肃省武威市', '733000', 6, 'admin', 'admin'),
+('620700', '张掖市', '620000', 2, '620000', '甘肃省', '620700', '张掖市', '', '', '', '', '甘肃省张掖市', '734000', 7, 'admin', 'admin'),
+('620800', '平凉市', '620000', 2, '620000', '甘肃省', '620800', '平凉市', '', '', '', '', '甘肃省平凉市', '744000', 8, 'admin', 'admin'),
+('620900', '酒泉市', '620000', 2, '620000', '甘肃省', '620900', '酒泉市', '', '', '', '', '甘肃省酒泉市', '735000', 9, 'admin', 'admin'),
+('621000', '庆阳市', '620000', 2, '620000', '甘肃省', '621000', '庆阳市', '', '', '', '', '甘肃省庆阳市', '745000', 10, 'admin', 'admin'),
+('621100', '定西市', '620000', 2, '620000', '甘肃省', '621100', '定西市', '', '', '', '', '甘肃省定西市', '743000', 11, 'admin', 'admin'),
+('621200', '陇南市', '620000', 2, '620000', '甘肃省', '621200', '陇南市', '', '', '', '', '甘肃省陇南市', '746000', 12, 'admin', 'admin'),
+('622900', '临夏回族自治州', '620000', 2, '620000', '甘肃省', '622900', '临夏回族自治州', '', '', '', '', '甘肃省临夏回族自治州', '731100', 13, 'admin', 'admin'),
+('623000', '甘南藏族自治州', '620000', 2, '620000', '甘肃省', '623000', '甘南藏族自治州', '', '', '', '', '甘肃省甘南藏族自治州', '747000', 14, 'admin', 'admin');
+
+-- 青海省
+INSERT INTO sys_address (code, name, parent_code, level, province_code, province_name, city_code, city_name, district_code, district_name, street_code, street_name, full_address, postcode, sort, creator, updator) VALUES
+('630000', '青海省', '0', 1, '630000', '青海省', '', '', '', '', '', '', '青海省', '', 23, 'admin', 'admin');
+
+-- 青海省下属地级市
+INSERT INTO sys_address (code, name, parent_code, level, province_code, province_name, city_code, city_name, district_code, district_name, street_code, street_name, full_address, postcode, sort, creator, updator) VALUES
+('630100', '西宁市', '630000', 2, '630000', '青海省', '630100', '西宁市', '', '', '', '', '青海省西宁市', '810000', 1, 'admin', 'admin'),
+('630200', '海东市', '630000', 2, '630000', '青海省', '630200', '海东市', '', '', '', '', '青海省海东市', '810600', 2, 'admin', 'admin'),
+('632200', '海北藏族自治州', '630000', 2, '630000', '青海省', '632200', '海北藏族自治州', '', '', '', '', '青海省海北藏族自治州', '812200', 3, 'admin', 'admin'),
+('632300', '黄南藏族自治州', '630000', 2, '630000', '青海省', '632300', '黄南藏族自治州', '', '', '', '', '青海省黄南藏族自治州', '811300', 4, 'admin', 'admin'),
+('632500', '海南藏族自治州', '630000', 2, '630000', '青海省', '632500', '海南藏族自治州', '', '', '', '', '青海省海南藏族自治州', '813000', 5, 'admin', 'admin'),
+('632600', '果洛藏族自治州', '630000', 2, '630000', '青海省', '632600', '果洛藏族自治州', '', '', '', '', '青海省果洛藏族自治州', '814000', 6, 'admin', 'admin'),
+('632700', '玉树藏族自治州', '630000', 2, '630000', '青海省', '632700', '玉树藏族自治州', '', '', '', '', '青海省玉树藏族自治州', '815000', 7, 'admin', 'admin'),
+('632800', '海西蒙古族藏族自治州', '630000', 2, '630000', '青海省', '632800', '海西蒙古族藏族自治州', '', '', '', '', '青海省海西蒙古族藏族自治州', '817000', 8, 'admin', 'admin');
+
+
+-- 宁夏回族自治区
+INSERT INTO sys_address (code, name, parent_code, level, province_code, province_name, city_code, city_name, district_code, district_name, street_code, street_name, full_address, postcode, sort, creator, updator) VALUES
+('640000', '宁夏回族自治区', '0', 1, '640000', '宁夏回族自治区', '', '', '', '', '', '', '宁夏回族自治区', '', 24, 'admin', 'admin');
+
+-- 宁夏回族自治区下属地级市
+INSERT INTO sys_address (code, name, parent_code, level, province_code, province_name, city_code, city_name, district_code, district_name, street_code, street_name, full_address, postcode, sort, creator, updator) VALUES
+('640100', '银川市', '640000', 2, '640000', '宁夏回族自治区', '640100', '银川市', '', '', '', '', '宁夏回族自治区银川市', '750000', 1, 'admin', 'admin'),
+('640200', '石嘴山市', '640000', 2, '640000', '宁夏回族自治区', '640200', '石嘴山市', '', '', '', '', '宁夏回族自治区石嘴山市', '753000', 2, 'admin', 'admin'),
+('640300', '吴忠市', '640000', 2, '640000', '宁夏回族自治区', '640300', '吴忠市', '', '', '', '', '宁夏回族自治区吴忠市', '751100', 3, 'admin', 'admin'),
+('640400', '固原市', '640000', 2, '640000', '宁夏回族自治区', '640400', '固原市', '', '', '', '', '宁夏回族自治区固原市', '756000', 4, 'admin', 'admin'),
+('640500', '中卫市', '640000', 2, '640000', '宁夏回族自治区', '640500', '中卫市', '', '', '', '', '宁夏回族自治区中卫市', '755000', 5, 'admin', 'admin');
+
+-- 新疆维吾尔自治区
+INSERT INTO sys_address (code, name, parent_code, level, province_code, province_name, city_code, city_name, district_code, district_name, street_code, street_name, full_address, postcode, sort, creator, updator) VALUES
+('650000', '新疆维吾尔自治区', '0', 1, '650000', '新疆维吾尔自治区', '', '', '', '', '', '', '新疆维吾尔自治区', '', 25, 'admin', 'admin');
+
+-- 新疆维吾尔自治区下属地级市
+INSERT INTO sys_address (code, name, parent_code, level, province_code, province_name, city_code, city_name, district_code, district_name, street_code, street_name, full_address, postcode, sort, creator, updator) VALUES
+('650100', '乌鲁木齐市', '650000', 2, '650000', '新疆维吾尔自治区', '650100', '乌鲁木齐市', '', '', '', '', '新疆维吾尔自治区乌鲁木齐市', '830000', 1, 'admin', 'admin'),
+('650200', '克拉玛依市', '650000', 2, '650000', '新疆维吾尔自治区', '650200', '克拉玛依市', '', '', '', '', '新疆维吾尔自治区克拉玛依市', '834000', 2, 'admin', 'admin'),
+('650400', '吐鲁番市', '650000', 2, '650000', '新疆维吾尔自治区', '650400', '吐鲁番市', '', '', '', '', '新疆维吾尔自治区吐鲁番市', '838000', 3, 'admin', 'admin'),
+('650500', '哈密市', '650000', 2, '650000', '新疆维吾尔自治区', '650500', '哈密市', '', '', '', '', '新疆维吾尔自治区哈密市', '839000', 4, 'admin', 'admin'),
+('652300', '昌吉回族自治州', '650000', 2, '650000', '新疆维吾尔自治区', '652300', '昌吉回族自治州', '', '', '', '', '新疆维吾尔自治区昌吉回族自治州', '831100', 5, 'admin', 'admin'),
+('652700', '博尔塔拉蒙古自治州', '650000', 2, '650000', '新疆维吾尔自治区', '652700', '博尔塔拉蒙古自治州', '', '', '', '', '新疆维吾尔自治区博尔塔拉蒙古自治州', '833400', 6, 'admin', 'admin'),
+('652800', '巴音郭楞蒙古自治州', '650000', 2, '650000', '新疆维吾尔自治区', '652800', '巴音郭楞蒙古自治州', '', '', '', '', '新疆维吾尔自治区巴音郭楞蒙古自治州', '841000', 7, 'admin', 'admin'),
+('652900', '阿克苏地区', '650000', 2, '650000', '新疆维吾尔自治区', '652900', '阿克苏地区', '', '', '', '', '新疆维吾尔自治区阿克苏地区', '843000', 8, 'admin', 'admin'),
+('653000', '克孜勒苏柯尔克孜自治州', '650000', 2, '650000', '新疆维吾尔自治区', '653000', '克孜勒苏柯尔克孜自治州', '', '', '', '', '新疆维吾尔自治区克孜勒苏柯尔克孜自治州', '845350', 9, 'admin', 'admin'),
+('653100', '喀什地区', '650000', 2, '650000', '新疆维吾尔自治区', '653100', '喀什地区', '', '', '', '', '新疆维吾尔自治区喀什地区', '844000', 10, 'admin', 'admin'),
+('653200', '和田地区', '650000', 2, '650000', '新疆维吾尔自治区', '653200', '和田地区', '', '', '', '', '新疆维吾尔自治区和田地区', '848000', 11, 'admin', 'admin'),
+('654000', '伊犁哈萨克自治州', '650000', 2, '650000', '新疆维吾尔自治区', '654000', '伊犁哈萨克自治州', '', '', '', '', '新疆维吾尔自治区伊犁哈萨克自治州', '835000', 12, 'admin', 'admin'),
+('654200', '塔城地区', '650000', 2, '650000', '新疆维吾尔自治区', '654200', '塔城地区', '', '', '', '', '新疆维吾尔自治区塔城地区', '834700', 13, 'admin', 'admin'),
+('654300', '阿勒泰地区', '650000', 2, '650000', '新疆维吾尔自治区', '654300', '阿勒泰地区', '', '', '', '', '新疆维吾尔自治区阿勒泰地区', '836500', 14, 'admin', 'admin'),
+('659001', '石河子市', '650000', 2, '650000', '新疆维吾尔自治区', '659001', '石河子市', '', '', '', '', '新疆维吾尔自治区石河子市', '832000', 15, 'admin', 'admin'),
+('659002', '阿拉尔市', '650000', 2, '650000', '新疆维吾尔自治区', '659002', '阿拉尔市', '', '', '', '', '新疆维吾尔自治区阿拉尔市', '843300', 16, 'admin', 'admin'),
+('659003', '图木舒克市', '650000', 2, '650000', '新疆维吾尔自治区', '659003', '图木舒克市', '', '', '', '', '新疆维吾尔自治区图木舒克市', '843806', 17, 'admin', 'admin'),
+('659004', '五家渠市', '650000', 2, '650000', '新疆维吾尔自治区', '659004', '五家渠市', '', '', '', '', '新疆维吾尔自治区五家渠市', '831300', 18, 'admin', 'admin'),
+('659005', '北屯市', '650000', 2, '650000', '新疆维吾尔自治区', '659005', '北屯市', '', '', '', '', '新疆维吾尔自治区北屯市', '836000', 19, 'admin', 'admin'),
+('659006', '铁门关市', '650000', 2, '650000', '新疆维吾尔自治区', '659006', '铁门关市', '', '', '', '', '新疆维吾尔自治区铁门关市', '841000', 20, 'admin', 'admin'),
+('659007', '双河市', '650000', 2, '650000', '新疆维吾尔自治区', '659007', '双河市', '', '', '', '', '新疆维吾尔自治区双河市', '833408', 21, 'admin', 'admin'),
+('659008', '可克达拉市', '650000', 2, '650000', '新疆维吾尔自治区', '659008', '可克达拉市', '', '', '', '', '新疆维吾尔自治区可克达拉市', '835213', 22, 'admin', 'admin'),
+('659009', '昆玉市', '650000', 2, '650000', '新疆维吾尔自治区', '659009', '昆玉市', '', '', '', '', '新疆维吾尔自治区昆玉市', '848116', 23, 'admin', 'admin'),
+('659010', '胡杨河市', '650000', 2, '650000', '新疆维吾尔自治区', '659010', '胡杨河市', '', '', '', '', '新疆维吾尔自治区胡杨河市', '831900', 24, 'admin', 'admin');
+
+-- 香港特别行政区
+INSERT INTO sys_address (code, name, parent_code, level, province_code, province_name, city_code, city_name, district_code, district_name, street_code, street_name, full_address, postcode, sort, creator, updator) VALUES
+('810000', '香港特别行政区', '0', 1, '810000', '香港特别行政区', '', '', '', '', '', '', '香港特别行政区', '', 26, 'admin', 'admin');
+
+-- 香港特别行政区下属行政区
+INSERT INTO sys_address (code, name, parent_code, level, province_code, province_name, city_code, city_name, district_code, district_name, street_code, street_name, full_address, postcode, sort, creator, updator) VALUES
+('810100', '香港岛', '810000', 2, '810000', '香港特别行政区', '810100', '香港岛', '', '', '', '', '香港特别行政区香港岛', '', 1, 'admin', 'admin'),
+('810200', '九龙', '810000', 2, '810000', '香港特别行政区', '810200', '九龙', '', '', '', '', '香港特别行政区九龙', '', 2, 'admin', 'admin'),
+('810300', '新界', '810000', 2, '810000', '香港特别行政区', '810300', '新界', '', '', '', '', '香港特别行政区新界', '', 3, 'admin', 'admin');
+
+-- 澳门特别行政区
+INSERT INTO sys_address (code, name, parent_code, level, province_code, province_name, city_code, city_name, district_code, district_name, street_code, street_name, full_address, postcode, sort, creator, updator) VALUES
+('820000', '澳门特别行政区', '0', 1, '820000', '澳门特别行政区', '', '', '', '', '', '', '澳门特别行政区', '', 27, 'admin', 'admin');
+
+-- 澳门特别行政区下属行政区
+INSERT INTO sys_address (code, name, parent_code, level, province_code, province_name, city_code, city_name, district_code, district_name, street_code, street_name, full_address, postcode, sort, creator, updator) VALUES
+('820100', '澳门半岛', '820000', 2, '820000', '澳门特别行政区', '820100', '澳门半岛', '', '', '', '', '澳门特别行政区澳门半岛', '', 1, 'admin', 'admin'),
+('820200', '氹仔岛', '820000', 2, '820000', '澳门特别行政区', '820200', '氹仔岛', '', '', '', '', '澳门特别行政区氹仔岛', '', 2, 'admin', 'admin'),
+('820300', '路环岛', '820000', 2, '820000', '澳门特别行政区', '820300', '路环岛', '', '', '', '', '澳门特别行政区路环岛', '', 3, 'admin', 'admin');
+
+-- 台湾省
+INSERT INTO sys_address (code, name, parent_code, level, province_code, province_name, city_code, city_name, district_code, district_name, street_code, street_name, full_address, postcode, sort, creator, updator) VALUES
+('710000', '台湾省', '0', 1, '710000', '台湾省', '', '', '', '', '', '', '台湾省', '', 28, 'admin', 'admin');
+
+-- 台湾省下属城市
+INSERT INTO sys_address (code, name, parent_code, level, province_code, province_name, city_code, city_name, district_code, district_name, street_code, street_name, full_address, postcode, sort, creator, updator) VALUES
+('710100', '台北市', '710000', 2, '710000', '台湾省', '710100', '台北市', '', '', '', '', '台湾省台北市', '', 1, 'admin', 'admin'),
+('710200', '高雄市', '710000', 2, '710000', '台湾省', '710200', '高雄市', '', '', '', '', '台湾省高雄市', '', 2, 'admin', 'admin'),
+('710300', '台南市', '710000', 2, '710000', '台湾省', '710300', '台南市', '', '', '', '', '台湾省台南市', '', 3, 'admin', 'admin'),
+('710400', '台中市', '710000', 2, '710000', '台湾省', '710400', '台中市', '', '', '', '', '台湾省台中市', '', 4, 'admin', 'admin'),
+('710500', '基隆市', '710000', 2, '710000', '台湾省', '710500', '基隆市', '', '', '', '', '台湾省基隆市', '', 5, 'admin', 'admin'),
+('710600', '新竹市', '710000', 2, '710000', '台湾省', '710600', '新竹市', '', '', '', '', '台湾省新竹市', '', 6, 'admin', 'admin'),
+('710700', '嘉义市', '710000', 2, '710000', '台湾省', '710700', '嘉义市', '', '', '', '', '台湾省嘉义市', '', 7, 'admin', 'admin'),
+('710800', '新北市', '710000', 2, '710000', '台湾省', '710800', '新北市', '', '', '', '', '台湾省新北市', '', 8, 'admin', 'admin'),
+('710900', '宜兰县', '710000', 2, '710000', '台湾省', '710900', '宜兰县', '', '', '', '', '台湾省宜兰县', '', 9, 'admin', 'admin'),
+('711000', '桃园市', '710000', 2, '710000', '台湾省', '711000', '桃园市', '', '', '', '', '台湾省桃园市', '', 10, 'admin', 'admin'),
+('711100', '新竹县', '710000', 2, '710000', '台湾省', '711100', '新竹县', '', '', '', '', '台湾省新竹县', '', 11, 'admin', 'admin'),
+('711200', '苗栗县', '710000', 2, '710000', '台湾省', '711200', '苗栗县', '', '', '', '', '台湾省苗栗县', '', 12, 'admin', 'admin'),
+('711300', '彰化县', '710000', 2, '710000', '台湾省', '711300', '彰化县', '', '', '', '', '台湾省彰化县', '', 13, 'admin', 'admin'),
+('711400', '南投县', '710000', 2, '710000', '台湾省', '711400', '南投县', '', '', '', '', '台湾省南投县', '', 14, 'admin', 'admin'),
+('711500', '云林县', '710000', 2, '710000', '台湾省', '711500', '云林县', '', '', '', '', '台湾省云林县', '', 15, 'admin', 'admin'),
+('711600', '嘉义县', '710000', 2, '710000', '台湾省', '711600', '嘉义县', '', '', '', '', '台湾省嘉义县', '', 16, 'admin', 'admin'),
+('711700', '屏东县', '710000', 2, '710000', '台湾省', '711700', '屏东县', '', '', '', '', '台湾省屏东县', '', 17, 'admin', 'admin'),
+('711800', '台东县', '710000', 2, '710000', '台湾省', '711800', '台东县', '', '', '', '', '台湾省台东县', '', 18, 'admin', 'admin'),
+('711900', '花莲县', '710000', 2, '710000', '台湾省', '711900', '花莲县', '', '', '', '', '台湾省花莲县', '', 19, 'admin', 'admin'),
+('712000', '澎湖县', '710000', 2, '710000', '台湾省', '712000', '澎湖县', '', '', '', '', '台湾省澎湖县', '', 20, 'admin', 'admin'),
+('712100', '金门县', '710000', 2, '710000', '台湾省', '712100', '金门县', '', '', '', '', '台湾省金门县', '', 21, 'admin', 'admin'),
+('712200', '连江县', '710000', 2, '710000', '台湾省', '712200', '连江县', '', '', '', '', '台湾省连江县', '', 22, 'admin', 'admin');
