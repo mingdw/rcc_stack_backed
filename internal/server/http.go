@@ -22,6 +22,8 @@ func NewHTTPServer(
 	userHandler *handler.UserHandler,
 	categoryHandler *handler.CategoryHandler,
 	productHandler *handler.ProductHandler,
+	addressHandler *handler.AddressHandler,
+	userAddressHandler *handler.UserAddressHandler,
 ) *http.Server {
 	gin.SetMode(gin.DebugMode)
 	s := http.NewServer(
@@ -61,7 +63,7 @@ func NewHTTPServer(
 			noAuthRouter.POST("/register", userHandler.Register)
 			noAuthRouter.POST("/login", userHandler.Login)
 			commonApi(noAuthRouter)
-			mallApi(noAuthRouter, categoryHandler, productHandler)
+			mallApi(noAuthRouter, categoryHandler, productHandler, addressHandler, userAddressHandler)
 		}
 		// Non-strict permission routing group
 		noStrictAuthRouter := v1.Group("/").Use(middleware.NoStrictAuth(jwt, logger))
@@ -93,8 +95,15 @@ func poolApi(router *gin.RouterGroup) {
 	})
 }
 
-func mallApi(router *gin.RouterGroup, categoryHandler *handler.CategoryHandler, productHandler *handler.ProductHandler) {
+func mallApi(router *gin.RouterGroup, categoryHandler *handler.CategoryHandler, productHandler *handler.ProductHandler, addressHandler *handler.AddressHandler, userAddressHandler *handler.UserAddressHandler) {
 	router.GET("/categories", categoryHandler.GetCategoryTree)
 	router.POST("/products", productHandler.ListProducts)
 	router.POST("/products/getProductDetails", productHandler.GetProductDetail)
+	router.POST("/address", addressHandler.GetAllAddress)
+	router.POST("/userAddress", userAddressHandler.GetUserAddress)
+	router.POST("/userAddress/addAndUpdate", userAddressHandler.AddAndUpdateUserAddress)
+	router.PUT("/userAddress/update", userAddressHandler.UpdateUserAddress)
+	router.DELETE("/userAddress/:id", userAddressHandler.DeleteUserAddress)
+	router.GET("/userAddress", userAddressHandler.ListUserAddresses)
+	router.POST("/userAddress/setDefault", userAddressHandler.SetDefaultAddress)
 }

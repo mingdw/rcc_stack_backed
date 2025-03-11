@@ -19,6 +19,7 @@ func NewProductRepository(
 	spuDetailRepo ProductSpuDetailRepository,
 	spuAttrParamsRepo ProductSpuAttrParamsRepository,
 	skuRepo ProductSkuRepository,
+	addressRepo AddressRepository,
 ) ProductRepository {
 	return &productRepository{
 		Repository:                     repo,
@@ -26,6 +27,7 @@ func NewProductRepository(
 		productSpuDetailRepository:     spuDetailRepo,
 		productSpuAttrParamsRepository: spuAttrParamsRepo,
 		productSkuRepository:           skuRepo,
+		addressRepository:              addressRepo,
 	}
 }
 
@@ -35,6 +37,7 @@ type productRepository struct {
 	productSpuDetailRepository     ProductSpuDetailRepository
 	productSpuAttrParamsRepository ProductSpuAttrParamsRepository
 	productSkuRepository           ProductSkuRepository
+	addressRepository              AddressRepository
 }
 
 func (r *productRepository) GetProduct(ctx context.Context, id int64) (*model.Product, error) {

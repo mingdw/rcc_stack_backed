@@ -44,16 +44,23 @@ func NewWire(viperViper *viper.Viper, logger *log.Logger) (*app.App, func(), err
 	productSpuDetailRepository := repository.NewProductSpuDetailRepository(repositoryRepository)
 	productSkuRepository := repository.NewProductSkuRepository(repositoryRepository)
 	productSpuAttrParamsRepository := repository.NewProductSpuAttrParamsRepository(repositoryRepository)
+	userAddressRepository := repository.NewUserAddressRepository(repositoryRepository)
+	userAddressService := service.NewUserAddressService(serviceService, userAddressRepository)
+	userAddressHandler := handler.NewUserAddressHandler(handlerHandler, userAddressService)
+	addressRepository := repository.NewAddressRepository(repositoryRepository)
+	addressService := service.NewAddressService(serviceService, addressRepository)
+	addressHandler := handler.NewAddressHandler(handlerHandler, addressService)
 	productRepository := repository.NewProductRepository(
 		repositoryRepository,
 		productSpuRepository,
 		productSpuDetailRepository,
 		productSpuAttrParamsRepository,
 		productSkuRepository,
+		addressRepository,
 	)
 	productService := service.NewProductService(serviceService, productRepository, categoryRepository)
 	productHandler := handler.NewProductHandler(handlerHandler, productService)
-	httpServer := server.NewHTTPServer(logger, viperViper, jwtJWT, userHandler, categoryHandler, productHandler)
+	httpServer := server.NewHTTPServer(logger, viperViper, jwtJWT, userHandler, categoryHandler, productHandler, addressHandler, userAddressHandler)
 	jobJob := job.NewJob(transaction, logger, sidSid)
 	userJob := job.NewUserJob(jobJob, userRepository)
 	jobServer := server.NewJobServer(logger, userJob)
