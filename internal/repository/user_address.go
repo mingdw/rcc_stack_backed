@@ -45,15 +45,41 @@ func (r *userAddressRepository) GetUserAddress(ctx context.Context, userId int64
 }
 
 func (r *userAddressRepository) Create(ctx context.Context, userAddress *model.UserAddress) error {
+	if userAddress.IsDefault == 1 {
+		_ = r.DB(ctx).Model(&model.UserAddress{}).Where("user_id = ? AND is_deleted = ?", userAddress.UserID, 0).Update("is_default", 0).Error
+	}
+
 	return r.DB(ctx).Create(userAddress).Error
 }
 
 func (r *userAddressRepository) Update(ctx context.Context, userAddress *model.UserAddress) error {
-	return r.DB(ctx).Where("id = ? AND is_deleted = ?", userAddress.ID, 0).Updates(userAddress).Error
+	if userAddress.IsDefault == 1 {
+		_ = r.DB(ctx).Model(&model.UserAddress{}).Where("user_id = ? AND is_deleted = ?", userAddress.UserID, 0).Update("is_default", 0).Error
+	}
+
+	// 使用 map 确保零值也会被更新
+	updateMap := map[string]interface{}{
+		"province_code": userAddress.ProvinceCode,
+		"province_name": userAddress.ProvinceName,
+		"city_code":     userAddress.CityCode,
+		"city_name":     userAddress.CityName,
+		"district_code": userAddress.DistrictCode,
+		"district_name": userAddress.DistrictName,
+		"street_code":   userAddress.StreetCode,
+		"street_name":   userAddress.StreetName,
+		"house_address": userAddress.HouseAddress,
+		"full_address":  userAddress.FullAddress,
+		"is_default":    userAddress.IsDefault,
+		"reciver_name":  userAddress.ReciverName,
+		"reciver_phone": userAddress.ReciverPhone,
+		"updator":       userAddress.Updator,
+	}
+
+	return r.DB(ctx).Model(&model.UserAddress{}).Where("id = ? AND is_deleted = ?", userAddress.ID, 0).Updates(updateMap).Error
 }
 
 func (r *userAddressRepository) Delete(ctx context.Context, id int64) error {
-	return r.DB(ctx).Model(&model.UserAddress{}).Where("id = ?", id).Update("is_deleted", 1).Error
+	return r.DB(ctx).Model(&model.UserAddress{}).Where("id = ?", id).Delete(&model.UserAddress{}).Error
 }
 
 func (r *userAddressRepository) FindByUserID(ctx context.Context, userID int64) ([]*model.UserAddress, error) {

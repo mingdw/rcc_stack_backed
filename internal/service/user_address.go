@@ -40,9 +40,11 @@ func (s *userAddressService) GetUserAddress(ctx context.Context, id int64, userC
 
 func (s *userAddressService) AddAndUpdateUserAddress(ctx context.Context, req *v1.UserAddressModifyRequest) error {
 	userAddress := &model.UserAddress{
-		Model:        gorm.Model{Creator: req.Creator, Updator: req.Updator, IsDeleted: 0, CreatedAt: time.Now(), UpdatedAt: time.Now()},
+		Model:        gorm.Model{ID: uint(req.ID), Creator: req.Creator, Updator: req.Updator, IsDeleted: 0, CreatedAt: time.Now(), UpdatedAt: time.Now()},
 		UserID:       req.UserID,
 		UserCode:     req.UserCode,
+		ReciverName:  req.ReciverName,
+		ReciverPhone: req.ReciverPhone,
 		ProvinceCode: req.ProvinceCode,
 		ProvinceName: req.ProvinceName,
 		CityCode:     req.CityCode,
@@ -52,14 +54,16 @@ func (s *userAddressService) AddAndUpdateUserAddress(ctx context.Context, req *v
 		StreetCode:   req.StreetCode,
 		StreetName:   req.StreetName,
 		FullAddress:  req.FullAddress,
+		HouseAddress: req.HouseAddress,
 		IsDefault:    req.IsDefault,
 		Longitude:    req.Longitude,
 		Latitude:     req.Latitude,
 	}
-	if req.ID == -1 {
-		return s.userAddressRepository.Create(ctx, userAddress)
-	} else {
+
+	if req.ID > 0 {
 		return s.userAddressRepository.Update(ctx, userAddress)
+	} else {
+		return s.userAddressRepository.Create(ctx, userAddress)
 	}
 }
 

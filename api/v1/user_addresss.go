@@ -19,6 +19,8 @@ type UserAddressModifyRequest struct {
 	ID           int64  `json:"id"`
 	UserID       int64  `json:"userId"`       // 用户id
 	UserCode     string `json:"userCode"`     // 用户编码
+	ReciverName  string `json:"reciverName"`  // 收货人姓名
+	ReciverPhone string `json:"reciverPhone"` // 手机号
 	ProvinceCode string `json:"provinceCode"` // 省编码
 	ProvinceName string `json:"provinceName"` // 省名称
 	CityCode     string `json:"cityCode"`     // 市编码

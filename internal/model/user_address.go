@@ -6,7 +6,8 @@ type UserAddress struct {
 	gorm.Model
 	UserID       int64  `gorm:"column:user_id;not null;default:0" json:"userId"`              // 用户id
 	UserCode     string `gorm:"column:user_code;not null;default:''" json:"userCode"`         // 用户编码
-	Phone        string `gorm:"column:phone;not null;default:''" json:"phone"`                // 手机号
+	ReciverName  string `gorm:"column:reciver_name;not null;default:''" json:"reciverName"`   // 收货人姓名
+	ReciverPhone string `gorm:"column:reciver_phone;not null;default:''" json:"reciverPhone"` // 手机号
 	ProvinceCode string `gorm:"column:province_code;not null;default:''" json:"provinceCode"` // 省编码
 	ProvinceName string `gorm:"column:province_name;not null;default:''" json:"provinceName"` // 省名称
 	CityCode     string `gorm:"column:city_code;not null;default:''" json:"cityCode"`         // 市编码
