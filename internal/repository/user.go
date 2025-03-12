@@ -3,8 +3,9 @@ package repository
 import (
 	"context"
 	"errors"
-	v1 "rcc-stake-backed/api/v1"
-	"rcc-stake-backed/internal/model"
+	v1 "rcc-stake-mall-backed/api/v1"
+	"rcc-stake-mall-backed/internal/model"
+
 	"gorm.io/gorm"
 )
 

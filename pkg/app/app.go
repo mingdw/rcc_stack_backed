@@ -2,10 +2,10 @@ package app
 
 import (
 	"context"
-	"rcc-stake-backed/pkg/server"
 	"log"
 	"os"
 	"os/signal"
+	"rcc-stake-mall-backed/pkg/server"
 	"syscall"
 )
 

@@ -2,8 +2,8 @@ package server
 
 import (
 	"context"
-	"rcc-stake-backed/internal/job"
-	"rcc-stake-backed/pkg/log"
+	"rcc-stake-mall-backed/internal/job"
+	"rcc-stake-mall-backed/pkg/log"
 )
 
 type JobServer struct {

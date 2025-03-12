@@ -4,19 +4,20 @@ import (
 	"bytes"
 	"flag"
 	"fmt"
-	"github.com/gavv/httpexpect/v2"
-	"github.com/gin-gonic/gin"
-	"rcc-stake-backed/internal/handler"
-	"rcc-stake-backed/internal/middleware"
-	"rcc-stake-backed/pkg/config"
-	jwt2 "rcc-stake-backed/pkg/jwt"
-	"rcc-stake-backed/pkg/log"
 	"net/http"
 	"net/http/httptest"
 	"os"
 	"path/filepath"
+	"rcc-stake-mall-backed/internal/handler"
+	"rcc-stake-mall-backed/internal/middleware"
+	"rcc-stake-mall-backed/pkg/config"
+	jwt2 "rcc-stake-mall-backed/pkg/jwt"
+	"rcc-stake-mall-backed/pkg/log"
 	"testing"
 	"time"
+
+	"github.com/gavv/httpexpect/v2"
+	"github.com/gin-gonic/gin"
 )
 
 var (

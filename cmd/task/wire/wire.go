@@ -4,12 +4,13 @@
 package wire
 
 import (
-	"rcc-stake-backed/internal/repository"
-	"rcc-stake-backed/internal/server"
-	"rcc-stake-backed/internal/task"
-	"rcc-stake-backed/pkg/app"
-	"rcc-stake-backed/pkg/log"
-	"rcc-stake-backed/pkg/sid"
+	"rcc-stake-mall-backed/internal/repository"
+	"rcc-stake-mall-backed/internal/server"
+	"rcc-stake-mall-backed/internal/task"
+	"rcc-stake-mall-backed/pkg/app"
+	"rcc-stake-mall-backed/pkg/log"
+	"rcc-stake-mall-backed/pkg/sid"
+
 	"github.com/google/wire"
 	"github.com/spf13/viper"
 )

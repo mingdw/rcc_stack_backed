@@ -4,16 +4,16 @@
 package wire
 
 import (
-	"rcc-stake-backed/internal/handler"
-	"rcc-stake-backed/internal/job"
-	"rcc-stake-backed/internal/repository"
-	"rcc-stake-backed/internal/server"
-	"rcc-stake-backed/internal/service"
-	"rcc-stake-backed/pkg/app"
-	"rcc-stake-backed/pkg/jwt"
-	"rcc-stake-backed/pkg/log"
-	"rcc-stake-backed/pkg/server/http"
-	"rcc-stake-backed/pkg/sid"
+	"rcc-stake-mall-backed/internal/handler"
+	"rcc-stake-mall-backed/internal/job"
+	"rcc-stake-mall-backed/internal/repository"
+	"rcc-stake-mall-backed/internal/server"
+	"rcc-stake-mall-backed/internal/service"
+	"rcc-stake-mall-backed/pkg/app"
+	"rcc-stake-mall-backed/pkg/jwt"
+	"rcc-stake-mall-backed/pkg/log"
+	"rcc-stake-mall-backed/pkg/server/http"
+	"rcc-stake-mall-backed/pkg/sid"
 
 	"github.com/google/wire"
 	"github.com/spf13/viper"

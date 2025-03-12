@@ -7,10 +7,10 @@
 package wire
 
 import (
-	"rcc-stake-backed/internal/repository"
-	"rcc-stake-backed/internal/server"
-	"rcc-stake-backed/pkg/app"
-	"rcc-stake-backed/pkg/log"
+	"rcc-stake-mall-backed/internal/repository"
+	"rcc-stake-mall-backed/internal/server"
+	"rcc-stake-mall-backed/pkg/app"
+	"rcc-stake-mall-backed/pkg/log"
 	"github.com/google/wire"
 	"github.com/spf13/viper"
 )

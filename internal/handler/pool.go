@@ -1,7 +1,7 @@
 package handler
 
 import (
-	"rcc-stake-backed/internal/service"
+	"rcc-stake-mall-backed/internal/service"
 
 	"github.com/gin-gonic/gin"
 )

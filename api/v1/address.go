@@ -1,6 +1,6 @@
 package v1
 
-import "rcc-stake-backed/internal/model"
+import "rcc-stake-mall-backed/internal/model"
 
 type AddressListRequest struct {
 	Level      int    `json:"level"`

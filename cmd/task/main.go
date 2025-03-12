@@ -3,9 +3,9 @@ package main
 import (
 	"context"
 	"flag"
-	"rcc-stake-backed/cmd/task/wire"
-	"rcc-stake-backed/pkg/config"
-	"rcc-stake-backed/pkg/log"
+	"rcc-stake-mall-backed/cmd/task/wire"
+	"rcc-stake-mall-backed/pkg/config"
+	"rcc-stake-mall-backed/pkg/log"
 )
 
 func main() {

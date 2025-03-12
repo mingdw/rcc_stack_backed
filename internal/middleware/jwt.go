@@ -1,12 +1,13 @@
 package middleware
 
 import (
-	"github.com/gin-gonic/gin"
-	"rcc-stake-backed/api/v1"
-	"rcc-stake-backed/pkg/jwt"
-	"rcc-stake-backed/pkg/log"
-	"go.uber.org/zap"
 	"net/http"
+	v1 "rcc-stake-mall-backed/api/v1"
+	"rcc-stake-mall-backed/pkg/jwt"
+	"rcc-stake-mall-backed/pkg/log"
+
+	"github.com/gin-gonic/gin"
+	"go.uber.org/zap"
 )
 
 func StrictAuth(j *jwt.JWT, logger *log.Logger) gin.HandlerFunc {

@@ -1,8 +1,9 @@
 package handler
 
 import (
+	"rcc-stake-mall-backed/internal/service"
+
 	"github.com/gin-gonic/gin"
-	"rcc-stake-backed/internal/service"
 )
 
 type PriceHandler struct {
@@ -11,8 +12,8 @@ type PriceHandler struct {
 }
 
 func NewPriceHandler(
-    handler *Handler,
-    priceService service.PriceService,
+	handler *Handler,
+	priceService service.PriceService,
 ) *PriceHandler {
 	return &PriceHandler{
 		Handler:      handler,

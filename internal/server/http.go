@@ -1,13 +1,13 @@
 package server
 
 import (
-	v1 "rcc-stake-backed/api/v1"
-	"rcc-stake-backed/docs"
-	"rcc-stake-backed/internal/handler"
-	"rcc-stake-backed/internal/middleware"
-	"rcc-stake-backed/pkg/jwt"
-	"rcc-stake-backed/pkg/log"
-	"rcc-stake-backed/pkg/server/http"
+	v1 "rcc-stake-mall-backed/api/v1"
+	"rcc-stake-mall-backed/docs"
+	"rcc-stake-mall-backed/internal/handler"
+	"rcc-stake-mall-backed/internal/middleware"
+	"rcc-stake-mall-backed/pkg/jwt"
+	"rcc-stake-mall-backed/pkg/log"
+	"rcc-stake-mall-backed/pkg/server/http"
 
 	"github.com/gin-gonic/gin"
 	"github.com/spf13/viper"

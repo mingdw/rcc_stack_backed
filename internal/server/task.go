@@ -2,11 +2,12 @@ package server
 
 import (
 	"context"
-	"github.com/go-co-op/gocron"
-	"rcc-stake-backed/internal/task"
-	"rcc-stake-backed/pkg/log"
-	"go.uber.org/zap"
+	"rcc-stake-mall-backed/internal/task"
+	"rcc-stake-mall-backed/pkg/log"
 	"time"
+
+	"github.com/go-co-op/gocron"
+	"go.uber.org/zap"
 )
 
 type TaskServer struct {

@@ -416,6 +416,69 @@ CREATE TABLE `sys_user_address` (
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+-- 19 角色表
+drop table if exists `sys_role`;
+CREATE TABLE `sys_role` (
+    `id` BIGINT NOT NULL AUTO_INCREMENT,
+    `name` VARCHAR(255) NOT NULL default '' COMMENT '角色名称',
+    `code` VARCHAR(255) NOT NULL default '' COMMENT '角色编码',
+    `description` VARCHAR(255) NOT NULL default '' COMMENT '角色描述',
+    `created_at` DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `updated_at` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+    `is_deleted` INT DEFAULT 0 COMMENT '是否删除',
+    `creator` VARCHAR(64) NOT NULL default '' COMMENT '创建人',
+    `updator` VARCHAR(64) NOT NULL default '' COMMENT '更新人',
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- 20.权限表
+drop table if exists `sys_permission`;
+CREATE TABLE `sys_permission` (
+    `id` BIGINT NOT NULL AUTO_INCREMENT,
+    `name` VARCHAR(255) NOT NULL default '' COMMENT '权限名称',
+    `code` VARCHAR(255) NOT NULL default '' COMMENT '权限编码',
+    `description` VARCHAR(255) NOT NULL default '' COMMENT '权限描述',
+    `created_at` DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `updated_at` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+    `is_deleted` INT DEFAULT 0 COMMENT '是否删除',
+    `creator` VARCHAR(64) NOT NULL default '' COMMENT '创建人',
+    `updator` VARCHAR(64) NOT NULL default '' COMMENT '更新人',
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+-- 21. 角色权限表
+drop table if exists `sys_role_permission`;
+CREATE TABLE `sys_role_permission` (
+    `id` BIGINT NOT NULL AUTO_INCREMENT,
+    `role_id` BIGINT NOT NULL default 0 COMMENT '角色id',
+    `role_code` VARCHAR(255) NOT NULL default '' COMMENT '角色编码',
+    `permission_id` BIGINT NOT NULL default 0 COMMENT '权限id', 
+    `permission_code` VARCHAR(255) NOT NULL default '' COMMENT '权限编码',
+    `created_at` DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `updated_at` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+    `is_deleted` INT DEFAULT 0 COMMENT '是否删除',
+    `creator` VARCHAR(64) NOT NULL default '' COMMENT '创建人',
+    `updator` VARCHAR(64) NOT NULL default '' COMMENT '更新人',
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- 22 用户角色表
+drop table if exists `sys_user_role`;
+CREATE TABLE `sys_user_role` (
+    `id` BIGINT NOT NULL AUTO_INCREMENT,
+    `user_id` BIGINT NOT NULL default 0 COMMENT '用户id',
+    `user_code` VARCHAR(255) NOT NULL default '' COMMENT '用户编码',
+    `role_id` BIGINT NOT NULL default 0 COMMENT '角色id',
+    `role_code` VARCHAR(255) NOT NULL default '' COMMENT '角色编码',
+    `created_at` DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `updated_at` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+    `is_deleted` INT DEFAULT 0 COMMENT '是否删除',
+    `creator` VARCHAR(64) NOT NULL default '' COMMENT '创建人',
+    `updator` VARCHAR(64) NOT NULL default '' COMMENT '更新人', 
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 
 -- 1. 一级目录
 INSERT INTO sys_category (code, name, parent_id, parent_code, level, sort, icon, created_at, updated_at, is_deleted, creator, updator) VALUES

@@ -1,8 +1,8 @@
 package repository
 
 import (
-    "context"
-	"rcc-stake-backed/internal/model"
+	"context"
+	"rcc-stake-mall-backed/internal/model"
 )
 
 type PriceRepository interface {

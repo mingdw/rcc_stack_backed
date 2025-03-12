@@ -1,6 +1,6 @@
 package v1
 
-import "rcc-stake-backed/internal/model"
+import "rcc-stake-mall-backed/internal/model"
 
 type UserAddressListRequest struct {
 	UserID   int64  `json:"userId"`

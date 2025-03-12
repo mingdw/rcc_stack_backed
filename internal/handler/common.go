@@ -1,8 +1,9 @@
 package handler
 
 import (
+	"rcc-stake-mall-backed/internal/service"
+
 	"github.com/gin-gonic/gin"
-	"rcc-stake-backed/internal/service"
 )
 
 type CommonHandler struct {
@@ -11,11 +12,11 @@ type CommonHandler struct {
 }
 
 func NewCommonHandler(
-    handler *Handler,
-    commonService service.CommonService,
+	handler *Handler,
+	commonService service.CommonService,
 ) *CommonHandler {
 	return &CommonHandler{
-		Handler:      handler,
+		Handler:       handler,
 		commonService: commonService,
 	}
 }

@@ -3,10 +3,11 @@ package grpc
 import (
 	"context"
 	"fmt"
-	"rcc-stake-backed/pkg/log"
-	"google.golang.org/grpc"
 	"net"
+	"rcc-stake-mall-backed/pkg/log"
 	"time"
+
+	"google.golang.org/grpc"
 )
 
 type Server struct {

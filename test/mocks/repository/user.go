@@ -8,7 +8,7 @@ import (
 	context "context"
 	reflect "reflect"
 
-	model "rcc-stake-backed/internal/model"
+	model "rcc-stake-mall-backed/internal/model"
 	gomock "github.com/golang/mock/gomock"
 )
 

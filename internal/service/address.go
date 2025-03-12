@@ -2,9 +2,9 @@ package service
 
 import (
 	"context"
-	v1 "rcc-stake-backed/api/v1"
-	"rcc-stake-backed/internal/model"
-	"rcc-stake-backed/internal/repository"
+	v1 "rcc-stake-mall-backed/api/v1"
+	"rcc-stake-mall-backed/internal/model"
+	"rcc-stake-mall-backed/internal/repository"
 	"sort"
 )
 

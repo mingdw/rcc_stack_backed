@@ -1,9 +1,10 @@
 package handler
 
 import (
+	"rcc-stake-mall-backed/pkg/jwt"
+	"rcc-stake-mall-backed/pkg/log"
+
 	"github.com/gin-gonic/gin"
-	"rcc-stake-backed/pkg/jwt"
-	"rcc-stake-backed/pkg/log"
 )
 
 type Handler struct {

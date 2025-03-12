@@ -1,10 +1,10 @@
 package task
 
 import (
-	"rcc-stake-backed/internal/repository"
-	"rcc-stake-backed/pkg/jwt"
-	"rcc-stake-backed/pkg/log"
-	"rcc-stake-backed/pkg/sid"
+	"rcc-stake-mall-backed/internal/repository"
+	"rcc-stake-mall-backed/pkg/jwt"
+	"rcc-stake-mall-backed/pkg/log"
+	"rcc-stake-mall-backed/pkg/sid"
 )
 
 type Task struct {

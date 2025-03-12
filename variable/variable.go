@@ -4,7 +4,7 @@ import (
 	"flag"
 	"log"
 	"os"
-	"rcc-stake-backed/pkg/config"
+	"rcc-stake-mall-backed/pkg/config"
 	"strconv"
 	"strings"
 

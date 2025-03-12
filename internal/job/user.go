@@ -2,7 +2,7 @@ package job
 
 import (
 	"context"
-	"rcc-stake-backed/internal/repository"
+	"rcc-stake-mall-backed/internal/repository"
 	"time"
 )
 

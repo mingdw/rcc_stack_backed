@@ -1,20 +1,21 @@
 package service
 
 import (
-    "context"
-	"rcc-stake-backed/internal/model"
-	"rcc-stake-backed/internal/repository"
+	"context"
+	"rcc-stake-mall-backed/internal/model"
+	"rcc-stake-mall-backed/internal/repository"
 )
 
 type PriceService interface {
 	GetPrice(ctx context.Context, id int64) (*model.Price, error)
 }
+
 func NewPriceService(
-    service *Service,
-    priceRepository repository.PriceRepository,
+	service *Service,
+	priceRepository repository.PriceRepository,
 ) PriceService {
 	return &priceService{
-		Service:        service,
+		Service:         service,
 		priceRepository: priceRepository,
 	}
 }

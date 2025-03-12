@@ -1,11 +1,12 @@
 package handler
 
 import (
-	"github.com/gin-gonic/gin"
-	"rcc-stake-backed/api/v1"
-	"rcc-stake-backed/internal/service"
-	"go.uber.org/zap"
 	"net/http"
+	v1 "rcc-stake-mall-backed/api/v1"
+	"rcc-stake-mall-backed/internal/service"
+
+	"github.com/gin-gonic/gin"
+	"go.uber.org/zap"
 )
 
 type UserHandler struct {

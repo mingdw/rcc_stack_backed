@@ -2,11 +2,12 @@ package service
 
 import (
 	"context"
-	v1 "rcc-stake-backed/api/v1"
-	"rcc-stake-backed/internal/model"
-	"rcc-stake-backed/internal/repository"
-	"golang.org/x/crypto/bcrypt"
+	v1 "rcc-stake-mall-backed/api/v1"
+	"rcc-stake-mall-backed/internal/model"
+	"rcc-stake-mall-backed/internal/repository"
 	"time"
+
+	"golang.org/x/crypto/bcrypt"
 )
 
 type UserService interface {

@@ -1,11 +1,11 @@
 package handler
 
 import (
-	v1 "rcc-stake-backed/api/v1"
-	"rcc-stake-backed/internal/handler"
-	"rcc-stake-backed/internal/middleware"
-	"rcc-stake-backed/test/mocks/service"
 	"net/http"
+	v1 "rcc-stake-mall-backed/api/v1"
+	"rcc-stake-mall-backed/internal/handler"
+	"rcc-stake-mall-backed/internal/middleware"
+	mock_service "rcc-stake-mall-backed/test/mocks/service"
 	"testing"
 
 	"github.com/golang/mock/gomock"

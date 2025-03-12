@@ -2,12 +2,12 @@ package repository
 
 import (
 	"context"
-	"rcc-stake-backed/pkg/log"
+	"rcc-stake-mall-backed/pkg/log"
 	"testing"
 	"time"
 
-	"rcc-stake-backed/internal/model"
-	"rcc-stake-backed/internal/repository"
+	"rcc-stake-mall-backed/internal/model"
+	"rcc-stake-mall-backed/internal/repository"
 
 	"github.com/DATA-DOG/go-sqlmock"
 	"github.com/stretchr/testify/assert"

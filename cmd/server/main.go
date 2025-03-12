@@ -3,9 +3,9 @@ package main
 import (
 	"context"
 	"fmt"
-	"rcc-stake-backed/cmd/server/wire"
-	"rcc-stake-backed/pkg/log"
-	"rcc-stake-backed/variable"
+	"rcc-stake-mall-backed/cmd/server/wire"
+	"rcc-stake-mall-backed/pkg/log"
+	"rcc-stake-mall-backed/variable"
 
 	"go.uber.org/zap"
 )

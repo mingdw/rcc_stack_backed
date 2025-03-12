@@ -1,20 +1,21 @@
 package service
 
 import (
-    "context"
-	"rcc-stake-backed/internal/model"
-	"rcc-stake-backed/internal/repository"
+	"context"
+	"rcc-stake-mall-backed/internal/model"
+	"rcc-stake-mall-backed/internal/repository"
 )
 
 type CommonService interface {
 	GetCommon(ctx context.Context, id int64) (*model.Common, error)
 }
+
 func NewCommonService(
-    service *Service,
-    commonRepository repository.CommonRepository,
+	service *Service,
+	commonRepository repository.CommonRepository,
 ) CommonService {
 	return &commonService{
-		Service:        service,
+		Service:          service,
 		commonRepository: commonRepository,
 	}
 }

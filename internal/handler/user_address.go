@@ -1,8 +1,8 @@
 package handler
 
 import (
-	v1 "rcc-stake-backed/api/v1"
-	"rcc-stake-backed/internal/service"
+	v1 "rcc-stake-mall-backed/api/v1"
+	"rcc-stake-mall-backed/internal/service"
 	"strconv"
 
 	"github.com/gin-gonic/gin"

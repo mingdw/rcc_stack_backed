@@ -2,7 +2,7 @@ package repository
 
 import (
 	"context"
-	"rcc-stake-backed/internal/model"
+	"rcc-stake-mall-backed/internal/model"
 )
 
 type ProductRepository interface {

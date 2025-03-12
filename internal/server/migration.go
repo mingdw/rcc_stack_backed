@@ -2,11 +2,12 @@ package server
 
 import (
 	"context"
-	"rcc-stake-backed/internal/model"
-	"rcc-stake-backed/pkg/log"
+	"os"
+	"rcc-stake-mall-backed/internal/model"
+	"rcc-stake-mall-backed/pkg/log"
+
 	"go.uber.org/zap"
 	"gorm.io/gorm"
-	"os"
 )
 
 type MigrateServer struct {
