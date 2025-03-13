@@ -1,8 +1,9 @@
 package handler
 
 import (
-	"github.com/gin-gonic/gin"
 	"rcc-stake-mall-backed/internal/service"
+
+	"github.com/gin-gonic/gin"
 )
 
 type ContractHandler struct {
@@ -11,15 +12,19 @@ type ContractHandler struct {
 }
 
 func NewContractHandler(
-    handler *Handler,
-    contractService service.ContractService,
+	handler *Handler,
+	contractService service.ContractService,
 ) *ContractHandler {
 	return &ContractHandler{
-		Handler:      handler,
+		Handler:         handler,
 		contractService: contractService,
 	}
 }
 
 func (h *ContractHandler) GetContract(ctx *gin.Context) {
+
+}
+
+func (h *ContractHandler) GetPoolsInfo(ctx *gin.Context) {
 
 }

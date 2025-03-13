@@ -24,6 +24,7 @@ func NewHTTPServer(
 	productHandler *handler.ProductHandler,
 	addressHandler *handler.AddressHandler,
 	userAddressHandler *handler.UserAddressHandler,
+	contractHandler *handler.ContractHandler,
 ) *http.Server {
 	gin.SetMode(gin.DebugMode)
 	s := http.NewServer(
@@ -63,7 +64,7 @@ func NewHTTPServer(
 			noAuthRouter.POST("/register", userHandler.Register)
 			noAuthRouter.POST("/login", userHandler.Login)
 			commonApi(noAuthRouter)
-			mallApi(noAuthRouter, categoryHandler, productHandler, addressHandler, userAddressHandler)
+			mallApi(noAuthRouter, categoryHandler, productHandler, addressHandler, userAddressHandler, contractHandler)
 		}
 		// Non-strict permission routing group
 		noStrictAuthRouter := v1.Group("/").Use(middleware.NoStrictAuth(jwt, logger))
@@ -89,13 +90,7 @@ func commonApi(router *gin.RouterGroup) {
 	})
 }
 
-func poolApi(router *gin.RouterGroup) {
-	router.GET("/pool", func(ctx *gin.Context) {
-		v1.HandleSuccess(ctx, nil)
-	})
-}
-
-func mallApi(router *gin.RouterGroup, categoryHandler *handler.CategoryHandler, productHandler *handler.ProductHandler, addressHandler *handler.AddressHandler, userAddressHandler *handler.UserAddressHandler) {
+func mallApi(router *gin.RouterGroup, categoryHandler *handler.CategoryHandler, productHandler *handler.ProductHandler, addressHandler *handler.AddressHandler, userAddressHandler *handler.UserAddressHandler, contractHandler *handler.ContractHandler) {
 	router.GET("/categories", categoryHandler.GetCategoryTree)
 	router.POST("/products", productHandler.ListProducts)
 	router.POST("/products/getProductDetails", productHandler.GetProductDetail)
@@ -103,5 +98,5 @@ func mallApi(router *gin.RouterGroup, categoryHandler *handler.CategoryHandler, 
 	router.POST("/userAddress", userAddressHandler.GetUserAddress)
 	router.POST("/userAddress/addAndUpdate", userAddressHandler.AddAndUpdateUserAddress)
 	router.DELETE("/userAddress/delete/:id", userAddressHandler.DeleteUserAddress)
-	router.POST("/contract/pools", userAddressHandler.SetDefaultAddress)
+	router.POST("/contract/pools", contractHandler.GetPoolsInfo)
 }

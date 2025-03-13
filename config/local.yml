@@ -16,7 +16,7 @@ data:
     #   dsn: storage/nunu-test.db?_busy_timeout=5000
      user:
        driver: mysql
-       dsn: root:Mdw19921129%@tcp(127.0.0.1:3306)/abbr_stack?charset=utf8mb4&parseTime=True&loc=Local
+       dsn: root:mdw19921129#@tcp(127.0.0.1:3306)/abbr_stack?charset=utf8mb4&parseTime=True&loc=Local
     #  user:
     #    driver: postgres
     #    dsn: host=localhost user=gorm password=gorm dbname=gorm port=9920 sslmode=disable TimeZone=Asia/Shanghai
@@ -36,5 +36,10 @@ log:
   max_size: 1024
   compress: true
 
-rccTokenAddress:0xb345C90046974FcDeC85cfe30B9DeDA138206Fbc
-rccStakeAddress:0xF28699665d460F58a775E4B7C430dFD4007fb2Cd  
+ethclient:
+  rpc_url: https://sepolia.infura.io/v3/968aba10f4a4430c943e5d3cb8704269
+  private_key: 6ec777ad161076673c2814423fb63aad02290693cd4dea5463fb02598e990835
+  chain_id: 11155111
+
+rccTokenAddress: 0xb345C90046974FcDeC85cfe30B9DeDA138206Fbc
+rccStakeAddress: 0xF28699665d460F58a775E4B7C430dFD4007fb2Cd  

@@ -19,6 +19,7 @@ import (
 	"rcc-stake-mall-backed/pkg/log"
 	"rcc-stake-mall-backed/pkg/server/http"
 	"rcc-stake-mall-backed/pkg/sid"
+	"github.com/ethereum/go-ethereum/ethclient"
 )
 
 // Injectors from wire.go:
@@ -60,7 +61,28 @@ func NewWire(viperViper *viper.Viper, logger *log.Logger) (*app.App, func(), err
 	)
 	productService := service.NewProductService(serviceService, productRepository, categoryRepository)
 	productHandler := handler.NewProductHandler(handlerHandler, productService)
-	httpServer := server.NewHTTPServer(logger, viperViper, jwtJWT, userHandler, categoryHandler, productHandler, addressHandler, userAddressHandler)
+
+	rccTokenAddress := viperViper.GetString("rccTokenAddress")
+	rccStakeAddress := viperViper.GetString("rccStakeAddress")
+
+	// 首先确保有 ethclient 实例
+	client, err := ethclient.Dial(viperViper.GetString("ethClientUrl"))
+	if err != nil {
+		return nil, nil, err
+	}
+
+	contractService, err := service.NewContractService(
+		serviceService,  // 传入 service 实例
+		client,         // 传入 ethclient 实例
+		rccTokenAddress,
+		rccStakeAddress,	
+	)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	contractHandler := handler.NewContractHandler(handlerHandler, contractService)
+	httpServer := server.NewHTTPServer(logger, viperViper, jwtJWT, userHandler, categoryHandler, productHandler, addressHandler, userAddressHandler, contractHandler)
 	jobJob := job.NewJob(transaction, logger, sidSid)
 	userJob := job.NewUserJob(jobJob, userRepository)
 	jobServer := server.NewJobServer(logger, userJob)
