@@ -10,7 +10,7 @@ import (
 type User struct {
 	gorm.Model
 	ID         int64     `gorm:"column:id;primaryKey;autoIncrement" json:"id"`
-	UserId     string    `gorm:"column:user_id;not null;default:0;comment:用户id"`
+	UniqueId   string    `gorm:"column:unique_id;not null;default:'';comment:平台编号"`
 	UserCode   string    `gorm:"column:user_code;not null;default:'';comment:用户编码"`
 	Nickname   string    `gorm:"column:nickname;not null;default:'';comment:昵称"`
 	Avatar     string    `gorm:"column:avatar;not null;default:'';comment:头像"`

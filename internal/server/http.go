@@ -103,6 +103,5 @@ func mallApi(router *gin.RouterGroup, categoryHandler *handler.CategoryHandler, 
 	router.POST("/userAddress", userAddressHandler.GetUserAddress)
 	router.POST("/userAddress/addAndUpdate", userAddressHandler.AddAndUpdateUserAddress)
 	router.DELETE("/userAddress/delete/:id", userAddressHandler.DeleteUserAddress)
-	router.GET("/userAddress", userAddressHandler.ListUserAddresses)
-	router.POST("/userAddress/setDefault", userAddressHandler.SetDefaultAddress)
+	router.POST("/contract/pools", userAddressHandler.SetDefaultAddress)
 }

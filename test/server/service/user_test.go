@@ -160,8 +160,8 @@ func TestUserService_GetProfile(t *testing.T) {
 	userId := "123"
 
 	mockUserRepo.EXPECT().GetByID(ctx, userId).Return(&model.User{
-		UserId: userId,
-		Email:  "test@example.com",
+		UniqueId: userId,
+		Email:    "test@example.com",
 	}, nil)
 
 	user, err := userService.GetProfile(ctx, userId)
@@ -187,8 +187,8 @@ func TestUserService_UpdateProfile(t *testing.T) {
 	}
 
 	mockUserRepo.EXPECT().GetByID(ctx, userId).Return(&model.User{
-		UserId: userId,
-		Email:  "old@example.com",
+		UniqueId: userId,
+		Email:    "old@example.com",
 	}, nil)
 	mockUserRepo.EXPECT().Update(ctx, gomock.Any()).Return(nil)
 

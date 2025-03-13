@@ -35,3 +35,6 @@ log:
   max_age: 7
   max_size: 1024
   compress: true
+
+rccTokenAddress:0xb345C90046974FcDeC85cfe30B9DeDA138206Fbc
+rccStakeAddress:0xF28699665d460F58a775E4B7C430dFD4007fb2Cd  

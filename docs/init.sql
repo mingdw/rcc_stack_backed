@@ -336,7 +336,7 @@ CREATE TABLE `sys_order_reviews` (
 drop table if exists `sys_user`;
 CREATE TABLE `sys_user` (
     `id` BIGINT NOT NULL AUTO_INCREMENT,
-    `user_id` BIGINT NOT NULL default 0 COMMENT '用户id',
+    `unique_id` VARCHAR(255) NOT NULL default '' COMMENT '平台编号',
     `user_code` VARCHAR(255) NOT NULL default '' COMMENT '用户编码',
     `nickname` VARCHAR(255) NOT NULL default '' COMMENT '昵称',
     `avatar` VARCHAR(255) NOT NULL default '' COMMENT '头像',
@@ -478,6 +478,139 @@ CREATE TABLE `sys_user_role` (
     `updator` VARCHAR(64) NOT NULL default '' COMMENT '更新人', 
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+-- 添加测试用户
+delete from sys_user where id>0;
+insert into sys_user(unique_id,user_code,nickname,avatar,gender,email,phone,password,status,status_desc,type,type_desc) values
+('U10000','0x67003e9d9B26Ed30B8AfeA6da762279D7c83abC2','Ming','https://himg.bdimg.com/sys/portrait/item/pp.1.a952ce36.GksfRd0oi8_Sw_wcx4WXIQ?_t=1741845261437',0,'46683025@qq.com','18710181267','qqq****11',0,'正常',0,'系统用户')
+
+-- 添加角色
+delete from sys_role where id>0;
+insert into sys_role(name,code,description) values('超级管理员','R0001','超级管理员，能够管理合约，升级合约，添加管理员等');
+insert into sys_role(name,code,description) values('系统管理员','R0002','质押池管理，商场管理,包括添加、暂停、删除、配置参数');
+insert into sys_role(name,code,description) values('普通用户','R0003','质押、解质押、兑换、购买东西');
+
+-- 添加权限
+delete from sys_permission where id>0;
+insert into sys_permission(name,code,description) values('FORBIDDEN','-10000','禁止操作');
+insert into sys_permission(name,code,description) values('ADD','P0001','增加');
+insert into sys_permission(name,code,description) values('DELETE','P0002','删除');
+insert into sys_permission(name,code,description) values('EDIT','P0003','编辑');
+insert into sys_permission(name,code,description) values('SELECT','P004','查询');
+
+
+-- 添加角色权限
+delete from sys_role_permission where id>0;
+insert into sys_role_permission(role_id,role_code,permission_id,permission_code)
+SELECT
+    sys_role.id,
+    sys_role.code,
+    sys_permission.id,
+    sys_permission.code
+FROM sys_role,sys_permission 
+WHERE sys_role.code = 'R0001'
+AND sys_permission.code = 'P0001'
+UNION ALL
+SELECT
+    sys_role.id,
+    sys_role.code,
+    sys_permission.id,
+    sys_permission.code
+FROM sys_role,sys_permission 
+WHERE sys_role.code = 'R0001'
+AND sys_permission.code = 'P0002';
+
+
+
+insert into sys_role_permission(role_id,role_code,permission_id,permission_code)
+SELECT
+    sys_role.id,
+    sys_role.code,
+    sys_permission.id,
+    sys_permission.code
+FROM sys_role,sys_permission 
+WHERE sys_role.code = 'R0002'
+AND sys_permission.code = 'P0001'
+UNION ALL
+SELECT
+    sys_role.id,
+    sys_role.code,
+    sys_permission.id,
+    sys_permission.code
+FROM sys_role,sys_permission 
+WHERE sys_role.code = 'R0002'
+AND sys_permission.code = 'P0002'
+UNION ALL
+SELECT
+    sys_role.id,
+    sys_role.code,
+    sys_permission.id,
+    sys_permission.code
+FROM sys_role,sys_permission 
+WHERE sys_role.code = 'R0002'
+AND sys_permission.code = 'P0003'
+UNION ALL
+SELECT
+    sys_role.id,
+    sys_role.code,
+    sys_permission.id,
+    sys_permission.code
+FROM sys_role,sys_permission 
+WHERE sys_role.code = 'R0002'
+AND sys_permission.code = 'P0004';
+
+
+insert into sys_role_permission(role_id,role_code,permission_id,permission_code)
+SELECT
+    sys_role.id,
+    sys_role.code,
+    sys_permission.id,
+    sys_permission.code
+FROM sys_role,sys_permission 
+WHERE sys_role.code = 'R0003'
+AND sys_permission.code = 'P0003'
+UNION ALL
+SELECT
+    sys_role.id,
+    sys_role.code,
+    sys_permission.id,
+    sys_permission.code
+FROM sys_role,sys_permission 
+WHERE sys_role.code = 'R0003'
+AND sys_permission.code = 'P0004';
+
+
+-- 添加用户角色
+delete from sys_user_role where id>0;
+insert into sys_user_role(user_id,user_code,role_id,role_code)
+SELECT
+    sys_user.id,
+    sys_user.user_code,
+    sys_role.id,
+    sys_role.code
+FROM sys_user,sys_role 
+WHERE sys_user.unique_id = 'U10000'
+AND sys_role.code = 'R0001'
+UNION ALL
+SELECT
+    sys_user.id,
+    sys_user.user_code,
+    sys_role.id,
+    sys_role.code
+FROM sys_user,sys_role 
+WHERE sys_user.unique_id = 'U10000'
+AND sys_role.code = 'R0002'
+UNION ALL
+SELECT
+    sys_user.id,
+    sys_user.user_code,
+    sys_role.id,
+    sys_role.code
+FROM sys_user,sys_role 
+WHERE sys_user.unique_id = 'U10000'
+AND sys_role.code = 'R0003';
+
 
 
 -- 1. 一级目录
