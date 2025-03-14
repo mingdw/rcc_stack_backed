@@ -66,7 +66,7 @@ func NewWire(viperViper *viper.Viper, logger *log.Logger) (*app.App, func(), err
 	rccStakeAddress := viperViper.GetString("rccStakeAddress")
 
 	// 首先确保有 ethclient 实例
-	client, err := ethclient.Dial(viperViper.GetString("ethClientUrl"))
+	client, err := ethclient.Dial(viperViper.GetString("ethclient.rpc_url"))
 	if err != nil {
 		return nil, nil, err
 	}

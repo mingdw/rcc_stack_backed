@@ -72,7 +72,6 @@ func (r *userAddressRepository) Update(ctx context.Context, userAddress *model.U
 		"is_default":    userAddress.IsDefault,
 		"reciver_name":  userAddress.ReciverName,
 		"reciver_phone": userAddress.ReciverPhone,
-		"updator":       userAddress.Updator,
 	}
 
 	return r.DB(ctx).Model(&model.UserAddress{}).Where("id = ? AND is_deleted = ?", userAddress.ID, 0).Updates(updateMap).Error
