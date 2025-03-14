@@ -1,5 +1,9 @@
 package v1
 
+import (
+	"time"
+)
+
 type RegisterRequest struct {
 	Email    string `json:"email" binding:"required,email" example:"1234@gmail.com"`
 	Password string `json:"password" binding:"required" example:"123456"`
@@ -28,4 +32,22 @@ type GetProfileResponseData struct {
 type GetProfileResponse struct {
 	Response
 	Data GetProfileResponseData
+}
+
+type UserInfo struct {
+	ID         int64     `json:"id"`
+	UniqueId   string    `json:"uniqueId"`
+	UserCode   string    `json:"userCode"`
+	Nickname   string    `json:"nickname"`
+	Avatar     string    `json:"avatar"`
+	Gender     int       `json:"gender"`
+	Birthday   time.Time `json:"birthday"`
+	Email      string    `json:"email"`
+	Phone      string    `json:"phone"`
+	Password   string    `json:"password"`
+	Status     int       `json:"status"`
+	StatusDesc string    `json:"statusDesc"`
+	Type       int       `json:"type"`
+	TypeDesc   string    `json:"typeDesc"`
+	IsAdmin    bool      `json:"isAdmin"`
 }

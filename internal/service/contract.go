@@ -16,7 +16,7 @@ type ContractService interface {
 	GetTokenSymbol(ctx context.Context) (string, error)
 	GetStakingBalance(ctx context.Context, poolId *big.Int, address common.Address) (*big.Int, error)
 	GetPendingRewards(ctx context.Context, poolId *big.Int, address common.Address) (*big.Int, error)
-	GetPoolInfo(ctx context.Context, poolId *big.Int) (struct {
+	GetPoolInfos(ctx context.Context) ([]struct {
 		StTokenAddress      common.Address
 		PoolWeight          *big.Int
 		LastRewardBlock     *big.Int
@@ -76,7 +76,7 @@ func (s *contractService) GetPendingRewards(ctx context.Context, poolId *big.Int
 	return s.rccStake.PendingRCC(&bind.CallOpts{Context: ctx}, poolId, address)
 }
 
-func (s *contractService) GetPoolInfo(ctx context.Context, poolId *big.Int) (struct {
+func (s *contractService) GetPoolInfos(ctx context.Context) ([]struct {
 	StTokenAddress      common.Address
 	PoolWeight          *big.Int
 	LastRewardBlock     *big.Int
@@ -85,5 +85,50 @@ func (s *contractService) GetPoolInfo(ctx context.Context, poolId *big.Int) (str
 	MinDepositAmount    *big.Int
 	UnstakeLockedBlocks *big.Int
 }, error) {
-	return s.rccStake.Pool(&bind.CallOpts{Context: ctx}, poolId)
+	// 获取池子数量
+	poolLength, err := s.rccStake.PoolLength(&bind.CallOpts{Context: ctx})
+	if err != nil {
+		return nil, err
+	}
+
+	// 创建结果切片
+	result := make([]struct {
+		StTokenAddress      common.Address
+		PoolWeight          *big.Int
+		LastRewardBlock     *big.Int
+		AccRCCPerST         *big.Int
+		StTokenAmount       *big.Int
+		MinDepositAmount    *big.Int
+		UnstakeLockedBlocks *big.Int
+	}, 0, poolLength.Int64())
+
+	// 遍历所有池子获取信息
+	for i := int64(0); i < poolLength.Int64(); i++ {
+		poolId := big.NewInt(i)
+		poolInfo, err := s.rccStake.Pool(&bind.CallOpts{Context: ctx}, poolId)
+		if err != nil {
+			return nil, err
+		}
+
+		// 将池信息添加到结果中
+		result = append(result, struct {
+			StTokenAddress      common.Address
+			PoolWeight          *big.Int
+			LastRewardBlock     *big.Int
+			AccRCCPerST         *big.Int
+			StTokenAmount       *big.Int
+			MinDepositAmount    *big.Int
+			UnstakeLockedBlocks *big.Int
+		}{
+			StTokenAddress:      poolInfo.StTokenAddress,
+			PoolWeight:          poolInfo.PoolWeight,
+			LastRewardBlock:     poolInfo.LastRewardBlock,
+			AccRCCPerST:         poolInfo.AccRCCPerST,
+			StTokenAmount:       poolInfo.StTokenAmount,
+			MinDepositAmount:    poolInfo.MinDepositAmount,
+			UnstakeLockedBlocks: poolInfo.UnstakeLockedBlocks,
+		})
+	}
+
+	return result, nil
 }

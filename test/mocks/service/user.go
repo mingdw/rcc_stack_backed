@@ -92,3 +92,18 @@ func (mr *MockUserServiceMockRecorder) UpdateProfile(ctx, userId, req interface{
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateProfile", reflect.TypeOf((*MockUserService)(nil).UpdateProfile), ctx, userId, req)
 }
+
+// GetUserByAddress mocks base method.
+func (m *MockUserService) GetUserByAddress(ctx context.Context, address string) (*v1.UserInfo, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetUserByAddress", ctx, address)
+	ret0, _ := ret[0].(*v1.UserInfo)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetUserByAddress indicates an expected call of GetUserByAddress.
+func (mr *MockUserServiceMockRecorder) GetUserByAddress(ctx, address interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetUserByAddress", reflect.TypeOf((*MockUserService)(nil).GetUserByAddress), ctx, address)
+}

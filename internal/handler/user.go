@@ -127,3 +127,19 @@ func (h *UserHandler) UpdateProfile(ctx *gin.Context) {
 
 	v1.HandleSuccess(ctx, nil)
 }
+
+func (h *UserHandler) GetUserByAddress(ctx *gin.Context) {
+	address := ctx.Param("address")
+	if address == "" {
+		v1.HandleError(ctx, http.StatusBadRequest, v1.ErrBadRequest, nil)
+		return
+	}
+
+	user, err := h.userService.GetUserByAddress(ctx, address)
+	if err != nil {
+		v1.HandleError(ctx, http.StatusBadRequest, v1.ErrBadRequest, nil)
+		return
+	}
+
+	v1.HandleSuccess(ctx, user)
+}

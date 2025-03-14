@@ -69,7 +69,7 @@ func NewHTTPServer(
 		// Non-strict permission routing group
 		noStrictAuthRouter := v1.Group("/").Use(middleware.NoStrictAuth(jwt, logger))
 		{
-			noStrictAuthRouter.GET("/user", userHandler.GetProfile)
+			noStrictAuthRouter.GET("/user/:address", userHandler.GetUserByAddress)
 		}
 
 		// Strict permission routing group
@@ -98,5 +98,5 @@ func mallApi(router *gin.RouterGroup, categoryHandler *handler.CategoryHandler, 
 	router.POST("/userAddress", userAddressHandler.GetUserAddress)
 	router.POST("/userAddress/addAndUpdate", userAddressHandler.AddAndUpdateUserAddress)
 	router.DELETE("/userAddress/delete/:id", userAddressHandler.DeleteUserAddress)
-	router.POST("/contract/pools", contractHandler.GetPoolsInfo)
+	router.GET("/contract/pools", contractHandler.GetPoolsInfo)
 }

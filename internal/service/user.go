@@ -15,6 +15,7 @@ type UserService interface {
 	Login(ctx context.Context, req *v1.LoginRequest) (string, error)
 	GetProfile(ctx context.Context, userId string) (*v1.GetProfileResponseData, error)
 	UpdateProfile(ctx context.Context, userId string, req *v1.UpdateProfileRequest) error
+	GetUserByAddress(ctx context.Context, address string) (*v1.UserInfo, error)
 }
 
 func NewUserService(
@@ -112,4 +113,30 @@ func (s *userService) UpdateProfile(ctx context.Context, userId string, req *v1.
 	}
 
 	return nil
+}
+
+func (s *userService) GetUserByAddress(ctx context.Context, address string) (*v1.UserInfo, error) {
+	user, err := s.userRepo.GetByAddress(ctx, address)
+	if err != nil {
+		return nil, err
+	}
+	isAdmin := true
+
+	return &v1.UserInfo{
+		ID:         user.ID,
+		UniqueId:   user.UniqueId,
+		UserCode:   user.UserCode,
+		Nickname:   user.Nickname,
+		Avatar:     user.Avatar,
+		Gender:     user.Gender,
+		Birthday:   user.Birthday,
+		Email:      user.Email,
+		Phone:      user.Phone,
+		Password:   user.Password,
+		Status:     user.Status,
+		StatusDesc: user.StatusDesc,
+		Type:       user.Type,
+		TypeDesc:   user.TypeDesc,
+		IsAdmin:    isAdmin,
+	}, nil
 }

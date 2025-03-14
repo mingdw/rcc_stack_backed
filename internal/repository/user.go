@@ -14,6 +14,7 @@ type UserRepository interface {
 	Update(ctx context.Context, user *model.User) error
 	GetByID(ctx context.Context, id string) (*model.User, error)
 	GetByEmail(ctx context.Context, email string) (*model.User, error)
+	GetByAddress(ctx context.Context, address string) (*model.User, error)
 }
 
 func NewUserRepository(
@@ -61,5 +62,22 @@ func (r *userRepository) GetByEmail(ctx context.Context, email string) (*model.U
 		}
 		return nil, err
 	}
+	return &user, nil
+}
+
+func (r *userRepository) GetByAddress(ctx context.Context, address string) (*model.User, error) {
+	var user model.User
+	if err := r.DB(ctx).Where("user_code = ? AND is_deleted = ?", address, 0).First(&user).Error; err != nil {
+		if errors.Is(err, gorm.ErrRecordNotFound) {
+			return nil, nil
+		}
+		return nil, err
+	}
+
+	// 加载用户角色信息
+	if err := r.DB(ctx).Preload("UserRoles").Preload("UserRoles.Roles").First(&user, user.ID).Error; err != nil {
+		return nil, err
+	}
+
 	return &user, nil
 }

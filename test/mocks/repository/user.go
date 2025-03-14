@@ -8,8 +8,8 @@ import (
 	context "context"
 	reflect "reflect"
 
-	model "rcc-stake-mall-backed/internal/model"
 	gomock "github.com/golang/mock/gomock"
+	model "rcc-stake-mall-backed/internal/model"
 )
 
 // MockUserRepository is a mock of UserRepository interface.
@@ -21,6 +21,10 @@ type MockUserRepository struct {
 // MockUserRepositoryMockRecorder is the mock recorder for MockUserRepository.
 type MockUserRepositoryMockRecorder struct {
 	mock *MockUserRepository
+}
+
+func (mr *MockUserRepositoryMockRecorder) GetByAddress(ctx context.Context, address string) {
+	panic("unimplemented")
 }
 
 // NewMockUserRepository creates a new mock instance.
