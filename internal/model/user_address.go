@@ -4,6 +4,7 @@ import "gorm.io/gorm"
 
 type UserAddress struct {
 	gorm.Model
+	ID           int64  `gorm:"column:id;not null;primary_key;auto_increment" json:"id"`      // 主键id
 	UserID       int64  `gorm:"column:user_id;not null;default:0" json:"userId"`              // 用户id
 	UserCode     string `gorm:"column:user_code;not null;default:''" json:"userCode"`         // 用户编码
 	ReciverName  string `gorm:"column:reciver_name;not null;default:''" json:"reciverName"`   // 收货人姓名

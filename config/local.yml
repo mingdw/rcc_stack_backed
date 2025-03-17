@@ -38,7 +38,7 @@ log:
 
 ethclient:
   rpc_url: https://sepolia.infura.io/v3/968aba10f4a4430c943e5d3cb8704269
-  private_key: 6ec777ad161076673c2814423fb63aad02290693cd4dea5463fb02598e990835
+  private_key_encrypted: 2a4e552f9a9dc7d62c52ebbefcc3addfb6a6787b481539fd1af0420059bd8a9ae9de546cf4f96caabb06f7b28a40182c1f0fdb60235d59dccd963e4efa156bdc26d8300f89874a2be09de2316a507c68
   chain_id: 11155111
 
 rccTokenAddress: 0xb345C90046974FcDeC85cfe30B9DeDA138206Fbc
