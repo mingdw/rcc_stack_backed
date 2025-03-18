@@ -74,7 +74,7 @@ func (r *userAddressRepository) Update(ctx context.Context, userAddress *model.U
 		"reciver_phone": userAddress.ReciverPhone,
 	}
 
-	return r.DB(ctx).Model(&model.UserAddress{}).Where("id = ? AND is_deleted = ?", userAddress.ID, 0).Updates(updateMap).Error
+	return r.DB(ctx).Model(&model.UserAddress{}).Where("id = ? AND is_deleted = ?", userAddress.Model.ID, 0).Updates(updateMap).Error
 }
 
 func (r *userAddressRepository) Delete(ctx context.Context, id int64) error {
