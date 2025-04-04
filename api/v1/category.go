@@ -36,3 +36,27 @@ type AttrResponse struct {
 	Description string `json:"description"`
 	Sort        int    `json:"sort"`
 }
+
+type CategoryModifyRequest struct {
+	ID         uint   `json:"id"`
+	Name       string `json:"name"`
+	Code       string `json:"code"`
+	Sort       int    `json:"sort"`
+	ParentID   uint   `json:"parentId"`
+	ParentCode string `json:"parentCode"`
+	Level      int    `json:"level"`
+	Icon       string `json:"icon"`
+	Status     int    `json:"status"`
+}
+
+type CategoryGroupModifyRequest struct {
+	ID           uint   `json:"id"`
+	CategoryID   uint   `json:"categoryId"`
+	CategoryCode string `json:"categoryCode"`
+	Name         string `json:"name"`
+	Code         string `json:"code"`
+	Type         int    `json:"type"`
+	Status       int    `json:"status"`
+	Sort         int    `json:"sort"`
+	Description  string `json:"description"`
+}

@@ -2,6 +2,7 @@ package service
 
 import (
 	"context"
+	"errors"
 	v1 "rcc-stake-mall-backed/api/v1"
 	"rcc-stake-mall-backed/internal/model"
 	"rcc-stake-mall-backed/internal/repository"
@@ -12,6 +13,9 @@ import (
 type CategoryService interface {
 	GetCategory(ctx context.Context, id int64) (*model.Category, error)
 	GetCategoryTree(ctx context.Context) ([]v1.CategoryTreeResponse, error)
+	ModifyCategory(ctx context.Context, request *v1.CategoryModifyRequest) error
+	DeleteCategory(ctx context.Context, id int64) error
+	ModifyCategoryGroup(ctx context.Context, request *v1.CategoryGroupModifyRequest) error
 }
 
 // categoryService 目录服务实现
@@ -157,4 +161,151 @@ func buildCategoryTree(categories []model.Category, categoryAttrGroupMap map[uin
 	})
 
 	return nodes
+}
+
+func (s *categoryService) ModifyCategory(ctx context.Context, request *v1.CategoryModifyRequest) error {
+	ecategory, err := s.categoryRepository.GetCategoryByCode(ctx, request.Code)
+	if err != nil {
+		return err
+	}
+	if request.ID != 0 {
+		// 更新
+		if ecategory != nil && ecategory.ID != request.ID {
+			return errors.New("code已存在")
+		}
+		category := model.Category{
+			ID:         request.ID,
+			Name:       request.Name,
+			Code:       request.Code,
+			Sort:       request.Sort,
+			ParentID:   request.ParentID,
+			ParentCode: request.ParentCode,
+			Level:      request.Level,
+			Icon:       request.Icon,
+			Status:     request.Status,
+		}
+		err := s.categoryRepository.Update(ctx, &category)
+		if err != nil {
+			return err
+		}
+	} else {
+		//先判断保存的code是否存在
+		if ecategory != nil {
+			return errors.New("code已存在")
+		}
+		// 创建
+		category := model.Category{
+			Name:       request.Name,
+			Code:       request.Code,
+			Sort:       request.Sort,
+			ParentID:   request.ParentID,
+			ParentCode: request.ParentCode,
+			Level:      request.Level,
+			Icon:       request.Icon,
+			Status:     request.Status,
+		}
+		err2 := s.categoryRepository.Create(ctx, &category)
+		if err2 != nil {
+			return err2
+		}
+	}
+	return nil
+}
+
+func (s *categoryService) DeleteCategory(ctx context.Context, id int64) error {
+	categoryAttrGroups, err := s.categoryAttrGroupRepository.FindByCategoryID(ctx, id)
+	if err != nil {
+		return err
+	}
+
+	attrGroupsIds := make([]uint, 0)
+	categoryIds := make([]uint, 0)
+	for _, cag := range categoryAttrGroups {
+		attrGroupsIds = append(attrGroupsIds, cag.AttrGroupID)
+		categoryIds = append(categoryIds, cag.CategoryID)
+	}
+
+	// 删除属性组
+	if len(attrGroupsIds) > 0 {
+		err = s.attrGroupRepository.DeleteByCategoryID(ctx, attrGroupsIds)
+		if err != nil {
+			return err
+		}
+	}
+
+	// 删除目录-属性组关联
+	if len(categoryIds) > 0 {
+		err = s.categoryAttrGroupRepository.DeleteByCategoryIDs(ctx, categoryIds)
+		if err != nil {
+			return err
+		}
+	}
+
+	// 删除目录
+	err = s.categoryRepository.Delete(ctx, id)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+// 更新或者新增目录属性组
+func (s *categoryService) ModifyCategoryGroup(ctx context.Context, request *v1.CategoryGroupModifyRequest) error {
+
+	//根据code查询属性组
+	attrGroup, err := s.attrGroupRepository.GetAttrGroupByCode(ctx, request.Code)
+	if err != nil {
+		return err
+	}
+
+	if request.ID != 0 {
+		if attrGroup != nil && attrGroup.ID != request.ID {
+			return errors.New("code已存在")
+		}
+		//更新
+		attrGroup := model.AttrGroup{
+			ID:            request.ID,
+			Sort:          request.Sort,
+			Type:          request.Type,
+			Status:        request.Status,
+			Description:   request.Description,
+			AttrGroupName: request.Name,
+			AttrGroupCode: request.Code,
+		}
+		err = s.attrGroupRepository.Update(ctx, &attrGroup)
+		if err != nil {
+			return err
+		}
+	} else {
+		//新增
+		if attrGroup != nil {
+			return errors.New("code已存在")
+		}
+
+		attrGroup := model.AttrGroup{
+			Sort:          request.Sort,
+			Type:          request.Type,
+			Status:        request.Status,
+			Description:   request.Description,
+			AttrGroupName: request.Name,
+			AttrGroupCode: request.Code,
+		}
+		groupID, err := s.attrGroupRepository.Create(ctx, &attrGroup)
+		if err != nil {
+			return err
+		}
+
+		// 创建目录-属性组关联
+		categoryAttrGroup := model.CategoryAttrGroup{
+			CategoryID:    request.CategoryID,
+			CategoryCode:  request.CategoryCode,
+			AttrGroupID:   groupID,
+			AttrGroupCode: request.Code,
+		}
+		_, err = s.categoryAttrGroupRepository.Create(ctx, &categoryAttrGroup)
+		if err != nil {
+			return err
+		}
+	}
+	return nil
 }

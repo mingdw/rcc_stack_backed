@@ -137,7 +137,7 @@ func (h *UserHandler) GetUserByAddress(ctx *gin.Context) {
 
 	user, err := h.userService.GetUserByAddress(ctx, address)
 	if err != nil {
-		v1.HandleError(ctx, http.StatusBadRequest, v1.ErrBadRequest, nil)
+		v1.HandleError(ctx, http.StatusBadRequest, err, nil)
 		return
 	}
 

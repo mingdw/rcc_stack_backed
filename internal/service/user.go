@@ -3,6 +3,7 @@ package service
 import (
 	"context"
 	v1 "rcc-stake-mall-backed/api/v1"
+	"rcc-stake-mall-backed/internal/enums"
 	"rcc-stake-mall-backed/internal/model"
 	"rcc-stake-mall-backed/internal/repository"
 	"time"
@@ -120,23 +121,32 @@ func (s *userService) GetUserByAddress(ctx context.Context, address string) (*v1
 	if err != nil {
 		return nil, err
 	}
-	isAdmin := true
+	if user != nil {
+		isAdmin := false
+		for _, userRole := range user.UserRoles {
+			if enums.RoleCode(userRole.RoleCode).IsAdmin() {
+				isAdmin = true
+				break
+			}
+		}
 
-	return &v1.UserInfo{
-		ID:         user.ID,
-		UniqueId:   user.UniqueId,
-		UserCode:   user.UserCode,
-		Nickname:   user.Nickname,
-		Avatar:     user.Avatar,
-		Gender:     user.Gender,
-		Birthday:   user.Birthday,
-		Email:      user.Email,
-		Phone:      user.Phone,
-		Password:   user.Password,
-		Status:     user.Status,
-		StatusDesc: user.StatusDesc,
-		Type:       user.Type,
-		TypeDesc:   user.TypeDesc,
-		IsAdmin:    isAdmin,
-	}, nil
+		return &v1.UserInfo{
+			ID:         user.ID,
+			UniqueId:   user.UniqueId,
+			UserCode:   user.UserCode,
+			Nickname:   user.Nickname,
+			Avatar:     user.Avatar,
+			Gender:     user.Gender,
+			Birthday:   user.Birthday,
+			Email:      user.Email,
+			Phone:      user.Phone,
+			Password:   user.Password,
+			Status:     user.Status,
+			StatusDesc: user.StatusDesc,
+			Type:       user.Type,
+			TypeDesc:   user.TypeDesc,
+			IsAdmin:    isAdmin,
+		}, nil
+	}
+	return nil, err
 }

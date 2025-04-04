@@ -67,15 +67,19 @@ func (r *userRepository) GetByEmail(ctx context.Context, email string) (*model.U
 
 func (r *userRepository) GetByAddress(ctx context.Context, address string) (*model.User, error) {
 	var user model.User
-	if err := r.DB(ctx).Where("user_code = ? AND is_deleted = ?", address, 0).First(&user).Error; err != nil {
-		if errors.Is(err, gorm.ErrRecordNotFound) {
-			return nil, nil
-		}
-		return nil, err
+	result := r.DB(ctx).Where("user_code = ? AND is_deleted = ?", address, 0).Limit(1).Find(&user)
+	if result.Error != nil {
+		return nil, result.Error
+	}
+	if result.RowsAffected == 0 {
+		return nil, nil
 	}
 
 	// 加载用户角色信息
 	if err := r.DB(ctx).Preload("UserRoles").Preload("UserRoles.Roles").First(&user, user.ID).Error; err != nil {
+		if errors.Is(err, gorm.ErrRecordNotFound) {
+			return nil, nil
+		}
 		return nil, err
 	}
 

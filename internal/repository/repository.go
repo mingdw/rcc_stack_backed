@@ -75,6 +75,7 @@ func NewDB(conf *viper.Viper, l *log.Logger) *gorm.DB {
 	// GORM doc: https://gorm.io/docs/connecting_to_the_database.html
 	switch driver {
 	case "mysql":
+
 		db, err = gorm.Open(mysql.Open(dsn), &gorm.Config{
 			Logger: logger,
 		})

@@ -92,6 +92,8 @@ func commonApi(router *gin.RouterGroup) {
 
 func mallApi(router *gin.RouterGroup, categoryHandler *handler.CategoryHandler, productHandler *handler.ProductHandler, addressHandler *handler.AddressHandler, userAddressHandler *handler.UserAddressHandler, contractHandler *handler.ContractHandler) {
 	router.GET("/categories", categoryHandler.GetCategoryTree)
+	router.PUT("/categories/modify", categoryHandler.ModifyCategory)
+	router.DELETE("/categories/delete/:id", categoryHandler.DeleteCategory)
 	router.POST("/products", productHandler.ListProducts)
 	router.POST("/products/getProductDetails", productHandler.GetProductDetail)
 	router.POST("/address", addressHandler.GetAllAddress)

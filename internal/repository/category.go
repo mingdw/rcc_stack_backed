@@ -3,6 +3,8 @@ package repository
 import (
 	"context"
 	"rcc-stake-mall-backed/internal/model"
+
+	"gorm.io/gorm"
 )
 
 type CategoryRepository interface {
@@ -10,6 +12,10 @@ type CategoryRepository interface {
 	FindAll(ctx context.Context) ([]model.Category, error)
 	GetCategories(ctx context.Context, categoryCodes []string) ([]*model.Category, error)
 	GetCategoriesByParams(ctx context.Context, params *model.Category) ([]*model.Category, error)
+	Create(ctx context.Context, category *model.Category) error
+	Update(ctx context.Context, category *model.Category) error
+	GetCategoryByCode(ctx context.Context, code string) (*model.Category, error)
+	Delete(ctx context.Context, id int64) error
 }
 
 func NewCategoryRepository(
@@ -52,4 +58,27 @@ func (r *categoryRepository) GetCategoriesByParams(ctx context.Context, params *
 		return nil, err
 	}
 	return categories, nil
+}
+
+func (r *categoryRepository) Create(ctx context.Context, category *model.Category) error {
+	return r.DB(ctx).Create(category).Error
+}
+
+func (r *categoryRepository) Update(ctx context.Context, category *model.Category) error {
+	return r.DB(ctx).Updates(category).Error
+}
+
+func (r *categoryRepository) GetCategoryByCode(ctx context.Context, code string) (*model.Category, error) {
+	var category model.Category
+	if err := r.DB(ctx).Where("code = ? and is_deleted = 0", code).First(&category).Limit(1).Error; err != nil {
+		if err == gorm.ErrRecordNotFound {
+			return nil, nil
+		}
+		return nil, err
+	}
+	return &category, nil
+}
+
+func (r *categoryRepository) Delete(ctx context.Context, id int64) error {
+	return r.DB(ctx).Where("id = ? and is_deleted = 0", id).Delete(&model.Category{}).Error
 }
