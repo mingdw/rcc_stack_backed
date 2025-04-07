@@ -3,8 +3,6 @@ package repository
 import (
 	"context"
 	"rcc-stake-mall-backed/internal/model"
-
-	"gorm.io/gorm"
 )
 
 type AttrGroupRepository interface {
@@ -13,6 +11,7 @@ type AttrGroupRepository interface {
 	GetAttrGroupByCode(ctx context.Context, code string) (*model.AttrGroup, error)
 	Update(ctx context.Context, attrGroup *model.AttrGroup) error
 	Create(ctx context.Context, attrGroup *model.AttrGroup) (uint, error)
+	Delete(ctx context.Context, id int64) error
 }
 
 func NewAttrGroupRepository(r *Repository) AttrGroupRepository {
@@ -39,17 +38,18 @@ func (r *attrGroupRepository) DeleteByCategoryID(ctx context.Context, ids []uint
 
 func (r *attrGroupRepository) GetAttrGroupByCode(ctx context.Context, code string) (*model.AttrGroup, error) {
 	var attrGroup model.AttrGroup
-	if err := r.DB(ctx).Where("code = ? and is_deleted = 0", code).Find(&attrGroup).Limit(1).Error; err != nil {
-		if err == gorm.ErrRecordNotFound {
-			return nil, nil
-		}
-		return nil, err
+	result := r.DB(ctx).Where("attr_group_code = ? and is_deleted = 0", code).Limit(1).Find(&attrGroup)
+	if result.Error != nil {
+		return nil, result.Error
+	}
+	if result.RowsAffected == 0 {
+		return nil, nil
 	}
 	return &attrGroup, nil
 }
 
 func (r *attrGroupRepository) Update(ctx context.Context, attrGroup *model.AttrGroup) error {
-	return r.DB(ctx).Model(&model.AttrGroup{}).Where("id = ?", attrGroup.ID).Updates(attrGroup).Error
+	return r.DB(ctx).Model(&model.AttrGroup{}).Where("id = ?", attrGroup.ID).Select("status", "updated_at", "updator").Updates(attrGroup).Error
 }
 
 func (r *attrGroupRepository) Create(ctx context.Context, attrGroup *model.AttrGroup) (uint, error) {
@@ -58,4 +58,8 @@ func (r *attrGroupRepository) Create(ctx context.Context, attrGroup *model.AttrG
 		return 0, err
 	}
 	return attrGroup.ID, nil
+}
+
+func (r *attrGroupRepository) Delete(ctx context.Context, id int64) error {
+	return r.DB(ctx).Where("id = ? and is_deleted = 0", id).Delete(&model.AttrGroup{}).Error
 }

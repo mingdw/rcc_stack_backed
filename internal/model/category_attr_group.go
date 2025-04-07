@@ -1,12 +1,8 @@
 package model
 
-import (
-	"gorm.io/gorm"
-)
-
 // CategoryAttrGroup 目录-属性组关联
 type CategoryAttrGroup struct {
-	gorm.Model
+	BaseModel
 	ID            uint   `json:"id" gorm:"primaryKey"`
 	CategoryID    uint   `json:"categoryId" gorm:"column:category_id;not null;default:0;comment:商品目录分类id"`
 	CategoryCode  string `json:"categoryCode" gorm:"column:category_code;not null;default:'';comment:商品目录分类编码"`

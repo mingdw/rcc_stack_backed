@@ -60,3 +60,15 @@ type CategoryGroupModifyRequest struct {
 	Sort         int    `json:"sort"`
 	Description  string `json:"description"`
 }
+
+type CategoryGroupAttrModifyRequest struct {
+	ID            uint   `json:"id"`
+	AttrGroupID   uint   `json:"attrGroupId"`
+	AttrGroupCode string `json:"attrGroupCode"`
+	AttrCode      string `json:"attrCode"`
+	AttrName      string `json:"attrName"`
+	AttrType      int    `json:"attrType"`
+	Sort          int    `json:"sort"`
+	Status        int    `json:"status"`
+	Description   string `json:"description"`
+}

@@ -1,12 +1,8 @@
 package model
 
-import (
-	"gorm.io/gorm"
-)
-
 // Category 商品目录分类
 type Category struct {
-	gorm.Model
+	BaseModel
 	ID         uint   `json:"id" gorm:"primaryKey"`
 	Code       string `json:"code" gorm:"column:code;not null;default:'';comment:编码"`
 	Name       string `json:"name" gorm:"column:name;not null;default:'';comment:名称"`

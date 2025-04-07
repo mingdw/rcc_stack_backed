@@ -16,6 +16,9 @@ type CategoryService interface {
 	ModifyCategory(ctx context.Context, request *v1.CategoryModifyRequest) error
 	DeleteCategory(ctx context.Context, id int64) error
 	ModifyCategoryGroup(ctx context.Context, request *v1.CategoryGroupModifyRequest) error
+	DeleteCategoryGroup(ctx context.Context, id int64) error
+	ModifyCategoryGroupAttr(ctx context.Context, request *v1.CategoryGroupAttrModifyRequest) error
+	DeleteCategoryGroupAttr(ctx context.Context, id int64) error
 }
 
 // categoryService 目录服务实现
@@ -306,6 +309,87 @@ func (s *categoryService) ModifyCategoryGroup(ctx context.Context, request *v1.C
 		if err != nil {
 			return err
 		}
+	}
+	return nil
+}
+
+func (s *categoryService) DeleteCategoryGroup(ctx context.Context, id int64) error {
+	//先删除属性
+	err := s.attrRepository.DeleteByAttrGroupID(ctx, id)
+	if err != nil {
+		return err
+	}
+	//再删除属性组
+	err = s.attrGroupRepository.Delete(ctx, id)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+// 更新或者新增目录属性组属性
+func (s *categoryService) ModifyCategoryGroupAttr(ctx context.Context, request *v1.CategoryGroupAttrModifyRequest) error {
+
+	//根据code查询属性组
+	attrGroup, err := s.attrGroupRepository.GetAttrGroupByCode(ctx, request.AttrGroupCode)
+	if err != nil {
+		return err
+	}
+	if attrGroup == nil {
+		return errors.New("属性组不存在")
+	}
+
+	//根据code查询属性
+	attr, err := s.attrRepository.GetAttrByCode(ctx, request.AttrCode)
+	if err != nil {
+		return err
+	}
+
+	if request.ID != 0 {
+		//更新
+		if attr != nil && attr.ID != request.ID {
+			return errors.New("属性已存在")
+		}
+		attr := model.Attr{
+			ID:          request.ID,
+			Sort:        request.Sort,
+			Status:      request.Status,
+			Description: request.Description,
+			AttrName:    request.AttrName,
+			AttrCode:    request.AttrCode,
+			AttrType:    request.AttrType,
+			AttrGroupID: attrGroup.ID,
+		}
+		err = s.attrRepository.Update(ctx, &attr)
+		if err != nil {
+			return err
+		}
+	} else {
+		if attr != nil {
+			return errors.New("属性已存在")
+		}
+		attr := model.Attr{
+			Sort:          request.Sort,
+			Status:        request.Status,
+			Description:   request.Description,
+			AttrName:      request.AttrName,
+			AttrCode:      request.AttrCode,
+			AttrType:      request.AttrType,
+			AttrGroupID:   attrGroup.ID,
+			AttrGroupCode: attrGroup.AttrGroupCode,
+		}
+		err = s.attrRepository.Create(ctx, &attr)
+		if err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func (s *categoryService) DeleteCategoryGroupAttr(ctx context.Context, id int64) error {
+	err := s.attrRepository.Delete(ctx, id)
+	if err != nil {
+		return err
 	}
 	return nil
 }

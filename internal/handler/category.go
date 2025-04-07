@@ -85,3 +85,47 @@ func (h *CategoryHandler) ModifyCategoryGroup(c *gin.Context) {
 	}
 	v1.HandleSuccess(c, nil)
 }
+
+func (h *CategoryHandler) DeleteCategoryGroup(c *gin.Context) {
+	idStr := c.Param("id")
+	id, err := strconv.ParseInt(idStr, 10, 64)
+	if err != nil {
+		v1.HandleError(c, -1, v1.ErrBadRequest, "无效的ID格式")
+		return
+	}
+	err = h.categoryService.DeleteCategoryGroup(c, id)
+	if err != nil {
+		v1.HandleError(c, -1, v1.ErrBadRequest, err.Error())
+		return
+	}
+	v1.HandleSuccess(c, nil)
+}
+
+func (h *CategoryHandler) ModifyCategoryGroupAttr(c *gin.Context) {
+	request := v1.CategoryGroupAttrModifyRequest{}
+	if err := c.ShouldBindJSON(&request); err != nil {
+		v1.HandleError(c, -1, v1.ErrBadRequest, nil)
+		return
+	}
+	err := h.categoryService.ModifyCategoryGroupAttr(c, &request)
+	if err != nil {
+		v1.HandleError(c, -1, v1.ErrBadRequest, err.Error())
+		return
+	}
+	v1.HandleSuccess(c, nil)
+}
+
+func (h *CategoryHandler) DeleteCategoryGroupAttr(c *gin.Context) {
+	idStr := c.Param("id")
+	id, err := strconv.ParseInt(idStr, 10, 64)
+	if err != nil {
+		v1.HandleError(c, -1, v1.ErrBadRequest, "无效的ID格式")
+		return
+	}
+	err = h.categoryService.DeleteCategoryGroupAttr(c, id)
+	if err != nil {
+		v1.HandleError(c, -1, v1.ErrBadRequest, err.Error())
+		return
+	}
+	v1.HandleSuccess(c, nil)
+}
